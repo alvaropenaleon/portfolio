@@ -24,7 +24,7 @@ async function seedUsers() {
     users.map(async (user) => {
       return client.sql`
         INSERT INTO users (id, name, email, title, bio, linkedin, github, location, currentlyListening, currentlyReading)
-        VALUES (${user.id}, ${user.name}, ${user.email}, ${user.title}, ${user.bio}, ${user.linkedin}, ${user.github}, ${user.location}, ${user.currentlyListening}, ${user.currentlyReading})
+        VALUES (${user.name}, ${user.email}, ${user.title}, ${user.bio}, ${user.linkedin}, ${user.github}, ${user.location}, ${user.currentlyListening}, ${user.currentlyReading})
         ON CONFLICT (id) DO NOTHING;
       `;
     }),
@@ -84,7 +84,7 @@ async function seedProjects() {
     projects.map(async (project) => {
       const insertedProject = await client.sql`
         INSERT INTO projects (id, title, description, heroImage, text, role, date)
-        VALUES (${project.id}, ${project.title}, ${project.description}, ${project.heroImage}, ${project.text}, ${project.role}, ${project.date})
+        VALUES (${project.title}, ${project.description}, ${project.heroImage}, ${project.text}, ${project.role}, ${project.date})
         ON CONFLICT (id) DO NOTHING
         RETURNING id;
       `;

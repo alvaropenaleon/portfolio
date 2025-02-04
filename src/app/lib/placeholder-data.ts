@@ -1,6 +1,5 @@
 const users = [
   {
-    id: '410544b2-4001-4271-9855-fec4b6a6442a',
     name: 'User',
     email: 'user@nextmail.com',
     title: 'Software Engineer',
@@ -15,7 +14,6 @@ const users = [
 
 const projects = [
   {
-    id: '1',
     title: 'Project One',
     description: 'Description of project one.',
     links: ['https://project-one.com'],
