@@ -83,7 +83,7 @@ async function seedProjects() {
   const insertedProjects = await Promise.all(
     projects.map(async (project) => {
       const insertedProject = await client.sql`
-        INSERT INTO projects (id, title, description, heroImage, text, role, date)
+        INSERT INTO projects (id, title, description, heroImage, "text", role, date)
         VALUES (${project.title}, ${project.description}, ${project.heroImage}, ${project.text}, ${project.role}, ${project.date})
         ON CONFLICT (id) DO NOTHING
         RETURNING id;
