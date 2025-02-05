@@ -3,7 +3,7 @@ import {
     User,
 } from './definitions';
 
-export async function fetchCustomers() {
+export async function fetchUser(){
     try {
       const data = await sql<User>`
         SELECT
@@ -16,14 +16,14 @@ export async function fetchCustomers() {
             location,
             currentlyListening,
             currentlyReading
-        FROM customers
+        FROM users
         ORDER BY name ASC
       `;
   
-      const customers = data.rows;
-      return customers;
+      const user = data.rows[0];
+      return user;
     } catch (err) {
       console.error('Database Error:', err);
-      throw new Error('Failed to fetch all customers.');
+      throw new Error('Failed to fetch user.');
     }
 }
