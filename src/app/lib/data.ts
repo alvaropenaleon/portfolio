@@ -14,8 +14,8 @@ export async function fetchUser(){
             linkedin,
             github,
             location,
-            currentlyListening,
-            currentlyReading
+            currentlylistening AS "currentlyListening",
+            currentlyreading AS "currentlyReading"
         FROM users
         ORDER BY name ASC
       `;
