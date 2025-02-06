@@ -1,7 +1,11 @@
 import { fetchSelectedWork } from '@/app/lib/data';
 
 export default async function SelectedWorkPage() {
-  const projects = await fetchSelectedWork();
+  const id = [
+    "acd50b8c-9e99-4fb5-b388-b5ed5aa80d20",
+    "bc8ebd2d-fc9e-414b-ab99-e6331a00a1d1" 
+  ]; 
+  const projects = await fetchSelectedWork(id);
   console.log("Fetched User:", projects);
 
   return (
