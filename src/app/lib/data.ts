@@ -1,7 +1,7 @@
 import { sql } from '@vercel/postgres';
 import {
     User,
-    Project
+    ProjectCard
 } from './definitions';
 
 export async function fetchUser(){
@@ -29,9 +29,13 @@ export async function fetchUser(){
     }
 }
 
-export async function fetchSelectedWork(): Promise<Project[]> {
+export async function fetchSelectedWork(id: string[]): Promise<ProjectCard[]> {
   try {
-    const projects = await sql<Project>`
+
+    if (id.length === 0) return [];
+    const idArrayLiteral = `{${id.join(',')}}`;
+
+    const projects = await sql<ProjectCard>`
       SELECT 
         p.id, 
         p.title, 
@@ -43,6 +47,7 @@ export async function fetchSelectedWork(): Promise<Project[]> {
       LEFT JOIN project_tools pt ON p.id = pt.project_id
       LEFT JOIN project_categories pc ON p.id = pc.project_id
       LEFT JOIN project_links pl ON p.id = pl.project_id
+      WHERE p.id = ANY(${idArrayLiteral}::uuid[])
       GROUP BY p.id, p.title, p.description
       ORDER BY p.date DESC
       LIMIT 5;
