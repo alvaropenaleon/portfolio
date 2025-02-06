@@ -25,7 +25,7 @@ export type User = {
 //   projectImages: string[];
 // };
 
-export type Project = {
+export type ProjectCard = {
   id: string;
   title: string;
   description: string;
