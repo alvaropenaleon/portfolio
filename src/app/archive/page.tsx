@@ -1,45 +1,13 @@
 import { fetchAllProjects } from '@/app/lib/data';
+import ArchiveList from '@/app/ui/archive/archive-list';
 
-export default async function WorkPage() {
+export default async function ArchivePage() {
   const projects = await fetchAllProjects();
 
-
   return (
-    <main>
-      <h1>Selected Work</h1>
-
-      <div>
-        {projects.length > 0 ? (
-          projects.map((project) => (
-            <div key={project.id}>
-              <h2>{project.title}</h2>
-              <p>{project.date}</p>
-
-              <div>
-                {project.links.map((link, index) => (
-                  <a key={index} href={link} target="_blank" rel="noopener noreferrer">
-                    {new URL(link).hostname}
-                  </a>
-                ))}
-              </div>
-
-              <div>
-                {project.tools.map((tool, index) => (
-                  <span key={index}>{tool}</span>
-                ))}
-              </div>
-
-              <div>
-                {project.categories.map((category, index) => (
-                  <span key={index}>{category}</span>
-                ))}
-              </div>
-            </div>
-          ))
-        ) : (
-          <p>No projects found.</p>
-        )}
-      </div>
+    <main className="p-6">
+      <h1 className="text-3xl font-bold">Archive</h1>
+      <ArchiveList projects={projects} />
     </main>
   );
 }
