@@ -1,7 +1,7 @@
 // import Image from "next/image";
 // import styles from "./page.module.css";
 
-import { fetchUser } from "@/app/lib/data";
+import { fetchUser } from "@/lib/data";
 
 export default async function HomePage() {
   const user = await fetchUser();

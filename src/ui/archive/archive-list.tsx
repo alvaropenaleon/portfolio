@@ -1,5 +1,5 @@
-import ArchiveItem from '@/app/ui/archive/archive-item';
-import { Project } from '@/app/lib/definitions';
+import ArchiveItem from '@/ui/archive/archive-item';
+import { Project } from '@/lib/definitions';
 
 type ArchiveListProps = {
   projects: Project[];

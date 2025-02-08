@@ -1,5 +1,5 @@
-import { fetchAllProjects } from '@/app/lib/data';
-import WorkList from '@/app/ui/work/work-list';
+import { fetchAllProjects } from '@/lib/data';
+import WorkList from '@/ui/work/work-list';
 
 export default async function WorkPage() {
   const projects = await fetchAllProjects(); 

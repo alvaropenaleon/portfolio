@@ -1,5 +1,5 @@
-import WorkItem from '@/app/ui/work/work-item';
-import { Project } from '@/app/lib/definitions';
+import WorkItem from '@/ui/work/work-item';
+import { Project } from '@/lib/definitions';
 
 type WorkListProps = {
   projects: Project[];

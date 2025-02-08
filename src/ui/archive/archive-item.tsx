@@ -1,4 +1,4 @@
-import { Project } from '@/app/lib/definitions';
+import { Project } from '@/lib/definitions';
 
 type ArchiveListProps = {
   project: Project;
