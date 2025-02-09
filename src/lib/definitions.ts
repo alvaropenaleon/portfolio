@@ -22,5 +22,6 @@ export type Project = {
   text: string;
   role: string;
   date: string;
-  projectImages: string[];
+  // projectImages: string[];
+  images: string[];
 };
