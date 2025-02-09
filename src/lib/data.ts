@@ -90,7 +90,7 @@ export async function fetchProjectById(id: string[]): Promise<Project[]> {
     return projects.rows;
   } catch (err) {
     console.error('Database Error:', err);
-    throw new Error('Failed to fetch all projects.');
+    throw new Error('Failed to fetch project by ID.');
   }
 }
 
