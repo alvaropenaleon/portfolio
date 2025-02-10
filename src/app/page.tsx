@@ -1,5 +1,5 @@
 // import Image from "next/image";
-// import styles from "./page.module.css";
+// import styles from "./layout.module.css";
 
 import { fetchUser } from "@/lib/data";
 

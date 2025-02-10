@@ -1,4 +1,4 @@
-import ArchiveItem from '@/ui/archive/archive-item';
+import ArchiveItem from '@/components/archive/archive-item';
 import { Project } from '@/lib/definitions';
 
 type ArchiveListProps = {

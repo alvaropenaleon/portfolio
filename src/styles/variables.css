@@ -1,0 +1,16 @@
+:root {
+    --bg-color: #fff;
+    --text-color: #222;
+    --sidebar-bg: #f8f8f8;
+    --primary-color: #007aff; /* Apple blue */
+  
+    /* Category Colors */
+    --graphic-design: #71c9ce;
+    --data-ai: #6a0572;
+    --artwork: #ffc857;
+    --backend: #ff71ce;
+    --frontend: #71ff71;
+    --writing: #ff5733;
+    --systems-devops: #9c27b0;
+  }
+  

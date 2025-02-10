@@ -1,4 +1,4 @@
-import WorkItem from '@/ui/work/work-item';
+import WorkItem from '@/components/work/work-item';
 import { Project } from '@/lib/definitions';
 
 type WorkListProps = {

@@ -1,5 +1,5 @@
 import { fetchProjectById } from '@/lib/data';
-import WorkList from '@/ui/work/work-list';
+import WorkList from '@/components/work/work-list';
 
 export default async function WorkPage() {
   const selectedProjectIds = [
