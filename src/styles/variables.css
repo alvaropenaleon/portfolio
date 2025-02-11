@@ -4,14 +4,6 @@
   --foreground: #171717;
   --text-color: #222;
 
-  /* Typography */
-  --font-primary: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --light: 300;
-  --regular: 400;
-  --medium: 500;
-  --semibold: 600;
-  --bold: 700;
-
   /* Category Colors */
   --graphic-design: #71c9ce;
   --data-ai: #6a0572;
@@ -20,6 +12,12 @@
   --frontend: #71ff71;
   --writing: #ff5733;
   --systems-devops: #9c27b0;
+}
+
+@supports (font-variation-settings: normal) {
+  :root {
+    font-family: InterVariable, sans-serif;
+  }
 }
 
 /* 🌙 Dark Mode */

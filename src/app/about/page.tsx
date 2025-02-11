@@ -1,6 +1,6 @@
 // import Image from "next/image";
-// import styles from "./layout.module.css";
-
+import layout from '@/styles/layout.module.css';
+import typo from '@/styles/typography.module.css';
 import { fetchUser } from "@/lib/data";
 
 export default async function HomePage() {
@@ -9,43 +9,46 @@ export default async function HomePage() {
 
   return (
     <main>
-      <h1>Welcome to My Portfolio</h1>
+        {user ? (
+          <div className={layout.container}>
 
-      {user ? (
-        <section>
-          <h2>{user.name}</h2>
-          <p>{user.title}</p>
-          <p>{user.bio}</p>
+            <div className={layout.sidebar}>
+              <p>Contact:</p>
+              <a href={`mailto:${user.email}`}>{user.email}</a>
+              <br />
+              <a href={user.linkedin} target="_blank" rel="noopener noreferrer">
+                linkedin.com/
+                <span className={layout.desktopBreak}><br /></span>
+                in/alvaropenaleon
+              </a>
+              <br />
+              <a href={user.github} target="_blank" rel="noopener noreferrer">
+                github.com/
+                <span className={layout.desktopBreak}><br /></span>
+                alvaropenaleon
+              </a>
+              <p>
+                <strong>📍 Location:</strong> {user.location}
+              </p>
+            </div>
 
-          <div>
-            <p>
-              <strong>📍 Location:</strong> {user.location}
-            </p>
-            <h1>Currently</h1>
-            <p>
-              <strong>🎧 Listening to:</strong> {user.currentlyListening}
-            </p>
-            <p>
-              <strong>📖 Reading:</strong> {user.currentlyReading}
-            </p>
+            <div className={layout.content}>
+              <h1>Welcome to My Portfolio</h1>
+              <h2>{user.name}</h2>
+              <p className={typo.medium}>{user.title}</p>
+              <h1> {user.bio}</h1>
+              <h1>Currently</h1>
+              <p>
+                <strong>🎧 Listening to:</strong> {user.currentlyListening}
+              </p>
+              <p>
+                <strong>📖 Reading:</strong> {user.currentlyReading}
+              </p>
+            </div>
           </div>
-
-          <div className="mt-2">
-            <p>Contact:</p>
-            <a href={`mailto:${user.email}`}>{user.email}</a>
-            <br />
-            <a href={user.linkedin} target="_blank" rel="noopener noreferrer">
-              https://linkedin.com/in/alvaropenaleon
-            </a>
-            <br />
-            <a href={user.github} target="_blank" rel="noopener noreferrer">
-              https://github.com/alvaropenaleon
-            </a>
-          </div>
-        </section>
-      ) : (
-        <p className="text-red-500">User data not found.</p>
-      )}
+        ) : (
+          <p className="text-red-500">User data not found.</p>
+        )}
     </main>
   );
 }

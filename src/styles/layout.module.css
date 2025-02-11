@@ -1,14 +1,34 @@
-@import "./variables.css";
-
-html, body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-.flex {
+.container {
   display: flex;
+  flex-direction: row;
+  gap: 2rem;
 }
 
-.grid {
-  display: grid;
+.sidebar {
+  flex: 0 0 20%;
+  position: sticky;
+  top: 0;                 
+  background: #f2f2f2; 
+  align-items: flex-end; 
+}
+
+.content {
+  flex: 1;
+}
+
+.desktopBreak {
+  display: inline;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column-reverse;
+  }
+  .sidebar {
+    position: static;
+  }
+
+  .desktopBreak {
+    display: none;
+  }
 }
