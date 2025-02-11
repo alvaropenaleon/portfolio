@@ -1,18 +1,35 @@
-// import Image from "next/image";
 import layout from '@/styles/layout.module.css';
 import typo from '@/styles/typography.module.css';
 import { fetchUser } from "@/lib/data";
 
 export default async function HomePage() {
   const user = await fetchUser();
-  console.log("Fetched User:", user);
 
   return (
     <main>
-        {user ? (
-          <div className={layout.container}>
+      {user ? (
+        <div className={layout.container}>
+          {/* 1) CONTENT FIRST in the DOM */}
+          <div className={layout.content}>
+            <h2>{user.name}</h2>
+            <p>{user.title}</p>
+            <h1 className={typo.intro}>{user.bio}</h1>
+            <h1>Currently</h1>
+            <p>
+              <strong>Listening 🎧🎵</strong> {user.currentlyListening}
+            </p>
+            <p>
+              <strong>Reading 📖</strong> {user.currentlyReading}
+            </p>
+          </div>
 
-            <div className={layout.sidebar}>
+          {/* 2) SIDEBAR SECOND in the DOM */}
+          <div className={layout.sidebar}>
+            {/* If you want top/bottom sections: */}
+            <div>
+              {/* top part (optional) */}
+            </div>
+            <div className={layout.sidebarBottom}>
               <p>Contact:</p>
               <a href={`mailto:${user.email}`}>{user.email}</a>
               <br />
@@ -27,28 +44,13 @@ export default async function HomePage() {
                 <span className={layout.desktopBreak}><br /></span>
                 alvaropenaleon
               </a>
-              <p>
-                <strong>📍 Location:</strong> {user.location}
-              </p>
-            </div>
-
-            <div className={layout.content}>
-              <h1>Welcome to My Portfolio</h1>
-              <h2>{user.name}</h2>
-              <p className={typo.medium}>{user.title}</p>
-              <h1> {user.bio}</h1>
-              <h1>Currently</h1>
-              <p>
-                <strong>🎧 Listening to:</strong> {user.currentlyListening}
-              </p>
-              <p>
-                <strong>📖 Reading:</strong> {user.currentlyReading}
-              </p>
+              <p>{user.location}</p>
             </div>
           </div>
-        ) : (
-          <p className="text-red-500">User data not found.</p>
-        )}
+        </div>
+      ) : (
+        <p className="text-red-500">User data not found.</p>
+      )}
     </main>
   );
 }

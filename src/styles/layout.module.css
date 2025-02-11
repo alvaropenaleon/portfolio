@@ -1,31 +1,66 @@
+/* The parent container that holds content + sidebar */
 .container {
-  display: flex;
-  flex-direction: row;
-  gap: 2rem;
+  /* We’ll offset the content from the left to avoid overlap 
+     with the fixed sidebar (which is 240px wide in this example). */
+  position: relative; /* optional, not strictly required */
+  margin-left: calc(200px + 2rem); 
 }
 
-.sidebar {
-  flex: 0 0 20%;
-  position: sticky;
-  top: 0;                 
-  background: #f2f2f2; 
-  align-items: flex-end; 
-}
-
+/* The content */
 .content {
-  flex: 1;
+  padding: 1rem 0;
+  /* No special width constraints, it can fill the rest */
+}
+
+/* Fixed sidebar on desktop */
+.sidebar {
+  position: fixed;
+  top: 2rem;
+  bottom: 2rem;
+  left: 2rem;  /* 2rem from left edge of viewport */
+  width: 200px; /* fixed pixel width is often more predictable than % */
+  background: #f2f2f2;
+  display: flex;
+  flex-direction: column; 
+  overflow-y: auto;      /* scroll if needed */
+  z-index: 10;
+
+}
+
+/* If you want a bottom section pinned to bottom of the sidebar */
+.sidebarBottom {
+  margin-top: auto;     /* pushes this down when .sidebar is display:flex column */
+  padding-top: 1rem;
+  border-top: 1px solid #ddd;
 }
 
 .desktopBreak {
   display: inline;
 }
 
+/* MOBILE BREAKPOINT */
 @media (max-width: 768px) {
-  .container {
-    flex-direction: column-reverse;
-  }
+  /* No longer pin the sidebar; it flows normally AFTER content. */
   .sidebar {
     position: static;
+    width: 100%; 
+    height: auto;
+    margin: 0;
+    top: auto;
+    bottom: auto;
+    left: auto;
+  }
+
+  /* The container can go full width. */
+  .container {
+    margin-left: 0;
+    padding: 0rem;
+  }
+
+  .sidebarBottom {
+    margin-top: 0;
+    border-top: none;
+    padding-top: 0;
   }
 
   .desktopBreak {
