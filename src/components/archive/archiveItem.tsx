@@ -13,7 +13,7 @@ export default function ArchiveItem({ project }: ArchiveListProps) {
       {/* Categories */}
       <div className={styles.col2}>
         {project.categories.map((category, index) => (
-          <span key={index}>{category}</span>
+          <p key={index}>{category}</p>
         ))}
       </div>
 
@@ -22,7 +22,7 @@ export default function ArchiveItem({ project }: ArchiveListProps) {
       {/* Tools */}
       <div className={styles.col4}>
         {project.tools.map((tool, index) => (
-          <span key={index}>{tool}</span>
+          <p key={index}>{tool}</p>
         ))}
       </div>
 

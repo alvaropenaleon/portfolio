@@ -27,6 +27,11 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+  font-size: var(--small);
+}
+
+p {
+  font-size: var(--small);
 }
 
 @media (max-width: 1024px) {

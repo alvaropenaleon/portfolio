@@ -7,9 +7,16 @@
   --text-color: #222;
   --line: #ddd;
 
-  --margin-big: 3rem;
-  --sidebar-offset: 3rem; /* Matches margin for alignment */
+  /* Spaces*/
+  --margin-big: 2rem;
+  --sidebar-offset: 2rem; /* Matches margin for alignment */
   --sidebar-width: 200px;
+  --row-padding: 0.5rem 0rem;
+
+  /* Font sizes */
+  --small: 14px;
+  --medium: 34px;
+  --large: 48px;
 
   /* Category Colors */
   --graphic-design: #71c9ce;
