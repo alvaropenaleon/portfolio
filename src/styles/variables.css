@@ -1,13 +1,14 @@
+
+/* 🌍 Global Variables */
 :root {
-  /* Light Mode (Default) */
-  --background: #ffffff;
+  /* Light Mode */
+  --background: #f0f0f0;
   --foreground: #171717;
   --text-color: #222;
 
   --margin-big: 3rem;
-  --sidebar-offset: 3rem; /* e.g., equals your var(--margin-big) */
+  --sidebar-offset: 3rem; /* Matches margin for alignment */
   --sidebar-width: 200px;
-  --background: #f0f0f0; /* Example background color for sidebar */
 
   /* Category Colors */
   --graphic-design: #71c9ce;
@@ -19,6 +20,7 @@
   --systems-devops: #9c27b0;
 }
 
+/* Font Support */
 @supports (font-variation-settings: normal) {
   :root {
     font-family: InterVariable, sans-serif;
@@ -30,6 +32,6 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
-    --text-color: #ddd; /* Adjust contrast if needed */
+    --text-color: #ddd;
   }
 }

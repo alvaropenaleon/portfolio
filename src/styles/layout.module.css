@@ -1,77 +1,82 @@
-/* layout.module.css */
-
-
-/* Container when no sidebar exists */
+/* Container when no sidebar exists (full-width layout) */
 .fullWidth {
   position: relative;
+  display: grid;
+  grid-template-columns: 1fr; /* Content takes full width */
+  padding: var(--margin-big);
 }
 
-/* Container when a sidebar exists */
+/* Container when a sidebar exists (grid layout) */
 .withSidebar {
   position: relative;
+  display: grid;
+  grid-template-columns: var(--sidebar-width) auto;
+  column-gap: var(--margin-big); /* Space between sidebar and content */
+  padding: var(--margin-big);
 }
 
-/* Offset the content so it doesn’t go underneath the fixed sidebar */
-.withSidebar .content {
-  margin-left: calc(var(--sidebar-width) + var(--sidebar-offset));
-}
-
-/* Fixed sidebar styles */
+/* Sidebar using sticky positioning */
 .sidebar {
-  position: fixed;
-  top: var(--margin-big);
-  bottom: var(--margin-big);
-  left: var(--sidebar-offset);
-  width: var(--sidebar-width);
-  background: var(--background);
+  position: sticky;
+  top: var(--margin-big); /* Sticks to the top with margin */
+  height: calc(100vh - var(--margin-big) * 2); /* Full viewport height minus top/bottom margin */
+  background: #ffc857;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
+  overflow-y: auto; /* Sidebar becomes scrollable if content exceeds viewport */
   z-index: 10;
 }
 
-/* Sidebar bottom section */
+/* Sidebar Bottom Section Stays at the Bottom */
 .sidebarBottom {
-  margin-top: auto;
+  margin-top: auto; /* Pushes this section to the bottom */
+  padding-top: 1rem;
   border-top: 1px solid #ddd;
 }
 
-/* Utility class for line breaks (if needed) */
+/* Content styling */
+.content {
+  padding: 1rem 0;
+}
+
+/* Utility class for optional line breaks */
 .desktopBreak {
   display: inline;
 }
 
-/* MOBILE BREAKPOINT */
+/* 🌐 MOBILE BREAKPOINT */
 @media (max-width: 768px) {
-  /* Change the container to flex-column so we can control the order */
+  /* On mobile, switch to a stacked layout */
   .withSidebar,
   .fullWidth {
     display: flex;
     flex-direction: column;
-
+    order: 1;
   }
 
-  /* Remove the left margin on mobile */
-  .withSidebar .content {
-    margin-left: 0;
-    order: 1;  /* Content comes first */
-  }
-
-  /* Sidebar becomes part of the normal flow and appears at the bottom */
+  /* Sidebar flows normally below the content */
   .sidebar {
-    position: static;
+    position: static; /* No sticky positioning on mobile */
     width: 100%;
     height: auto;
     margin: 0;
-    order: 2;  /* Sidebar comes after the content */
+    order: 2;
   }
 
+  /* Remove left margin for full-width content on mobile */
+  .content {
+    margin-left: 0;
+    padding: 0;
+  }
+
+  /* Remove sidebar bottom section spacing */
   .sidebarBottom {
     margin-top: 0;
     border-top: none;
     padding-top: 0;
   }
 
+  /* Hide optional line breaks */
   .desktopBreak {
     display: none;
   }
