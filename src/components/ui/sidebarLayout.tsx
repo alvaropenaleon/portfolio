@@ -1,5 +1,5 @@
 // components/SidebarLayout.tsx
-import styles from '@/styles/layout.module.css';
+import styles from '@/styles/ui/layout.module.css';
 
 interface SidebarLayoutProps {
   children: React.ReactNode;

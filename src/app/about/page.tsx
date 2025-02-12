@@ -1,6 +1,6 @@
 // app/page.tsx (or any page file)
 import SidebarLayout from '@/components/ui/sidebarLayout';
-import typo from '@/styles/typography.module.css';
+import typo from '@/styles/ui/typography.module.css';
 import { fetchUser } from "@/lib/data";
 
 export default async function HomePage() {
