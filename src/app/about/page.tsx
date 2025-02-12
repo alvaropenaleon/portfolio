@@ -1,6 +1,6 @@
-// app/page.tsx (or any page file)
 import SidebarLayout from '@/components/ui/sidebarLayout';
-import typo from '@/styles/ui/typography.module.css';
+import CurrentlyRow from '@/components/about/currently'; // Use correctly named component
+import type from '@/styles/ui/typography.module.css';
 import { fetchUser } from "@/lib/data";
 
 export default async function HomePage() {
@@ -31,14 +31,14 @@ export default async function HomePage() {
     <SidebarLayout sidebar={sidebarContent}>
       <h2>{user.name}</h2>
       <p>{user.title}</p>
-      <h1 className={typo.intro}>{user.bio}</h1>
+      <h1 className={type.intro}>{user.bio}</h1>
+
       <h1>Currently</h1>
-      <p>
-        <strong>Listening 🎧🎵</strong> {user.currentlyListening}
-      </p>
-      <p>
-        <strong>Reading 📖</strong> {user.currentlyReading}
-      </p>
+      <div className="currently-list">
+        <CurrentlyRow type="📖 Reading" title={user.currentlyReading} />
+        <CurrentlyRow type="🎧 Listening" title={user.currentlyListening} />
+      </div>
+
     </SidebarLayout>
   );
 }

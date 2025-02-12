@@ -5,6 +5,7 @@
   --background: #f0f0f0;
   --foreground: #171717;
   --text-color: #222;
+  --line: #ddd;
 
   --margin-big: 3rem;
   --sidebar-offset: 3rem; /* Matches margin for alignment */

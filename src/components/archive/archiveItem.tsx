@@ -1,5 +1,5 @@
 import { Project } from '@/lib/definitions';
-import styles from '@/styles/archive/archiveItem.module.css';
+import styles from '@/styles/ui/row.module.css';
 
 type ArchiveListProps = {
   project: Project;
@@ -7,27 +7,27 @@ type ArchiveListProps = {
 
 export default function ArchiveItem({ project }: ArchiveListProps) {
   return (
-    <div className={styles.archiveItem}>
-      <p>{project.date}</p>
+    <div className={styles.row5col}>
+      <p className={styles.col1}>{project.date}</p>
 
       {/* Categories */}
-      <div>
+      <div className={styles.col2}>
         {project.categories.map((category, index) => (
           <span key={index}>{category}</span>
         ))}
       </div>
 
-      <p>{project.title}</p>
+      <p className={styles.col3}>{project.title}</p>
 
       {/* Tools */}
-      <div>
+      <div className={styles.col4}>
         {project.tools.map((tool, index) => (
           <span key={index}>{tool}</span>
         ))}
       </div>
 
       {/* Links */}
-      <div>
+      <div className={styles.col5}>
         {project.links.map((link, index) => (
           <a key={index} href={link} target="_blank" rel="noopener noreferrer">
             {new URL(link).hostname}

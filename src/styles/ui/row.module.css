@@ -1,0 +1,23 @@
+.row5col {
+    display: grid;
+    grid-template-columns: minmax(80px, 10%) minmax(100px, 12%) 1fr minmax(150px, 20%) minmax(100px, 15%);
+    align-items: center;
+    padding: 0.75rem 0rem;
+    border-bottom: 1px solid var(--line);
+}
+
+
+.row2col {
+    display: grid;
+    grid-template-columns: minmax(80px, 10%) minmax(100px, 12%) 1fr  ;/* Type and Title */
+    align-items: center;
+    padding: 0.75rem 0rem;
+    border-bottom: 1px solid var(--line);
+}
+  
+
+@media (max-width: 768px) {
+    .row2col, .row5col {
+        grid-template-columns: 1fr; /* Stack content */
+    }
+}
