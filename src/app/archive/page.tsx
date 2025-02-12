@@ -1,5 +1,5 @@
 import { fetchAllProjects } from '@/lib/data';
-import ArchiveList from '@/components/archive/archive-list';
+import ArchiveList from '@/components/archive/archiveList';
 
 export default async function ArchivePage() {
   const projects = await fetchAllProjects();
