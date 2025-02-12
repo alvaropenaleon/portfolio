@@ -1,60 +1,69 @@
-/* The parent container that holds content + sidebar */
-.container {
-  /* We’ll offset the content from the left to avoid overlap 
-     with the fixed sidebar (which is 240px wide in this example). */
-  position: relative; /* optional, not strictly required */
-  margin-left: calc(200px + 2rem); 
+/* layout.module.css */
+
+
+/* Container when no sidebar exists */
+.fullWidth {
+  position: relative;
 }
 
-/* The content */
-.content {
-  padding: 1rem 0;
-  /* No special width constraints, it can fill the rest */
+/* Container when a sidebar exists */
+.withSidebar {
+  position: relative;
 }
 
-/* Fixed sidebar on desktop */
+/* Offset the content so it doesn’t go underneath the fixed sidebar */
+.withSidebar .content {
+  margin-left: calc(var(--sidebar-width) + var(--sidebar-offset));
+}
+
+/* Fixed sidebar styles */
 .sidebar {
   position: fixed;
-  top: 2rem;
-  bottom: 2rem;
-  left: 2rem;  /* 2rem from left edge of viewport */
-  width: 200px; /* fixed pixel width is often more predictable than % */
-  background: #f2f2f2;
+  top: var(--margin-big);
+  bottom: var(--margin-big);
+  left: var(--sidebar-offset);
+  width: var(--sidebar-width);
+  background: var(--background);
   display: flex;
-  flex-direction: column; 
-  overflow-y: auto;      /* scroll if needed */
+  flex-direction: column;
+  overflow-y: auto;
   z-index: 10;
-
 }
 
-/* If you want a bottom section pinned to bottom of the sidebar */
+/* Sidebar bottom section */
 .sidebarBottom {
-  margin-top: auto;     /* pushes this down when .sidebar is display:flex column */
-  padding-top: 1rem;
+  margin-top: auto;
   border-top: 1px solid #ddd;
 }
 
+/* Utility class for line breaks (if needed) */
 .desktopBreak {
   display: inline;
 }
 
 /* MOBILE BREAKPOINT */
 @media (max-width: 768px) {
-  /* No longer pin the sidebar; it flows normally AFTER content. */
-  .sidebar {
-    position: static;
-    width: 100%; 
-    height: auto;
-    margin: 0;
-    top: auto;
-    bottom: auto;
-    left: auto;
+  /* Change the container to flex-column so we can control the order */
+  .withSidebar,
+  .fullWidth {
+    display: flex;
+    flex-direction: column;
+
   }
 
-  /* The container can go full width. */
-  .container {
+  /* Remove the left margin on mobile */
+  .withSidebar .content {
     margin-left: 0;
-    padding: 0rem;
+    order: 1;  /* Content comes first */
+  }
+
+  /* Sidebar becomes part of the normal flow and appears at the bottom */
+  .sidebar {
+    position: static;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    order: 2;  /* Sidebar comes after the content */
   }
 
   .sidebarBottom {

@@ -4,6 +4,9 @@
   --foreground: #171717;
   --text-color: #222;
 
+  --margin-big: 3rem;
+  
+
   /* Category Colors */
   --graphic-design: #71c9ce;
   --data-ai: #6a0572;
