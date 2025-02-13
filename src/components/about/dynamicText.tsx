@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import styles from "@/styles/ui/typography.module.css";
+import typo from "@/styles/ui/typography.module.css";
 
 const firstTexts = ["scalable", "human-centred", "data-driven"];
 const secondTexts = ["code", "design", "problem-solving", "innovation"];
@@ -14,7 +14,7 @@ export default function DualDynamicText() {
   const [isDeleting, setIsDeleting] = useState(false);
   const [isResting, setIsResting] = useState(false);
   const [textColor, setTextColor] = useState(0);
-  const typingSpeed = 100;
+  const typingSpeed = 80;
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
@@ -35,7 +35,7 @@ export default function DualDynamicText() {
         timeout = setTimeout(() => {
           setIsDeleting(true);
           setIsResting(false);
-        }, 1000);
+        }, 2000);
       }
     } else {
       if (secondText.length > 0) {
@@ -59,16 +59,16 @@ export default function DualDynamicText() {
   }, [firstText, secondText, isDeleting, index]);
 
   return (
-    <h1 className={styles.text3xl}>
+    <h1 className={typo.xxl}>
       A software engineer building{" "}
       <span>
         <span style={{ color: colors[textColor] }}>{firstText}</span>
-        <span className={isResting ? styles.blinkingCursor : ""}>|</span>
+        <span className={isResting ? typo.blinkingCursor : ""}>|</span>
       </span>{" "}
       products through{" "}
       <span>
         <span style={{ color: colors[textColor] }}>{secondText}</span>
-        <span className={isResting ? styles.blinkingCursor : ""}>|</span>
+        <span className={isResting ? typo.blinkingCursor : ""}>|</span>
       </span>
       .
     </h1>

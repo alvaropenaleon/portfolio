@@ -14,9 +14,11 @@
   --row-padding: 0.7rem 0rem;
 
   /* Font sizes */
-  --small: 16px;
-  --medium: 34px;
-  --large: 48px;
+  --small: calc(15rem/ 16);
+  --medium: calc(18rem/ 16);
+  --large: 25px;
+  --xl: 48px;
+  --xxl:calc(90rem/ 16);
 
   /* Category Colors */
   --backend: #ff5733;

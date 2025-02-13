@@ -31,7 +31,6 @@
 .sidebarBottom {
   margin-top: auto; /* Pushes this section to the bottom */
   padding-top: 1rem;
-  border-top: 1px solid #ddd;
 }
 
 /* Content styling */

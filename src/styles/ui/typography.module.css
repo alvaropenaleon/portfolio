@@ -18,10 +18,15 @@
   font-weight: 700;
 }
 
-.text3xl {
-  font-size: calc(90rem/ 16);
+.medium {
+  font-size: var(--medium);
+}
+
+.xxl {
+  font-size: var(--xxl);
   line-height: 1;
 }
+
 
 @keyframes blink {
   50% {

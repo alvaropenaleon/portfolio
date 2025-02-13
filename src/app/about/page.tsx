@@ -1,6 +1,6 @@
 import SidebarLayout from '@/components/ui/sidebarLayout';
-import CurrentlyRow from '@/components/about/currently'; // Use correctly named component
-// import type from '@/styles/ui/typography.module.css';
+import CurrentlyRow from '@/components/about/currentInfo'; // Use correctly named component
+import typo from '@/styles/ui/typography.module.css';
 import DynamicText from '@/components/about/dynamicText';
 import { fetchUser } from "@/lib/data";
 
@@ -36,7 +36,10 @@ export default async function HomePage() {
         <DynamicText />
         <p>{user.bio}</p>
 
-        <h1>Currently</h1>
+        <h1>Selected Projects</h1><hr />
+        <p className={typo.medium}>More of my work</p>
+
+        <h1>Currently</h1><hr />
         <div>
           <CurrentlyRow type="📖 Reading" title={user.currentlyReading} />
           <CurrentlyRow type="🎧 Listening" title={user.currentlyListening} />
