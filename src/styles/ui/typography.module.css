@@ -18,6 +18,17 @@
   font-weight: 700;
 }
 
-.intro{
-  font-size: calc(50rem/ 16);
+.text3xl {
+  font-size: calc(90rem/ 16);
+  line-height: 1;
+}
+
+@keyframes blink {
+  50% {
+    visibility: hidden;
+  }
+}
+
+.blinkingCursor {
+  animation: blink 1s steps(1) infinite;
 }

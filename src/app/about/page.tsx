@@ -1,6 +1,7 @@
 import SidebarLayout from '@/components/ui/sidebarLayout';
 import CurrentlyRow from '@/components/about/currently'; // Use correctly named component
-import type from '@/styles/ui/typography.module.css';
+// import type from '@/styles/ui/typography.module.css';
+import DynamicText from '@/components/about/dynamicText';
 import { fetchUser } from "@/lib/data";
 
 export default async function HomePage() {
@@ -29,16 +30,18 @@ export default async function HomePage() {
 
   return (
     <SidebarLayout sidebar={sidebarContent}>
-      <h2>{user.name}</h2>
-      <p>{user.title}</p>
-      <h1 className={type.intro}>{user.bio}</h1>
+      <main>
+        <h2>{user.name}</h2>
+        <p>{user.title}</p>
+        <DynamicText />
+        <p>{user.bio}</p>
 
-      <h1>Currently</h1>
-      <div className="currently-list">
-        <CurrentlyRow type="📖 Reading" title={user.currentlyReading} />
-        <CurrentlyRow type="🎧 Listening" title={user.currentlyListening} />
-      </div>
-
+        <h1>Currently</h1>
+        <div>
+          <CurrentlyRow type="📖 Reading" title={user.currentlyReading} />
+          <CurrentlyRow type="🎧 Listening" title={user.currentlyListening} />
+        </div>
+      </main>
     </SidebarLayout>
   );
 }

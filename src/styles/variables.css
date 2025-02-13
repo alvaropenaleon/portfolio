@@ -11,10 +11,10 @@
   --margin-big: 2rem;
   --sidebar-offset: 2rem; /* Matches margin for alignment */
   --sidebar-width: 200px;
-  --row-padding: 0.5rem 0rem;
+  --row-padding: 0.7rem 0rem;
 
   /* Font sizes */
-  --small: 14px;
+  --small: 15px;
   --medium: 34px;
   --large: 48px;
 
