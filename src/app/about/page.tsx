@@ -1,7 +1,7 @@
 import SidebarLayout from '@/components/ui/sidebarLayout';
 import CurrentlyRow from '@/components/about/currentInfo'; // Use correctly named component
 import typo from '@/styles/ui/typography.module.css';
-import DynamicText from '@/components/about/dynamicText';
+import DynamicText from '@/components/about/dynamicIntro';
 import { fetchUser } from "@/lib/data";
 
 export default async function HomePage() {
