@@ -12,7 +12,7 @@
 body {
   font-family:  InterVariable, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   font-optical-sizing: none;
-  font-variation-settings: "opsz" 25, "wght" 400;
+  font-variation-settings: "opsz" 23, "wght" 450;
   font-feature-settings: 'liga' 1, 'calt' 1;
   font-variant-ligatures: common-ligatures discretionary-ligatures;
   text-rendering: optimizeLegibility;
@@ -33,6 +33,10 @@ a {
 p {
   font-size: var(--small);
 }
+
+.graphicDesign {
+  color: var(--graphic-design);
+} 
 
 @media (max-width: 1024px) {
   body {
