@@ -5,6 +5,7 @@ import styles from "@/styles/ui/typography.module.css";
 
 const firstTexts = ["scalable", "human-centred", "data-driven"];
 const secondTexts = ["code", "design", "problem-solving", "innovation"];
+const colors = ["#ff5733", "#33ff57", "#9922FF"];
 
 export default function DualDynamicText() {
   const [index, setIndex] = useState(0);
@@ -12,7 +13,9 @@ export default function DualDynamicText() {
   const [secondText, setSecondText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [isResting, setIsResting] = useState(false);
+  const [textColor, setTextColor] = useState(0);
   const typingSpeed = 100;
+
   useEffect(() => {
     let timeout: NodeJS.Timeout;
     const fullFirstText = firstTexts[index];
@@ -32,7 +35,7 @@ export default function DualDynamicText() {
         timeout = setTimeout(() => {
           setIsDeleting(true);
           setIsResting(false);
-        }, 3000);
+        }, 1000);
       }
     } else {
       if (secondText.length > 0) {
@@ -47,6 +50,7 @@ export default function DualDynamicText() {
         timeout = setTimeout(() => {
           setIsDeleting(false);
           setIndex((prevIndex) => (prevIndex + 1) % firstTexts.length);
+          setTextColor((prevColorIndex) => (prevColorIndex + 1) % colors.length);
         }, typingSpeed);
       }
     }
@@ -58,12 +62,12 @@ export default function DualDynamicText() {
     <h1 className={styles.text3xl}>
       A software engineer building{" "}
       <span>
-        {firstText}
+        <span style={{ color: colors[textColor] }}>{firstText}</span>
         <span className={isResting ? styles.blinkingCursor : ""}>|</span>
       </span>{" "}
       products through{" "}
       <span>
-        {secondText}
+        <span style={{ color: colors[textColor] }}>{secondText}</span>
         <span className={isResting ? styles.blinkingCursor : ""}>|</span>
       </span>
       .

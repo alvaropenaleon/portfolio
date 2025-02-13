@@ -34,10 +34,6 @@ p {
   font-size: var(--small);
 }
 
-.graphicDesign {
-  color: var(--graphic-design);
-} 
-
 @media (max-width: 1024px) {
   body {
     padding: 0.5rem;

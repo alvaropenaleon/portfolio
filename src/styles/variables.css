@@ -14,18 +14,18 @@
   --row-padding: 0.7rem 0rem;
 
   /* Font sizes */
-  --small: 15px;
+  --small: 16px;
   --medium: 34px;
   --large: 48px;
 
   /* Category Colors */
-  --graphic-design: #71c9ce;
-  --data-ai: #6a0572;
-  --artwork: #ffc857;
-  --backend: #ff71ce;
-  --frontend: #71ff71;
-  --writing: #ff5733;
-  --systems-devops: #9c27b0;
+  --backend: #ff5733;
+  --graphic-design: #67D9FF;
+  --systems-devops: #FFEE00;
+  --artwork: #FF94F1;
+  --frontend: #7EFF27;
+  --writing: #3300AA;
+  --data-ai: #9922FF;
 }
 
 /* Font Support */
