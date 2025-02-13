@@ -12,8 +12,7 @@ export default function DualDynamicText() {
   const [secondText, setSecondText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [isResting, setIsResting] = useState(false);
-  const typingSpeed = 100; // Speed of typing (ms per character)
-
+  const typingSpeed = 100;
   useEffect(() => {
     let timeout: NodeJS.Timeout;
     const fullFirstText = firstTexts[index];
@@ -33,7 +32,7 @@ export default function DualDynamicText() {
         timeout = setTimeout(() => {
           setIsDeleting(true);
           setIsResting(false);
-        }, 3000); // Pause before deleting
+        }, 3000);
       }
     } else {
       if (secondText.length > 0) {
