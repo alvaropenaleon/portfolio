@@ -2,6 +2,7 @@ import SidebarLayout from '@/components/ui/sidebarLayout';
 import CurrentlyRow from '@/components/about/currentInfo'; // Use correctly named component
 import typo from '@/styles/ui/typography.module.css';
 import DynamicText from '@/components/about/dynamicIntro';
+import Clock from '@/components/about/clock';
 import { fetchUser } from "@/lib/data";
 
 export default async function HomePage() {
@@ -11,7 +12,6 @@ export default async function HomePage() {
     return <p className="text-red-500">User data not found.</p>;
   }
 
-  // Define sidebar content
   const sidebarContent = (
     <>
       <p>Contact:</p>
@@ -24,7 +24,8 @@ export default async function HomePage() {
       <a href={user.github} target="_blank" rel="noopener noreferrer">
         github.com/<span className="desktopBreak"><br /></span>alvaropenaleon
       </a>
-      <p>{user.location}</p>
+      <Clock />
+      { /* <p>{user.location}</p> */ }
     </>
   );
 
