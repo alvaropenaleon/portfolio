@@ -7,7 +7,8 @@ const firstTexts = ["scalable", "human-centred", "data-driven"];
 const secondTexts = ["code", "design", "problem-solving", "innovation"];
 const colors = ["#ff5733", "#33ff57", "#9922FF"];
 
-export default function DualDynamicText() {
+
+export default function DynamicText() {
   const [index, setIndex] = useState(0);
   const [firstText, setFirstText] = useState("");
   const [secondText, setSecondText] = useState("");
