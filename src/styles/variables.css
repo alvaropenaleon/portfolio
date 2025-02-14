@@ -14,9 +14,10 @@
   --row-padding: 0.7rem 0rem;
 
   /* Font sizes */
-  --small: calc(15rem/ 16);
-  --medium: calc(18rem/ 16);
-  --large: 25px;
+  --xs: calc(12rem/ 16);
+  --small: calc(14rem/ 16);
+  --medium: calc(17rem/ 16);
+  --large: calc(25rem/ 16);
   --xl: 48px;
   --xxl:calc(90rem/ 16);
 

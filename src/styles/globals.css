@@ -28,6 +28,7 @@ a {
   color: inherit;
   text-decoration: none;
   font-size: var(--small);
+  font-variation-settings: "opsz" 20, "wght" 450;
 }
 
 p {

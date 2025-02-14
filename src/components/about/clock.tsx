@@ -9,7 +9,7 @@ const getMelbourneTime = () => {
   );
 
   return {
-    hours: now.getHours() % 12 || 12, // Convert 24 to 12 h format
+    hours: now.getHours(), // Convert 24 to 12 h format: % 12 || 12
     minutes: now.getMinutes(),
     seconds: now.getSeconds(),
     formattedTime: now.toLocaleTimeString("en-AU", {
@@ -17,7 +17,7 @@ const getMelbourneTime = () => {
       hour: "2-digit",
       minute: "2-digit",
       second: "2-digit",
-      hour12: true, //12 h format am/pm
+      hour12: false, //12 h format am/pm: true
     }),
   };
 };
@@ -55,7 +55,10 @@ export default function Clock() {
             x2="50"
             y2="30"
             className={styles.hourHand}
-            style={{ transform: `rotate(${hourDeg}deg)`, transformOrigin: "50% 50%" }}
+            style={{
+              transform: `rotate(${hourDeg}deg)`,
+              transformOrigin: "50% 50%",
+            }}
           />
           <line
             x1="50"
@@ -63,7 +66,10 @@ export default function Clock() {
             x2="50"
             y2="20"
             className={styles.minuteHand}
-            style={{ transform: `rotate(${minuteDeg}deg)`, transformOrigin: "50% 50%" }}
+            style={{
+              transform: `rotate(${minuteDeg}deg)`,
+              transformOrigin: "50% 50%",
+            }}
           />
           <line
             x1="50"
@@ -71,7 +77,10 @@ export default function Clock() {
             x2="50"
             y2="15"
             className={styles.secondHand}
-            style={{ transform: `rotate(${secondDeg}deg)`, transformOrigin: "50% 50%" }}
+            style={{
+              transform: `rotate(${secondDeg}deg)`,
+              transformOrigin: "50% 50%",
+            }}
           />
           <circle cx="50" cy="50" r="1" className={styles.centerDot} />
         </svg>
@@ -79,10 +88,16 @@ export default function Clock() {
 
       {/* Digital when hover */}
       {isHovered && (
-        <p className={styles.digitalTime}>
-          {time.formattedTime} <br />
-          <span className={styles.timezone}>Melbourne, AUS</span>
-        </p>
+        <span className={styles.digitalTime}>
+          <p className={styles.timezone}>
+            AEDT
+            <br />
+            UTC+11
+            <br />
+            Melbourne
+          </p>
+          {time.formattedTime}
+        </span>
       )}
     </div>
   );

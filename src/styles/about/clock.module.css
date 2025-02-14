@@ -51,15 +51,15 @@
 }
 
 .digitalTime {
-  font-size: 1.1rem;
+  font-size: var(--large);
   font-weight: bold;
   text-align: left;
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.3s ease-in-out;
 }
 
 .timezone {
-  font-size: 0.8rem;
+  font-size: var(--xs);
   opacity: 0.8;
 }
 
