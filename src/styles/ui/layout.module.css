@@ -38,10 +38,6 @@
   padding: 1rem 0;
 }
 
-/* Utility class for optional line breaks */
-.desktopBreak {
-  display: inline;
-}
 
 /* 🌐 MOBILE BREAKPOINT */
 @media (max-width: 768px) {
@@ -73,10 +69,5 @@
     margin-top: 0;
     border-top: none;
     padding-top: 0;
-  }
-
-  /* Hide optional line breaks */
-  .desktopBreak {
-    display: none;
   }
 }
