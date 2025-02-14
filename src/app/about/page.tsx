@@ -13,7 +13,7 @@ export default async function HomePage() {
   }
 
   const sidebarContent = (
-    <>
+    <div>
       <a href={`mailto:${user.email}`}>Email</a>
       <br />
       <a href={user.linkedin} target="_blank" rel="noopener noreferrer">
@@ -25,7 +25,7 @@ export default async function HomePage() {
       </a>
       <Clock />
       {/* <p>{user.location}</p> */}
-    </>
+    </div>
   );
 
   return (

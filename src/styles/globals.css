@@ -24,13 +24,6 @@ body {
   background: var(--background);
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-  font-size: var(--small);
-  font-variation-settings: "opsz" 20, "wght" 450;
-}
-
 p {
   font-size: var(--small);
   font-variation-settings: "opsz" 20, "wght" 450;
@@ -39,6 +32,41 @@ p {
 hr {
   border: 0;
   border-bottom: 1px solid var(--line);
+}
+
+a {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  color: inherit;
+  text-decoration: none;
+  font-size: var(--small);
+  font-variation-settings: "opsz" 20, "wght" 450;
+  transition: color 0.2s ease;
+  position: relative;
+}
+
+a:hover {
+  color: var(--blue);
+}
+
+a::after {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-color: currentColor;
+  -webkit-mask-image: url("/arrow.svg");
+  mask-image: url("/arrow.svg");
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  transition: rotate 0.2s ease;
+}
+
+a:hover::after {
+  rotate: 45deg;
+  transition: rotate 0.2s ease;
+  /* transform: translateY(-4px); */
 }
 
 @media (max-width: 1024px) {

@@ -20,7 +20,6 @@
   position: sticky;
   top: var(--margin-big); /* Sticks to the top with margin */
   height: calc(100vh - var(--margin-big) * 2); /* Full viewport height minus top/bottom margin */
-  background: var(--background);
   display: flex;
   flex-direction: column;
   overflow-y: auto; /* Sidebar becomes scrollable if content exceeds viewport */
