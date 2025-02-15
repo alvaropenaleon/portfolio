@@ -7,7 +7,6 @@ const firstTexts = ["scalable", "human-centred", "data-driven"];
 const secondTexts = ["code", "design", "problem-solving", "innovation"];
 const colors = ["#ff5733", "#33ff57", "#9922FF"];
 
-
 export default function DynamicText() {
   const [index, setIndex] = useState(0);
   const [firstText, setFirstText] = useState("");
@@ -15,7 +14,7 @@ export default function DynamicText() {
   const [isDeleting, setIsDeleting] = useState(false);
   const [isResting, setIsResting] = useState(false);
   const [textColor, setTextColor] = useState(0);
-  const typingSpeed = 80;
+  const typingSpeed = 100;
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
@@ -59,17 +58,21 @@ export default function DynamicText() {
     return () => clearTimeout(timeout);
   }, [firstText, secondText, isDeleting, index]);
 
+  // Cursor logic:
+  const showFirstCursor = firstText.length < firstTexts[index].length && !isResting;
+  const showSecondCursor = secondText.length > 0 && (secondText.length < secondTexts[index % secondTexts.length].length || isResting);
+
   return (
     <h1 className={typo.xxl}>
       A software engineer building{" "}
       <span>
         <span style={{ color: colors[textColor] }}>{firstText}</span>
-        <span className={isResting ? typo.blinkingCursor : ""}>|</span>
+        {showFirstCursor && <span className={typo.blinkingCursor}>|</span>}
       </span>{" "}
       products through{" "}
       <span>
         <span style={{ color: colors[textColor] }}>{secondText}</span>
-        <span className={isResting ? typo.blinkingCursor : ""}>|</span>
+        {showSecondCursor && <span className={typo.blinkingCursor}>|</span>}
       </span>
       .
     </h1>
