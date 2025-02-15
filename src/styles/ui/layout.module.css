@@ -1,46 +1,39 @@
-/* Container when no sidebar exists (full-width layout) */
 .fullWidth {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr; /* Content takes full width */
-  padding: var(--margin-big);
+  grid-template-columns: 1fr;
+  padding: var(--space-lg);
 }
 
-/* Container when a sidebar exists (grid layout) */
 .withSidebar {
   position: relative;
   display: grid;
-  grid-template-columns: var(--sidebar-width) auto;
-  column-gap: var(--margin-big); /* Space between sidebar and content */
-  padding: var(--margin-big);
+  grid-template-columns: var(--space-sidebar) auto;
+  column-gap: var(--space-lg);
+  padding: var(--space-lg);
 }
 
-/* Sidebar using sticky positioning */
 .sidebar {
   position: sticky;
-  top: var(--margin-big); /* Sticks to the top with margin */
-  height: calc(100vh - var(--margin-big) * 2); /* Full viewport height minus top/bottom margin */
+  top: var(--space-lg);
+  height: calc(100vh - var(--space-lg) * 2);
   display: flex;
   flex-direction: column;
-  overflow-y: auto; /* Sidebar becomes scrollable if content exceeds viewport */
+  overflow-y: auto;
   z-index: 10;
 }
 
-/* Sidebar Bottom Section Stays at the Bottom */
 .sidebarBottom {
-  margin-top: auto; /* Pushes this section to the bottom */
-  padding-top: 1rem;
+  margin-top: auto;
+  padding-top: var(--space-lg);
 }
 
-/* Content styling */
 .content {
-  padding: 1rem 0;
+  padding: var(--space-lg) 0;
 }
 
-
-/* 🌐 MOBILE BREAKPOINT */
 @media (max-width: 768px) {
-  /* On mobile, switch to a stacked layout */
+  
   .withSidebar,
   .fullWidth {
     display: flex;
@@ -48,22 +41,19 @@
     order: 1;
   }
 
-  /* Sidebar flows normally below the content */
   .sidebar {
-    position: static; /* No sticky positioning on mobile */
+    position: static;
     width: 100%;
     height: auto;
     margin: 0;
     order: 2;
   }
 
-  /* Remove left margin for full-width content on mobile */
   .content {
     margin-left: 0;
     padding: 0;
   }
 
-  /* Remove sidebar bottom section spacing */
   .sidebarBottom {
     margin-top: 0;
     border-top: none;

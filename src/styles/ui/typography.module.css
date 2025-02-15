@@ -19,11 +19,11 @@
 }
 
 .medium {
-  font-size: var(--medium);
+  font-size: var(--font-md);
 }
 
 .xxl {
-  font-size: var(--xxl);
+  font-size: var(--font-xxl);
   line-height: 1;
 }
 

@@ -2,22 +2,22 @@
     display: grid;
     grid-template-columns: minmax(80px, 10%) minmax(100px, 12%) 1fr minmax(150px, 20%) minmax(100px, 15%);
     align-items: center;
-    padding: var(--row-padding);
-    border-bottom: 1px solid var(--line);
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--color-line);
 }
 
 
 .row2col {
     display: grid;
-    grid-template-columns: minmax(80px, 10%) minmax(100px, 12%) 1fr  ;/* Type and Title */
+    grid-template-columns: minmax(80px, 10%) minmax(100px, 12%) 1fr;
     align-items: center;
-    padding: var(--row-padding);
-    border-bottom: 1px solid var(--line);
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--color-line);
 }
   
 
 @media (max-width: 768px) {
     .row2col, .row5col {
-        grid-template-columns: 1fr; /* Stack content */
+        grid-template-columns: 1fr;
     }
 }
