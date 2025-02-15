@@ -64,7 +64,7 @@ export default function DynamicText() {
 
   return (
     <h1 className={typo.xxl}>
-      A computer scientist building{" "}
+      Software engineer building{" "}
       <span>
         <span style={{ color: colors[textColor] }}>{firstText}</span>
         {showFirstCursor && <span className={typo.blinkingCursor}>|</span>}
