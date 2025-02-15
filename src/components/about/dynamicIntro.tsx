@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import typo from "@/styles/ui/typography.module.css";
 
 const firstTexts = ["scalable", "human-centred", "data-driven"];
-const secondTexts = ["code", "design", "problem-solving", "innovation"];
+const secondTexts = ["code", "design", "problem-solving"];
 const colors = ["#ff5733", "#33ff57", "#9922FF"];
 
 export default function DynamicText() {
@@ -64,7 +64,7 @@ export default function DynamicText() {
 
   return (
     <h1 className={typo.xxl}>
-      A software engineer building{" "}
+      A computer scientist building{" "}
       <span>
         <span style={{ color: colors[textColor] }}>{firstText}</span>
         {showFirstCursor && <span className={typo.blinkingCursor}>|</span>}
