@@ -18,15 +18,34 @@
   font-weight: 700;
 }
 
-.medium {
+.xxs {
+  font-size: var(--font-xxs);
+}
+
+.xs {
+  font-size: var(--font-xs);
+}
+
+.sm {
+  font-size: var(--font-sm);
+}
+
+.md {
   font-size: var(--font-md);
+}
+
+.lg {
+  font-size: var(--font-lg);
+}
+
+.xl {
+  font-size: var(--font-xl);
 }
 
 .xxl {
   font-size: var(--font-2xl);
   line-height: 1;
 }
-
 
 @keyframes blink {
   50% {

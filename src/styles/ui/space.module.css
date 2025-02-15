@@ -1,0 +1,23 @@
+.sm {
+    padding: var(--space-sm) 0 0 0;
+}
+
+.md {
+    padding: var(--space-md) 0 0 0;
+}
+  
+.lg {
+    padding: var(--space-lg) 0 0 0;
+}
+
+.xl {
+    padding: var(--space-xl) 0 0 0;
+}
+
+.xl2 {
+    padding: var(--space-2xl) 0 0 0;
+}
+
+.xl3 {
+    padding: var(--space-3xl) 0 0 0;
+}
