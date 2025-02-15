@@ -14,16 +14,16 @@
   --space-md: 1rem;
   --space-lg: 2rem;
   --space-xl: 3rem;
-  --space-xxl: 4rem;
+  --space-2xl: 4rem;
   --space-sidebar: 200px;
 
   /* Font sizes */
   --font-xs: calc(12rem/ 16);
-  --font-sm: calc(14rem/ 16);
+  --font-sm: calc(13rem/ 16);
   --font-md: calc(17rem/ 16);
   --font-lg: calc(25rem/ 16);
   --font-xl: 48px;
-  --font-xxl:calc(90rem/ 16);
+  --font-2xl:calc(90rem/ 16);
 
   /* Border Radius */
   --radius-sm: 4px;
