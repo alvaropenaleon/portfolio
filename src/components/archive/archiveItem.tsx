@@ -28,9 +28,9 @@ export default function ArchiveItem({ project }: ArchiveListProps) {
 
       {/* Links */}
       <div className={styles.col5}>
-        {project.links.map((link, index) => (
-          <a key={index} href={link} target="_blank" rel="noopener noreferrer">
-            {new URL(link).hostname}
+        {project.links.map(({ url, type }, index) => (
+          <a key={index} href={url} target="_blank" rel="noopener noreferrer">
+            {type === 'code' ? 'Code' : 'Demo'}
           </a>
         ))}
       </div>

@@ -42,7 +42,7 @@ export async function fetchAllProjects(): Promise<Project[]> {
         p.date,
         ARRAY_AGG(DISTINCT pc.category) AS categories,
         ARRAY_AGG(DISTINCT pt.tool) AS tools,
-        ARRAY_AGG(DISTINCT pl.link) AS links,
+        ARRAY_AGG(DISTINCT jsonb_build_object('url', pl.link, 'type', pl.type)) AS links,
         ARRAY_AGG(DISTINCT pi.image) AS images
       FROM projects p
       LEFT JOIN project_categories pc ON p.id = pc.project_id
@@ -74,7 +74,7 @@ export async function fetchProjectById(id: string[]): Promise<Project[]> {
         p.date,
         ARRAY_AGG(DISTINCT pc.category) AS categories,
         ARRAY_AGG(DISTINCT pt.tool) AS tools,
-        ARRAY_AGG(DISTINCT pl.link) AS links,
+        ARRAY_AGG(DISTINCT jsonb_build_object('url', pl.link, 'type', pl.type)) AS links,
         ARRAY_AGG(DISTINCT pi.image) AS images
       FROM projects p
       LEFT JOIN project_categories pc ON p.id = pc.project_id

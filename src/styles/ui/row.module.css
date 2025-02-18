@@ -14,7 +14,12 @@
     padding: var(--space-sm) 0;
     border-bottom: 1px solid var(--color-line);
 }
-  
+
+.col5 {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
 
 @media (max-width: 768px) {
     .row2col, .row5col {
