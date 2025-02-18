@@ -12,9 +12,9 @@ export default function WorkItem({ project }: WorkItemProps) {
 
       {/* Links */}
       <div>
-        {project.links.map((link, index) => (
-          <a key={index} href={link} target="_blank" rel="noopener noreferrer">
-            {new URL(link).hostname}
+        {project.links.map(({ url }, index) => (
+          <a key={index} href={url} target="_blank" rel="noopener noreferrer">
+            {new URL(url).hostname}
           </a>
         ))}
       </div>
