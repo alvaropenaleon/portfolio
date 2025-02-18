@@ -7,6 +7,10 @@
   --color-text: #222;
   --color-line: #ddd;
 
+  /* font variation settings*/
+  --var-sm: "opsz" 20, "wght" 420;
+  --var-lg: "opsz" 32, "wght" 420;
+
    /* Spacing */
   --space-xxs: 0.125rem;
   --space-xs: 0.25rem;
@@ -24,13 +28,15 @@
   --font-sm: calc(13rem/ 16);
   --font-md: calc(17rem/ 16);
   --font-lg: calc(25rem/ 16);
-  --font-xl: 48px;
-  --font-2xl:calc(91rem/ 16);
+  --font-xl: calc(48rem/ 16);
+  --font-2xl:calc(75rem/ 16);
 
   /* Border Radius */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 16px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-2xl: 30px;
 
   /* Transitions */
   --transition-fast: 0.2s ease-in-out;
@@ -49,7 +55,7 @@
   --brand-design: #67D9FF;
   --brand-devops: #FFEE00;
   --brand-artwork: #FF94F1;
-  --brand-frontend: #7EFF27;
+  --brand-frontend: #02DD51;
   --brand-writing: #3300AA;
   --brand-data: #9922FF;
 }
