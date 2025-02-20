@@ -41,7 +41,7 @@
 }
 
 .secondHand {
-  stroke: var(--brand-data);
+  stroke: var(--brand-red);
   stroke-width: 1;
   transition: transform 0.1s linear;
 }

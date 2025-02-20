@@ -8,7 +8,7 @@ import SidebarLayout from "@/components/ui/sidebarLayout";
 import spacing from "@/styles/ui/space.module.css";
 import BioComponent from "@/components/about/bio";
 
-import Clock from "@/components/about/clock";
+import ClockClient from "@/components/about/clockClient";
 import { fetchUser } from "@/lib/data";
 
 export default async function HomePage() {
@@ -29,7 +29,7 @@ export default async function HomePage() {
       <a href={user.github} target="_blank" rel="noopener noreferrer">
         Github
       </a>
-      <Clock />
+      <ClockClient />
     </div>
   );
 
