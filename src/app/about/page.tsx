@@ -1,12 +1,12 @@
 {/* 
-import CurrentlyRow from "@/components/about/currentInfo"; // Use correctly named component
 import typo from "@/styles/ui/typography.module.css";
 import clsx from "clsx"; 
 */}
 
 import SidebarLayout from "@/components/ui/sidebarLayout";
 import spacing from "@/styles/ui/space.module.css";
-import BioComponent from "@/components/about/bio";
+import Bio from "@/components/about/bio";
+import Notifications from "@/components/about/notifications"; 
 
 import ClockClient from "@/components/about/clockClient";
 import { fetchUser } from "@/lib/data";
@@ -37,27 +37,12 @@ export default async function HomePage() {
     <SidebarLayout sidebar={sidebarContent}>
       <main>
         <div className={spacing.lg}>
-          
-          <BioComponent bio={user.bio} />
+          <Bio bio={user.bio} />
+          < Notifications />
         </div>
         {/* 
         <p>{user.name}</p>
         <p>{user.title}</p>
-        <p>{user.location}</p> 
-        <div className={spacing.xl3}>
-        <p>{user.bio}</p>
-        </div>
-
-        <div className={spacing.xl3}>
-          <h2>Selected Projects</h2><hr className={spacing.sm}/>
-          <p className={typo.md}>More of my work</p>
-        </div>
-
-        <div className={spacing.xl3}>
-          <h2>Currently</h2><hr className={spacing.sm} />
-          <CurrentlyRow type="📖 Reading" title={user.currentlyReading} />
-          <CurrentlyRow type="🎧 Listening" title={user.currentlyListening} />
-        </div>
         */}
       </main>
     </SidebarLayout>
