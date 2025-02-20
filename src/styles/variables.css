@@ -26,7 +26,7 @@
   --font-xxs: calc(10rem/ 16);
   --font-xs: calc(12rem/ 16);
   --font-sm: calc(13rem/ 16);
-  --font-md: calc(17rem/ 16);
+  --font-md: calc(15rem/ 16);
   --font-lg: calc(25rem/ 16);
   --font-xl: calc(48rem/ 16);
   --font-2xl:calc(75rem/ 16);
@@ -51,6 +51,7 @@
 
   /* Brand Colors */
   --brand-grey: #787880;
+  --brand-grey-rgb: 120, 120, 128;
   --brand-blue: #007bff;
   --brand-red: #ff5733;
   --brand-turquoise: #67D9FF;
