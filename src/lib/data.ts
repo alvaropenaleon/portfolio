@@ -1,7 +1,8 @@
 import { sql } from '@vercel/postgres';
 import {
     User,
-    Project
+    Project,
+    Notification
 } from './definitions';
 
 export async function fetchUser(){
@@ -14,9 +15,7 @@ export async function fetchUser(){
             bio,
             linkedin,
             github,
-            location,
-            currentlylistening AS "currentlyListening",
-            currentlyreading AS "currentlyReading"
+            location
         FROM users
         ORDER BY name ASC
       `;
@@ -91,6 +90,26 @@ export async function fetchProjectById(id: string[]): Promise<Project[]> {
   } catch (err) {
     console.error('Database Error:', err);
     throw new Error('Failed to fetch project by ID.');
+  }
+}
+
+export async function fetchNotifications(): Promise<Notification[]> {
+  try {
+    const { rows } = await sql<Notification>`
+      SELECT
+        id,
+        category,
+        title,
+        subtitle,
+        cover_image_url,
+        last_updated
+      FROM notifications
+      ORDER BY last_updated DESC
+    `;
+    return rows;
+  } catch (err) {
+    console.error("Database Error:", err);
+    throw new Error("Failed to fetch notifications.");
   }
 }
 

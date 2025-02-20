@@ -7,8 +7,6 @@ export type User = {
   linkedin: string;
   github: string;
   location: string;
-  currentlyListening: string;
-  currentlyReading: string;
 };
 
 export type Project = {
@@ -24,4 +22,13 @@ export type Project = {
   date: string;
   // projectImages: string[];
   images: string[];
+};
+
+export type Notification = {
+  id: number;
+  category: string;
+  title: string;
+  subtitle?: string;
+  cover_image_url?: string;
+  last_updated?: Date;
 };
