@@ -50,14 +50,15 @@
   --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.1);
 
   /* Brand Colors */
-  --brand-primary: #007bff;
-  --brand-backend: #ff5733;
-  --brand-design: #67D9FF;
-  --brand-devops: #FFEE00;
-  --brand-artwork: #FF94F1;
-  --brand-frontend: #02DD51;
-  --brand-writing: #3300AA;
-  --brand-data: #9922FF;
+  --brand-grey: #787880;
+  --brand-blue: #007bff;
+  --brand-red: #ff5733;
+  --brand-turquoise: #67D9FF;
+  --brand-yellow: #FFEE00;
+  --brand-pink: #FF94F1;
+  --brand-green: #02DD51;
+  --brand-navy: #3300AA;
+  --brand-purple: #9922FF;
 }
 
 @supports (font-variation-settings: normal) {

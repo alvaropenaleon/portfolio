@@ -46,13 +46,3 @@
   font-size: var(--font-2xl);
   line-height: 1;
 }
-
-@keyframes blink {
-  50% {
-    visibility: hidden;
-  }
-}
-
-.blinkingCursor {
-  animation: blink 1s steps(1) infinite;
-}
