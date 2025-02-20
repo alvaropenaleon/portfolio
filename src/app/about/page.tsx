@@ -1,11 +1,15 @@
-import SidebarLayout from "@/components/ui/sidebarLayout";
+{/* 
 import CurrentlyRow from "@/components/about/currentInfo"; // Use correctly named component
 import typo from "@/styles/ui/typography.module.css";
+import clsx from "clsx"; 
+*/}
+
+import SidebarLayout from "@/components/ui/sidebarLayout";
 import spacing from "@/styles/ui/space.module.css";
-import DynamicText from "@/components/about/dynamicIntro";
+import BioComponent from "@/components/about/bio";
+
 import Clock from "@/components/about/clock";
 import { fetchUser } from "@/lib/data";
-import clsx from "clsx";
 
 export default async function HomePage() {
   const user = await fetchUser();
@@ -26,22 +30,22 @@ export default async function HomePage() {
         Github
       </a>
       <Clock />
-      {/* <p>{user.location}</p> */}
     </div>
   );
 
   return (
     <SidebarLayout sidebar={sidebarContent}>
       <main>
+        <div className={spacing.lg}>
+          
+          <BioComponent bio={user.bio} />
+        </div>
+        {/* 
         <p>{user.name}</p>
         <p>{user.title}</p>
-
-        <div className={spacing.lg}>
-          <DynamicText />
-        </div>
-
+        <p>{user.location}</p> 
         <div className={spacing.xl3}>
-          <p>{user.bio}</p>
+        <p>{user.bio}</p>
         </div>
 
         <div className={spacing.xl3}>
@@ -54,11 +58,7 @@ export default async function HomePage() {
           <CurrentlyRow type="📖 Reading" title={user.currentlyReading} />
           <CurrentlyRow type="🎧 Listening" title={user.currentlyListening} />
         </div>
-
-        <p className={clsx(spacing.xl3, typo.xxs)}>
-          Website designed in Figma, built with Next.js using Typescript, Vanilla CSS, Neon Postgres, and deployed with Vercel. All text is set in the Inter typeface.
-        </p>
-
+        */}
       </main>
     </SidebarLayout>
   );

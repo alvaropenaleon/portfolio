@@ -3,7 +3,7 @@ export type User = {
   name: string;
   email: string;
   title: string;
-  bio: string;
+  bio: {text: string; class:string} [];
   linkedin: string;
   github: string;
   location: string;
