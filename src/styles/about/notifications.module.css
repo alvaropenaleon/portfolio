@@ -10,7 +10,7 @@
 
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: var(--space-md);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -19,8 +19,8 @@
 .notificationCard {
   position: relative;
   background-color: rgba(var(--brand-grey-rgb), 0.15);
-  border-radius: 0.75rem;
-  padding: 1rem;
+  border-radius: var(--radius-lg);
+  padding:var(--space-md);
   display: flex;
   align-items: center; 
   width: 100%;
@@ -30,8 +30,8 @@
 
 .activityLabel {
   position: absolute;
-  top: 0.5rem;
-  right: 0.75rem;
+  top: var(--space-md);
+  right: var(--space-md);
   opacity: 0.5;
   font-size: var(--font-xs);
   font-variation-settings: var(--var-sm);
@@ -60,7 +60,7 @@
 }
 
 .details p {
-  margin: 0.25rem 0 0;
+  margin: var(--space-xs) 0 0;
   text-align: left;
   font-size: var(--font-sm);
 }
