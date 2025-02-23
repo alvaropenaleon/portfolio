@@ -7,6 +7,7 @@ import SidebarLayout from "@/components/ui/sidebarLayout";
 import spacing from "@/styles/ui/space.module.css";
 import Bio from "@/components/about/bio";
 import Notifications from "@/components/about/notifications"; 
+import layout from "@/styles/ui/layout.module.css";
 
 import ClockClient from "@/components/about/clockClient";
 import { fetchUser } from "@/lib/data";
@@ -19,7 +20,9 @@ export default async function HomePage() {
   }
 
   const sidebarContent = (
+ 
     <div>
+      {/*
       <a href={`mailto:${user.email}`}>Email</a>
       <br />
       <a href={user.linkedin} target="_blank" rel="noopener noreferrer">
@@ -29,7 +32,12 @@ export default async function HomePage() {
       <a href={user.github} target="_blank" rel="noopener noreferrer">
         Github
       </a>
+      */}
       <ClockClient />
+    
+      <div className={layout.sidebarBottom}>
+        <Notifications />
+      </div>
     </div>
   );
 
@@ -38,7 +46,6 @@ export default async function HomePage() {
       <main>
         <div className={spacing.lg}>
           <Bio bio={user.bio} />
-          < Notifications />
         </div>
         {/* 
         <p>{user.name}</p>
