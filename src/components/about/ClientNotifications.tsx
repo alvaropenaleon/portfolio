@@ -1,5 +1,6 @@
 "use client";
 
+
 import { useState } from 'react';
 import styles from '@/styles/about/notifications.module.scss';
 import { Notification } from "@/lib/definitions";

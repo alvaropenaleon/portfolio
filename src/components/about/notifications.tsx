@@ -1,5 +1,5 @@
 import { fetchNotifications } from "@/lib/data";
-import ClientNotifications from '@/components/about/ClientNotifications';
+import ClientNotifications from '@/components/about/clientNotifications';
 
 export default async function Notifications() {
   const notifications = await fetchNotifications();
