@@ -88,12 +88,16 @@ $max-z: 20;
 .expandButton {
     width: 120px;
     padding: var(--space-sm);
+    font-size: var(--font-sm);
     background-color: rgba(var(--brand-grey-rgb), 0.1);
     border: none;
     border-radius: var(--radius-lg);
     cursor: pointer;
     margin-bottom: var(--space-sm);
     transition: background-color 0.2s ease;
+
+    display: block;
+    margin-left: auto;
 }
 
 .expandButton:hover {
