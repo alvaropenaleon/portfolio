@@ -97,7 +97,7 @@ $max-z: 20;
 .expandButton {
     width: 120px;
     padding: var(--space-sm);
-    background-color: rgba(120, 120, 128, 0.1);
+    background-color: rgba(var(--brand-grey-rgb), 0.1);
     border: none;
     border-radius: var(--radius-lg);
     cursor: pointer;
@@ -130,7 +130,7 @@ $max-z: 20;
 
 /* Pseudo-element for the blur effect */
 .notificationCard::before {
-    content: "";
+    /*content: "";*/
     position: absolute;
     inset: 0;
     backdrop-filter: blur(22px);
