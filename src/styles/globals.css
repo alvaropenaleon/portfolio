@@ -70,15 +70,11 @@ a:hover::after {
 }
 
 @media (max-width: 1024px) {
-  body {
-    padding: 0.5rem;
-  }
+
 }
 
 @media (max-width: 768px) {
-  body {
-    padding: 0.2rem;
-  }
+
 }
 
 @media (prefers-color-scheme: dark) {
