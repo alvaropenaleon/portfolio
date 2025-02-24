@@ -9,7 +9,7 @@ import Bio from "@/components/about/bio";
 import Notifications from "@/components/about/notifications"; 
 import layout from "@/styles/ui/layout.module.css";
 
-import ClockClient from "@/components/about/clockClient";
+// import ClockClient from "@/components/about/clockClient";
 import { fetchUser } from "@/lib/data";
 
 export default async function HomePage() {
@@ -32,8 +32,8 @@ export default async function HomePage() {
       <a href={user.github} target="_blank" rel="noopener noreferrer">
         Github
       </a>
+       <ClockClient />
       */}
-      <ClockClient />
     
       <div className={layout.sidebarBottom}>
         <Notifications />

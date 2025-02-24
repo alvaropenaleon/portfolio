@@ -1,4 +1,3 @@
-// components/about/notifications.tsx
 import { fetchNotifications } from "@/lib/data";
 import ClientNotifications from '@/components/about/ClientNotifications';
 
