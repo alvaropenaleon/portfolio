@@ -19,8 +19,8 @@ $max-z: 20;
     list-style: none;
 
     /* Animate between a small height and a larger one */
-    max-height: 7rem;
-    min-height: 7rem;
+    max-height: 8rem;
+    min-height: 6rem;
     /* Collapsed: show top card (and part of next) */
     overflow: hidden;
     transition: max-height 0.5s ease;
