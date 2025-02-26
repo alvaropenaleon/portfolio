@@ -1,0 +1,79 @@
+.menuContainer {
+    position: fixed;
+    top: var(--space-lg);
+    left: var(--space-lg);
+    right: var(--space-lg);
+    width: calc(var(--space-sidebar) - var(--space-lg) * 0.75); /* Sidebar width */
+    max-width: 100%;
+    z-index: 50;
+    height: 20px;
+    background-color: var(--brand-pink);
+    padding: 7px 12px;
+    transition: transform 0.3s ease-in-out; /* Smooth hide/show */
+}
+
+.hidden {
+    transform: translateY(-200%); /* Moves it out of view */
+}
+
+
+.menuBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.menuBar:hover {
+  background-color: transparent;
+}
+
+.icon {
+  margin-left: auto;
+}
+
+.rightIcons {
+  display: flex;
+  gap: 10px;
+  margin-left: 10px;
+}
+
+.menuDropdown {
+  background: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+}
+
+.menuDropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    z-index: 100;
+}
+
+.menuDropdown a {
+  display: block;
+  text-decoration: none;
+  color: black;
+  padding: 5px 0;
+}
+
+.menuDropdown hr {
+  margin: 10px 0;
+}
+
+
+@media (max-width: 768px) {
+    .menuContainer {
+        width: calc(100% - var(--space-sm) * var(--space-sm)); /* Respect left/right spacing */
+        top: var(--space-md);
+        left: var(--space-md);
+        right: var(--space-md); /* Now applies correctly */
+    }
+  }
