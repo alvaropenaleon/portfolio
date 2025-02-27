@@ -1,13 +1,13 @@
 .clockContainer {
-  display: grid; /* Use grid to stack elements */
-  grid-template-columns: 1fr; /* One column */
-  grid-template-rows: 1fr; /* One row */
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
   align-items: center;
   justify-content: end;
   color: var(--color-text);
   height: auto;
   width: fit-content;
-  min-width: 55px; /* Only takes as much space as needed */
+  min-width: 55px;
   position: relative;
 }
 
@@ -17,7 +17,7 @@
   font-size: var(--font-sm);
   white-space: nowrap;
   text-align: left;
-  grid-column: 1 / -1; /* Both elements occupy the same grid cell */
+  grid-column: 1 / -1;
   grid-row: 1 / -1;
 }
 
