@@ -3,6 +3,7 @@
 :root {
   /* Light Mode */
   --color-background: #fcfcfc;
+  --color-background-07: rgba(252, 252, 252, 0.7);
   --color-foreground: #171717;
   --color-text: #222;
   --color-line: #ddd;
@@ -68,9 +69,11 @@
   }
 }
 
+/*
 @media (prefers-color-scheme: dark) {
   :root {
     --color-background: #0a0a0a;
+    --color-background-07: rgb(10, 10, 10, 0.7);
     --color-foreground: #ededed;
     --color-text: #ddd;
 
@@ -80,3 +83,19 @@
     --shadow-lg: 0 8px 16px rgba(255, 255, 255, 0.05);
   }
 }
+*/
+
+
+.dark {
+    color-scheme: dark;
+    --color-background: #0a0a0a;
+    --color-background-07: rgba(10, 10, 10, 0.7);
+    --color-foreground: #ededed;
+    --color-text: #ddd;
+  
+    --shadow-xs: 0 1px 2px rgba(255, 255, 255, 0.05);
+    --shadow-sm: 0 2px 4px rgba(255, 255, 255, 0.05);
+    --shadow-md: 0 4px 8px rgba(255, 255, 255, 0.05);
+    --shadow-lg: 0 8px 16px rgba(255, 255, 255, 0.05);
+  }
+
