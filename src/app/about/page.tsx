@@ -1,10 +1,10 @@
 {/* 
 import typo from "@/styles/ui/typography.module.css";
 import clsx from "clsx"; 
+import spacing from "@/styles/ui/space.module.css";
 */}
 
 import SidebarLayout from "@/components/ui/sidebarLayout";
-import spacing from "@/styles/ui/space.module.css";
 import Bio from "@/components/about/bio";
 import Notifications from "@/components/about/notifications"; 
 import layout from "@/styles/ui/layout.module.css";
@@ -44,7 +44,7 @@ export default async function HomePage() {
   return (
     <SidebarLayout sidebar={sidebarContent}>
       <main>
-        <div className={spacing.lg}>
+        <div>
           <Bio bio={user.bio} />
         </div>
         {/* 
