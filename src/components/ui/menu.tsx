@@ -6,7 +6,7 @@ import styles from "@/styles/ui/menu.module.css";
 import { Mail } from "lucide-react";
 import ThemeButton from "@/components/ui/themeButton";
 
-export default function MenuBar() {
+export default function MenuBar({ user }: { user: { email: string } }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -19,9 +19,11 @@ export default function MenuBar() {
           Menu
         </p>
         <div className={styles.rightIcons}>
-          <Mail size={20} />
-          <ThemeButton /> 
-          <ClockClient />
+            <a href={`mailto:${user.email}`}>
+            <Mail size={20} />
+            </a>
+            <ThemeButton /> 
+            <ClockClient />
         </div>
       </div>
 
@@ -29,7 +31,7 @@ export default function MenuBar() {
         <div className={styles.menuDropdown}>
           <a href="/about">About</a>
           <a href="/archive">Archive</a>
-          <a href="/contact">Contact</a>
+          <a href={`mailto:${user.email}`}>Contact</a>
         </div>
       )}
     </div>

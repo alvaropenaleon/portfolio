@@ -42,7 +42,8 @@ export default async function HomePage() {
   );
 
   return (
-    <SidebarLayout sidebar={sidebarContent}>
+    
+    <SidebarLayout sidebar={sidebarContent} user={user}>
       <main>
         <div>
           <Bio bio={user.bio} />
