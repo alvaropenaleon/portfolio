@@ -46,3 +46,11 @@
   font-size: var(--font-2xl);
   line-height: 1;
 }
+
+
+@media (max-width: 768px) {
+    .xl {
+        font-size: var(--font-lg);
+    }
+
+}

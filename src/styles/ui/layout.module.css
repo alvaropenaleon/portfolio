@@ -57,6 +57,7 @@
   .content {
     margin-left: 0;
     padding: 0;
+    padding-top: calc( var(--space-sm) + var(--space-2xl));
   }
 
   .sidebarBottom {
