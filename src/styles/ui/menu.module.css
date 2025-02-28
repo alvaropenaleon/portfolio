@@ -61,8 +61,10 @@
     .menuContainer {
         width: calc(100% - var(--space-sm) * var(--space-sm));
         top: 0;
-        left: var(--space-md);
-        right: var(--space-md);
+        left: 0;
+        right: 0;
+        padding: 0 var(--space-md);
+        padding-top: var(--space-md);
     }
 
 }
