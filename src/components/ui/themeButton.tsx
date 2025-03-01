@@ -28,8 +28,9 @@ export default function ColorThemeBtn() {
         /*background: "none",*/
         border: "none",
         cursor: "pointer",
-        /*padding: 0,
-        margin: 0,*/
+        width: '2rem',
+        height: '2rem',
+        /*margin: 0,*/
       }}
     >
       {resolvedTheme === "dark" ? <SunDim size={18} /> : <Sun size={18} />}
