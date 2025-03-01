@@ -44,6 +44,20 @@
     gap: 10px;
 }
 
+
+.rightIcons > :nth-child(-n+3) {
+    background-color: transparent;
+    /*
+    color: white;
+    padding: calc(var(--space-xxs) - 0.2rem ) var(--space-xxs);
+    border-radius: var(--radius-lg);
+    */
+}
+
+.rightIcons a::after {
+    content: none;
+}
+
 .menuDropdown {
     margin-top: 0;
 }
@@ -54,6 +68,15 @@
     text-decoration: none;
     color: var(--color-foreground);
     font-variation-settings: var(--var-lg);
+}
+
+.menuDropdown a::after {
+    content: "";
+    width: 20px;
+    height: 20px;
+    -webkit-mask-image: url("/arrow.svg");
+    mask-image: url("/arrow.svg");
+
 }
 
 

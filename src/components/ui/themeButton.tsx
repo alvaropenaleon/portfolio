@@ -15,10 +15,10 @@ export default function ColorThemeBtn() {
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
       aria-label="Toggle Dark Mode"
       style={{
-        background: "none",
+        /*background: "none",*/
         border: "none",
         cursor: "pointer",
-        padding: 0,
+        /*padding: 0,*/
         margin: 0,
       }}
     >
