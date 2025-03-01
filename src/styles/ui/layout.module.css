@@ -47,10 +47,13 @@
   }
 
   .sidebar {
-    position: static;
+    position: sticky;
     width: 100%;
-    height: auto;
-    margin: 0;
+    height: calc(100vh - (var(--space-md) * 2));
+    top: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
     order: 2;
   }
 
@@ -61,8 +64,7 @@
   }
 
   .sidebarBottom {
-    margin-top: 0;
-    border-top: none;
-    padding-top: 0;
+    margin-top: auto;
+    padding-top: var(--space-md);
   }
 }
