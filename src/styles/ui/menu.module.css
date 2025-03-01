@@ -51,6 +51,7 @@
     align-items: center;
     height: 2rem;
     width: 2rem;
+    color: var(--brand-blue);
     background-color: rgba(var(--brand-grey-rgb), 0.12);
     border-radius: var(--radius-xl);
     backdrop-filter: blur(22px);
@@ -60,7 +61,7 @@
 
 .rightIcons > *:hover {
     background-color: rgba(var(--brand-grey-rgb), 0.2);
-    color: var(--color-foreground)
+    color: var(--brand-blue)
 }
 
 .rightIcons > :nth-child(2) {
