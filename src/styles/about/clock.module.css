@@ -16,7 +16,7 @@
   font-variation-settings: "wght" 520;
   font-size: var(--font-sm);
   white-space: nowrap;
-  text-align: left;
+  text-align: center;
   grid-column: 1 / -1;
   grid-row: 1 / -1;
 }

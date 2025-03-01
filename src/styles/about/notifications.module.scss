@@ -89,7 +89,7 @@ $max-z: 20;
     width: 120px;
     padding: var(--space-sm);
     font-size: var(--font-sm);
-    background-color: rgba(var(--brand-grey-rgb), 0.1);
+    background-color: rgba(var(--brand-grey-rgb), 0.12);
     border: none;
     border-radius: var(--radius-lg);
     cursor: pointer;
@@ -106,7 +106,7 @@ $max-z: 20;
 
 .notificationCard {
     position: relative;
-    background-color: rgba(var(--brand-grey-rgb), 0.1);
+    background-color: rgba(var(--brand-grey-rgb), 0.12);
     border-radius: var(--radius-lg);
     padding: var(--space-md);
     display: flex;

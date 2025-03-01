@@ -20,7 +20,7 @@ export default function MenuBar({ user }: { user: { email: string } }) {
         </p>
         <div className={styles.rightIcons}>
             <a href={`mailto:${user.email}`}>
-            <Mail size={20} />
+            <Mail size={17} />
             </a>
             <ThemeButton /> 
             <ClockClient />

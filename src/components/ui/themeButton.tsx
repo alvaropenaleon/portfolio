@@ -25,14 +25,14 @@ export default function ColorThemeBtn() {
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
       aria-label="Toggle Dark Mode"
       style={{
-        background: "none",
+        /*background: "none",*/
         border: "none",
         cursor: "pointer",
-        padding: 0,
-        margin: 0,
+        /*padding: 0,
+        margin: 0,*/
       }}
     >
-      {resolvedTheme === "dark" ? <SunDim size={20} /> : <Sun size={20} />}
+      {resolvedTheme === "dark" ? <SunDim size={18} /> : <Sun size={18} />}
     </button>
   );
 }

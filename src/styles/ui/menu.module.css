@@ -30,7 +30,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    cursor: pointer;
+    cursor: default;
 }
 
 .menuText {
@@ -41,17 +41,31 @@
 
 .rightIcons {
     display: flex;
-    gap: 10px;
+    gap: 5px;
 }
 
 
-.rightIcons > :nth-child(-n+3) {
-    background-color: transparent;
-    /*
-    color: white;
-    padding: calc(var(--space-xxs) - 0.2rem ) var(--space-xxs);
-    border-radius: var(--radius-lg);
-    */
+.rightIcons > * {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2rem;
+    width: 2rem;
+    background-color: rgba(var(--brand-grey-rgb), 0.12);
+    border-radius: var(--radius-xl);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+  }
+
+
+.rightIcons > *:hover {
+    background-color: rgba(var(--brand-grey-rgb), 0.2);
+    color: var(--color-foreground)
+}
+
+.rightIcons > :nth-child(3) {
+    padding: 0 var(--space-sm);
+
 }
 
 .rightIcons a::after {
