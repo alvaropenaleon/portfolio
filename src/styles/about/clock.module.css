@@ -7,7 +7,9 @@
   color: var(--color-text);
   height: auto;
   width: fit-content;
-  min-width: 55px;
+  width: -moz-fit-content;
+  width: -webkit-fit-content;
+  min-width: 57px;
   position: relative;
 }
 
