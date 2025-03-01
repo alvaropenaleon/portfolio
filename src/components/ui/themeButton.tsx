@@ -2,9 +2,19 @@
 
 import { Sun, SunDim } from "lucide-react";
 import { useTheme } from "next-themes";
+import { useState, useEffect } from "react";
 
 export default function ColorThemeBtn() {
   const { setTheme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
 
   if (!resolvedTheme) {
     return null;
@@ -15,10 +25,10 @@ export default function ColorThemeBtn() {
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
       aria-label="Toggle Dark Mode"
       style={{
-        /*background: "none",*/
+        background: "none",
         border: "none",
         cursor: "pointer",
-        /*padding: 0,*/
+        padding: 0,
         margin: 0,
       }}
     >
