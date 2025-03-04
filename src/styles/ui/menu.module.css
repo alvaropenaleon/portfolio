@@ -51,7 +51,7 @@
     align-items: center;
     height: 2rem;
     width: 2rem;
-    color: var(--brand-blue);
+    color: var(--color-foreground);
     background-color: rgba(var(--brand-grey-rgb), 0.12);
     border-radius: var(--radius-xl);
     backdrop-filter: blur(22px);
