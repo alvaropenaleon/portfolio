@@ -22,6 +22,7 @@ $max-z: 20;
 
     &.expanded {
         max-height: 100vh;
+        margin-bottom: var(--space-sm);
     }
 
     &.collapsed {
@@ -99,11 +100,12 @@ $max-z: 20;
     display: block;
     margin-left: auto;
 
-    color: var(--brand-blue);
+    color: var(--color-foreground);
 }
 
 .expandButton:hover {
     background-color: rgba(var(--brand-grey-rgb), 0.2);
+    color: var(--brand-blue);
 }
 
 .notificationCard {
@@ -172,4 +174,12 @@ $max-z: 20;
     margin: var(--space-xs) 0 0;
     text-align: left;
     font-size: var(--font-sm);
+}
+
+@media (max-width: 768px) {
+
+    .notificationsList {
+        margin-bottom: var(--space-md);
+    }
+
 }
