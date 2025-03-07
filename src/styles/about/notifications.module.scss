@@ -180,6 +180,10 @@ $max-z: 20;
 
     .notificationsList {
         margin-bottom: var(--space-md);
+
+        &.expanded {
+            margin-bottom: calc(var(--space-md) - var(--space-xxs));
+        }
     }
 
 }
