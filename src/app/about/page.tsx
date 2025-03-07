@@ -8,6 +8,7 @@ import SidebarLayout from "@/components/ui/sidebarLayout";
 import Bio from "@/components/about/bio";
 import Notifications from "@/components/about/notifications"; 
 import layout from "@/styles/ui/layout.module.css";
+import ClockClient from "@/components/about/clockClient";
 
 // import ClockClient from "@/components/about/clockClient";
 import { fetchUser } from "@/lib/data";
@@ -37,6 +38,7 @@ export default async function HomePage() {
     
       <div className={layout.sidebarBottom}>
         <Notifications />
+        <ClockClient />
       </div>
     </div>
   );

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import ClockClient from "@/components/about/clockClient";
 import styles from "@/styles/ui/menu.module.css";
 import { Mail } from "lucide-react";
 import ThemeButton from "@/components/ui/themeButton";
@@ -23,7 +22,6 @@ export default function MenuBar({ user }: { user: { email: string } }) {
             <Mail size={17} />
             </a>
             <ThemeButton /> 
-            <ClockClient />
         </div>
       </div>
 
