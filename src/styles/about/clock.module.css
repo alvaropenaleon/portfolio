@@ -1,41 +1,43 @@
 .clockContainer {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
-  align-items: center;
-  justify-content: end;
-  color: var(--color-foreground);
-  height: auto;
-  width: fit-content;
-  width: -moz-fit-content;
-  width: -webkit-fit-content;
-  min-width: 57px;
-  position: relative;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(var(--brand-dark-grey-rgb), 0.75);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
+    max-width: 100%;
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
 }
 
-.digitalTime,
-.timezone {
-  font-variation-settings: "wght" 520;
-  font-size: var(--font-sm);
-  white-space: nowrap;
-  text-align: center;
-  grid-column: 1 / -1;
-  grid-row: 1 / -1;
-  color: var(--color-foreground);
+.topRow {
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.digitalTime {
-  opacity: 1;
+.location {
+    font-weight: 800;
+    font-size: var(--font-md);
+    font-variation-settings: "wght" 520;
+    color: #ffffff;
 }
 
-.timezone {
-  opacity: 0;
+.time {
+    position: absolute;
+    right: var(--space-md);
+    top: var(--space-sm);
+
+    text-align: right;
+    font-size: calc(var(--font-lg)*1.6);
+    font-weight: 700;
+    color: #ffffff;
 }
 
-.clockContainer:hover .digitalTime {
-  opacity: 0;
-}
-
-.clockContainer:hover .timezone {
-  opacity: 1;
+.date {
+    font-weight: 600;
+    font-size: var(--font-sm);
+    text-align: left;
+    color: #EBEBF580;
 }

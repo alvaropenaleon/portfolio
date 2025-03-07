@@ -51,6 +51,8 @@
   --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.1);
 
   /* Brand Colors */
+  --brand-dark-grey: #1E1E1E;
+  --brand-dark-grey-rgb: 30, 30, 30;
   --brand-grey: #787880;
   --brand-grey-rgb: 120, 120, 128;
   --brand-blue: #007AFF;
