@@ -82,22 +82,58 @@
 }
 
 .menuDropdown a {
-    font-size: calc(1.2 *var(--font-lg));
-    display: block;
-    text-decoration: none;
-    color: var(--color-foreground);
-    font-variation-settings: var(--var-lg);
+  position: relative;              /* So the arrow can be absolutely placed */
+  display: block;
+  padding-right: 1.5rem;          /* Space for arrow on the right */
+  font-size: calc(1.2 * var(--font-lg));
+  text-decoration: none;
+  color: var(--color-foreground);
+  font-variation-settings: var(--var-lg);
+  transition: 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 .menuDropdown a::after {
+  content: none;
+}
+  
+.menuDropdown a::before {
     content: "";
-    width: 20px;
-    height: 20px;
+    position: absolute;
+    top: 45%;
+    left: 0;
+    rotate: 45deg;
+    width: 0px;
+    height: 0px;
+  
+    /* Mask the arrow.svg file onto this box */
     -webkit-mask-image: url("/arrow.svg");
     mask-image: url("/arrow.svg");
-
-}
-
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+  
+    /* Start transparent so it's “hidden” initially */
+    transition: 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    background-color: transparent;
+  
+    /* Smooth transitions for color/position changes */
+  }
+  
+  /* On hover, change text color and reveal the arrow */
+  .menuDropdown a:hover {
+    padding-left: 2rem;
+    transition: 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+  
+  .menuDropdown a:hover::before {
+    background-color: currentColor;  /* matches the text color on hover */
+    transition: 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    top: 15%;
+    width: 30px;
+    height: 30px;
+  }
+  
 
 @media (max-width: 768px) {
     .menuContainer {
