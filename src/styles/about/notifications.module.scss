@@ -116,7 +116,7 @@ $max-z: 20;
     display: flex;
     align-items: center;
     max-width: 100%;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.01);
+    box-shadow: var(--shadow-xs);
     backdrop-filter: blur(22px);
     -webkit-backdrop-filter: blur(22px);
     transition:

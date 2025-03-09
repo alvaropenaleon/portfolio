@@ -2,12 +2,13 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    background-color: rgba(var(--brand-dark-grey-rgb), 0.75);
+    background-color: rgba(var(--brand-grey-rgb), 0.12);
     border-radius: var(--radius-lg);
     padding: var(--space-md);
     max-width: 100%;
     backdrop-filter: blur(22px);
     -webkit-backdrop-filter: blur(22px);
+    box-shadow: var(--shadow-xs);
 }
 
 .topRow {
@@ -21,23 +22,21 @@
     font-weight: 800;
     font-size: var(--font-md);
     font-variation-settings: "wght" 520;
-    color: #ffffff;
+    color: var(--color-foreground);
 }
 
 .time {
     position: absolute;
     right: var(--space-md);
     top: var(--space-sm);
-
     text-align: right;
     font-size: calc(var(--font-lg)*1.6);
     font-weight: 700;
-    color: #ffffff;
 }
 
 .date {
     font-weight: 600;
     font-size: var(--font-sm);
     text-align: left;
-    color: #EBEBF580;
+    opacity: 0.5;
 }
