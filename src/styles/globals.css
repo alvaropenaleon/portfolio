@@ -87,6 +87,9 @@ h3 a::after {
 }
 
 @media (max-width: 768px) {
+    h1 {
+        font-size: var(--font-lg);
+    }
 
 }
 
