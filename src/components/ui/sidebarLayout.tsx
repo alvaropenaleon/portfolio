@@ -13,6 +13,7 @@ export default function SidebarLayout({ children, sidebar, user }: SidebarLayout
   return (
     <div className={sidebar ? styles.withSidebar : styles.fullWidth}>
       <MenuBar user={user} />
+      { /* 1st Render grid template column: sidebar */}
       {sidebar && (
         <div className={styles.sidebar}>
           <div className={styles.sidebarBottom}>
@@ -20,6 +21,7 @@ export default function SidebarLayout({ children, sidebar, user }: SidebarLayout
           </div>
         </div>
       )}
+      { /* 2nd Render for grid template column: auto */}
       <div className={styles.content}>
         {children}
       </div>

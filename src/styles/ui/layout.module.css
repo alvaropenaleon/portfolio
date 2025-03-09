@@ -2,21 +2,22 @@
   position: relative;
   display: grid;
   grid-template-columns: 1fr;
-  padding: var(--space-lg);
+  padding: var(--space-xl);
 }
 
 .withSidebar {
   position: relative;
   display: grid;
+  /* Render sidebar 1st, content 2nd */
   grid-template-columns: var(--space-sidebar) auto;
   column-gap: var(--space-lg);
-  padding: var(--space-lg);
+  padding: var(--space-xl);
 }
 
 .sidebar {
   position: sticky;
-  top: var(--space-lg);
-  height: calc(100vh - var(--space-lg) * 2);
+  top: var(--space-xl);
+  height: calc(100vh - var(--space-xl) * 2);
   display: flex;
   flex-direction: column;
   overflow-y: auto;
@@ -33,7 +34,7 @@
 
 .sidebarBottom {
   margin-top: auto;
-  padding-top: var(--space-lg);
+  padding-top: var(--space-xl);
 }
 
 @media (max-width: 768px) {
