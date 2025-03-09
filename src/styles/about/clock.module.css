@@ -9,6 +9,7 @@
     backdrop-filter: blur(22px);
     -webkit-backdrop-filter: blur(22px);
     box-shadow: var(--shadow-xs);
+    margin-bottom: 2px;
 }
 
 .topRow {
