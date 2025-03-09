@@ -179,10 +179,10 @@ $max-z: 20;
 @media (max-width: 768px) {
 
     .notificationsList {
-        margin-bottom: var(--space-md);
+        margin-bottom: calc(var(--space-xs) + var(--space-xs));
 
         &.expanded {
-            margin-bottom: calc(var(--space-md) - var(--space-xxs));
+            margin-bottom: var(--space-xxs);
         }
     }
 
