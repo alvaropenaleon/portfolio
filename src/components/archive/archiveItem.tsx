@@ -1,5 +1,7 @@
 import { Project } from '@/lib/definitions';
 import styles from '@/styles/ui/row.module.css';
+import CategoryMapping from '@/components/ui/categoryMapping';
+
 
 type ArchiveListProps = {
     project: Project;
@@ -15,7 +17,7 @@ export default function ArchiveItem({ project }: ArchiveListProps) {
                 {project.title}
                 <br />
                 {project.categories.map((category, index) => (
-                    <p key={index}>{category}</p>
+                    <CategoryMapping key={index} category={category} />
                 ))}
             </div>
 
