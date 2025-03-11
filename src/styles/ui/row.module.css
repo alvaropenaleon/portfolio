@@ -1,8 +1,8 @@
 .row4col {
     display: grid;
-    grid-template-columns: minmax(80px, 10%) 1fr minmax(150px, 20%) minmax(100px, 15%);
-    align-items: center;
-    padding: var(--space-sm) 0;
+    grid-template-columns: minmax(70px, 7%) 1fr minmax(150px, 20%) minmax(100px, 15%);
+    align-items: baseline;
+    padding: var(--space-row) 0;
     border-bottom: 1px solid var(--color-line);
 }
 
@@ -12,7 +12,7 @@
     grid-template-columns: minmax(80px, 10%) minmax(100px, 12%) 1fr;
     align-items: center;
     padding: var(--space-sm) 0;
-    border-bottom: 1px solid var(--color-line);
+    border-bottom: 1px solid rgba(var(--color-forground-rgb), 0.5);
 }
 
 .col4 {
