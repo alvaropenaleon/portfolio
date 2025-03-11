@@ -1,6 +1,6 @@
 .category {
     display: inline-flex;
-    align-items: center;
+    align-items: first baseline;
     margin-right: 0.5rem;
 }
 
@@ -8,8 +8,11 @@
     display: inline-block;
     width: 8px;
     height: 8px;
-    border-radius: var(--radius-xl);
     margin-right: 4px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    min-width: 8px;
+    min-height: 8px;
 }
 
 .label {
