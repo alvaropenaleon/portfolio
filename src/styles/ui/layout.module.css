@@ -8,8 +8,8 @@
 .withSidebar {
   position: relative;
   display: grid;
-  /* Render sidebar 1st, content 2nd */
-  grid-template-columns: var(--space-sidebar) auto;
+  /* Render content 1st, sidebar 2nd */
+  grid-template-columns: auto var(--space-sidebar);
   column-gap: var(--space-lg);
   padding: var(--space-xl);
 }
