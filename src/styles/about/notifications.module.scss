@@ -27,7 +27,7 @@ $max-z: 20;
 
     &.collapsed {
         .notificationCard {
-            margin-bottom: -4rem;
+            margin-bottom: -3.35rem;
             transform: translateY(0);
             opacity: 1;
 
@@ -112,7 +112,7 @@ $max-z: 20;
     position: relative;
     background-color: rgba(var(--brand-grey-rgb), 0.12);
     border-radius: var(--radius-lg);
-    padding: var(--space-md);
+    padding:calc(var(--space-sm) * 1.5);
     display: flex;
     align-items: center;
     max-width: 100%;
@@ -140,8 +140,8 @@ $max-z: 20;
 }
 
 .cover {
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
     object-fit: cover;
     border-radius: 0.5rem;
     margin-right: 1rem;
@@ -171,7 +171,7 @@ $max-z: 20;
 }
 
 .details p {
-    margin: var(--space-xs) 0 0;
+    margin: var(--space-xxs) 0 0;
     text-align: left;
     font-size: var(--font-sm);
 }
