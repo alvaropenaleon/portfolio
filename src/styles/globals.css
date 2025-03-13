@@ -71,19 +71,19 @@ a:hover::after {
 }
 
 h3 {
-    font-variation-settings: "opsz" 22, "wght" 410;
+    font-variation-settings: "opsz" 20, "wght" 450;
     font-size: var(--font-md);
 }
 
 h2 {
-    font-variation-settings: "opsz" 26, "wght" 420;
+    font-variation-settings: "opsz" 24, "wght" 450;
     font-size: var(--font-lg);
 }
 
 h1 {
     font-variation-settings: var(--var-lg);
     font-size: var(--font-xl);
-    line-height: 1.25;
+    line-height: 1.3;
 }
 
 h2 a {
@@ -96,7 +96,7 @@ h2 a {
 h2 a::after {
   width: 20px;
   height: 20px;
-  margin-top: 7px;
+  margin-top: 4px;
 }
 
 @media (max-width: 1024px) {

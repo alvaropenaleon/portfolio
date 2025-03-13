@@ -10,10 +10,11 @@
   --color-line: rgba(10, 10, 10, 0.2);
 
   /* font variation settings*/
-  --var-sm: "opsz" 21, "wght" 420;
+  --var-sm: "opsz" 20, "wght" 420;
   --var-lg: "opsz" 32, "wght" 420;
 
    /* Spacing */
+  --space-3xs: 0.05rem;
   --space-xxs: 0.125rem;
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
@@ -24,15 +25,15 @@
   --space-3xl: 5rem;
 
   --space-sidebar: 332px;
-  --space-row: 0.7rem;
+  --space-row: 1rem;
 
   /* Font sizes */
   --font-xxs: calc(10rem/ 16);
   --font-xs: calc(12rem/ 16);
   --font-sm: calc(13rem/ 16);
   --font-md: calc(15rem/ 16);
-  --font-lg: calc(24rem/ 16);
-  --font-xl: calc(38rem/ 16);
+  --font-lg: calc(23rem/ 16);
+  --font-xl: calc(35rem/ 16);
   --font-2xl:calc(45rem/ 16);
 
   /* Border Radius */

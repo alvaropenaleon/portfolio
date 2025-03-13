@@ -9,7 +9,7 @@
     display: inline-block;
     width: 8px;
     height: 8px;
-    margin-right: var(--space-xs);
+    margin-right: var(--space-sm);
     border-radius: 50%;
     flex-shrink: 0;
     min-width: 8px;
@@ -19,6 +19,6 @@
 
 .label {
     font-size: var(--font-sm);
-    color: rgba(var(--color-foreground-rgb), 0.6);
+    color: rgba(var(--color-foreground-rgb), 0.7);
     font-variation-settings: var(--var-sm);
 }

@@ -103,7 +103,7 @@ $max-z: 20;
     cursor: pointer;
     margin-bottom: var(--space-sm);
     transition: background-color 0.2s ease;
-
+    font-variation-settings: var(--var-sm);
     display: block;
     margin-left: auto;
 
@@ -173,7 +173,7 @@ $max-z: 20;
     text-align: left;
     font-size: var(--font-sm);
     font-variation-settings: var(--var-sm);
-    font-variation-settings: "wght" 520;
+    font-variation-settings: "opsz" 20, "wght" 520;
 }
 
 .details p {

@@ -37,7 +37,7 @@
 
 .menuText {
     margin-right: auto;
-    font-size: calc(1.2 *var(--font-lg));
+    font-size: var(--font-xl);
     font-variation-settings: var(--var-lg);
 }
 
@@ -89,8 +89,9 @@
     display: block;
     padding-right: 1.5rem;
     /* Space for arrow on the right */
-    font-size: calc(1.2 * var(--font-lg));
+    font-size: var(--font-xl);
     text-decoration: none;
+    line-height: 1.2;
     color: var(--color-foreground);
     font-variation-settings: var(--var-lg);
     transition: 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
