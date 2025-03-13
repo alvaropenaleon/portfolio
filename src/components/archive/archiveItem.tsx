@@ -16,8 +16,7 @@ export default function ArchiveItem({ project }: ArchiveListProps) {
 
             {/* Categories */}
             <div className={styles.col2}>
-                {project.title}
-                <br />
+                <h3>{project.title}</h3>
                 {project.categories.map((category, index) => (
                     <CategoryMapping key={index} category={category} />
                 ))}
@@ -33,9 +32,11 @@ export default function ArchiveItem({ project }: ArchiveListProps) {
             {/* Links */}
             <div className={styles.col4}>
                 {project.links.map(({ url, type }, index) => (
-                    <a key={index} href={url} target="_blank" rel="noopener noreferrer">
-                        {type === 'code' ? 'Code' : 'Demo'}
-                    </a>
+                    url ? (
+                        <a key={index} href={url} target="_blank" rel="noopener noreferrer">
+                            {type === 'code' ? 'Code' : 'Demo'}
+                        </a>
+                    ) : null
                 ))}
             </div>
         </div>

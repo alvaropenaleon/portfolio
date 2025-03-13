@@ -30,7 +30,7 @@ export default async function HomePage() {
       <main>
         <div>
           <Bio bio={user.bio} /><br />
-          <h3 className={color.brandGrey}>Explore <a href="/archive">my work</a> or <a href={`mailto:${user.email}`}>get in touch</a> to collaborate.</h3>
+          <h2 className={color.brandGrey}>Explore <a href="/archive">my work</a> or <a href={`mailto:${user.email}`}>get in touch</a> to collaborate.</h2>
         </div>
       </main>
     </SidebarLayout>
