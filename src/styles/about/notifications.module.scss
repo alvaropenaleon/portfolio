@@ -3,6 +3,10 @@ $max-z: 20;
 .notificationsContainer {
     position: relative;
     width: 100%;
+
+    /* Safari transition optimisation */
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
 }
 
 .notificationsList {
@@ -13,6 +17,9 @@ $max-z: 20;
     padding: 0;
     list-style: none;
 
+    /* Safari transition optimisation */
+    will-change: max-height;
+
     /* Animate between max height and vh */
     max-height: 8rem;
     min-height: 6rem;
@@ -21,13 +28,13 @@ $max-z: 20;
     transition: max-height 0.5s ease;
 
     &.expanded {
-        max-height: 100vh;
+        max-height: 100%;
         margin-bottom: var(--space-sm);
     }
 
     &.collapsed {
         .notificationCard {
-            margin-bottom: -3.35rem;
+            margin-bottom: -3.4rem;
             transform: translateY(0);
             opacity: 1;
 
@@ -45,7 +52,7 @@ $max-z: 20;
 
         @for $i from 2 through $max-z {
             .notificationCard:nth-child(#{$i}) {
-                $scale: 1 - (($i - 1) * 0.05);
+                $scale: 1 - (($i - 1) * 0.07);
 
                 @if $i ==2 {
                     transform: translateY(0rem) scale($scale);
@@ -112,11 +119,10 @@ $max-z: 20;
     position: relative;
     background-color: rgba(var(--brand-grey-rgb), 0.12);
     border-radius: var(--radius-lg);
-    padding:calc(var(--space-sm) * 1.5);
+    padding:calc(var(--space-sm) * 1.6);
     display: flex;
     align-items: center;
     max-width: 100%;
-    box-shadow: var(--shadow-xs);
     backdrop-filter: blur(22px);
     -webkit-backdrop-filter: blur(22px);
     transition:
@@ -125,7 +131,7 @@ $max-z: 20;
         opacity 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
     
     /* Safari transition ptimisation */
-    will-change: transform, opacity;
+    will-change: transform, opacity, max-height;
     transform: translate3d(0, 0, 0);
 }
 
@@ -155,7 +161,7 @@ $max-z: 20;
 
 .activityLabel {
     position: absolute;
-    top: var(--space-md);
+    top: calc(var(--space-sm) * 1.6);
     right: var(--space-md);
     opacity: 0.5;
     font-size: var(--font-xs);

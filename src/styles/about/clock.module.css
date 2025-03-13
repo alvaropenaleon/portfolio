@@ -8,7 +8,6 @@
     max-width: 100%;
     backdrop-filter: blur(22px);
     -webkit-backdrop-filter: blur(22px);
-    box-shadow: var(--shadow-xs);
     margin-bottom: 2px;
 }
 
@@ -20,8 +19,8 @@
 }
 
 .location {
-    font-weight: 800;
-    font-size: var(--font-md);
+    font-size: var(--font-sm);
+    font-variation-settings: var(--var-sm);
     font-variation-settings: "wght" 520;
     color: var(--color-foreground);
 }
@@ -32,12 +31,11 @@
     top: var(--space-sm);
     text-align: right;
     font-size: calc(var(--font-lg)*1.6);
-    font-weight: 700;
 }
 
-.date {
-    font-weight: 600;
+.date { 
     font-size: var(--font-sm);
     text-align: left;
     opacity: 0.5;
+    font-variation-settings: var(--var-sm);
 }

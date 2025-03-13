@@ -1,0 +1,13 @@
+/* components/ui/tag.module.css */
+.tag {
+    display: inline-block;
+    padding: var(--space-xxs) var(--space-sm);
+    margin: var(--space-xxs);
+    background-color: rgba(var(--brand-grey-rgb), 0.12);
+    border-radius: var(--radius-xl);
+    font-size: var(--font-xs);
+    color: rgba(var(--color-foreground-rgb), 0.7);
+    white-space: nowrap;
+    font-variation-settings: var(--var-sm);
+  }
+  

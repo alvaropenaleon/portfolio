@@ -1,6 +1,8 @@
 import { Project } from '@/lib/definitions';
 import styles from '@/styles/ui/row.module.css';
 import CategoryMapping from '@/components/ui/categoryMapping';
+import Tag from '@/components/ui/tag';
+
 
 
 type ArchiveListProps = {
@@ -24,7 +26,7 @@ export default function ArchiveItem({ project }: ArchiveListProps) {
             {/* Tools */}
             <div className={styles.col3}>
                 {project.tools.map((tool, index) => (
-                    <p key={index}>{tool}</p>
+                    <Tag key={index} label={tool} />
                 ))}
             </div>
 
