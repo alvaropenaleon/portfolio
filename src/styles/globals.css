@@ -69,6 +69,10 @@ a:hover::after {
   /* transform: translateY(-4px); */
 }
 
+h3 {
+    font-variation-settings: "opsz" 22, "wght" 420;
+}
+
 h3 a {
     font-size: inherit;
     font-variation-settings: inherit;
