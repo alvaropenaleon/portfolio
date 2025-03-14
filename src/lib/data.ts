@@ -113,6 +113,18 @@ export async function fetchNotifications(): Promise<Notification[]> {
   }
 }
 
+export async function fetchProjectCategories(): Promise<string[]> {
+    try {
+      const result = await sql<{ category: string }>`
+        SELECT DISTINCT category FROM project_categories ORDER BY category ASC
+      `;
+      return result.rows.map(row => row.category);
+    } catch (err) {
+      console.error("Database Error:", err);
+      throw new Error("Failed to fetch project categories.");
+    }
+  }
+
 export const ITEMS_PER_PAGE = 10;
 
 
