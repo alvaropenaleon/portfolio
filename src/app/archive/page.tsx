@@ -1,3 +1,4 @@
+// /app/archive/page.tsx
 import { fetchFilteredProjects, fetchUser, fetchProjectCategories, ITEMS_PER_PAGE } from '@/lib/data';
 import ArchiveList from '@/components/archive/archiveList';
 import SidebarLayout from '@/components/ui/sidebarLayout';
@@ -5,6 +6,7 @@ import ArchiveControls from '@/components/archive/archiveControls';
 import PaginationControls from '@/components/archive/paginationControls';
 
 type ArchivePageProps = {
+ params: "";
   searchParams: {
     search?: string;
     page?: string;
@@ -12,7 +14,9 @@ type ArchivePageProps = {
   };
 };
 
-export default async function ArchivePage({ searchParams }: ArchivePageProps) {
+export default async function ArchivePage({ params: _params, searchParams }: ArchivePageProps) {
+    void _params;
+
   const searchQuery = searchParams.search || "";
   const currentPage = Number(searchParams.page) || 1;
   const selectedCategory = searchParams.category || "";
@@ -29,13 +33,13 @@ export default async function ArchivePage({ searchParams }: ArchivePageProps) {
 
   const sidebarContent = (
     <>
-
+      <p>Category:</p>
     </>
   );
 
   return (
     <SidebarLayout sidebar={sidebarContent} user={user}>
-
+      <h1>Archive</h1>
       <ArchiveControls
         searchQuery={searchQuery}
         selectedCategory={selectedCategory}
