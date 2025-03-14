@@ -10,8 +10,8 @@
   --color-line: rgba(10, 10, 10, 0.2);
 
   /* font variation settings*/
-  --var-sm: "opsz" 20, "wght" 420;
-  --var-lg: "opsz" 32, "wght" 420;
+  --var-sm: "opsz" 21, "wght" 420;
+  --var-lg: "opsz" 32, "wght" 450;
 
    /* Spacing */
   --space-3xs: 0.05rem;

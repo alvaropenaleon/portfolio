@@ -21,7 +21,7 @@
 .location {
     font-size: var(--font-sm);
     font-variation-settings: var(--var-sm);
-    font-variation-settings: "opsz" 20, "wght" 520;
+    font-variation-settings: "opsz" 21, "wght" 520;
     color: var(--color-foreground);
 }
 
