@@ -6,7 +6,7 @@ import ArchiveControls from '@/components/archive/archiveControls';
 import PaginationControls from '@/components/archive/paginationControls';
 
 type ArchivePageProps = {
- params: "";
+ params: object;
   searchParams: {
     search?: string;
     page?: string;
