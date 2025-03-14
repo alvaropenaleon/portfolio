@@ -7,6 +7,7 @@ import PaginationControls from '@/components/archive/paginationControls';
 
 // We define both props as records. For searchParams, we allow either a string or an array.
 export default async function ArchivePage({
+  params,
   searchParams,
 }: {
   params: Record<string, string | string[]>;
