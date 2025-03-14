@@ -4,13 +4,16 @@ import SidebarLayout from '@/components/ui/sidebarLayout';
 import ArchiveControls from '@/components/archive/archiveControls';
 import PaginationControls from '@/components/archive/paginationControls';
 
-type SearchQueryParams = {
-    search?: string;
-    page?: string;
-    category?: string;
-  };
 
-export default async function ArchivePage({ searchParams }: { searchParams?: SearchQueryParams; }) {
+export default async function ArchivePage({
+    searchParams,
+  }: {
+    searchParams?: {
+      search?: string;
+      page?: string;
+      category?: string;
+    };
+  }) {
   const searchQuery = searchParams?.search || "";
   const currentPage = Number(searchParams?.page) || 1;
   const selectedCategory = searchParams?.category || "";
