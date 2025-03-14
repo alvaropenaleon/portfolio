@@ -5,16 +5,27 @@ import SidebarLayout from '@/components/ui/sidebarLayout';
 import ArchiveControls from '@/components/archive/archiveControls';
 import PaginationControls from '@/components/archive/paginationControls';
 
-
-export default async function ArchivePage({ searchParams }: {searchParams: { search?: string; page?: string; category?: string }}) {
-
-
-  const searchQuery = searchParams.search || "";
-  const currentPage = Number(searchParams.page) || 1;
-  const selectedCategory = searchParams.category || "";
+// We define both props as records. For searchParams, we allow either a string or an array.
+export default async function ArchivePage({
+  searchParams,
+}: {
+  params: Record<string, string | string[]>;
+  searchParams: Record<string, string | string[]>;
+}) {
+  // Extract query parameters, assuming they're single-valued
+  const searchQuery =
+    typeof searchParams.search === 'string' ? searchParams.search : "";
+  const currentPage =
+    typeof searchParams.page === 'string' ? Number(searchParams.page) : 1;
+  const selectedCategory =
+    typeof searchParams.category === 'string' ? searchParams.category : "";
 
   // Fetch projects, user, and categories from the database
-  const { projects, totalCount } = await fetchFilteredProjects(searchQuery, currentPage, selectedCategory);
+  const { projects, totalCount } = await fetchFilteredProjects(
+    searchQuery,
+    currentPage,
+    selectedCategory
+  );
   const user = await fetchUser();
   const categories = await fetchProjectCategories();
   const totalPages = Math.ceil(totalCount / ITEMS_PER_PAGE);
