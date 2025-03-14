@@ -5,17 +5,9 @@ import SidebarLayout from '@/components/ui/sidebarLayout';
 import ArchiveControls from '@/components/archive/archiveControls';
 import PaginationControls from '@/components/archive/paginationControls';
 
-type ArchivePageProps = {
- params: object;
-  searchParams: {
-    search?: string;
-    page?: string;
-    category?: string;
-  };
-};
 
-export default async function ArchivePage({ params: _params, searchParams }: ArchivePageProps) {
-    void _params;
+export default async function ArchivePage({ searchParams }: {searchParams: { search?: string; page?: string; category?: string }}) {
+
 
   const searchQuery = searchParams.search || "";
   const currentPage = Number(searchParams.page) || 1;
