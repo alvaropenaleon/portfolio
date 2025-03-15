@@ -1,54 +1,39 @@
-import { fetchFilteredProjects, fetchUser, fetchProjectCategories, ITEMS_PER_PAGE } from '@/lib/data';
+// app/archive/page.tsx
+
+import { fetchFilteredProjects, fetchUser,  ITEMS_PER_PAGE } from '@/lib/data';
 import ArchiveList from '@/components/archive/archiveList';
 import SidebarLayout from '@/components/ui/sidebarLayout';
-import ArchiveControls from '@/components/archive/archiveControls';
-import PaginationControls from '@/components/archive/paginationControls';
+import Search from '@/components/archive/search';
+import Pagination from '@/components/archive/pagination';
 
+// 1) Define searchParams as a Promise
+interface ArchivePageProps {
+  searchParams: Promise<{
+    query?: string;
+    page?: string;
+  }>;
+}
 
-export default async function ArchivePage({
-    searchParams,
-  }: {
-    searchParams?: {
-      search?: string;
-      page?: string;
-      category?: string;
-    };
-  }) {
-  const searchQuery = searchParams?.search || "";
-  const currentPage = Number(searchParams?.page) || 1;
-  const selectedCategory = searchParams?.category || "";
+export default async function ArchivePage({ searchParams }: ArchivePageProps) {
+  // 2) Await searchParams
+  const sp = await searchParams;
 
-  // Fetch projects, user, and categories from the database
-  const { projects, totalCount } = await fetchFilteredProjects(searchQuery, currentPage, selectedCategory);
+  // 3) Now read query/page from the awaited object
+  const query = sp.query ?? '';
+  const currentPage = Number(sp.page) || 1;
+
+  // Fetch user + filtered projects
   const user = await fetchUser();
-  const categories = await fetchProjectCategories();
-  const totalPages = Math.ceil(totalCount / ITEMS_PER_PAGE);
+  const { projects, totalPages } = await fetchFilteredProjects(query, currentPage,  ITEMS_PER_PAGE);
 
-  if (!projects) {
-    return <p className="text-red-500">Project data not found.</p>;
-  }
-
-  const sidebarContent = (
-    <>
-
-    </>
-  );
+  // Sidebar, etc.
+  const sidebarContent = <p>Category:</p>;
 
   return (
     <SidebarLayout sidebar={sidebarContent} user={user}>
-
-      <ArchiveControls
-        searchQuery={searchQuery}
-        selectedCategory={selectedCategory}
-        categories={categories}
-      />
+      <Search placeholder="Search projects..." />
       <ArchiveList projects={projects} />
-      <PaginationControls
-        searchQuery={searchQuery}
-        selectedCategory={selectedCategory}
-        currentPage={currentPage}
-        totalPages={totalPages}
-      />
+      <Pagination totalPages={totalPages} />
     </SidebarLayout>
   );
 }
