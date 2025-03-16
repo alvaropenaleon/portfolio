@@ -133,7 +133,7 @@ export async function fetchProjectCategories(): Promise<string[]> {
  * @returns An object containing the filtered projects and total pages
  */
 
-export const ITEMS_PER_PAGE = 2;
+export const ITEMS_PER_PAGE = 1;
 
 export async function fetchFilteredProjects(
     query: string = '',
@@ -162,13 +162,13 @@ export async function fetchFilteredProjects(
             p.date,
             ARRAY_AGG(DISTINCT pc.category) AS categories,
             ARRAY_AGG(DISTINCT pt.tool) AS tools,
-            ARRAY_AGG(DISTINCT jsonb_build_object('url', pl.link, 'type', pl.type)) AS links,
-            ARRAY_AGG(DISTINCT pi.image) AS images
+            ARRAY_AGG(DISTINCT jsonb_build_object('url', pl.link, 'type', pl.type)) AS links
+            -- ARRAY_AGG(DISTINCT pi.image) AS images
           FROM projects p
           LEFT JOIN project_categories pc ON p.id = pc.project_id
           LEFT JOIN project_tools pt ON p.id = pt.project_id
           LEFT JOIN project_links pl ON p.id = pl.project_id
-          LEFT JOIN project_images pi ON p.id = pi.project_id
+          -- LEFT JOIN project_images pi ON p.id = pi.project_id
   
           /*
             We always use this WHERE block. If query='' (empty),
@@ -195,7 +195,7 @@ export async function fetchFilteredProjects(
           LEFT JOIN project_categories pc ON p.id = pc.project_id
           LEFT JOIN project_tools pt ON p.id = pt.project_id
           LEFT JOIN project_links pl ON p.id = pl.project_id
-          LEFT JOIN project_images pi ON p.id = pi.project_id
+          -- LEFT JOIN project_images pi ON p.id = pi.project_id
   
           WHERE (
             p.title ILIKE ${'%' + query + '%'}
