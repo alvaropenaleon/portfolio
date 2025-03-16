@@ -71,12 +71,12 @@ a:hover::after {
 }
 
 h3 {
-    font-variation-settings: "opsz" 21, "wght" 420;
+    font-variation-settings: "opsz" 20, "wght" 440;
     font-size: var(--font-md);
 }
 
 h2 {
-    font-variation-settings: "opsz" 24, "wght" 450;
+    font-variation-settings: "opsz" 24, "wght" 440;
     font-size: var(--font-lg);
 }
 
