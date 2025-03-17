@@ -35,40 +35,10 @@ hr {
 }
 
 a {
-  display: inline-flex;
-  align-items: center;
-  gap: 1px;
   color: inherit;
   text-decoration: none;
-  font-size: var(--font-sm);
-  font-variation-settings: var(--var-sm);
-  transition: color var(--transition-fast);
-  position: relative;
 }
 
-a:hover {
-  color: var(--brand-blue);
-}
-
-a::after {
-  content: "";
-  display: inline-block;
-  margin-top: 2px;
-  width: 14px;
-  height: 14px;
-  background-color: currentColor;
-  -webkit-mask-image: url("/arrow.svg");
-  mask-image: url("/arrow.svg");
-  mask-size: contain;
-  mask-repeat: no-repeat;
-  transition: rotate var(--transition-fast);
-}
-
-a:hover::after {
-  rotate: 45deg;
-  transition: rotate var(--transition-fast);
-  /* transform: translateY(-4px); */
-}
 
 h3 {
     font-variation-settings: "opsz" 20, "wght" 440;

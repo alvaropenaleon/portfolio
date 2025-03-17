@@ -1,0 +1,36 @@
+
+.link {
+    display: inline-flex;
+    align-items: center;
+    gap: 1px;
+    color: inherit;
+    text-decoration: none;
+    font-size: var(--font-sm);
+    font-variation-settings: var(--var-sm);
+    transition: color var(--transition-fast);
+    position: relative;
+  }
+  
+  .link:hover {
+    color: var(--color-foreground);
+  }
+  
+  .link::after {
+    content: "";
+    display: inline-block;
+    margin-top: 2px;
+    width: 15px;
+    height: 15px;
+    background-color: currentColor;
+    -webkit-mask-image: url("/arrow.svg");
+    mask-image: url("/arrow.svg");
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    transition: rotate var(--transition-fast);
+  }
+  
+  .link:hover::after {
+    rotate: 45deg;
+    transition: rotate var(--transition-fast);
+    /* transform: translateY(-4px); */
+  }

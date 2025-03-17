@@ -1,5 +1,6 @@
 import { Project } from '@/lib/definitions';
 import styles from '@/styles/ui/row.module.css';
+import style from '@/styles/archive/archiveItem.module.css';
 import CategoryMapping from '@/components/ui/categoryMapping';
 import Tag from '@/components/ui/tag';
 
@@ -33,7 +34,7 @@ export default function ArchiveItem({ project }: ArchiveListProps) {
             <div className={styles.col4}>
                 {project.links.map(({ url, type }, index) => (
                     url ? (
-                        <a key={index} href={url} target="_blank" rel="noopener noreferrer">
+                        <a className={style.link} key={index} href={url} target="_blank" rel="noopener noreferrer">
                             {type === 'code' ? 'Code' : 'Demo'}
                         </a>
                     ) : null
