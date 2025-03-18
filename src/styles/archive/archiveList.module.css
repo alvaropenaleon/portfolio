@@ -1,0 +1,23 @@
+.stickyHeader {
+    position: sticky;
+    top: 0;
+    padding-top: var(--space-lg);
+    z-index: 10;
+    background: var(--color-background);
+}
+
+.stickyHeader p {
+    font-size: var(--font-sm);
+}
+
+@media (max-width: 1024px) {
+    .stickyHeader {
+        display: none;
+    }
+
+}
+
+@media (max-width: 768px) {
+
+}
+

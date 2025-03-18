@@ -1,4 +1,3 @@
-
 .link {
     display: inline-flex;
     align-items: center;
@@ -9,13 +8,13 @@
     font-variation-settings: var(--var-sm);
     transition: color var(--transition-fast);
     position: relative;
-  }
-  
-  .link:hover {
+}
+
+.link:hover {
     color: var(--color-foreground);
-  }
-  
-  .link::after {
+}
+
+.link::after {
     content: "";
     display: inline-block;
     margin-top: 2px;
@@ -27,10 +26,10 @@
     mask-size: contain;
     mask-repeat: no-repeat;
     transition: rotate var(--transition-fast);
-  }
-  
-  .link:hover::after {
+}
+
+.link:hover::after {
     rotate: 45deg;
     transition: rotate var(--transition-fast);
     /* transform: translateY(-4px); */
-  }
+}
