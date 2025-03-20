@@ -3,21 +3,24 @@ import styles from '@/styles/ui/row.module.css';
 import style from '@/styles/archive/archiveItem.module.css';
 import CategoryMapping from '@/components/ui/categoryMapping';
 import Tag from '@/components/ui/tag';
+import { highlightText } from '@/lib/utils';
 
-
-
-type ArchiveListProps = {
+type ArchiveItemProps = {
     project: Project;
+    searchTerm: string;
 };
 
-export default function ArchiveItem({ project }: ArchiveListProps) {
+export default function ArchiveItem({ project, searchTerm }: ArchiveItemProps) {
     return (
         <div className={styles.row4col}>
             <p className={styles.col1}>{project.date}</p>
 
-            {/* Categories */}
+            {/* Title, Description, Categories */}
             <div className={styles.col2}>
-                <h3>{project.title}</h3>
+                <h3>{highlightText(project.title, searchTerm)}</h3>
+                
+                <p>{highlightText(project.description, searchTerm)}</p>
+
                 {project.categories.map((category, index) => (
                     <CategoryMapping key={index} category={category} />
                 ))}

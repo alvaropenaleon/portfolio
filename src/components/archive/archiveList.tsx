@@ -3,13 +3,12 @@ import { Project } from '@/lib/definitions';
 import styles from '@/styles/ui/row.module.css';
 import layoutStyles from '@/styles/archive/archiveList.module.css'; 
 
-
-
 type ArchiveListProps = {
   projects: Project[];
+  searchTerm: string;
 };
 
-export default function ArchiveList({ projects }: ArchiveListProps) {
+export default function ArchiveList({ projects, searchTerm }: ArchiveListProps) {
   return (
     <div>
       {/* header */}
@@ -24,7 +23,7 @@ export default function ArchiveList({ projects }: ArchiveListProps) {
 
       {/* list items */}
       {projects.map((project) => (
-        <ArchiveItem key={project.id} project={project} />
+        <ArchiveItem key={project.id} project={project} searchTerm={searchTerm}/>
       ))}
     </div>
   );

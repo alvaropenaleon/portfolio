@@ -13,7 +13,7 @@ export default function ArchiveSearch({ placeholder }: SearchProps) {
     const pathname = usePathname();
     const searchParams = useSearchParams();
 
-    // Use debounce to avoid hitting the DB on every keystroke
+    // Use debounce to avoid hitting  database on every keystroke
     const handleSearch = useDebouncedCallback((term: string) => {
         const params = new URLSearchParams(searchParams.toString());
         // Reset to page 1 when the query changes
@@ -26,7 +26,7 @@ export default function ArchiveSearch({ placeholder }: SearchProps) {
         }
         // Replace current URL with updated query params
         router.replace(`${pathname}?${params.toString()}`);
-    }, 300);
+    }, 100);
 
     return (
         <div className={styles.searchContainer}>
