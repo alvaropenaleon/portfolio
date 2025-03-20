@@ -10,6 +10,8 @@ interface ArchivePageProps {
         page?: string;
     }>;
 }
+export const revalidate = 120;
+
 
 export default async function ArchivePage({ searchParams }: ArchivePageProps) {
     const sp = await searchParams;

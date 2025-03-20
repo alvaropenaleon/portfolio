@@ -1,6 +1,6 @@
 import { Project } from '@/lib/definitions';
-import styles from '@/styles/ui/row.module.css';
-import style from '@/styles/archive/archiveItem.module.css';
+import stylesRow from '@/styles/ui/row.module.css';
+import styles from '@/styles/archive/archiveItem.module.css';
 import CategoryMapping from '@/components/ui/categoryMapping';
 import Tag from '@/components/ui/tag';
 import { highlightText } from '@/lib/utils';
@@ -11,15 +11,22 @@ type ArchiveItemProps = {
 };
 
 export default function ArchiveItem({ project, searchTerm }: ArchiveItemProps) {
+    const lowerDesc = project.description.toLowerCase();
+    const lowerSearch = searchTerm.toLowerCase();
+    const hasMatchInDescription = searchTerm.trim() !== '' && lowerDesc.includes(lowerSearch);
+
     return (
-        <div className={styles.row4col}>
-            <p className={styles.col1}>{project.date}</p>
+        <div className={stylesRow.row4col}>
+            <p className={stylesRow.col1}>{project.date}</p>
 
             {/* Title, Description, Categories */}
-            <div className={styles.col2}>
+            <div className={stylesRow.col2}>
                 <h3>{highlightText(project.title, searchTerm)}</h3>
-                
-                <p>{highlightText(project.description, searchTerm)}</p>
+
+                <p data-description className={`${styles.description} ${hasMatchInDescription ? styles.alwaysShow : ''
+                    }`}>
+                    {highlightText(project.description, searchTerm)}
+                </p>
 
                 {project.categories.map((category, index) => (
                     <CategoryMapping key={index} category={category} />
@@ -27,17 +34,17 @@ export default function ArchiveItem({ project, searchTerm }: ArchiveItemProps) {
             </div>
 
             {/* Tools */}
-            <div className={styles.col3}>
+            <div className={stylesRow.col3}>
                 {project.tools.map((tool, index) => (
                     <Tag key={index} label={tool} />
                 ))}
             </div>
 
             {/* Links */}
-            <div className={styles.col4}>
+            <div className={stylesRow.col4}>
                 {project.links.map(({ url, type }, index) => (
                     url ? (
-                        <a className={style.link} key={index} href={url} target="_blank" rel="noopener noreferrer">
+                        <a className={styles.link} key={index} href={url} target="_blank" rel="noopener noreferrer">
                             {type === 'code' ? 'Code' : 'Demo'}
                         </a>
                     ) : null

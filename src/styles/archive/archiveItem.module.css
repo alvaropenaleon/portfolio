@@ -1,3 +1,19 @@
+.description {
+    display: none;
+    margin-top: var(--space-sm);
+    font-size: var(--font-sm);
+    color: rgba(var(--color-foreground-rgb), 0.7);
+    line-height: 1.4;
+}
+
+.row4col:hover [data-description] {
+    display: block;
+}
+
+.alwaysShow {
+    display: block !important;
+}
+
 .link {
     display: inline-flex;
     align-items: center;
