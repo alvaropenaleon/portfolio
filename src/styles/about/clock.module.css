@@ -19,7 +19,7 @@
 }
 
 .location {
-    font-size: var(--font-sm);
+    font-size: var(--font-xs);
     font-variation-settings: var(--var-sm);
     font-variation-settings: "opsz" 21, "wght" 520;
     color: var(--color-foreground);
@@ -34,7 +34,7 @@
 }
 
 .date { 
-    font-size: var(--font-sm);
+    font-size: var(--font-xs);
     text-align: left;
     opacity: 0.5;
     font-variation-settings: var(--var-sm);
