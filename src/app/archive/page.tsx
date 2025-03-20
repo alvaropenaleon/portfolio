@@ -27,7 +27,7 @@ export default async function ArchivePage({ searchParams }: ArchivePageProps) {
   
   return (
     <SidebarLayout sidebar={sidebarContent} user={user}>
-      <Search placeholder="Search projects..." />
+      <Search />
       <ArchiveList projects={projects} />
       <Pagination totalPages={totalPages} />
     </SidebarLayout>

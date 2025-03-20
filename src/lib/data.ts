@@ -133,7 +133,7 @@ export async function fetchProjectCategories(): Promise<string[]> {
  * @returns An object containing the filtered projects and total pages
  */
 
-export const ITEMS_PER_PAGE = 1;
+export const ITEMS_PER_PAGE = 2;
 
 export async function fetchFilteredProjects(
     query: string = '',

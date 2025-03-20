@@ -22,15 +22,15 @@
 
 .link:hover {
     color: var(--color-foreground);
-    background-color: rgba(var(--brand-grey-rgb), 0.12);
+    background-color: rgba(var(--brand-grey-rgb), 0.2);
 }
 
 .nav .active {
     color: var(--color-foreground);
-    background-color: rgba(var(--brand-grey-rgb), 0.2);
+    background-color: rgba(var(--brand-grey-rgb), 0.12);
 }
 
 .nav .active:hover {
     color: var(--color-foreground);
-    background-color: rgba(var(--brand-grey-rgb), 0.25);
+    background-color: rgba(var(--brand-grey-rgb), 0.2);
 }
