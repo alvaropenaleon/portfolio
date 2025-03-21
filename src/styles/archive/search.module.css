@@ -3,7 +3,7 @@
     max-width: 600px;
     width: 100%;
     /* margin-left: auto; */
-    padding: 0.5rem;
+    padding: var(--space-sm);
   }
   
   .searchIcon {
