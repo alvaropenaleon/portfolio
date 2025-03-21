@@ -62,7 +62,7 @@ export default function ArchiveItem({ project, searchTerm }: ArchiveItemProps) {
                         alt={project.title}
                         layout="fill"
                         objectFit="contain"
-                        quality={75}
+                        quality={65}
                     />
                 </div>
             </div>

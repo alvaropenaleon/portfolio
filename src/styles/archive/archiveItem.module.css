@@ -52,22 +52,22 @@
 }
 
 .hiddenImage {
-    background-color: rgba(var(--brand-grey-rgb), 0.12);
+    /*background-color: rgba(var(--brand-grey-rgb), 0.12);*/
     display: none;
     position: absolute;
     bottom: var(--space-lg);
     left: var(--space-lg);
     width: var(--space-sidebar);
-    height: 232px;
+    height: 222px;
     border-radius: var(--radius-lg);
 }
 
 .imageInner {
     position: relative;
-    width: calc(100% - (2 * var(--space-md)));
-    height: calc(100% - (2 * var(--space-md)));
-    margin: var(--space-md);
+    width: 100%; /*calc(100% - (2 * var(--space-md)));*/
+    height: 100%; /*calc(100% - (2 * var(--space-md)));*/
+    margin: 0;
     box-sizing: border-box;
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
     overflow: hidden;
 }
