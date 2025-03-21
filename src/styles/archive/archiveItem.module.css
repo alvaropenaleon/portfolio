@@ -6,6 +6,7 @@
     line-height: 1.4;
 }
 
+.row4col:hover [data-image],
 .row4col:hover [data-description] {
     display: block;
 }
@@ -48,4 +49,25 @@
     rotate: 45deg;
     transition: rotate var(--transition-fast);
     /* transform: translateY(-4px); */
+}
+
+.hiddenImage {
+    background-color: rgba(var(--brand-grey-rgb), 0.12);
+    display: none;
+    position: absolute;
+    bottom: var(--space-lg);
+    left: var(--space-lg);
+    width: var(--space-sidebar);
+    height: 232px;
+    border-radius: var(--radius-lg);
+}
+
+.imageInner {
+    position: relative;
+    width: calc(100% - (2 * var(--space-md)));
+    height: calc(100% - (2 * var(--space-md)));
+    margin: var(--space-md);
+    box-sizing: border-box;
+    border-radius: var(--radius-md);
+    overflow: hidden;
 }

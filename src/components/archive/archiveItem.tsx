@@ -4,6 +4,7 @@ import styles from '@/styles/archive/archiveItem.module.css';
 import CategoryMapping from '@/components/ui/categoryMapping';
 import Tag from '@/components/ui/tag';
 import { highlightText } from '@/lib/utils';
+import Image from 'next/image';
 
 type ArchiveItemProps = {
     project: Project;
@@ -17,6 +18,8 @@ export default function ArchiveItem({ project, searchTerm }: ArchiveItemProps) {
 
     return (
         <div className={stylesRow.row4col}>
+
+            {/* Date */}
             <p className={stylesRow.col1}>{project.date}</p>
 
             {/* Title, Description, Categories */}
@@ -50,6 +53,20 @@ export default function ArchiveItem({ project, searchTerm }: ArchiveItemProps) {
                     ) : null
                 ))}
             </div>
+
+            {/* Image */}
+            <div data-image className={styles.hiddenImage}>
+                <div className={styles.imageInner}>
+                    <Image
+                        src={project.heroImage}
+                        alt={project.title}
+                        layout="fill"
+                        objectFit="contain"
+                        quality={75}
+                    />
+                </div>
+            </div>
+
         </div>
     );
 }

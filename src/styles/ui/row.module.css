@@ -1,18 +1,19 @@
 .row4col {
     display: grid;
-    grid-template-columns: 
-        minmax(50px, 0.25fr)
-        minmax(200px, 2fr)
-        minmax(100px, 0.85fr)
+    grid-template-columns:
+        minmax(50px, 0.25fr) 
+        minmax(200px, 2fr) 
+        minmax(100px, 0.85fr) 
         minmax(60px, 0.2fr);
     align-items: baseline;
     padding: var(--space-row) 0;
     border-bottom: 1px solid var(--color-line);
 }
 
+.row4col:hover [data-image],
 .row4col:hover [data-description] {
     display: block;
-  }
+}
 
 .row2col {
     display: grid;
@@ -41,7 +42,9 @@
 }
 
 @media (max-width: 768px) {
-    .row2col, .row5col {
+
+    .row2col,
+    .row5col {
         grid-template-columns: 1fr;
     }
 
@@ -53,5 +56,5 @@
         border-radius: var(--radius-lg);
         margin-top: var(--space-md);
     }
-    
+
 }
