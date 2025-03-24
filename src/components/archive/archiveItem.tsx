@@ -5,6 +5,7 @@ import CategoryMapping from '@/components/ui/categoryMapping';
 import Tag from '@/components/ui/tag';
 import { highlightText } from '@/lib/utils';
 import Image from 'next/image';
+import Link from 'next/link';
 
 type ArchiveItemProps = {
     project: Project;
@@ -17,7 +18,7 @@ export default function ArchiveItem({ project, searchTerm }: ArchiveItemProps) {
     const hasMatchInDescription = searchTerm.trim() !== '' && lowerDesc.includes(lowerSearch);
 
     return (
-        <div className={stylesRow.row4col}>
+        <Link href={`/project/${project.id}`} className={stylesRow.row4col}>
 
             {/* Date */}
             <p className={stylesRow.col1}>{project.date}</p>
@@ -67,6 +68,6 @@ export default function ArchiveItem({ project, searchTerm }: ArchiveItemProps) {
                 </div>
             </div>
 
-        </div>
+        </Link>
     );
 }
