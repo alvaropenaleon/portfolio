@@ -1,4 +1,5 @@
 .row4col {
+    position: relative;
     display: grid;
     grid-template-columns:
         minmax(50px, 0.25fr) 
@@ -15,12 +16,12 @@
     display: block;
 }
 
-.row2col {
-    display: grid;
-    grid-template-columns: minmax(80px, 10%) minmax(100px, 12%) 1fr;
-    align-items: center;
-    padding: var(--space-sm) 0;
-    border-bottom: 1px solid rgba(var(--color-forground-rgb), 0.5);
+.row4col:hover [data-view] {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.row4col:has([data-sublink]:hover) [data-view] {
+    transform: translate(-50%, -50%) scale(0);
 }
 
 .col4 {

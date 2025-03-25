@@ -6,6 +6,7 @@ import Tag from '@/components/ui/tag';
 import { highlightText } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
+import ViewItem from '@/components/archive/viewItem';
 
 type ArchiveItemProps = {
     project: Project;
@@ -18,7 +19,7 @@ export default function ArchiveItem({ project, searchTerm }: ArchiveItemProps) {
     const hasMatchInDescription = searchTerm.trim() !== '' && lowerDesc.includes(lowerSearch);
 
     return (
-        <Link href={`/project/${project.id}`} className={stylesRow.row4col}>
+        <div className={stylesRow.row4col}>
 
             {/* Date */}
             <p className={stylesRow.col1}>{project.date}</p>
@@ -48,7 +49,7 @@ export default function ArchiveItem({ project, searchTerm }: ArchiveItemProps) {
             <div className={stylesRow.col4}>
                 {project.links.map(({ url, type }, index) => (
                     url ? (
-                        <a className={styles.link} key={index} href={url} target="_blank" rel="noopener noreferrer">
+                        <a data-sublink className={styles.link} key={index} href={url} target="_blank" rel="noopener noreferrer">
                             {type === 'code' ? 'Code' : 'Demo'}
                         </a>
                     ) : null
@@ -68,6 +69,12 @@ export default function ArchiveItem({ project, searchTerm }: ArchiveItemProps) {
                 </div>
             </div>
 
-        </Link>
+            <Link href={`/project/${project.id}`}>
+                <span className={styles.fullLinkOverlay} aria-label={`View project ${project.title}`} />
+            </Link>
+
+            <ViewItem />
+
+        </div>
     );
 }

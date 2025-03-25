@@ -11,8 +11,22 @@
     display: block;
 }
 
+.row4col:hover [data-view] {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.row4col:has([data-sublink]:hover) [data-view] {
+    transform: translate(-50%, -50%) scale(0);
+}
+
 .alwaysShow {
     display: block !important;
+}
+
+.fullLinkOverlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
 }
 
 .link {
@@ -25,6 +39,7 @@
     font-variation-settings: var(--var-sm);
     transition: color var(--transition-fast);
     position: relative;
+    z-index: 5;
 }
 
 .link:hover {
@@ -54,7 +69,7 @@
 .hiddenImage {
     /*background-color: rgba(var(--brand-grey-rgb), 0.12);*/
     display: none;
-    position: absolute;
+    position: fixed;
     bottom: var(--space-lg);
     left: var(--space-lg);
     width: var(--space-sidebar);
@@ -64,10 +79,36 @@
 
 .imageInner {
     position: relative;
-    width: 100%; /*calc(100% - (2 * var(--space-md)));*/
-    height: 100%; /*calc(100% - (2 * var(--space-md)));*/
+    width: 100%;
+    /*calc(100% - (2 * var(--space-md)));*/
+    height: 100%;
+    /*calc(100% - (2 * var(--space-md)));*/
     margin: 0;
     box-sizing: border-box;
     border-radius: var(--radius-lg);
     overflow: hidden;
+}
+
+.viewCircle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transform-origin: center;
+
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    line-height: 70px;
+
+    color: var(--color-foreground);
+    background-color: rgba(var(--brand-grey-rgb), 0.12);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border-radius: 50%;
+
+    z-index: 999;
+    pointer-events: none;
+
+    transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
