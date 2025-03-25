@@ -2,8 +2,15 @@ import { fetchProjectById } from "@/lib/data";
 import { notFound } from "next/navigation";
 import { Project } from "@/lib/definitions";
 
-export default async function ProjectPage({ params }: { params: { id: string } }) {
-    const projectData: Project[] = await fetchProjectById([params.id]);
+interface ProjectPageProps {
+    params: Promise<{
+      id: string;
+    }>;
+  }
+  
+export default async function ProjectPage({ params }: ProjectPageProps) {
+    const { id } = await params;
+    const projectData: Project[] = await fetchProjectById([id]);
 
     if (!projectData.length) {
         notFound();
