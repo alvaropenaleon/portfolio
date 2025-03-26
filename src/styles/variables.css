@@ -3,7 +3,7 @@
 :root {
   /* Light Mode */
   --color-background: #fcfcfc;
-  --color-background-07: rgba(252, 252, 252, 0.7);
+  --color-background-rgb: 252, 252, 252;
   --color-foreground: #171717;
   --color-foreground-rgb: 23, 23, 23;
   --color-text: #222;
@@ -96,7 +96,7 @@
 .dark {
     color-scheme: dark;
     --color-background: #0a0a0a;
-    --color-background-07: rgba(10, 10, 10, 0.7);
+    --color-background-rgb: 10, 10, 10;
     --color-foreground: #ededed;
     --color-foreground-rgb: 237, 237, 237;
     --color-line: rgba(252, 252, 252, 0.2);
