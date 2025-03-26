@@ -74,7 +74,8 @@ export default function ViewItem() {
             className={`${styles.viewCircle} ${circleClass}`}
             style={{ left: `${position.x}px`, top: `${position.y}px` }}
         >
-            View
+            {/* View */}
+            Open
         </div>
     );
 }
