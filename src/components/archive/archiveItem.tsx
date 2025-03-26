@@ -19,7 +19,7 @@ export default function ArchiveItem({ project, searchTerm }: ArchiveItemProps) {
     const hasMatchInDescription = searchTerm.trim() !== '' && lowerDesc.includes(lowerSearch);
 
     return (
-        <div className={stylesRow.row4col}>
+        <div  data-archive-row className={stylesRow.row4col}>
 
             {/* Date */}
             <p className={stylesRow.col1}>{project.date}</p>
