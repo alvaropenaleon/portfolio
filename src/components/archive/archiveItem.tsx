@@ -40,9 +40,9 @@ export default function ArchiveItem({ project, searchTerm }: ArchiveItemProps) {
 
             {/* Tools */}
             <div className={stylesRow.col3}>
-                {project.tools.map((tool, index) => (
+                <a data-sublink>{project.tools.map((tool, index) => (
                     <Tag key={index} label={tool} />
-                ))}
+                ))}</a>
             </div>
 
             {/* Links */}
