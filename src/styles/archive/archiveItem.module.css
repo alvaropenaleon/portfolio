@@ -1,7 +1,7 @@
 .description {
     display: none;
     margin-top: var(--space-sm);
-    font-size: var(--font-sm);
+    font-size: var(--font-xs);
     color: rgba(var(--color-foreground-rgb), 0.7);
     line-height: 1.4;
 }
@@ -34,8 +34,9 @@
     align-items: center;
     gap: 1px;
     color: inherit;
+    margin-bottom: var(--space-xxs);
     text-decoration: none;
-    font-size: var(--font-sm);
+    font-size: var(--font-xs);
     font-variation-settings: var(--var-sm);
     transition: color var(--transition-fast);
     position: relative;
@@ -61,9 +62,11 @@
 }
 
 .link:hover::after {
-    rotate: 45deg;
-    transition: rotate var(--transition-fast);
+    transform: translateY(-2px) translateX(2px);
+    transition: trasnform var(--transition-fast);
     /* transform: translateY(-4px); */
+    background-color: var(--brand-blue);
+
 }
 
 .hiddenImage {
