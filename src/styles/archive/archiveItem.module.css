@@ -91,6 +91,7 @@
 
 .viewCircle {
     display: none;
+
     position: absolute;
     top: 50%;
     left: 50%;
@@ -103,7 +104,7 @@
     line-height: 70px;
 
     color: var(--color-foreground);
-    background-color: rgba(var(--brand-grey-rgb), 0.12);
+    background-color: rgba(var(--brand-grey-rgb), 0.2);
     backdrop-filter: blur(22px);
     -webkit-backdrop-filter: blur(22px);
     border-radius: 50%;
