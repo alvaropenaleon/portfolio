@@ -7,11 +7,11 @@
   --color-foreground: #171717;
   --color-foreground-rgb: 23, 23, 23;
   --color-text: #222;
-  --color-line: rgba(10, 10, 10, 0.2);
+  --color-line: rgba(120, 120, 128, 0.2);
 
   /* font variation settings*/
-  --var-sm: "opsz" 21, "wght" 440;
-  --var-lg: "opsz" 32, "wght" 450;
+  --var-sm: "opsz" 12, "wght" 440;
+  --var-lg: "opsz" 20, "wght" 450;
 
    /* Spacing */
   --space-3xs: 0.05rem;
@@ -57,8 +57,12 @@
   /* Brand Colors */
   --brand-dark-grey: #1E1E1E;
   --brand-dark-grey-rgb: 30, 30, 30;
+  /*
   --brand-grey: #787880;
   --brand-grey-rgb: 120, 120, 128;
+  */
+  --brand-grey: #818b98;
+  --brand-grey-rgb: 129, 139, 152;
   --brand-blue: #007AFF;
   --brand-blue-rgb: 0, 122, 255;
   --brand-red: #ff5733;
