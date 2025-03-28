@@ -5,7 +5,7 @@ import { ThemeProvider } from "@/components/ui/themeProvider";
 
 const inter = Inter({
   subsets: ["latin"],
-  display: "swap",
+  weight: ['300', '400', '500', '700'],
   variable: "--font-inter",
 });
 
