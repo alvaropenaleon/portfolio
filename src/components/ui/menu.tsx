@@ -14,9 +14,9 @@ export default function MenuBar({ user }: { user: { email: string } }) {
       onMouseLeave={() => setIsOpen(false)}
     >
       <div className={styles.menuBar}>
-        <p className={styles.menuText} onMouseEnter={() => setIsOpen(true)}>
+        <h1 className={styles.menuText} onMouseEnter={() => setIsOpen(true)}>
           Menu
-        </p>
+        </h1>
         <div className={styles.rightIcons}>
             <a href={`mailto:${user.email}`}>
             <Mail size={17} />
@@ -27,9 +27,11 @@ export default function MenuBar({ user }: { user: { email: string } }) {
 
       {isOpen && (
         <div className={styles.menuDropdown}>
-          <a href="/about">About</a>
-          <a href="/archive">Archive</a>
-          <a href={`mailto:${user.email}`}>Contact</a>
+          <h1>
+            <a href="/about">About</a>
+            <a href="/archive">Archive</a>
+            <a href={`mailto:${user.email}`}>Contact</a>
+          </h1>
         </div>
       )}
     </div>

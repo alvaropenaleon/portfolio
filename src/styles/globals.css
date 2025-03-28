@@ -10,9 +10,9 @@
 }
 
 body {
-  font-family:  InterVariable, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  letter-spacing: -0.01em; /* Adjust this value as needed */
   font-optical-sizing: none;
-  font-variation-settings: var(--var-lg);
   font-feature-settings: 'liga' 1, 'calt' 1;
   font-variant-ligatures: common-ligatures discretionary-ligatures;
   text-rendering: optimizeLegibility;
@@ -41,16 +41,20 @@ a {
 
 
 h3 {
-    font-variation-settings: var(--var-sm), "wght" 450;
+    font-variation-settings: var(--var-sm);
     font-size: var(--font-md);
 }
 
 h2 {
+    letter-spacing: -0.02em;
+    font-optical-sizing: none;
     font-variation-settings: var(--var-lg);
     font-size: var(--font-lg);
 }
 
 h1 {
+    letter-spacing: -0.02em;
+    font-optical-sizing: none;
     font-variation-settings: var(--var-lg);
     font-size: var(--font-xl);
     line-height: 1.3;
