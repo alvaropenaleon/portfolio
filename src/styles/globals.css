@@ -41,7 +41,7 @@ a {
 
 
 h3 {
-    font-variation-settings: var(--var-sm);
+    font-variation-settings: var(--var-lg);
     font-size: var(--font-md);
 }
 
