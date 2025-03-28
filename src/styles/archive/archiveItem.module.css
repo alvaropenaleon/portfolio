@@ -32,40 +32,34 @@
 .link {
     display: inline-flex;
     align-items: center;
-    gap: 1px;
+    gap: 0;
     color: inherit;
-    margin-bottom: var(--space-xxs);
     text-decoration: none;
     font-size: var(--font-xs);
     font-variation-settings: var(--var-sm);
-    transition: color var(--transition-fast);
     position: relative;
     z-index: 5;
 }
 
 .link:hover {
-    color: var(--color-foreground);
+    color: var(--brand-blue);
 }
 
 .link::after {
     content: "";
     display: inline-block;
-    margin-top: 2px;
-    width: 15px;
-    height: 15px;
+    margin-top: 3px;
+    width: 14px;
+    height: 14px;
     background-color: currentColor;
     -webkit-mask-image: url("/arrow.svg");
     mask-image: url("/arrow.svg");
     mask-size: contain;
     mask-repeat: no-repeat;
-    transition: rotate var(--transition-fast);
 }
 
 .link:hover::after {
     transform: translateY(-2px) translateX(2px);
-    transition: trasnform var(--transition-fast);
-    /* transform: translateY(-4px); */
-    background-color: var(--brand-blue);
 
 }
 
@@ -101,11 +95,12 @@
     transform: translate(-50%, -50%) scale(0);
     transform-origin: center;
 
-    width: 70px;
-    height: 70px;
-    text-align: center;
-    line-height: 70px;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3rem;
+    width: 3rem;
+    
     color: var(--color-foreground);
     background-color: rgba(var(--brand-grey-rgb), 0.2);
     backdrop-filter: blur(22px);

@@ -1,6 +1,8 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import styles from "@/styles/archive/archiveItem.module.css";
+import { Plus } from "lucide-react";
+
 
 export default function ViewItem() {
     const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -75,7 +77,7 @@ export default function ViewItem() {
             style={{ left: `${position.x}px`, top: `${position.y}px` }}
         >
             {/* View */}
-            Open
+            <Plus size={28} />
         </div>
     );
 }
