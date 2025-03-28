@@ -8,7 +8,7 @@
     border-bottom: 1px solid var(--color-line);
 }
 
-
+/*
 .row4col[data-archive-row]:hover {
     background-color: var(--color-background);
     border-radius: var(--radius-md);
@@ -40,7 +40,7 @@
 .row4col[data-archive-row]:hover::before {
     opacity: 1;
 }
-
+*/
 
 .row4col:hover [data-image],
 .row4col:hover [data-description] {
@@ -57,14 +57,20 @@
 
 .col1,
 .col2,
-.col3 {
+.col3 ,
+.col4  {
+   padding-right: var(--space-sm);
+}
+
+.col1,
+.col2 {
     z-index: 3;
 }
 
+.col3 ,
 .col4 {
     z-index: 5;
 }
-
 
 .col4 {
     display: flex;
