@@ -41,12 +41,12 @@ a {
 
 
 h3 {
-    font-variation-settings: var(--var-sm), "wght" 440;
+    font-variation-settings: var(--var-sm), "wght" 450;
     font-size: var(--font-md);
 }
 
 h2 {
-    font-variation-settings: var(--var-lg), "wght" 440;
+    font-variation-settings: var(--var-lg);
     font-size: var(--font-lg);
 }
 
