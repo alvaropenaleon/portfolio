@@ -5,21 +5,27 @@ import CategoryMapping from '@/components/ui/categoryMapping';
 import Tag from '@/components/ui/tag';
 import { highlightText } from '@/lib/utils';
 import Image from 'next/image';
-import Link from 'next/link';
+// import Link from 'next/link';
 import ViewItem from '@/components/archive/viewItem';
 
 type ArchiveItemProps = {
     project: Project;
     searchTerm: string;
+    onOpenProject?: (id: string) => void;
 };
 
-export default function ArchiveItem({ project, searchTerm }: ArchiveItemProps) {
+export default function ArchiveItem({ project, searchTerm, onOpenProject }: ArchiveItemProps) {
     const lowerDesc = project.description.toLowerCase();
     const lowerSearch = searchTerm.toLowerCase();
     const hasMatchInDescription = searchTerm.trim() !== '' && lowerDesc.includes(lowerSearch);
+    const handleClick = () => {
+        if (onOpenProject) {
+            onOpenProject(project.id);
+        }
+    };
 
     return (
-        <div  data-archive-row className={stylesRow.row4col}>
+        <div data-archive-row className={stylesRow.row4col} onClick={handleClick} >
 
             {/* Date */}
             <p className={stylesRow.col1}>{project.date}</p>
@@ -28,8 +34,9 @@ export default function ArchiveItem({ project, searchTerm }: ArchiveItemProps) {
             <div className={stylesRow.col2}>
                 <h3>{highlightText(project.title, searchTerm)}</h3>
 
-                <p data-description className={`${styles.description} ${hasMatchInDescription ? styles.alwaysShow : ''
-                    }`}>
+                <p data-description
+                    className={`${styles.description} ${hasMatchInDescription ? styles.alwaysShow : ''
+                        }`}>
                     {highlightText(project.description, searchTerm)}
                 </p>
 
@@ -49,7 +56,12 @@ export default function ArchiveItem({ project, searchTerm }: ArchiveItemProps) {
             <div className={stylesRow.col4}>
                 {project.links.map(({ url, type }, index) => (
                     url ? (
-                        <a data-sublink className={styles.link} key={index} href={url} target="_blank" rel="noopener noreferrer">
+                        <a data-sublink
+                            className={styles.link}
+                            key={index} href={url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}>
                             {type === 'code' ? 'Code' : 'Demo'}
                         </a>
                     ) : null
@@ -69,9 +81,11 @@ export default function ArchiveItem({ project, searchTerm }: ArchiveItemProps) {
                 </div>
             </div>
 
+            {/*
             <Link href={`/project/${project.id}`}>
                 <span className={styles.fullLinkOverlay} aria-label={`View project ${project.title}`} />
             </Link>
+            */}
 
             <ViewItem />
 

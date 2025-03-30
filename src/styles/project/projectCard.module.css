@@ -1,0 +1,35 @@
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.slideover {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: calc(100% - calc(var(--space-sidebar) + var(--space-lg) + var(--space-lg)));
+    background: rgba(var(--color-background-rgb), 1);
+    color: var(--color-foreground);
+    /*box-shadow: 20px 0 100px rgba(0, 0, 0, 0.2);*/
+    z-index: 9999;
+    overflow-y: auto;
+
+    border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+    border: 1px solid var(--color-line);
+
+
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+
+    animation: slideInFromRight 0.5s ease forwards;
+}
+
+.overlayContent {
+    padding: 2rem;
+}
