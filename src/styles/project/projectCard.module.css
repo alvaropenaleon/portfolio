@@ -1,26 +1,26 @@
 @keyframes slideInFromRight {
     0% {
-        transform: translateX(100%);
+        transform: translateY(100%);
     }
 
     100% {
-        transform: translateX(0);
+        transform: translateY(0);
     }
 }
 
 .slideover {
     position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: calc(100% - calc(var(--space-sidebar) + var(--space-lg) + var(--space-lg)));
+    top: var(--space-lg);
+    bottom: var(--space-lg);
+    right:  var(--space-sidebar) ;
+    left:  var(--space-sidebar);
     background: rgba(var(--color-background-rgb), 1);
     color: var(--color-foreground);
-    /*box-shadow: 20px 0 100px rgba(0, 0, 0, 0.2);*/
+    box-shadow: 20px 0 100px rgba(0, 0, 0, 0.1);
     z-index: 9999;
     overflow-y: auto;
 
-    border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+    border-radius: var(--radius-lg) var(--radius-lg);
     border: 1px solid var(--color-line);
 
 
@@ -33,3 +33,18 @@
 .overlayContent {
     padding: 2rem;
 }
+
+.markdown h2,
+.markdown h3,
+.markdown p {
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.markdown img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1.5rem auto; /* optional: center and add spacing */
+  }
+  

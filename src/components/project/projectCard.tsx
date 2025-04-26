@@ -2,6 +2,8 @@
 import { Project } from "@/lib/definitions";
 import styles from '@/styles/project/projectCard.module.css';
 import Image from 'next/image';
+import ReactMarkdown from 'react-markdown';
+
 
 
 type ProjectOverlayProps = {
@@ -19,7 +21,9 @@ export default function ProjectOverlay({ project, onClose }: ProjectOverlayProps
                 <br /><br />
                 <h2>{project.description}</h2>
                 <br /><br />
-                <p>{project.text}</p>
+                <div className={styles.markdown}>
+                <ReactMarkdown>{project.text}</ReactMarkdown>
+                </div>
                 <br /><br /><br />
                 <Image
                     src={project.heroImage}

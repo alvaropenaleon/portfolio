@@ -1,8 +1,7 @@
-import SidebarLayout from "@/components/ui/sidebarLayout";
+import Sidebar from "@/components/ui/sidebar";
 import Bio from "@/components/about/bio";
 import Notifications from "@/components/about/notifications"; 
-import layout from "@/styles/ui/layout.module.css";
-import ClockClient from "@/components/about/clockClient";
+// import ClockClient from "@/components/about/clockClient";
 import { fetchUser } from "@/lib/data";
 import color from "@/styles/ui/color.module.css";
 
@@ -13,26 +12,19 @@ export default async function HomePage() {
     return <p className="text-red-500">User data not found.</p>;
   }
 
-  const sidebarContent = (
- 
-    <div>
-    
-      <div className={layout.sidebarBottom}>
-        <Notifications />
-        <ClockClient />
-      </div>
-    </div>
-  );
-
   return (
+    <>
+    <Sidebar>
+        <Notifications />
+        {/* <ClockClient /> */}
+    </Sidebar>
     
-    <SidebarLayout sidebar={sidebarContent} user={user}>
       <main>
         <div>
           <Bio bio={user.bio} /><br /><br />
           <h2 className={color.brandGrey}>Explore <a href="/archive">my work</a> or <a href={`mailto:${user.email}`}>get in touch</a> to collaborate.</h2>
         </div>
       </main>
-    </SidebarLayout>
+    </>
   );
 }

@@ -1,0 +1,16 @@
+/* src/styles/ui/sidebar.module.css */
+.sidebar {
+    position: absolute;
+    top: var(--space-lg);
+    right: var(--space-lg);
+    width: var(--space-sidebar);
+    height: calc(100vh - var(--space-lg) * 2);
+    padding: var(--space-md);
+    overflow-y: auto;
+    /* hide scrollbar if you like */
+    scrollbar-width: none;
+  }
+  .sidebar::-webkit-scrollbar {
+    display: none;
+  }
+  
