@@ -4,10 +4,11 @@ import styles from '@/styles/desktop/windowFrame.module.css';
 interface Props {
   title: string;
   zIndex: number;
-  children: ReactNode;           /* the <iframe> we pass in */
+  children: ReactNode;
   onClose(): void;
   onFocus(): void;
-  style?: CSSProperties;         /* geometry from WindowManager */
+  style?: CSSProperties;   // geometry from WindowManager
+  hidden?: boolean;        // ← NEW
 }
 
 export default function WindowFrame({
@@ -17,20 +18,25 @@ export default function WindowFrame({
   onClose,
   onFocus,
   style,
+  hidden = false,
 }: Props) {
   return (
     <div
       className={styles.windowFrame}
-      style={{ zIndex, ...style }}   /* width/height/top/left etc. */
+      style={{
+        display: hidden ? 'none' : 'flex',  // hide until iframe loads
+        zIndex,
+        ...style,
+      }}
       onMouseDown={onFocus}
     >
-      {/* ─── Title bar ─── */}
+      {/* ───── Title bar ───── */}
       <div className={styles.titleBar}>
         <button className={styles.closeBtn} onClick={onClose} />
         <span>{title}</span>
       </div>
 
-      {/* ─── Content ─── */}
+      {/* ───── Content ───── */}
       <div className={styles.windowContent}>{children}</div>
     </div>
   );

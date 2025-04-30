@@ -74,6 +74,11 @@ h2 a::after {
     margin-top: 4px;
 }
 
+.invisible { 
+    visibility: hidden; 
+}
+
+
 @media (max-width: 1024px) {}
 
 @media (max-width: 768px) {
