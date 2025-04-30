@@ -117,10 +117,8 @@ h2 a::after {
 
 .window-frame {
     position: absolute;
-    top: 100px;
-    left: 100px;
-    width: 400px;
-    height: 300px;
+
+
     background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(10px);
     border-radius: 12px;

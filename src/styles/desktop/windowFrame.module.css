@@ -1,0 +1,54 @@
+/* Root container (size & position come from inline style) */
+.windowFrame {
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    /* crop iframe corners */
+    position: relative;
+    /* for absolute children */
+}
+
+/* ───── Title bar ───── */
+.titleBar {
+    display: flex;
+    align-items: center;
+    height: 28px;
+    padding: 0 8px;
+    background: #f3f4f6;
+    user-select: none;
+    cursor: default;
+}
+
+.closeBtn {
+    width: 12px;
+    height: 12px;
+    margin-right: 6px;
+    border: none;
+    border-radius: 50%;
+    background: #ff5f57;
+    cursor: pointer;
+}
+
+/* ───── Content area ───── */
+.windowContent {
+    flex: 1;
+    /* take remaining space */
+    position: relative;
+    /* parent for absolute iframe */
+    overflow: auto;
+}
+
+/* Make iframe always fill the area */
+.fillFrame {
+    position: absolute;
+    inset: 0;
+    /* top:0 right:0 bottom:0 left:0 */
+    width: 100%;
+    height: 100%;
+    border: 0;
+    border-radius: inherit;
+    /* keep rounded corners */
+}

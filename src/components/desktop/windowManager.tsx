@@ -1,55 +1,67 @@
-// src/components/Desktop/WindowManager.tsx
 'use client';
-import React, { createContext, useContext, useState } from 'react';
 
-type WindowID = 'about-bio' | 'about-portrait' | 'archive';
+import { createContext, useContext, useState } from 'react';
+import { windowDefaults, type Geometry } from './windowDefaults';
 
-interface WindowState {
+/* ─────────────────── Types ─────────────────── */
+export type WindowID = 'about' | 'archive' | 'work';
+
+interface Win {
   id: WindowID;
   isOpen: boolean;
   z: number;
+  geom: Geometry;
 }
 
-interface Manager {
-  windows: WindowState[];
-  open: (id: WindowID) => void;
-  close: (id: WindowID) => void;
-  bringToFront: (id: WindowID) => void;
+interface Ctx {
+  windows: Win[];
+  open(id: WindowID): void;
+  close(id: WindowID): void;
+  bringToFront(id: WindowID): void;
 }
 
-const ctx = createContext<Manager | null>(null);
+/* ────────────────── Context ─────────────────── */
+const WinCtx = createContext<Ctx | null>(null);
 
+/* ───────────────── Provider ─────────────────── */
 export function WindowManagerProvider({ children }: { children: React.ReactNode }) {
-  const [windows, set] = useState<WindowState[]>([]);
+  const [wins, setWins] = useState<Win[]>([]);
 
-  const open = (id: WindowID) => {
-    set(ws => {
-      if (ws.find(w => w.id === id)?.isOpen) return ws;
-      const maxZ = ws.reduce((m, w) => Math.max(m, w.z), 0);
-      return [...ws, { id, isOpen: true, z: maxZ + 1 }];
+  /* ---------- actions ---------- */
+  const open = (id: WindowID) =>
+    setWins(ws => {
+      if (ws.find(w => w.id === id)) return ws;        // already open
+      const maxZ = Math.max(0, ...ws.map(w => w.z));
+      return [
+        ...ws,
+        {
+          id,
+          isOpen: true,
+          z: maxZ + 1,
+          geom: windowDefaults[id],                    // ← default geometry
+        },
+      ];
     });
-  };
 
-  const close = (id: WindowID) => {
-    set(ws => ws.map(w => w.id === id ? { ...w, isOpen: false } : w));
-  };
+  const close = (id: WindowID) =>
+    setWins(ws => ws.filter(w => w.id !== id));
 
-  const bringToFront = (id: WindowID) => {
-    set(ws => {
-      const maxZ = ws.reduce((m, w) => Math.max(m, w.z), 0);
+  const bringToFront = (id: WindowID) =>
+    setWins(ws => {
+      const maxZ = Math.max(0, ...ws.map(w => w.z));
       return ws.map(w => w.id === id ? { ...w, z: maxZ + 1 } : w);
     });
-  };
 
   return (
-    <ctx.Provider value={{ windows, open, close, bringToFront }}>
+    <WinCtx.Provider value={{ windows: wins, open, close, bringToFront }}>
       {children}
-    </ctx.Provider>
+    </WinCtx.Provider>
   );
 }
 
+/* ──────────────── Hook ──────────────────────── */
 export function useWindowManager() {
-  const m = useContext(ctx);
-  if (!m) throw new Error('useWindowManager');
-  return m;
+  const ctx = useContext(WinCtx);
+  if (!ctx) throw new Error('useWindowManager must be used within provider');
+  return ctx;
 }

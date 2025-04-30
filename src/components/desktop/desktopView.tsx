@@ -1,40 +1,50 @@
-// src/components/desktop/DesktopView.tsx
 'use client';
 
-import { usePathname, useRouter } from 'next/navigation';
-import Icon from '@/components/desktop/icon';
-import WindowFrame from '@/components/desktop/windowFrame';
+import Icon        from './icon';
+import WindowFrame from './windowFrame';
+import { useWindowManager }   from './windowManager';
+import styles from '@/styles/desktop/windowFrame.module.css';
 
-const titleMap: Record<string, string> = {
-  '/about':   'About Me',
-  '/archive': 'Archive',
-  '/work':    'Work',
-};
 
-export default function DesktopView({ children }: { children?: React.ReactNode }) {
-  const router = useRouter();
-  const path   = usePathname();
-  const title  = titleMap[path];
+const titles = {
+  about:   'About Me',
+  archive: 'Archive',
+  work:    'Work',
+} as const;
+
+export default function DesktopView() {
+  const { windows, open, close, bringToFront } = useWindowManager();
 
   return (
     <div className="desktop-root">
-      {/* ICON GRID */}
+      {/* ─────────── Icons ─────────── */}
       <div className="icon-grid">
-        <Icon label="About"   iconSrc="/paper.png"  onDoubleClick={() => router.push('/about')} />
-        <Icon label="Archive" iconSrc="/folder.png" onDoubleClick={() => router.push('/archive')} />
-        {/* etc. */}
+        <Icon label="About"   iconSrc="/paper.png"
+              onDoubleClick={() => open('about')} />
+
+        <Icon label="Archive" iconSrc="/folder.png"
+              onDoubleClick={() => open('archive')} />
+
+        <Icon label="Work"    iconSrc="/hammer.png"
+              onDoubleClick={() => open('work')} />
       </div>
 
-      {/* ROUTE-DRIVEN WINDOW */}
-      {children && (
+      {/* ────────── Windows ────────── */}
+      {windows.map(w => (
         <WindowFrame
-          title={title}
-          onClose={() => router.push('/')}
-          onFocus={() => {/* optionally re-push(path) to keep in front */}}
+          key={w.id}
+          title={titles[w.id]}
+          zIndex={w.z}
+          style={w.geom}                    // ← custom size / position
+          onClose={() => close(w.id)}
+          onFocus={() => bringToFront(w.id)}
         >
-          {children}
+          <iframe
+            src={`/embed/${w.id}`}
+            className={styles.fillFrame}
+          />
         </WindowFrame>
-      )}
+      ))}
     </div>
   );
 }

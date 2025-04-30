@@ -1,27 +1,37 @@
-// src/components/Desktop/WindowFrame.tsx
-// src/components/Desktop/WindowFrame.tsx
-import React from 'react';
+import { CSSProperties, ReactNode } from 'react';
+import styles from '@/styles/desktop/windowFrame.module.css';
 
-interface WindowFrameProps {
-    title: string;
-    children: React.ReactNode;
-    onClose: () => void;
-    onFocus: () => void;
-    style?: React.CSSProperties;
+interface Props {
+  title: string;
+  zIndex: number;
+  children: ReactNode;           /* the <iframe> we pass in */
+  onClose(): void;
+  onFocus(): void;
+  style?: CSSProperties;         /* geometry from WindowManager */
 }
 
-export default function WindowFrame({ title, children, onClose, onFocus, style }: WindowFrameProps) {
-    return (
-        <div
-            className="window-frame"
-            style={style}
-            onMouseDown={onFocus}
-        >
-            <div className="title-bar">
-                <button className="close" onClick={onClose} />
-                <div className="title">{title}</div>
-            </div>
-            <div className="window-content">{children}</div>
-        </div>
-    );
+export default function WindowFrame({
+  title,
+  zIndex,
+  children,
+  onClose,
+  onFocus,
+  style,
+}: Props) {
+  return (
+    <div
+      className={styles.windowFrame}
+      style={{ zIndex, ...style }}   /* width/height/top/left etc. */
+      onMouseDown={onFocus}
+    >
+      {/* ─── Title bar ─── */}
+      <div className={styles.titleBar}>
+        <button className={styles.closeBtn} onClick={onClose} />
+        <span>{title}</span>
+      </div>
+
+      {/* ─── Content ─── */}
+      <div className={styles.windowContent}>{children}</div>
+    </div>
+  );
 }
