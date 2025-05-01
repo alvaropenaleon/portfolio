@@ -37,21 +37,42 @@ export function WindowManagerProvider({ children }: { children: ReactNode }) {
   const [wins, setWins] = useState<Win[]>([]);
 
   /* ── iframe → parent sync ── */
+
   useEffect(() => {
     const handleMsg = (e: MessageEvent) => {
       if (e.origin !== window.location.origin) return;
       if (e.data?.type !== 'iframe-path') return;
 
-      const { id, path } = e.data as { id: WindowID; path: string };
+      const { id, path: newPath } = e.data as { id: WindowID; path: string };
 
-      router.replace(path.startsWith('/') ? path : '/' + path);
+      // 1) Always sync the browser URL so deep-links work
+      router.replace(newPath.startsWith('/') ? newPath : '/' + newPath);
 
-      setWins(ws => ws.map(w => (w.id === id ? { ...w, path } : w)));
+      // 2) Only update the iframe-src state when the *page* changed,
+      //    not when just the query string changed.
+      setWins(ws =>
+        ws.map(w => {
+          if (w.id !== id) return w;
+
+          const [oldBase] = w.path.split('?');
+          const [newBase] = newPath.split('?');
+
+          if (oldBase === newBase) {
+            // same page (e.g. '/archive'): leave w.path unchanged
+            return w;
+          } else {
+            // different page (e.g. '/about' → '/archive'): update w.path
+            return { ...w, path: newPath };
+          }
+        })
+      );
     };
 
     window.addEventListener('message', handleMsg);
     return () => window.removeEventListener('message', handleMsg);
   }, [router]);
+
+
 
   /* ── helpers ── */
   const buildPath = (id: WindowID, params?: Record<string, string>) => {
