@@ -1,6 +1,7 @@
 "use client";
 
 import {
+    useCallback,
     startTransition,
     createContext,
     useContext,
@@ -10,6 +11,7 @@ import {
 } from "react";
 import { useRouter } from "next/navigation";
 import { windowDefaults, type Geometry } from "./windowDefaults";
+
 
 export type WindowID = "about" | "archive" | "work" | "project" | "carousel";
 
@@ -42,23 +44,33 @@ export function WindowManagerProvider({ children }: { children: ReactNode }) {
     };
 
     // Action: open a window
-    const open = (id: WindowID, params?: Record<string, string>) => {
-        const path = buildPath(id, params);
+   
 
-        // update state first
-        const maxZ = Math.max(0, ...wins.map(w => w.z));
-        const found = wins.find(w => w.id === id);
-        const nextWins = found
-            ? wins.map(w => w.id === id ? { ...w, path, z: maxZ + 1 } : w)
-            : [...wins, { id, path, geom: windowDefaults[id], z: maxZ + 1, visible: false }];
+    const open = useCallback((id: WindowID, params?: Record<string, string>) => {
+    const path = buildPath(id, params);
 
-        setWins(nextWins);
+    // use functional update so multiple opens in one tick accumulate
+    setWins(ws => {
+        const maxZ = Math.max(0, ...ws.map(w => w.z));
+        const found = ws.find(w => w.id === id);
 
-        // navigate
-        startTransition(() => {
-            router.push(path);
-        });
-    };
+        if (found) {
+        return ws.map(w =>
+            w.id === id ? { ...w, path, z: maxZ + 1 } : w
+        );
+        } else {
+        return [
+            ...ws,
+            { id, path, geom: windowDefaults[id], z: maxZ + 1, visible: false },
+        ];
+        }
+    });
+
+    startTransition(() => {
+        router.push(path);
+    });
+    }, [router]);
+
 
 
     // Action: mark iframe loaded
@@ -141,16 +153,32 @@ export function WindowManagerProvider({ children }: { children: ReactNode }) {
     }, [router, wins]);
 
     // Auto‑open on initial load if URL matches
+    
     useEffect(() => {
         if (typeof window === "undefined") return;
         const url = new URL(window.location.href);
+      
+        // 1) base window
         const seg = url.pathname.split("/")[1] as WindowID;
-        if (["about", "archive", "work", "project", "carousel"].includes(seg)) {
-            const params: Record<string, string> = {};
-            url.searchParams.forEach((v, k) => (params[k] = v));
-            open(seg, Object.keys(params).length ? params : undefined);
+        if (["about", "archive", "work"].includes(seg)) {
+          const baseParams: Record<string, string> = {};
+          url.searchParams.forEach((v, k) => (baseParams[k] = v));
+          open(seg, Object.keys(baseParams).length ? baseParams : undefined);
         }
-    }, []);
+      
+        // 2) project window
+        const projId = url.searchParams.get("project");
+        if (projId) {
+          open("project", { project: projId });
+        }
+      
+        // 3) carousel window
+        const idx = url.searchParams.get("index");
+        if (projId && idx != null) {
+          open("carousel", { project: projId, index: idx });
+        }
+      }, [open]);
+      
 
     return (
         <WinCtx.Provider
