@@ -6,10 +6,9 @@ import { Project } from "@/lib/definitions";
 type Props = {
   projectId: string;
   startIndex: number;
-  onClose: () => void;
 };
 
-export default function ImageCarousel({ projectId, startIndex, onClose }: Props) {
+export default function ImageCarousel({ projectId, startIndex }: Props) {
   const [images, setImages] = useState<string[]>([]);
   const [index, setIndex]   = useState(startIndex);
 
@@ -23,7 +22,6 @@ export default function ImageCarousel({ projectId, startIndex, onClose }: Props)
 
   return (
     <div className="carousel-container">
-      <button onClick={onClose}>Close</button>
       <div className="carousel-main">
         <img src={images[index]} alt={`Image ${index + 1}`} />
       </div>

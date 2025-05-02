@@ -8,14 +8,12 @@ import ReactMarkdown from 'react-markdown';
 
 type ProjectOverlayProps = {
     project: Project;
-    onClose: () => void;
 };
 
-export default function ProjectOverlay({ project, onClose }: ProjectOverlayProps) {
+export default function ProjectOverlay({ project }: ProjectOverlayProps) {
     return (
         <div className={styles.slideover}>
             <div className={styles.overlayContent}>
-                <button onClick={onClose}>Close</button>
                 <br /><br />
                 <h1>{project.title}</h1>
                 <br /><br />
