@@ -4,8 +4,16 @@ import Icon         from './icon';
 import WindowFrame  from './windowFrame';
 import { useWindowManager } from './windowManager';
 import styles from '@/styles/desktop/windowFrame.module.css';
+import type { WindowID } from "./windowManager";
 
-const titles = { about: 'About Me', archive: 'Archive', work: 'Work' } as const;
+
+const titles: Record<WindowID, string> = {
+    about:    "About Me",
+    archive:  "Archive",
+    work:     "Work",
+    project:  "Project Details",
+    carousel: "Image Carousel",
+  } as const;
 
 export default function DesktopView() {
   const {

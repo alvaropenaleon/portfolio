@@ -1,2 +1,8 @@
 // src/components/desktop/types.ts
-export type WindowID = 'about' | 'archive' | 'portrait'
+export type WindowID =
+  | "about"
+  | "archive"
+  | "work"
+  | "project"
+  | "carousel"; 
+

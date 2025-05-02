@@ -1,78 +1,76 @@
+// src/components/archive/archiveClient.tsx
 "use client";
 
-import { useState, useEffect } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import ArchiveList from "@/components/archive/archiveList";
-import ProjectCard from "@/components/project/projectCard";
-import { Project } from "@/lib/definitions";
+import type { Project } from "@/lib/definitions";
 
 type ArchiveClientProps = {
-    projects: Project[];
-    searchTerm: string;
+  projects: Project[];
+  searchTerm: string;
 };
 
 export default function ArchiveClient({ projects, searchTerm }: ArchiveClientProps) {
-    const router = useRouter();
-    const searchParams = useSearchParams();
+  const searchParams = useSearchParams();
 
-    const [openProject, setOpenProject] = useState<Project | null>(null);
+  // On mount (or when ?project=… changes), tell parent to open windows
+  useEffect(() => {
+    const id = searchParams.get("project");
+    if (!id) return;
 
-    useEffect(() => {
-        const existing = searchParams.get("project");
-        if (existing) {
-            fetchAndSetProject(existing);
-        }
-    }, [searchParams]);
-
-    async function fetchAndSetProject(id: string) {
-        try {
-            const res = await fetch(`/api/project/${id}`);
-            if (!res.ok) {
-                setOpenProject(null);
-                return;
-            }
-            const data = await res.json();
-            setOpenProject(data);
-        } catch (err) {
-            console.error("Error loading project:", err);
-            setOpenProject(null);
-        }
-    }
-
-    const handleOpenProject = async (id: string) => {
-        await fetchAndSetProject(id);
-
-        // Update the URL with ?project=, keep any other params (page=2)
-        const params = new URLSearchParams(window.location.search);
-        params.set("project", id);
-        router.push(`?${params}`, { scroll: false });
-    };
-
-    const handleClose = () => {
-        setOpenProject(null);
-
-        // Remove ?project= from the query
-        const params = new URLSearchParams(window.location.search);
-        params.delete("project");
-        router.push(`?${params}`, { scroll: false });
-    };
-
-    return (
-        <>
-            {/* Existing archive list */}
-            <ArchiveList
-                projects={projects}
-                searchTerm={searchTerm}
-                onOpenProject={handleOpenProject}
-            />
-
-            {/* Mount the project if projectexists */}
-            {openProject && (
-                <ProjectCard
-                    project={openProject}
-                    onClose={handleClose}
-                />
-            )}
-        </>
+    // open the project details window
+    window.parent.postMessage(
+      { type: "open-window", id: "project", params: { project: id } },
+      window.origin
     );
+
+    // fetch project via API to see if it has images
+    fetch(`/api/project/${id}`)
+      .then(res => {
+        if (!res.ok) throw new Error("Project not found");
+        return res.json();
+      })
+      .then((proj: Project) => {
+        if (proj.images?.length > 0) {
+          // open the carousel window
+          window.parent.postMessage(
+            { type: "open-window", id: "carousel", params: { project: id, index: "0" } },
+            window.origin
+          );
+        }
+      })
+      .catch(console.error);
+  }, [searchParams]);
+
+  const handleOpenProject = async (id: string) => {
+    // 1) open project info window
+    window.parent.postMessage(
+      { type: "open-window", id: "project", params: { project: id } },
+      window.origin
+    );
+
+    // 2) fetch project via API and open carousel if images exist
+    try {
+      const res = await fetch(`/api/project/${id}`);
+      if (!res.ok) return;
+      const proj: Project = await res.json();
+      if (proj.images?.length > 0) {
+        window.parent.postMessage(
+          { type: "open-window", id: "carousel", params: { project: id, index: "0" } },
+          window.origin
+        );
+      }
+    } catch (err) {
+      console.error("Error loading project images:", err);
+    }
+  };
+
+  return (
+    <ArchiveList
+      projects={projects}
+      searchTerm={searchTerm}
+      onOpenProject={handleOpenProject}
+    />
+  );
 }
