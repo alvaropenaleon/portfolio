@@ -22,6 +22,7 @@ export default function DesktopView() {
     close,
     bringToFront,
     markLoaded,
+    moveWindow,
   } = useWindowManager();
 
   return (
@@ -42,6 +43,7 @@ export default function DesktopView() {
           style={w.geom}
           onClose={() => close(w.id)}
           onFocus={() => bringToFront(w.id)}
+          onMove={(geom) => moveWindow(w.id, geom)}
           hidden={!w.visible}          /* hide until iframe loads */
         >
           <iframe

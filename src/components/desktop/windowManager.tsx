@@ -29,6 +29,7 @@ interface Ctx {
     markLoaded(id: WindowID): void;
     close(id: WindowID): void;
     bringToFront(id: WindowID): void;
+    moveWindow(id: WindowID, geom: Geometry): void;
 }
 
 const WinCtx = createContext<Ctx | null>(null);
@@ -44,32 +45,53 @@ export function WindowManagerProvider({ children }: { children: ReactNode }) {
     };
 
     // Action: open a window
-   
+
+
+    // inside WindowManagerProvider, replace open = useCallback(…) with:
 
     const open = useCallback((id: WindowID, params?: Record<string, string>) => {
-    const path = buildPath(id, params);
+        const path = buildPath(id, params);
 
-    // use functional update so multiple opens in one tick accumulate
-    setWins(ws => {
-        const maxZ = Math.max(0, ...ws.map(w => w.z));
-        const found = ws.find(w => w.id === id);
+        setWins(ws => {
+            const maxZ = Math.max(0, ...ws.map(w => w.z));
+            const exists = ws.find(w => w.id === id);
 
-        if (found) {
-        return ws.map(w =>
-            w.id === id ? { ...w, path, z: maxZ + 1 } : w
-        );
-        } else {
-        return [
-            ...ws,
-            { id, path, geom: windowDefaults[id], z: maxZ + 1, visible: false },
-        ];
-        }
-    });
+            if (exists) {
+                // bring existing to front, update path only
+                return ws.map(w =>
+                    w.id === id ? { ...w, path, z: maxZ + 1 } : w
+                );
+            }
 
-    startTransition(() => {
-        router.push(path);
-    });
+            // NEW window: cascade by count
+            const base = windowDefaults[id];
+            // derive numeric left/top if possible
+            let left = typeof base.left === "number" ? base.left : 0;
+            let top = typeof base.top === "number" ? base.top : 0;
+            const shift = ws.length * 30;
+            left += shift;
+            top += shift;
+
+            // clamp so window fits fully in viewport
+            const vw = window.innerWidth, vh = window.innerHeight;
+            const w = typeof base.width === "number" ? base.width : vw;
+            const h = typeof base.height === "number" ? base.height : vh;
+            left = Math.min(Math.max(left, 0), vw - w);
+            top = Math.min(Math.max(top, 0), vh - h);
+
+            const geom = { ...base, left, top };
+
+            return [
+                ...ws,
+                { id, path, geom, z: maxZ + 1, visible: false },
+            ];
+        });
+
+        startTransition(() => {
+            router.push(path);
+        });
     }, [router]);
+
 
 
 
@@ -103,6 +125,13 @@ export function WindowManagerProvider({ children }: { children: ReactNode }) {
             const maxZ = Math.max(0, ...ws.map((w) => w.z));
             return ws.map((w) => (w.id === id ? { ...w, z: maxZ + 1 } : w));
         });
+
+    // action: move window
+    const moveWindow = (id: WindowID, geom: Geometry) => {
+        setWins(ws =>
+            ws.map(w => (w.id === id ? { ...w, geom } : w))
+        );
+    };
 
     // Listen for postMessage from iframes
     useEffect(() => {
@@ -153,36 +182,36 @@ export function WindowManagerProvider({ children }: { children: ReactNode }) {
     }, [router, wins]);
 
     // Auto‑open on initial load if URL matches
-    
+
     useEffect(() => {
         if (typeof window === "undefined") return;
         const url = new URL(window.location.href);
-      
+
         // 1) base window
         const seg = url.pathname.split("/")[1] as WindowID;
         if (["about", "archive", "work"].includes(seg)) {
-          const baseParams: Record<string, string> = {};
-          url.searchParams.forEach((v, k) => (baseParams[k] = v));
-          open(seg, Object.keys(baseParams).length ? baseParams : undefined);
+            const baseParams: Record<string, string> = {};
+            url.searchParams.forEach((v, k) => (baseParams[k] = v));
+            open(seg, Object.keys(baseParams).length ? baseParams : undefined);
         }
-      
+
         // 2) project window
         const projId = url.searchParams.get("project");
         if (projId) {
-          open("project", { project: projId });
+            open("project", { project: projId });
         }
-      
+
         // 3) carousel window
         const idx = url.searchParams.get("index");
         if (projId && idx != null) {
-          open("carousel", { project: projId, index: idx });
+            open("carousel", { project: projId, index: idx });
         }
-      }, [open]);
-      
+    }, [open]);
+
 
     return (
         <WinCtx.Provider
-            value={{ windows: wins, open, close, bringToFront, markLoaded }}
+            value={{ windows: wins, open, close, bringToFront, markLoaded, moveWindow }}
         >
             {children}
         </WinCtx.Provider>
