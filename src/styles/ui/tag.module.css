@@ -1,20 +1,12 @@
 .tag {
     display: inline-block;
-    padding: var(--space-3xs) var(--space-sm);
-    margin: var(--space-3xs);
-    /* background-color: rgba(var(--brand-grey-rgb), 0.12); */
-    border-radius: var(--radius-xl);
+    padding-top: var(--space-sm);
     font-size: var(--font-xs);
-    color: rgba(var(--color-foreground-rgb), 0.7);
+    color: var(--brand-blue);
     white-space: nowrap;
-    font-variation-settings: var(--var-sm);
-    border: 1px solid var(--color-line);
 }
 
 .tag:hover {
-    border: 0px;
-    color: rgba(var(--color-foreground-rgb), 1);
-    padding: calc(var(--space-3xs) + 1px) calc(var(--space-sm) + 1px);
-    background-color: rgba(var(--brand-grey-rgb), 0.2);
+    
     cursor: pointer;
 }

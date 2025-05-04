@@ -27,12 +27,10 @@ export default function ArchiveItem({ project, searchTerm, onOpenProject }: Arch
     return (
         <div data-archive-row className={stylesRow.row4col} onClick={handleClick} >
 
-            {/* Date */}
-            <p className={stylesRow.col1}>{project.date}</p>
 
             {/* Title, Description, Categories */}
-            <div className={stylesRow.col2}>
-                <h3>{highlightText(project.title, searchTerm)}</h3>
+            <div className={stylesRow.col1}>
+                <h4>{highlightText(project.title, searchTerm)}</h4>
 
                 <p data-description
                     className={`${styles.description} ${hasMatchInDescription ? styles.alwaysShow : ''
@@ -40,17 +38,22 @@ export default function ArchiveItem({ project, searchTerm, onOpenProject }: Arch
                     {highlightText(project.description, searchTerm)}
                 </p>
 
-                {project.categories.map((category, index) => (
-                    <CategoryMapping key={index} category={category} />
-                ))}
+                <a data-sublink>{project.tools.map((tool, index) => (
+                    <Tag key={index} label={tool} withComma={index < project.tools.length - 1}/>
+                ))}</a>
+
             </div>
 
             {/* Tools */}
-            <div className={stylesRow.col3}>
-                <a data-sublink>{project.tools.map((tool, index) => (
-                    <Tag key={index} label={tool} />
-                ))}</a>
+            <div className={stylesRow.col2}>
+                {project.categories.map((category, index) => (
+                    <CategoryMapping key={index} category={category} />
+                ))}
+
             </div>
+
+            {/* Date */}
+            <p className={stylesRow.col3}>{project.date}</p>
 
             {/* Links */}
             <div className={stylesRow.col4}>
@@ -67,6 +70,7 @@ export default function ArchiveItem({ project, searchTerm, onOpenProject }: Arch
                     ) : null
                 ))}
             </div>
+            
 
             {/* Image */}
             <div data-image className={styles.hiddenImage}>
