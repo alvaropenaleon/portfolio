@@ -82,7 +82,7 @@ export default function WindowFrame({
     >
       <div className={styles.titleBar} onPointerDown={onPointerDown}>
         <button className={styles.closeBtn} onClick={onClose} />
-        <span>{title}</span>
+        <span className={styles.title}>{title}</span>
       </div>
       <div className={styles.windowContent}>{children}</div>
     </div>

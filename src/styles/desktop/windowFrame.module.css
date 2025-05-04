@@ -1,26 +1,38 @@
-/* Root container (size & position come from inline style) */
+/* ───────── Window frame (outer wrapper) ───────── */
 .windowFrame {
-    display: flex;
-    flex-direction: column;
-    background: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    overflow: hidden;
-    /* crop iframe corners */
-    position: relative;
-    /* for absolute children */
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border-radius: 8px;
+  /* TWO stacked outer shadows (layer order = top-to-bottom)          *
+   * 1) 0 0 1 0  rgba(0,0,0,0.80)  – crisp outline                    *
+   * 2) 0 0 30 0 rgba(0,0,0,0.30)  – soft ambient drop shadow         */
+  box-shadow:
+    0 0 1px 0 rgba(0, 0, 0, 0.80),
+    0 0 30px 0 rgba(0, 0, 0, 0.30);
+  overflow: hidden;     /* crop iframe corners */
+  position: relative;   /* context for absolute children */
 }
 
-/* ───── Title bar ───── */
+/* ───────── Title bar (unchanged) ───────── */
 .titleBar {
-    display: flex;
-    align-items: center;
-    height: 28px;
-    padding: 0 8px;
-    background: #f3f4f6;
-    user-select: none;
-    cursor: default;
+  display: flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 8px;
+  background: #f3f4f6;
+  user-select: none;
+  cursor: default;
 }
+
+.title {                 /* <span class="title"> */
+    flex: 1;               /* lets it center nicely between buttons */
+    font: 500 13px/1 "Inter", sans-serif;
+    text-align: left;
+    white-space: nowrap;
+    text-overflow: ellipsis; /* neat truncation if name is long */
+    color: #000000;
+  }
 
 .closeBtn {
     width: 12px;
@@ -32,30 +44,37 @@
     cursor: pointer;
 }
 
-/* ───── Content area ───── */
+/* ───────── Inner content area ───────── */
 .windowContent {
-    flex: 1;
-    /* take remaining space */
-    position: relative;
-    /* parent for absolute iframe */
-    overflow: auto;
+  flex: 1;
+  position: relative;
+  overflow: auto;
+  padding: 16px;   
 }
 
-/* Make iframe always fill the area */
+/* Inner shadow exactly: 0 1 1 0 rgba(0,0,0,0.15) *
+ * Added with a ::before layer so scrolling content
+ * doesn’t blur the shadow.                        */
+.windowContent::before {
+  content: "";
+  position: absolute;
+  inset: 0;                 /* stretch over full area */
+  pointer-events: none;     /* keep clicks on content */
+  border-radius: inherit;   /* follow outer rounding  */
+  box-shadow: inset 0 1px 1px 0 rgba(0, 0, 0, 0.15);
+  z-index: 1;           /* above content, below title */
+}
+
+/* ───────── Iframe fill helper (unchanged) ───────── */
 .fillFrame {
-    position: absolute;
-    inset: 0;
-    /* top:0 right:0 bottom:0 left:0 */
-    width: 100%;
-    height: 100%;
-    border: 0;
-    border-radius: inherit;
-    /* keep rounded corners */
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: inherit;
 }
 
-.hidden {
-    display: none;
-}
-.visible {
-    display: flex;          /* matches .windowFrame’s flex layout */
-  }
+/* Visibility helpers (unchanged) */
+.hidden  { display: none; }
+.visible { display: flex; }
