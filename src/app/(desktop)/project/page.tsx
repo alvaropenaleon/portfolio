@@ -22,5 +22,10 @@ export default function ProjectPage() {
   if (!project) return null;
 
 
-  return <ProjectOverlay project={project} />;
+    return (
+      <div style={{ padding: "var(--space-md)" }}>
+        <ProjectOverlay project={project} />;
+      </div>
+    );
+   
 }

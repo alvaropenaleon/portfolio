@@ -1,13 +1,12 @@
-import color from "@/styles/ui/color.module.css";
+// components/about/Bio.tsx
+"use client";
 
-export default function BioComponent({ bio }: { bio: { text: string; class: string }[] }) {
+import ReactMarkdown from "react-markdown";
+
+type Props = { markdown: string };
+
+export default function Bio({ markdown }: Props) {
   return (
-    <h1>
-      {bio.map((segment, index) => (
-        <span key={index} className={color[segment.class]}>
-          {segment.text}
-        </span>
-      ))}
-    </h1>
+      <ReactMarkdown>{markdown}</ReactMarkdown>
   );
 }

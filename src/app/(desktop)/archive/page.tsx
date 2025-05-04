@@ -30,11 +30,11 @@ export default async function ArchivePage({ searchParams }: PageProps) {
 
   /* -------- inner UI -------- */
   const content = (
-    <>
+    <div style={{ padding: "var(--space-md)" }}>
       <Search />
       <ArchiveClient projects={projects} searchTerm={query} />
       <Pagination totalPages={totalPages} />
-    </>
+    </div>
   );
 
   /* If we’re inside the iframe just return raw content */
