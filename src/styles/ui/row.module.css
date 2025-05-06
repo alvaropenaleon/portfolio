@@ -2,23 +2,33 @@
     position: relative;
     display: grid;
     grid-template-columns:
-        minmax(200px, 2fr) 
-        minmax(100px, 0.85fr) 
-        minmax(50px, 0.25fr)
-        minmax(60px, 0.2fr);
+        minmax(60px, 0.2fr)     /* Img */
+        minmax(200px, 2.2fr)    /* Project Name */
+        minmax(40px, 0.2fr)     /* Dots (Categories) */
+        minmax(160px, 0.8fr)    /* Tags */
+        minmax(50px, 0.25fr)     /* Date */
+        minmax(30px, 0.2fr);    /* Link */
+  
     align-items: center; /* baseline */
-    padding: var(--space-row) 0.7rem;
+    padding: var(--space-sm) 0.7rem;
     border-bottom: 1px solid var(--color-line);
+    overflow: visible;
+
 }
 
-/*
+.row4col:hover {
+    z-index: 10;            /* anything > 0 will beat the default “auto” rows */
+  }
+
+
 .row4col[data-archive-row]:hover {
     background-color: var(--color-background);
     border-radius: var(--radius-md);
     border-bottom-color: transparent;
     border-radius: 0;
     margin: -1px 0;
-    padding: calc(var(--space-row) + 1px) var(--space-row);
+    padding: calc(var(--space-sm) + 1px) 0.7rem;
+    cursor: pointer;
 }
 
 
@@ -43,12 +53,13 @@
 .row4col[data-archive-row]:hover::before {
     opacity: 1;
 }
-*/
 
+/*
 .row4col:hover [data-image],
 .row4col:hover [data-description] {
     display: block;
 }
+*/
 
 .row4col:hover [data-view] {
     transform: translate(-50%, -70%) scale(1);
@@ -58,14 +69,20 @@
     transform: translate(-50%, -70%) scale(0);
 }
 
-.col1,
-.col2,
-.col3 ,
-.col4  {
-   padding-right: var(--space-sm);
-}
+
 
 .col1,
+.col2,
+.col3,
+.col4,
+.col5  {
+   padding-right: var(--space-xl);
+}
+
+.col1 {
+    z-index: 4;
+}
+
 .col2 {
     z-index: 3;
 }

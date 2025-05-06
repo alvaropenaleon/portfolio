@@ -6,7 +6,6 @@ import Tag from '@/components/ui/tag';
 import { highlightText } from '@/lib/utils';
 import Image from 'next/image';
 // import Link from 'next/link';
-import ViewItem from '@/components/archive/viewItem';
 
 type ArchiveItemProps = {
     project: Project;
@@ -28,35 +27,53 @@ export default function ArchiveItem({ project, searchTerm, onOpenProject }: Arch
         <div data-archive-row className={stylesRow.row4col} onClick={handleClick} >
 
 
-            {/* Title, Description, Categories */}
+            {/* Image */}
             <div className={stylesRow.col1}>
+                <div className={styles.thumbnailWrapper}>
+                    <Image
+                    src={project.heroImage}
+                    alt={project.title}
+                    width={300}
+                    height={150}
+                    className={styles.thumbnail}
+                    quality={100}
+                    />
+                </div>
+            </div>
+            
+            {/* Title, Description */}
+            <div className={stylesRow.col2}>
                 <h4>{highlightText(project.title, searchTerm)}</h4>
 
+                
                 <p data-description
                     className={`${styles.description} ${hasMatchInDescription ? styles.alwaysShow : ''
                         }`}>
                     {highlightText(project.description, searchTerm)}
-                </p>
-
-                <a data-sublink>{project.tools.map((tool, index) => (
-                    <Tag key={index} label={tool} withComma={index < project.tools.length - 1}/>
-                ))}</a>
-
+                </p> 
+                
             </div>
 
-            {/* Tools */}
-            <div className={stylesRow.col2}>
+            {/* Categories */}
+            <div className={stylesRow.col3}>
                 {project.categories.map((category, index) => (
                     <CategoryMapping key={index} category={category} />
                 ))}
 
             </div>
 
+            {/* Tags */}
+            <div className={stylesRow.col4}>
+                <a data-sublink>{project.tools.map((tool, index) => (
+                    <Tag key={index} label={tool} withComma={index < project.tools.length - 1}/>
+                ))}</a>
+            </div>
+
             {/* Date */}
-            <p className={stylesRow.col3}>{project.date}</p>
+            <p className={`${stylesRow.col5} ${styles.date}`}>{project.date}</p>
 
             {/* Links */}
-            <div className={stylesRow.col4}>
+            <div className={stylesRow.col6}>
                 {project.links.map(({ url, type }, index) => (
                     url ? (
                         <a data-sublink
@@ -72,26 +89,12 @@ export default function ArchiveItem({ project, searchTerm, onOpenProject }: Arch
             </div>
             
 
-            {/* Image */}
-            <div data-image className={styles.hiddenImage}>
-                <div className={styles.imageInner}>
-                    <Image
-                        src={project.heroImage}
-                        alt={project.title}
-                        layout="fill"
-                        objectFit="contain"
-                        quality={65}
-                    />
-                </div>
-            </div>
-
             {/*
             <Link href={`/project/${project.id}`}>
                 <span className={styles.fullLinkOverlay} aria-label={`View project ${project.title}`} />
             </Link>
             */}
 
-            <ViewItem />
 
         </div>
     );

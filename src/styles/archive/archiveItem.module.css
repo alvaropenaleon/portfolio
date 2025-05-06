@@ -1,15 +1,17 @@
 .description {
     display: none;
     margin-top: var(--space-sm);
-    font-size: var(--font-xs);
+    font-size: var(--font-xxs);
     color: rgba(var(--color-foreground-rgb), 0.7);
     line-height: 1.4;
 }
 
+/*
 .row4col:hover [data-image],
 .row4col:hover [data-description] {
     display: block;
 }
+
 
 .row4col:hover [data-view] {
     transform: translate(-50%, -50%) scale(1);
@@ -18,6 +20,7 @@
 .row4col:has([data-sublink]:hover) [data-view] {
     transform: translate(-50%, -50%) scale(0);
 }
+*/
 
 .alwaysShow {
     display: block !important;
@@ -27,6 +30,12 @@
     position: absolute;
     inset: 0;
     z-index: 4;
+}
+
+.date{
+    font-size: var(--font-xxs);
+    color: rgba(var(--color-foreground-rgb), 0.7);
+    
 }
 
 .link {
@@ -63,52 +72,39 @@
 
 }
 
-.hiddenImage {
-    /*background-color: rgba(var(--brand-grey-rgb), 0.12);*/
-    display: none;
-    position: fixed;
-    bottom: var(--space-lg);
-    left: var(--space-lg);
-    width: var(--space-sidebar);
-    height: 222px;
-    border-radius: var(--radius-lg);
-}
-
-.imageInner {
-    position: relative;
-    width: 100%;
-    /*calc(100% - (2 * var(--space-md)));*/
-    height: 100%;
-    /*calc(100% - (2 * var(--space-md)));*/
-    margin: 0;
-    box-sizing: border-box;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-}
-
-.viewCircle {
-    /*display: none;*/
-
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    transform-origin: center;
-
+/* —————————  Thumbnail container (outer frame + drop-shadow) ————————— */
+.thumbnailWrapper {
+    position: relative;       
+    overflow: visible;        
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: 3rem;
-    width: 3rem;
-    
-    color: var(--color-foreground);
-    background-color: rgba(var(--brand-grey-rgb), 0.2);
-    backdrop-filter: blur(22px);
-    -webkit-backdrop-filter: blur(22px);
-    border-radius: 50%;
+    justify-content: center;
 
-    z-index: 999;
-    pointer-events: none;
+    /* keep your original small size */
+    width: 45px;
+    height: 30px;
 
-    transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    /* — new frame + outer shadow — */
+    background: #fff;
+    padding: 1px;
+    box-shadow: 0 0 0.1rem rgba(0, 0, 0, 0.5);
+
+    transition: transform 0.2s ease-out;
+    transform-origin: top left;
+}
+
+/* —————————  The image itself (inner inset‐shadow) ————————— */
+.thumbnail {
+    width: 45px;
+    height: 30px;
+    object-fit: cover;
+
+    /* — new inner shadow — */
+    /* box-shadow: inset 0 0 0.1rem rgba(0, 0, 0, 0.5);*/
+}
+
+/* — scale up on hover, keeping it on top — */
+.thumbnailWrapper:hover {
+    transform: scale(5.2);
+    z-index: 11;
 }

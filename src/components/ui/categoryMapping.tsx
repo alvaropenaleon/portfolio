@@ -22,8 +22,9 @@ export default function CategoryColorDot({ category }: CategoryColorDotProps) {
       <span
         className={styles.dot}
         style={{ backgroundColor: color }}
+        title={category} 
       />
-      <span className={styles.label}>{category}</span>
+      {/*<span className={styles.label}>{category}</span>*/}
     </div>
   );
 }

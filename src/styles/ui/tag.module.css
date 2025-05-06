@@ -1,12 +1,13 @@
 .tag {
-    display: inline-block;
+    display: inline;
     padding-top: var(--space-sm);
-    font-size: var(--font-xs);
-    color: var(--brand-blue);
+    font-size: var(--font-xxs);
+    color: rgba(var(--color-foreground-rgb), 0.7);
     white-space: nowrap;
+
 }
 
 .tag:hover {
-    
+    color: var(--brand-blue);
     cursor: pointer;
 }
