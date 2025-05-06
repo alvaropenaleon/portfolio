@@ -43,7 +43,7 @@ export default function ArchiveItem({ project, searchTerm, onOpenProject }: Arch
             
             {/* Title, Description */}
             <div className={stylesRow.col2}>
-                <h4>{highlightText(project.title, searchTerm)}</h4>
+                <h5>{highlightText(project.title, searchTerm)}</h5>
 
                 
                 <p data-description
