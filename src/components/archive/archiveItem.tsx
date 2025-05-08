@@ -72,21 +72,31 @@ export default function ArchiveItem({ project, searchTerm, onOpenProject }: Arch
             {/* Date */}
             <p className={`${stylesRow.col5} ${styles.date}`}>{project.date}</p>
 
-            {/* Links */}
+            {/* Links (col6) */}
             <div className={stylesRow.col6}>
-                {project.links.map(({ url, type }, index) => (
-                    url ? (
-                        <a data-sublink
-                            className={styles.link}
-                            key={index} href={url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={(e) => e.stopPropagation()}>
-                            {type === 'code' ? 'Code' : 'Demo'}
+            {project.links.filter(l => l.url).length > 0 && (
+                <div className={styles.linkContainer}>
+                <div className={styles.ellipsis}>…</div>
+                <div className={styles.linkMenu}>
+                    {project.links.map(({url,type}, i) =>
+                    url && (
+                        <a
+                        key={i}
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={e => e.stopPropagation()}
+                        >
+                        {type==='code' ? 'View Code' : 'View Demo'}
                         </a>
-                    ) : null
-                ))}
+                    )
+                    )}
+                </div>
+                </div>
+            )}
             </div>
+
+
             
 
             {/*
