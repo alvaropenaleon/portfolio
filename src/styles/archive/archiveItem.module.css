@@ -1,7 +1,7 @@
 .description {
     display: none;
     margin-top: var(--space-sm);
-    font-size: var(--font-xxs);
+    font-size: var(--font-xs);
     color: rgba(var(--color-foreground-rgb), 0.7);
     line-height: 1.4;
 }
@@ -33,7 +33,7 @@
 }
 
 .date {
-    font-size: var(--font-xxs);
+    font-size: var(--font-xs);
     color: rgba(var(--color-foreground-rgb), 0.7);
 
 }
@@ -70,10 +70,13 @@
     /* align right edges */
     display: flex;
     flex-direction: column;
-    background: rgba(var(--color-background-rgb), 0.95);
-    backdrop-filter: blur(8px);
-    border-radius: var(--radius-md);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    background-color: rgba(var(--brand-grey-rgb), 0.08);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border-radius: var(--radius-sm);
+    box-shadow:
+        /* 0 0 1px 0 rgba(0, 0, 0, 0.80), */
+        0 0 30px 0 rgba(0, 0, 0, 0.20);
     margin-top: 2px;
     /* tiny gap */
     min-width: 140px;
@@ -83,7 +86,7 @@
 
 /* —— each menu link —— */
 .linkMenu a {
-    padding: 0.75rem 1rem;
+    padding: 0.6rem var(--space-md);
     font-size: var(--font-sm);
     color: var(--color-foreground);
     text-decoration: none;
@@ -92,7 +95,8 @@
 }
 
 .linkMenu a+a {
-    border-top: 1px solid rgba(var(--color-line-rgb), 0.3);
+    box-shadow:
+    0 0 1px 0 rgba(0, 0, 0, 0.50);
 }
 
 .linkMenu a:hover {
@@ -114,8 +118,8 @@
     justify-content: center;
 
     /* keep your original small size */
-    width: 45px;
-    height: 30px;
+    width: 40px;
+    height: 25px;
 
     /* — new frame + outer shadow — */
     background: #fff;
@@ -128,8 +132,8 @@
 
 /* —————————  The image itself (inner inset‐shadow) ————————— */
 .thumbnail {
-    width: 45px;
-    height: 30px;
+    width: 40px;
+    height: 25px;
     object-fit: cover;
 
     /* — new inner shadow — */

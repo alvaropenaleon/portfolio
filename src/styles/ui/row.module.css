@@ -76,7 +76,7 @@
 .col3,
 .col4,
 .col5  {
-   padding-right: var(--space-xl);
+   padding-right: var(--space-lg);
 }
 
 .col1 {
