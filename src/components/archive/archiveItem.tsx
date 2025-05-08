@@ -99,7 +99,7 @@ export default function ArchiveItem({
 
             {/* Col 2: title & description */}
             <div className={stylesRow.col2}>
-                <h5>{highlightText(project.title, searchTerm)}</h5>
+                <p className={styles.title}>{highlightText(project.title, searchTerm)}</p>
                 <p
                     data-description
                     className={`${styles.description} ${hasMatchInDescription ? styles.alwaysShow : ''
@@ -118,7 +118,7 @@ export default function ArchiveItem({
 
             {/* Col 4: tags */}
             <div className={stylesRow.col4}>
-                <a data-sublink>
+                <p data-sublink>
                     {project.tools.map((tool, i) => (
                         <Tag
                             key={i}
@@ -126,7 +126,7 @@ export default function ArchiveItem({
                             withComma={i < project.tools.length - 1}
                         />
                     ))}
-                </a>
+                </p>
             </div>
 
             {/* Col 5: date */}
@@ -154,7 +154,7 @@ export default function ArchiveItem({
                                                 rel="noopener noreferrer"
                                                 onClick={(e) => e.stopPropagation()}
                                             >
-                                                {type === 'code' ? 'View Code' : 'View Demo'}
+                                                <p>{type === 'code' ? 'View Code' : 'View Demo'}</p>
                                             </a>
                                         )
                                 )}

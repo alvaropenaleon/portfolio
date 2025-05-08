@@ -14,7 +14,7 @@ export default function ArchiveList({ projects, searchTerm, onOpenProject }: Arc
         <div>
             {/* header */}
             <div className={layoutStyles.stickyHeader}>
-                <div className={styles.row4col}>
+                <div className={layoutStyles.row}>
                     <p className={styles.col1}>Img</p>
                     <p className={styles.col2}>Name</p>
                     <p className={styles.col3}></p>

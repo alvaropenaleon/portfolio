@@ -1,3 +1,7 @@
+.title {
+    font-weight: 500;
+}
+
 .description {
     display: none;
     margin-top: var(--space-sm);
@@ -48,17 +52,17 @@
 .ellipsis {
     width: 24px;
     height: 24px;
-    line-height: 24px;
+    line-height: 14px;
     text-align: center;
     font-size: 1.25rem;
-    color: rgba(var(--color-foreground-rgb), 0.6);
+    color: rgba(var(--color-foreground-rgb), 0.7);
     cursor: pointer;
     transition: background 0.2s;
     border-radius: 50%;
 }
 
 .ellipsis:hover {
-    background: rgba(var(--color-background-rgb), 0.2);
+    background-color: rgba(var(--brand-grey-rgb), 0.15);
 }
 
 /* —— the pop-up menu —— */
