@@ -9,8 +9,8 @@ type TagProps = {
 export default function Tag({ label, withComma = false }: TagProps) {
   return (
     <>
-      <span className={styles.tag}>{label}</span>
-      {withComma && <span style={{ fontSize: "var(--font-sm)" }}>,&nbsp;</span>}
+      <p className={styles.tag}>{label}</p>
+      {withComma && <span style={{ color: "rgba(var(--color-foreground-rgb), 0.7)", fontSize: "var(--font-sm)" }}>,&nbsp;</span>}
     </>
   );
 }

@@ -13,7 +13,7 @@
     flex-shrink: 0;
     min-width: 8px;
     min-height: 8px;
-    border: 1px solid rgba(var(--color-background-rgb), 0.9); 
+    border: 1px solid rgba(var(--color-background-rgb), 1);
 }
 
 

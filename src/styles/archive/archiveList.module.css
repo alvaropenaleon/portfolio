@@ -6,7 +6,7 @@
         minmax(200px, 2.2fr)    /* Project Name */
         minmax(40px, 0.2fr)     /* Dots (Categories) */
         minmax(160px, 0.8fr)    /* Tags */
-        minmax(50px, 0.25fr)     /* Date */
+        minmax(100px, 0.5fr)     /* Date */
         minmax(30px, 0.2fr);    /* Link */
   
     align-items: center; /* baseline */
@@ -27,7 +27,7 @@
 }
 
 .stickyHeader p {
-    font-size: var(--font-xxs);
+    font-size: var(--font-xs);
     color: rgba(var(--color-foreground-rgb), 0.7);
 }
 

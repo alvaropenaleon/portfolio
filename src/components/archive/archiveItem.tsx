@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
+import { Code, Link2 } from 'lucide-react';
 import { Project } from '@/lib/definitions';
 import stylesRow from '@/styles/ui/row.module.css';
 import styles from '@/styles/archive/archiveItem.module.css';
@@ -27,56 +28,6 @@ export default function ArchiveItem({
         onOpenProject?.(project.id);
     };
 
-    const [menuOpen, setMenuOpen] = useState(false);
-    const containerRef = useRef<HTMLDivElement>(null);
-
-    // toggle menu on ellipsis click
-    const toggleMenu = (e: React.MouseEvent) => {
-        e.stopPropagation();
-        setMenuOpen((open) => !open);
-    };
-
-    useEffect(() => {
-        // run in capture phase so we can stop row-level clicks
-        const onDocumentClickCapture = (e: Event) => {
-            if (
-                menuOpen &&
-                containerRef.current &&
-                !containerRef.current.contains(e.target as Node)
-            ) {
-                setMenuOpen(false);
-                // prevent the click from reaching the row's onClick
-                e.stopImmediatePropagation();
-            }
-        };
-
-        const onScrollCapture = () => {
-            if (menuOpen) {
-                setMenuOpen(false);
-            }
-        };
-
-        document.addEventListener(
-            'click',
-            onDocumentClickCapture,
-      /* useCapture= */ true
-        );
-        window.addEventListener('scroll', onScrollCapture, /* useCapture= */ true);
-
-        return () => {
-            document.removeEventListener(
-                'click',
-                onDocumentClickCapture,
-        /* useCapture= */ true
-            );
-            window.removeEventListener(
-                'scroll',
-                onScrollCapture,
-        /* useCapture= */ true
-            );
-        };
-    }, [menuOpen]);
-
     return (
         <div
             data-archive-row
@@ -99,7 +50,7 @@ export default function ArchiveItem({
 
             {/* Col 2: title & description */}
             <div className={stylesRow.col2}>
-                <p className={styles.title}>{highlightText(project.title, searchTerm)}</p>
+                <p><b>{highlightText(project.title, searchTerm)}</b></p>
                 <p
                     data-description
                     className={`${styles.description} ${hasMatchInDescription ? styles.alwaysShow : ''
@@ -118,7 +69,7 @@ export default function ArchiveItem({
 
             {/* Col 4: tags */}
             <div className={stylesRow.col4}>
-                <p data-sublink>
+                <a data-sublink>
                     {project.tools.map((tool, i) => (
                         <Tag
                             key={i}
@@ -126,7 +77,7 @@ export default function ArchiveItem({
                             withComma={i < project.tools.length - 1}
                         />
                     ))}
-                </p>
+                </a>
             </div>
 
             {/* Col 5: date */}
@@ -134,41 +85,28 @@ export default function ArchiveItem({
                 {project.date}
             </p>
 
-            {/* Col 6: click-to-open menu */}
+            {/* Col 6: code/demo icons on hover */}
             <div className={stylesRow.col6}>
-                {project.links.some((l) => l.url) && (
-                    <div className={styles.linkContainer} ref={containerRef}>
-                        <div className={styles.ellipsis} onClick={toggleMenu}>
-                            …
-                        </div>
-
-                        {menuOpen && (
-                            <div className={styles.linkMenu}>
-                                {project.links.map(
-                                    ({ url, type }, i) =>
-                                        url && (
-                                            <a
-                                                key={i}
-                                                href={url}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                onClick={(e) => e.stopPropagation()}
-                                            >
-                                                <p>{type === 'code' ? 'View Code' : 'View Demo'}</p>
-                                            </a>
-                                        )
-                                )}
-                            </div>
-                        )}
-                    </div>
-                )}
+                {project.links
+                    .filter((l) => l.url)
+                    .map(({ url, type }, i) => (
+                        <a
+                            key={i}
+                            href={url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={styles.iconWrapper}
+                            data-tooltip={type === 'code' ? 'View Code' : 'View Demo'}
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            {type === 'code' ? (
+                                <Code className={styles.linkIcon} />
+                            ) : (
+                                <Link2 className={styles.linkIcon} />
+                            )}
+                        </a>
+                    ))}
             </div>
-
-            {/*
-            <Link href={`/project/${project.id}`}>
-                <span className={styles.fullLinkOverlay} aria-label={`View project ${project.title}`} />
-            </Link>
-            */}
         </div>
     );
 }

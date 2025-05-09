@@ -1,7 +1,7 @@
 .tag {
     display: inline;
     padding-top: var(--space-sm);
-    font-size: var(--font-xs);
+    font-size: var(--font-sm);
     color: rgba(var(--color-foreground-rgb), 0.7);
     white-space: nowrap;
 

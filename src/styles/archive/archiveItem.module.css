@@ -5,7 +5,7 @@
 .description {
     display: none;
     margin-top: var(--space-sm);
-    font-size: var(--font-xs);
+    font-size: var(--font-sm);
     color: rgba(var(--color-foreground-rgb), 0.7);
     line-height: 1.4;
 }
@@ -37,80 +37,58 @@
 }
 
 .date {
-    font-size: var(--font-xs);
-    color: rgba(var(--color-foreground-rgb), 0.7);
-
-}
-
-/* —— container for ellipsis + menu —— */
-.linkContainer {
-    position: relative;
-    display: inline-block;
-}
-
-/* —— the “…” trigger —— */
-.ellipsis {
-    width: 24px;
-    height: 24px;
-    line-height: 14px;
-    text-align: center;
-    font-size: 1.25rem;
-    color: rgba(var(--color-foreground-rgb), 0.7);
-    cursor: pointer;
-    transition: background 0.2s;
-    border-radius: 50%;
-}
-
-.ellipsis:hover {
-    background-color: rgba(var(--brand-grey-rgb), 0.15);
-}
-
-/* —— the pop-up menu —— */
-.linkMenu {
-    position: absolute;
-    top: 100%;
-    /* just below ellipsis */
-    right: 0;
-    /* align right edges */
-    display: flex;
-    flex-direction: column;
-    background-color: rgba(var(--brand-grey-rgb), 0.08);
-    backdrop-filter: blur(22px);
-    -webkit-backdrop-filter: blur(22px);
-    border-radius: var(--radius-sm);
-    box-shadow:
-        /* 0 0 1px 0 rgba(0, 0, 0, 0.80), */
-        0 0 30px 0 rgba(0, 0, 0, 0.20);
-    margin-top: 2px;
-    /* tiny gap */
-    min-width: 140px;
-    overflow: hidden;
-    z-index: 1000;
-}
-
-/* —— each menu link —— */
-.linkMenu a {
-    padding: 0.6rem var(--space-md);
     font-size: var(--font-sm);
-    color: var(--color-foreground);
-    text-decoration: none;
-    white-space: nowrap;
-    transition: background 0.15s;
+    color: rgba(var(--color-foreground-rgb), 0.7);
+
 }
 
-.linkMenu a+a {
+/* ————— Icons hidden by default ————— */
+.linkIcon {
+    opacity: 0;
+    width: 1rem;
+    height: 1rem;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    color: rgba(var(--color-foreground-rgb), 0.7);
+  }
+
+  .linkIcon:hover {
+    color: rgba(var(--color-foreground-rgb), 0.7);
+  }
+  
+  [data-archive-row]:hover .linkIcon {
+    opacity: 1;
+  }
+  
+  /* wrapper to position tooltip */
+  .iconWrapper {
+    position: sticky;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: var(--space-sm);
+  }
+  
+  /* tooltip text */
+  .iconWrapper:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: 40px;
+    left: -10px;
+    transform: translateX(-50%) translateY(-4px);
+    background-color: rgba(var(--brand-grey-rgb), 0.12);
+    backdrop-filter: blur(8px);
     box-shadow:
-    0 0 1px 0 rgba(0, 0, 0, 0.50);
-}
-
-.linkMenu a:hover {
-    background: rgba(var(--color-foreground-rgb), 0.05);
-}
-
-
-
-
-
+    0 0 1px 0 rgba(var(--color-foreground-rgb), 0.80),
+    0 0 10px 0 rgba(var(--color-foreground-rgb), 0.10);
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-xs);
+    font-size: var(--font-sm);
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 1000;
+  }
+  
 
 
 /* —————————  Thumbnail container (outer frame + drop-shadow) ————————— */
@@ -122,8 +100,8 @@
     justify-content: center;
 
     /* keep your original small size */
-    width: 40px;
-    height: 25px;
+    width: 35px;
+    height: 24px;
 
     /* — new frame + outer shadow — */
     background: #fff;
@@ -136,8 +114,8 @@
 
 /* —————————  The image itself (inner inset‐shadow) ————————— */
 .thumbnail {
-    width: 40px;
-    height: 25px;
+    width: 35px;
+    height: 24px;
     object-fit: cover;
 
     /* — new inner shadow — */
@@ -146,6 +124,6 @@
 
 /* — scale up on hover, keeping it on top — */
 .thumbnailWrapper:hover {
-    transform: scale(5.2);
+    transform: scale(6.2);
     z-index: 11;
 }
