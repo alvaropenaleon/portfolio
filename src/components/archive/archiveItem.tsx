@@ -50,7 +50,7 @@ export default function ArchiveItem({
 
             {/* Col 2: title & description */}
             <div className={stylesRow.col2}>
-                <p><b>{highlightText(project.title, searchTerm)}</b></p>
+                <p className={styles.title}>{highlightText(project.title, searchTerm)}</p>
                 <p
                     data-description
                     className={`${styles.description} ${hasMatchInDescription ? styles.alwaysShow : ''

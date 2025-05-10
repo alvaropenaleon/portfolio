@@ -7,11 +7,12 @@
   --color-foreground: #171717;
   --color-foreground-rgb: 23, 23, 23;
   --color-text: #222;
-  --color-line: rgba(120, 120, 128, 0.2);
+  --color-line: rgba(120, 120, 128, 0.4);
 
-  /* font variation settings*/
-  --var-sm: "opsz" 15, "wght" 440;
-  --var-lg: "opsz" 15, "wght" 540;
+  /* font variation settings: "opsz" 14, "wght" 400 */
+  --var-sm: "wght" 440;
+  --var-md: "wght" 480;
+  --var-lg: "wght" 540;
 
    /* Spacing */
   --space-3xs: 0.05rem;
@@ -30,7 +31,7 @@
   /* Font sizes */
   --font-xxs: calc(10rem/ 16);
   --font-xs: calc(12rem/ 16);
-  --font-sm: calc(13rem/ 16);
+  --font-sm: calc(12.5rem/ 16);
   --font-md: calc(15rem/ 16);
   --font-lg: calc(23rem/ 16);
   --font-xl: calc(35rem/ 16);
@@ -62,8 +63,8 @@
   --brand-grey: #787880;
   --brand-grey-rgb: 120, 120, 128;
   */
-  --brand-grey: #818b98;
-  --brand-grey-rgb: 129, 139, 152;
+  --brand-grey: #787880;
+  --brand-grey-rgb: 120, 120, 128;
   --brand-blue: #007AFF;
   --brand-blue-rgb: 0, 122, 255;
   --brand-red: #ff5733;

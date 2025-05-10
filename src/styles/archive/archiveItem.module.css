@@ -1,13 +1,20 @@
 .title {
-    font-weight: 500;
+    font-variation-settings: var(--var-md);
+    font-size: var(--font-sm);
 }
 
 .description {
     display: none;
     margin-top: var(--space-sm);
     font-size: var(--font-sm);
-    color: rgba(var(--color-foreground-rgb), 0.7);
+    color: rgba(var(--color-foreground-rgb), 0.6);
     line-height: 1.4;
+}
+
+.date {
+    font-size: var(--font-sm);
+    color: rgba(var(--color-foreground-rgb), 0.6);
+
 }
 
 /*
@@ -36,11 +43,6 @@
     z-index: 4;
 }
 
-.date {
-    font-size: var(--font-sm);
-    color: rgba(var(--color-foreground-rgb), 0.7);
-
-}
 
 /* ————— Icons hidden by default ————— */
 .linkIcon {
