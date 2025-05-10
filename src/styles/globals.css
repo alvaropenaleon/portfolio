@@ -25,16 +25,6 @@ body {
 }
 
 
-/* fallback for browsers that don’t support font-optical-sizing 
-@supports not (font-optical-sizing: auto) {
-    body {
-      --var-sm: "wght" 440;
-      --var-md: "wght" 480;
-      --var-lg: "wght" 540;
-    }
-  }
-*/
-
 p {
     font-size: var(--font-sm);
     font-variation-settings: var(--var-sm);
@@ -191,7 +181,7 @@ h2 a::after {
 .icon-label {
     margin-top: 0.25rem;
     padding: var(--space-xxs) var(--space-xs);
-    font-size: var(--font-xs);
+    font-size: var(--font-sm);
     font-weight: 500;
     font-variation-settings: var(--var-lg);
     text-align: center;

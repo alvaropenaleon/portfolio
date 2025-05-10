@@ -96,7 +96,7 @@ $max-z: 20;
 .expandButton {
     width: 120px;
     padding: var(--space-sm);
-    font-size: var(--font-xs);
+    font-size: var(--font-sm);
     background-color: rgba(var(--brand-grey-rgb), 0.12);
     border: none;
     border-radius: var(--radius-lg);
@@ -164,21 +164,22 @@ $max-z: 20;
     top: calc(var(--space-sm) * 1.6);
     right: var(--space-md);
     opacity: 0.5;
-    font-size: var(--font-xxs);
+    font-size: var(--font-xs);
     font-variation-settings: var(--var-sm);
 }
 
 .details h3 {
     margin: 0;
     text-align: left;
-    font-size: var(--font-xs);
+    font-size: var(--font-sm);
     font-variation-settings: var( --var-lg);
 }
 
 .details p {
     margin: var(--space-xxs) 0 0;
     text-align: left;
-    font-size: var(--font-xs);
+    font-size: var(--font-sm);
+    font-variation-settings: var(--var-sm);
 }
 
 @media (max-width: 768px) {

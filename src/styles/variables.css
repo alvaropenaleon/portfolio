@@ -1,6 +1,12 @@
-
-/* 🌍 Global Variables */
+/* Global Variables */
 :root {
+
+    /* font variation settings: "opsz" auto, "wght" (specific) */
+  --var-sm:  "wght" 440;
+  --var-md:  "wght" 480;
+  --var-lg:  "wght" 540;
+
+
   /* Light Mode */
   --color-background: #fcfcfc;
   --color-background-rgb: 252, 252, 252;
@@ -8,12 +14,6 @@
   --color-foreground-rgb: 23, 23, 23;
   --color-text: #222;
   --color-line: rgba(120, 120, 128, 0.4);
-
-  /* font variation settings: "opsz" 14, "wght" 400 */
-  --var-sm: "wght" 440;
-  --var-md: "wght" 480;
-  --var-lg: "wght" 540;
-
   
 
    /* Spacing */
@@ -32,7 +32,7 @@
 
   /* Font sizes */
   --font-xxs: calc(10rem/ 16);
-  --font-xs: calc(12rem/ 16);
+  --font-xs: calc(11rem/ 16);
   --font-sm: calc(12.5rem/ 16);
   --font-md: calc(15rem/ 16);
   --font-lg: calc(23rem/ 16);
@@ -78,11 +78,7 @@
   --brand-purple: #9922FF;
 }
 
-@supports (font-variation-settings: normal) {
-  :root {
-    font-family: InterVariable, sans-serif;
-  }
-}
+
 
 
 /*
