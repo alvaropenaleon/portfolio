@@ -14,6 +14,8 @@
   --var-md: "wght" 480;
   --var-lg: "wght" 540;
 
+  
+
    /* Spacing */
   --space-3xs: 0.05rem;
   --space-xxs: 0.125rem;
@@ -81,6 +83,7 @@
     font-family: InterVariable, sans-serif;
   }
 }
+
 
 /*
 @media (prefers-color-scheme: dark) {

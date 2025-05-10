@@ -12,7 +12,7 @@
 body {
     font-family:  -apple-system,  BlinkMacSystemFont, var(--font-inter), "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     /* Adjust this value as needed */
-    font-optical-sizing: none;
+    font-optical-sizing: auto;
     font-feature-settings: 'liga' 1, 'calt' 1;
     font-variant-ligatures: common-ligatures discretionary-ligatures;
     text-rendering: optimizeLegibility;
@@ -23,6 +23,17 @@ body {
     color: var(--color-foreground);
     background: var(--color-background);
 }
+
+
+/* fallback for browsers that don’t support font-optical-sizing 
+@supports not (font-optical-sizing: auto) {
+    body {
+      --var-sm: "wght" 440;
+      --var-md: "wght" 480;
+      --var-lg: "wght" 540;
+    }
+  }
+*/
 
 p {
     font-size: var(--font-sm);
