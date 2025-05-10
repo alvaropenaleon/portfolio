@@ -116,6 +116,7 @@ $max-z: 20;
 }
 
 .notificationCard {
+    margin: 2px;
     position: relative;
     background-color: rgba(var(--brand-grey-rgb), 0.12);
     border-radius: var(--radius-lg);
@@ -133,6 +134,9 @@ $max-z: 20;
     /* Safari transition ptimisation */
     will-change: transform, opacity, max-height;
     transform: translate3d(0, 0, 0);
+    box-shadow:
+        0 0 1px 0 rgba(0, 0, 0, 0.20),
+        0 0 2px 0 rgba(0, 0, 0, 0.20);
 }
 
 .notificationCard::before {
