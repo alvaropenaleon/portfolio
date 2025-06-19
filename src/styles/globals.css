@@ -55,6 +55,11 @@ h5,h4,h3,h2,h1 {
     font-variation-settings: var( --var-lg);
 }
 
+h4 {
+    font-size: var(--font-md);
+}
+
+
 h3 {
     font-size: var(--font-md);
 }

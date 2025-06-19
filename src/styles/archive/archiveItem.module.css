@@ -1,11 +1,11 @@
 .title {
-    font-variation-settings: var(--var-md);
-    font-size: var(--font-sm);
+    font-variation-settings: var(--var-lg);
+    font-size: var(--font-md);
 }
 
 .description {
-    display: none;
-    margin-top: var(--space-sm);
+    /* display: none; */
+    margin-top: var(--space-xs);
     font-size: var(--font-sm);
     color: rgba(var(--color-foreground-rgb), 0.6);
     line-height: 1.4;
@@ -16,22 +16,6 @@
     color: rgba(var(--color-foreground-rgb), 0.6);
 
 }
-
-/*
-.row4col:hover [data-image],
-.row4col:hover [data-description] {
-    display: block;
-}
-
-
-.row4col:hover [data-view] {
-    transform: translate(-50%, -50%) scale(1);
-}
-
-.row4col:has([data-sublink]:hover) [data-view] {
-    transform: translate(-50%, -50%) scale(0);
-}
-*/
 
 .alwaysShow {
     display: block !important;
@@ -47,8 +31,8 @@
 /* ————— Icons hidden by default ————— */
 .linkIcon {
     opacity: 0;
-    width: 1rem;
-    height: 1rem;
+    width: 0.85rem;
+    height: 0.85rem;
     cursor: pointer;
     transition: opacity 0.2s ease;
     color: rgba(var(--color-foreground-rgb), 0.7);
@@ -102,8 +86,8 @@
     justify-content: center;
 
     /* keep your original small size */
-    width: 35px;
-    height: 24px;
+    width: 65px;
+    height: 44px;
 
     /* — new frame + outer shadow — */
     background: #fff;
@@ -116,8 +100,8 @@
 
 /* —————————  The image itself (inner inset‐shadow) ————————— */
 .thumbnail {
-    width: 35px;
-    height: 24px;
+    width: 65px;
+    height: 44px;
     object-fit: cover;
 
     /* — new inner shadow — */
@@ -126,6 +110,6 @@
 
 /* — scale up on hover, keeping it on top — */
 .thumbnailWrapper:hover {
-    transform: scale(6.2);
+    transform: scale(4.2);
     z-index: 11;
 }

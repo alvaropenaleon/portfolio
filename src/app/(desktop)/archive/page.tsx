@@ -30,7 +30,7 @@ export default async function ArchivePage({ searchParams }: PageProps) {
 
   /* -------- inner UI -------- */
   const content = (
-    <div style={{ padding: "var(--space-md)" }}>
+    <div style={{ padding: "var(--space-lg)" }}>
       <Search />
       <ArchiveClient projects={projects} searchTerm={query} />
       <Pagination totalPages={totalPages} />

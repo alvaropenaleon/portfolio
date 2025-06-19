@@ -1,10 +1,10 @@
 import React from 'react';
-import { Code, Link2 } from 'lucide-react';
+import { Code, Link } from 'lucide-react';
 import { Project } from '@/lib/definitions';
 import stylesRow from '@/styles/ui/row.module.css';
 import styles from '@/styles/archive/archiveItem.module.css';
 import CategoryMapping from '@/components/ui/categoryMapping';
-import Tag from '@/components/ui/tag';
+// import Tag from '@/components/ui/tag';
 import { highlightText } from '@/lib/utils';
 import Image from 'next/image';
 
@@ -67,7 +67,7 @@ export default function ArchiveItem({
                 ))}
             </div>
 
-            {/* Col 4: tags */}
+            {/* Col 4: tags 
             <div className={stylesRow.col4}>
                 <a data-sublink>
                     {project.tools.map((tool, i) => (
@@ -79,14 +79,15 @@ export default function ArchiveItem({
                     ))}
                 </a>
             </div>
+            */}
 
             {/* Col 5: date */}
-            <p className={`${stylesRow.col5} ${styles.date}`}>
+            <p className={`${stylesRow.col4} ${styles.date}`}>
                 {project.date}
             </p>
 
             {/* Col 6: code/demo icons on hover */}
-            <div className={stylesRow.col6}>
+            <div className={stylesRow.col5}>
                 {project.links
                     .filter((l) => l.url)
                     .map(({ url, type }, i) => (
@@ -96,13 +97,13 @@ export default function ArchiveItem({
                             target="_blank"
                             rel="noopener noreferrer"
                             className={styles.iconWrapper}
-                            data-tooltip={type === 'code' ? 'View Code' : 'View Demo'}
+                            data-tooltip={type === 'code' ? 'Code' : 'Live'}
                             onClick={(e) => e.stopPropagation()}
                         >
                             {type === 'code' ? (
                                 <Code className={styles.linkIcon} />
                             ) : (
-                                <Link2 className={styles.linkIcon} />
+                                <Link className={styles.linkIcon} />
                             )}
                         </a>
                     ))}
