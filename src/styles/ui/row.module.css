@@ -2,7 +2,7 @@
     position: relative;
     display: grid;
     grid-template-columns:
-        minmax(120px, 0.25fr)     /* Img */
+        minmax(130px, 0.25fr)     /* Img */
         minmax(200px, 2.2fr)    /* Project Name */
         minmax(60px, 0.3fr)     /* Dots (Categories) */
     /*    minmax(160px, 0.8fr)     Tags */
@@ -67,7 +67,7 @@
 .col1 {
     z-index: 4;
     justify-self: start;
-    padding-left: var(--space-md);
+    padding-left: var(--space-lg);
 
 }
 

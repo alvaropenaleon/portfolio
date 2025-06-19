@@ -2,7 +2,7 @@
 :root {
 
     /* font variation settings: "opsz" auto, "wght" (specific) */
-  --var-sm:  "wght" 440;
+  --var-sm:  "wght" 400;
   --var-md:  "wght" 480;
   --var-lg:  "wght" 540;
 
