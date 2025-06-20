@@ -4,12 +4,17 @@
 }
 
 .description {
-    /* display: none; */
     margin-top: var(--space-xs);
     font-size: var(--font-sm);
     color: rgba(var(--color-foreground-rgb), 0.6);
     line-height: 1.4;
-}
+    
+    /* multiline ellipsis */
+    display: -webkit-box;             /* create flexbox context */
+    -webkit-box-orient: vertical;     /* vertical stacking */
+    -webkit-line-clamp: 2;            /* limit to 2 lines */
+    overflow: hidden;                 /* hide the rest */
+  }
 
 .date {
     font-size: var(--font-sm);
