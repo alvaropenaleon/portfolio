@@ -1,0 +1,27 @@
+.title {
+  font-size: var(--font-md);
+  margin-bottom: var(--space-sm);
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.list li {
+  cursor: pointer;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+}
+
+.list li:hover {
+  background-color: rgba(var(--brand-grey-rgb), 0.08);
+}
+
+.active {
+  font-weight: 600;
+}

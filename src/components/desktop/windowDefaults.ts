@@ -21,10 +21,10 @@ export const windowDefaults: Record<WindowID, Geometry> = {
 
     archive: {                       // full screen, but leave sidebar visible
         position: 'fixed',
-        top: 0,
-        left: '96px',                  // sidebar width
-        width: 'calc(100vw - 96px)',
-        height: '100vh',
+        top: 95,
+        left: 90,                  // sidebar width
+        width: '80%',
+        height: '80%',
     },
 
     work: {

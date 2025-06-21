@@ -9,6 +9,7 @@
     margin: 0;
 }
 
+
 body {
     font-family:  -apple-system,  BlinkMacSystemFont, var(--font-inter), "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     /* Adjust this value as needed */
@@ -93,8 +94,6 @@ h2 a::after {
 .invisible { 
     visibility: hidden; 
 }
-
-
 
 @media (max-width: 1024px) {}
 

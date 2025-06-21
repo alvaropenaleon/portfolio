@@ -14,11 +14,19 @@ interface Props {
   onMove?(geom: Geometry): void;
   style?: CSSProperties;
   hidden?: boolean;
+  className?: string; 
 }
 
 export default function WindowFrame({
-  title, zIndex, children, onClose, onFocus, onMove,
-  style = {}, hidden = false,
+  title, 
+  zIndex, 
+  children, 
+  onClose, 
+  onFocus, 
+  onMove,
+  style = {}, 
+  hidden = false, 
+  className = '',
 }: Props) {
   const frameRef = useRef<HTMLDivElement>(null);
   const dragRef = useRef<{ x: number; y: number; left: number; top: number; w: number; h: number } | undefined>(undefined);
@@ -77,7 +85,7 @@ export default function WindowFrame({
   return (
     <div
       ref={frameRef}
-      className={styles.windowFrame}
+      className={`${styles.windowFrame} ${className}`}
       style={{ position: "absolute", display: hidden ? "none" : "flex", zIndex, ...style }}
     >
       <div className={styles.titleBar} onPointerDown={onPointerDown}>

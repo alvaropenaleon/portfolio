@@ -1,8 +1,36 @@
-/* ───────── Window frame (outer wrapper) ───────── */
+:global(.archiveWindowFrame) .titleBar {
+    background: transparent;
+    position: relative;
+  }
+  
+  /* draw the normal bg from X onward */
+  :global(.archiveWindowFrame) .titleBar::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 206px;
+    right: 0;
+    bottom: 0;
+    background: #f3f4f6;     /* same as default titleBar */
+    z-index: -1;
+  }
+  
+  /* keep the close button at absolute left */
+  :global(.archiveWindowFrame) .titleBar .closeBtn {
+    position: absolute;
+    left: 0;
+  }
+  
+  /* push the title text over by 206px */
+  :global(.archiveWindowFrame) .titleBar .title {
+    margin-left: 206px;
+  }
+  
+  /* ───────── Window frame (outer wrapper) ───────── */
 .windowFrame {
   display: flex;
   flex-direction: column;
-  background: #ffffff;
+  background: var(--color-background);
   border-radius: 8px;
   /* TWO stacked outer shadows (layer order = top-to-bottom)          *
    * 1) 0 0 1 0  rgba(0,0,0,0.80)  – crisp outline                    *
