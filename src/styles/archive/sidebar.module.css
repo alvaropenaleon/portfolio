@@ -14,7 +14,7 @@
 
 .list li {
   cursor: pointer;
-  padding: 0.4rem var(--space-sm);
+  padding: var(--space-sm) var(--space-sm);
   border-radius: var(--radius-xs);
 }
 

@@ -1,6 +1,6 @@
 .searchContainer {
     position: relative;
-    max-width: 600px;
+    max-width: auto;
     width: 100%;
     /* margin-left: auto; */
     padding: var(--space-sm) 0;
@@ -15,11 +15,11 @@
   }
 
 .searchInput {
-    width: 100%;
+    width: -webkit-fill-available;
     background-color: rgba(var(--brand-grey-rgb), 0.12);
-    padding: var(--space-sm) var(--space-lg);
+    padding: 0.4rem var(--space-lg);
     border: 1px solid transparent;
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-xs);
     font-size:var(--font-md);
     outline: none;
     transition: border-color 0s;

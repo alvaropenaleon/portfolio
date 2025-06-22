@@ -31,7 +31,7 @@ export default async function ArchivePage({ searchParams }: PageProps) {
   const content = (
     <div className={pageStyles.archiveWindow}>
       <aside className={pageStyles.archiveSidebar}>
-      
+      <Search placeholder="Search" />
         <CategorySidebar
           categories={categories}
           activeCategory={category}
@@ -39,7 +39,7 @@ export default async function ArchivePage({ searchParams }: PageProps) {
       </aside>
 
       <section className={pageStyles.archiveMain}>
-      <Search placeholder="Search" />
+     
         <Pagination totalPages={totalPages} />
 
 
