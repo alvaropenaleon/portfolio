@@ -81,6 +81,7 @@ export default function WindowFrame({
     }
     dragRef.current = undefined;
   };
+  
 
   return (
     <div

@@ -1,42 +1,66 @@
-:global(.archiveWindowFrame) .titleBar {
+.archiveWindowFrame .titleBar {
   background: transparent;
   position: relative;
+  background: rgba(var(--brand-grey-rgb), 0.08);
 }
 
 /* draw the normal bg from X onward */
-:global(.archiveWindowFrame) .titleBar::after {
+.archiveWindowFrame .titleBar::after {
   content: "";
   position: absolute;
   top: 0;
-  left: 206px;
+  left: 205px;
   right: 0;
   bottom: 0;
   background: #f3f4f6;     /* same as default titleBar */
   z-index: -1;
+  border-left: 1px solid var(--color-line);
+
 }
 
 /* keep the close button at absolute left */
-:global(.archiveWindowFrame) .titleBar .closeBtn {
+.archiveWindowFrame .titleBar .closeBtn {
   position: absolute;
   left: 0;
 }
 
 /* push the title text over by 206px */
-:global(.archiveWindowFrame) .titleBar .title {
+.archiveWindowFrame .titleBar .title {
   margin-left: 206px;
 }
 
 /* Disable outer window scrolling */
-:global(.archiveWindowFrame) .windowContent {
+.archiveWindowFrame .windowContent {
   overflow: hidden;
 }
+
+.archiveWindowFrame .windowContent::before {
+    /* shorthand for top:0; right:0; bottom:0; left:206px; */
+    inset: 0 0 0 206px !important;
+  }
+
+/* MARKER: this class lives in the same file, so it’s a true CSS-module */
+.archiveWindowFrame {
+    background: transparent;    /* wipe out the default white BG */
+  }
+  
+  /* now target the local .windowContent under that marker */
+  .archiveWindowFrame .windowContent {
+    overflow: hidden;           /* kill the host scroll */
+    background:                  /* transparent sidebar + white main */
+      linear-gradient(
+        to right,
+        transparent 206px,
+        var(--color-background) 206px
+      ) !important;
+  }
 
 /* ───────── Window frame (outer wrapper) ───────── */
 .windowFrame {
   display: flex;
   flex-direction: column;
   background: var(--color-background);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   /* TWO stacked outer shadows (layer order = top-to-bottom)          *
    * 1) 0 0 1 0  rgba(0,0,0,0.80)  – crisp outline                    *
    * 2) 0 0 30 0 rgba(0,0,0,0.30)  – soft ambient drop shadow         */
@@ -51,8 +75,8 @@
 .titleBar {
   display: flex;
   align-items: center;
-  height: 28px;
-  padding: 0 8px;
+  height: var(--space-lg);
+  padding: 0 var(--radius-sm);
   background: #f3f4f6;
   user-select: none;
   cursor: default;
