@@ -40,15 +40,13 @@ export default async function ArchivePage({ searchParams }: PageProps) {
 
       <section className={pageStyles.archiveMain}>
      
-        <Pagination totalPages={totalPages} />
-
-
         <div className={pageStyles.archiveContent}>
           <ArchiveClient
             projects={projects}
             searchTerm={query}
           />
         </div>
+        <Pagination totalPages={totalPages} />
       </section>
     </div>
   );
