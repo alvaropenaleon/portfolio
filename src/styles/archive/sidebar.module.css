@@ -1,6 +1,6 @@
 .title {
-  font-size: var(--font-md);
-  margin-bottom: var(--space-sm);
+  margin: var(--space-sm) var(--space-sm);
+
 }
 
 .list {
@@ -9,13 +9,13 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--space-xs);
+  gap: 1px;
 }
 
 .list li {
   cursor: pointer;
-  padding: var(--space-xs) var(--space-sm);
-  border-radius: var(--radius-sm);
+  padding: 0.4rem var(--space-sm);
+  border-radius: var(--radius-xs);
 }
 
 .list li:hover {
@@ -23,5 +23,5 @@
 }
 
 .active {
-  font-weight: 600;
+  background-color: rgba(var(--brand-grey-rgb), 0.12);
 }

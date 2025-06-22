@@ -21,7 +21,7 @@
 /* keep the close button at absolute left */
 .archiveWindowFrame .titleBar .closeBtn {
   position: absolute;
-  left: 0;
+
 }
 
 /* push the title text over by 206px */
