@@ -1,38 +1,83 @@
-.row {
+/* parent fills .windowContent */
+.archivePane {
     position: relative;
-    display: grid;
-    grid-template-columns:
-        minmax(60px, 0.2fr)     /* Img */
-        minmax(200px, 2.2fr)    /* Project Name */
-        minmax(40px, 0.2fr)     /* Dots (Categories) */
-        minmax(160px, 0.8fr)    /* Tags */
-        minmax(100px, 0.5fr)     /* Date */
-        minmax(30px, 0.2fr);    /* Link */
+    height: 100%;
+  }
   
-    align-items: center; /* baseline */
-    padding: var(--space-sm) 0.7rem;
-    overflow: visible;
-
-}
-
-.stickyHeader {
-    position: sticky;
+  /* ───────── floating glass header ───────── */
+  .headerRow {
+    position: absolute;
     top: 0;
-    padding: 0 var(--space-md);
-    margin: 0 -1rem;
-    z-index: 999;
-    background-color: rgba(var(--brand-grey-rgb), 0.08);
+    left: 0; 
+    right: 0;
+    height: var(--space-lg);   /* set once, reuse */         /* centres the .row grid */
+    align-items: center;
+  
+    /* glass look */
+    background: rgba(var(--brand-grey-rgb), 0.01);
     backdrop-filter: blur(22px);
     -webkit-backdrop-filter: blur(22px);
-}
+    z-index: 999;
 
-.stickyHeader p {
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.15);
+  }
+  
+  /* optional mask to hide scrollbar slice 
+  .headerRow::after {
+    content: '';
+    position: absolute;
+    top: 0; 
+    right: 0;
+    width: 0;
+    height: 100%;
+    background: inherit;
+    pointer-events: none;
+  }*/
+  
+  /* ───────── real scrolling area ───────── */
+  .scroller {
+    position: absolute;
+    top: var(--space-lg);      /* start below header */
+    left: 0; 
+    right: 0; 
+    bottom: 0;
+    overflow-y: auto;
+    scrollbar-gutter: stable;     /* keeps layout from re-flowing */
+    overscroll-behavior: contain; /* nice on touch devices */
+  }
+  
+  /* existing row grid stays unchanged */
+  .row {
+    display: grid;
+    grid-template-columns:
+        minmax(130px, 0.25fr)
+        minmax(200px, 2.2fr)
+        minmax(60px, 0.3fr)
+        minmax(100px, 0.25fr)
+        minmax(80px, 0.2fr);
+    align-items: center;
+    padding: var(--space-sm) 0;
+  }
+
+.headerRow p {
     font-size: var(--font-xs);
     color: rgba(var(--color-foreground-rgb), 0.7);
+
 }
 
+.row > *:not(:first-child)  { 
+
+    margin-left: -10px;
+}  
+
+.row > *:not(:first-child) {
+  border-left: 1px solid rgba(0,0,0,.15);
+  padding-left: 10px;
+}
+
+
 @media (max-width: 1024px) {
-    .stickyHeader {
+    .headerRow {
         display: none;
     }
 
