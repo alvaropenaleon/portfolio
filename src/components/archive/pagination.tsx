@@ -1,65 +1,55 @@
 'use client';
 
 import Link from 'next/link';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import styles from '@/styles/archive/pagination.module.css';
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
 type PaginationProps = {
-    totalPages: number;
+  totalPages: number;
 };
 
 export default function ArchivePagination({ totalPages }: PaginationProps) {
-    const pathname = usePathname();
-    const searchParams = useSearchParams();
+  const pathname     = usePathname();
+  const searchParams = useSearchParams();
+  const page         = Number(searchParams.get('page')) || 1;
 
-    // Current URL oage
-    const currentPage = Number(searchParams.get('page')) || 1;
+  /* helper to rebuild ?page= */
+  const urlFor = (p: number) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('page', String(p));
+    return `${pathname}?${params}`;
+  };
 
-    // URL builder for a given page
-    function createPageURL(pageNumber: number) {
-        const params = new URLSearchParams(searchParams.toString());
-        params.set('page', String(pageNumber));
-        return `${pathname}?${params.toString()}`;
-    }
+  const atStart = page === 1;
+  const atEnd   = page === totalPages;
 
-    //Hide pagination
-    // if (totalPages <= 1) return null;
+  return (
+    <nav className={styles.nav}>
+      {/* previous */}
+      {atStart ? (
+        <span className={`${styles.link} ${styles.disabled}`}>
+          <ChevronLeft size={16} />
+        </span>
+      ) : (
+        <Link href={urlFor(page - 1)} className={styles.link}>
+          <ChevronLeft size={16} />
+        </Link>
+      )}
 
-    return (
-        <nav className={styles.nav}>
-            {/* Previous Page button */}
-            {currentPage > 1 && (
-                <Link href={createPageURL(currentPage - 1)}>
-                    <span className={styles.link}>
-                        <ChevronLeft size={16} />
-                    </span>
-                </Link>
-            )}
+      {/* current page */}
+      <span className={`${styles.link} ${styles.active}`}>{page}</span>
 
-            {/* Page numbers */}
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
-                <Link key={pageNum} href={createPageURL(pageNum)}>
-                    <span
-                        className={
-                            pageNum === currentPage
-                                ? `${styles.link} ${styles.active}`
-                                : styles.link
-                        }
-                    >
-                        {pageNum}
-                    </span>
-                </Link>
-            ))}
-
-            {/* Next Page button */}
-            {currentPage < totalPages && (
-                <Link href={createPageURL(currentPage + 1)}>
-                    <span className={styles.link}>
-                        <ChevronRight size={16} />
-                    </span>
-                </Link>
-            )}
-        </nav>
-    );
+      {/* next */}
+      {atEnd ? (
+        <span className={`${styles.link} ${styles.disabled}`}>
+          <ChevronRight size={16} />
+        </span>
+      ) : (
+        <Link href={urlFor(page + 1)} className={styles.link}>
+          <ChevronRight size={16} />
+        </Link>
+      )}
+    </nav>
+  );
 }

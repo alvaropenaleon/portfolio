@@ -1,20 +1,26 @@
 .nav {
-    margin: var(--space-md) 0;
+    margin: 0 0;
+    padding: 0 var(--space-xs);
     display: flex;
     justify-content: left;
-    gap: 0.5rem;
+    gap: 0.1rem;
+    background-color: rgba(var(--brand-grey-rgb), 0.05);
+    /* border-top: 1px solid rgba(0,0,0,.15); */
+    box-shadow: 0 -1px 1px 0 rgba(0, 0, 0, .15);
+    z-index: 1000;
 }
 
 .nav .link{
-    font-size: var(--font-md);
+    font-size: var(--font-sm);
     font-variation-settings: var(--var-sm);
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 2rem;
+    height: 1.4rem;
     width: 2rem;
-    color: rgba(var(--color-foreground-rgb), 0.7);
-    border-radius: var(--radius-xl);
+    margin: var(--space-xs) 0;
+    color: rgba(var(--color-foreground-rgb), 0.6);
+    border-radius: var(--radius-xs);
     border: 0px solid var(--color-line);
     text-decoration: none;
     /* transition: background-color 0.2s, border-color 0.2s; */
@@ -22,15 +28,20 @@
 
 .link:hover {
     color: var(--color-foreground);
-    background-color: rgba(var(--brand-grey-rgb), 0.2);
+    background-color: rgba(var(--brand-grey-rgb), 0.12);
 }
 
 .nav .active {
-    color: var(--color-foreground);
-    background-color: rgba(var(--brand-grey-rgb), 0.12);
+    color: rgba(var(--color-foreground-rgb), 0.7);
+    pointer-events: none;
+
 }
 
 .nav .active:hover {
     color: var(--color-foreground);
-    background-color: rgba(var(--brand-grey-rgb), 0.2);
 }
+
+.disabled {
+    pointer-events: none;
+    opacity: .3;                 /* faded look when arrow is inactive */
+  }
