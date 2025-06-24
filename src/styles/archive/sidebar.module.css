@@ -15,7 +15,7 @@
 
 .list li {
   cursor: pointer;
-  padding: var(--space-sm) var(--space-sm);
+  padding:  0.4rem var(--space-sm);
   border-radius: var(--radius-xs);
 }
 
@@ -24,7 +24,7 @@
 }
 
 .active {
-  background-color: rgba(var(--brand-grey-rgb), 0.12);
+  background-color: rgba(var(--brand-grey-rgb), 0.20);
 }
 
 .catItem {

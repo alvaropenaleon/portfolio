@@ -76,7 +76,7 @@
   display: flex;
   align-items: center;
   height: var(--space-lg);
-  padding: var(--space-xs) var(--space-md);
+  padding: var(--space-xxs) var(--space-md);
   background: #f3f4f6;
   user-select: none;
   cursor: default;

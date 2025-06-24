@@ -11,14 +11,14 @@
     left: 0.7rem;
     top: 50%;
     transform: translateY(-50%);
-    color: var(--brand-grey);
+    color: rgba(var(--color-foreground-rgb), 0.6);
   }
 
 .searchInput {
     width: -webkit-fill-available;
     background-color: rgba(var(--brand-grey-rgb), 0.12);
-    padding: 0.4rem var(--space-lg);
-    border: 1px solid transparent;
+    padding: 0.3rem var(--space-lg);
+    border: 2px solid transparent;
     border-radius: var(--radius-xs);
     font-size:var(--font-md);
     outline: none;
