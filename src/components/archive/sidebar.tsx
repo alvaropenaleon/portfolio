@@ -3,6 +3,10 @@
 
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import styles from "@/styles/archive/sidebar.module.css";
+import CategoryColorDot from '@/components/ui/categoryMapping';
+import { FolderClosed } from 'lucide-react';
+import clsx from 'clsx';
+
 
 interface Props {
   categories: string[];
@@ -29,21 +33,23 @@ export default function CategorySidebar({
   return (
     <div>
 
-      <h3 className={styles.title}>Categories</h3>
-
       <ul className={styles.list}>
+      <h3 className={styles.title}>Favourites</h3>
         <li
-          className={!activeCategory ? styles.active : ""}
+          className={clsx(styles.favItem, !activeCategory ? styles.active : "")}
           onClick={() => go()}
         >
-          All Work
+        <FolderClosed className={styles.folderIcon} size={15} />
+        Work
         </li>
+        <h3 className={styles.title}>Tags</h3>
         {categories.map((cat) => (
           <li
             key={cat}
-            className={activeCategory === cat ? styles.active : ""}
+            className={clsx(styles.catItem, activeCategory === cat ? styles.active : '')}
             onClick={() => go(cat)}
           >
+            <CategoryColorDot category={cat} />
             {cat}
           </li>
         ))}

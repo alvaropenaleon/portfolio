@@ -1,6 +1,7 @@
 .title {
-  margin: var(--space-sm) var(--space-sm);
-
+  margin: var(--space-md) var(--space-sm) var(--space-sm) var(--space-sm);
+  font-size: var(--font-sm);
+  color: rgba(var(--brand-grey-rgb), 0.7);
 }
 
 .list {
@@ -25,3 +26,24 @@
 .active {
   background-color: rgba(var(--brand-grey-rgb), 0.12);
 }
+
+.catItem {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;            /* space between dot and label */
+    cursor: pointer;
+  }
+
+
+.favItem {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;            /* space between dot and label */
+    cursor: pointer;
+  }
+
+  .folderIcon {
+    position: relative;
+
+    color: var(--brand-blue);
+  }
