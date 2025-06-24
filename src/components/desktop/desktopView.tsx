@@ -31,7 +31,7 @@ export default function DesktopView() {
       <div className="icon-grid">
         <Icon label="About"   iconSrc="/paper.png"  onDoubleClick={() => open('about')} />
         <Icon label="Archive" iconSrc="/folder.png" onDoubleClick={() => open('archive')} />
-        <Icon label="Work"    iconSrc="/hammer.png" onDoubleClick={() => open('work')} />
+        {/* <Icon label="Work"    iconSrc="/folder.png" onDoubleClick={() => open('work')} /> */}
       </div>
 
       {/* ───── Windows ───── */}
