@@ -40,7 +40,7 @@ export default function CategorySidebar({
           onClick={() => go()}
         >
         <FolderClosed className={styles.folderIcon} size={15} />
-        Work
+        Archive
         </li>
         <h3 className={styles.title}>Tags</h3>
         {categories.map((cat) => (
