@@ -2,6 +2,7 @@
     display: inline-flex;
     flex-direction: row-reverse;  
     align-items: baseline;
+    float: right;
 }
 
 .dot {

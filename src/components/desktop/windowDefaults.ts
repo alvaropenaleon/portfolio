@@ -23,7 +23,7 @@ export const windowDefaults: Record<WindowID, Geometry> = {
         position: 'fixed',
         top: 95,
         left: 90,                  // sidebar width
-        width: '80%',
+        width: '90%',
         height: '80%',
     },
 

@@ -3,21 +3,49 @@
     font-size: var(--font-md);
 }
 
+
 .description {
+
     margin-top: var(--space-xs);
-    font-size: var(--font-sm);
+    font-size: var(--font-xs);
     color: rgba(var(--color-foreground-rgb), 0.6);
     line-height: 1.4;
     
-    /* multiline ellipsis */
-    display: -webkit-box;             /* create flexbox context */
-    -webkit-box-orient: vertical;     /* vertical stacking */
-    -webkit-line-clamp: 2;            /* limit to 2 lines */
-    overflow: hidden;                 /* hide the rest */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    opacity: 1;
   }
 
+
+ /*  
+.description {
+    display: none;
+   
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+  }
+
+[data-archive-row]:hover .description {
+
+    margin-top: var(--space-xs);
+    font-size: var(--font-xs);
+    color: rgba(var(--color-foreground-rgb), 0.6);
+    line-height: 1.4;
+    
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    opacity: 1;
+  }
+*/
+
+
 .date {
-    font-size: var(--font-sm);
+    font-size: var(--font-xs);
     color: rgba(var(--color-foreground-rgb), 0.6);
 
 }
@@ -91,8 +119,8 @@
     justify-content: center;
 
     /* keep your original small size */
-    width: 65px;
-    height: 44px;
+    width: 55px;
+    height: 35px;
 
     /* — new frame + outer shadow — */
     background: #fff;
@@ -105,8 +133,8 @@
 
 /* —————————  The image itself (inner inset‐shadow) ————————— */
 .thumbnail {
-    width: 65px;
-    height: 44px;
+    width: 55px;
+    height: 35px;
     object-fit: cover;
 
     /* — new inner shadow — */

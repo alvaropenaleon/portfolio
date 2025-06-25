@@ -2,17 +2,18 @@
     position: relative;
     display: grid;
     grid-template-columns:
-        minmax(130px, 0.25fr)     /* Img */
-        minmax(200px, 2.2fr)    /* Project Name */
-        minmax(60px, 0.3fr)     /* Dots (Categories) */
+        minmax(90px, 0.2fr)     /* Img */
+        minmax(200px, 3fr)    /* Project Name */
+        minmax(50px, 0.15fr)     /* Dots (Categories) */
     /*    minmax(160px, 0.8fr)     Tags */
-        minmax(100px, 0.25fr)    /* Date */
-        minmax(80px, 0.2fr);    /* Link */
+        minmax(90px, 0.2fr)    /* Date */
+        minmax(90px, 0.2fr);    /* Link */
   
     align-items: center; /* baseline */
-    padding: var(--space-lg) 0;
     border-bottom: 1px solid var(--color-line);
     overflow: visible;
+    margin: 0 0;
+    padding:  2rem  2rem;
 
 }
 
@@ -24,11 +25,14 @@
 .row4col[data-archive-row]:hover {
     background-color: var(--color-background);
     border-radius: var(--radius-md);
+    
     border-bottom-color: transparent;
+    
     border-radius: 0;
-    margin: -1px 0;
-    padding: calc(var(--space-lg) + 1px) 0;
     cursor: pointer;
+    margin: -1px 0;
+    padding: calc( 2em + 1px) 2rem;
+
 }
 
 
@@ -40,8 +44,11 @@
     right: 0;
     bottom: -1px;
 
+    
     background-color: rgba(var(--brand-grey-rgb), 0.08);
+    /*
     border-radius: var(--radius-sm);
+    */
 
     z-index: 0;
 
@@ -67,13 +74,13 @@
 .col1 {
     z-index: 4;
     justify-self: start;
-    padding-left: var(--space-lg);
+    padding-left: 0rem;
 
 }
 
 .col2 {
     z-index: 3;
-    padding-right: var(--space-lg);
+    padding-right: var(--space-md);
 }
 
 .col3 ,
@@ -81,10 +88,15 @@
     z-index: 5;
 }
 
-.col4,
+
+.col4{
+  justify-self: end;
+  padding-right: 0;
+}
+
 .col5 {
   justify-self: end;
-  padding-right: var(--space-lg);
+  padding-right:  0rem;
 }
 
 
