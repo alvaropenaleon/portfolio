@@ -2,7 +2,5 @@
 export type WindowID =
   | "about"
   | "archive"
-  | "work"
-  | "project"
-  | "carousel"; 
+  | "work";
 
