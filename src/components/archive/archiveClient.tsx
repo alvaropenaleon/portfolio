@@ -31,22 +31,18 @@ export default function ArchiveClient({ projects, searchTerm }: ArchiveClientPro
     fetchProject();
   }, [searchParams]);
 
-  const handleOpenProject = async (id: string) => {
-    // Instead of sending a window message for a removed "project" window,
-    // update internal state to show the project quick look panel.
-    try {
-      const res = await fetch(`/api/project/${id}`);
-      if (!res.ok) return;
-      const proj: Project = await res.json();
-      setQuickViewProject(proj);
-      // if the project has images, handle the carousel display internally.
-      // 
-      
-      // if (proj.images?.length > 0) {
-      //   setCarouselProject({ id, images: proj.images, currentIndex: 0 });
-      // }
-    } catch (err) {
-      console.error("Error loading project images:", err);
+  // Look up the project by id and open its demo or code link
+  const handleOpenProject = (id: string) => {
+    const project = projects.find(p => p.id === id);
+    if (!project) return;
+
+    // Defaukts to demo link if available
+    const preferredLink = project.links.find(
+      (link) => link.type === "code" && link.url
+    ) || project.links.find((link) => link.type === "demo" && link.url);
+
+    if (preferredLink && preferredLink.url) {
+      window.open(preferredLink.url, "_blank");
     }
   };
 
@@ -57,12 +53,9 @@ export default function ArchiveClient({ projects, searchTerm }: ArchiveClientPro
         searchTerm={searchTerm}
         onOpenProject={handleOpenProject}
       />
-      {/* Render your quick look project panel inside the archive window */}
       {quickViewProject && (
         <div className="quick-look-panel">
-          {/* Your quick look UI for project details goes here */}
-          <h2>{quickViewProject.title}</h2>
-          {/* ... */}
+          {/* <h2>{quickViewProject.title}</h2> */}
         </div>
       )}
     </>
