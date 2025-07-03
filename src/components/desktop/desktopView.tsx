@@ -11,8 +11,6 @@ const titles: Record<WindowID, string> = {
     about:    "About Me",
     archive:  "Archive",
     work:     "Work",
-    project:  "Project Details",
-    carousel: "Image Carousel",
   } as const;
 
 export default function DesktopView() {

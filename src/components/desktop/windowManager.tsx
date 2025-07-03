@@ -13,7 +13,7 @@ import { useRouter } from "next/navigation";
 import { windowDefaults, type Geometry } from "./windowDefaults";
 
 
-export type WindowID = "about" | "archive" | "work" | "project" | "carousel";
+export type WindowID = "about" | "archive" | "work";
 
 interface Win {
     id: WindowID;
@@ -193,18 +193,6 @@ export function WindowManagerProvider({ children }: { children: ReactNode }) {
             const baseParams: Record<string, string> = {};
             url.searchParams.forEach((v, k) => (baseParams[k] = v));
             open(seg, Object.keys(baseParams).length ? baseParams : undefined);
-        }
-
-        // 2) project window
-        const projId = url.searchParams.get("project");
-        if (projId) {
-            open("project", { project: projId });
-        }
-
-        // 3) carousel window
-        const idx = url.searchParams.get("index");
-        if (projId && idx != null) {
-            open("carousel", { project: projId, index: idx });
         }
     }, [open]);
 

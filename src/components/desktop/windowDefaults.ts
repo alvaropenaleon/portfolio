@@ -15,14 +15,14 @@ export const windowDefaults: Record<WindowID, Geometry> = {
     about: {
         width: 700,
         height: 480,
-        left: 'calc(50% - 350px)',   // centred
+        left: 'calc(50% - 350px)',
         top: 'calc(50% - 240px)',
     },
 
-    archive: {                       // full screen, but leave sidebar visible
+    archive: { 
         position: 'fixed',
         top: 95,
-        left: 90,                  // sidebar width
+        left: 90, 
         width: '90%',
         height: '80%',
     },
@@ -34,18 +34,5 @@ export const windowDefaults: Record<WindowID, Geometry> = {
         top: 60,
     },
 
-    // Project info window
-    project: {
-        width: 600,
-        height: 520,
-        left: 200,
-        top: 100,
-    },
-    // Image carousel window
-    carousel: {
-        width: 480,
-        height: 380,
-        left: 300,
-        top: 140,
-    },
+
 };

@@ -1,7 +1,6 @@
-// src/components/archive/archiveClient.tsx
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import ArchiveList from "@/components/archive/archiveList";
 import type { Project } from "@/lib/definitions";
@@ -13,64 +12,59 @@ type ArchiveClientProps = {
 
 export default function ArchiveClient({ projects, searchTerm }: ArchiveClientProps) {
   const searchParams = useSearchParams();
+  const [quickViewProject, setQuickViewProject] = useState<Project | null>(null);
 
-  // On mount (or when ?project=… changes), tell parent to open windows
   useEffect(() => {
     const id = searchParams.get("project");
     if (!id) return;
-
-    // open the project details window
-    window.parent.postMessage(
-      { type: "open-window", id: "project", params: { project: id } },
-      window.origin
-    );
-
-    // fetch project via API to see if it has images
-    fetch(`/api/project/${id}`)
-      .then(res => {
+    
+    const fetchProject = async () => {
+      try {
+        const res = await fetch(`/api/project/${id}`);
         if (!res.ok) throw new Error("Project not found");
-        return res.json();
-      })
-      .then((proj: Project) => {
-        if (proj.images?.length > 0) {
-          // open the carousel window
-          window.parent.postMessage(
-            { type: "open-window", id: "carousel", params: { project: id, index: "0" } },
-            window.origin
-          );
-        }
-      })
-      .catch(console.error);
+        const proj: Project = await res.json();
+        setQuickViewProject(proj);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchProject();
   }, [searchParams]);
 
   const handleOpenProject = async (id: string) => {
-    // 1) open project info window
-    window.parent.postMessage(
-      { type: "open-window", id: "project", params: { project: id } },
-      window.origin
-    );
-
-    // 2) fetch project via API and open carousel if images exist
+    // Instead of sending a window message for a removed "project" window,
+    // update internal state to show the project quick look panel.
     try {
       const res = await fetch(`/api/project/${id}`);
       if (!res.ok) return;
       const proj: Project = await res.json();
-      if (proj.images?.length > 0) {
-        window.parent.postMessage(
-          { type: "open-window", id: "carousel", params: { project: id, index: "0" } },
-          window.origin
-        );
-      }
+      setQuickViewProject(proj);
+      // if the project has images, handle the carousel display internally.
+      // 
+      
+      // if (proj.images?.length > 0) {
+      //   setCarouselProject({ id, images: proj.images, currentIndex: 0 });
+      // }
     } catch (err) {
       console.error("Error loading project images:", err);
     }
   };
 
   return (
-    <ArchiveList
-      projects={projects}
-      searchTerm={searchTerm}
-      onOpenProject={handleOpenProject}
-    />
+    <>
+      <ArchiveList
+        projects={projects}
+        searchTerm={searchTerm}
+        onOpenProject={handleOpenProject}
+      />
+      {/* Render your quick look project panel inside the archive window */}
+      {quickViewProject && (
+        <div className="quick-look-panel">
+          {/* Your quick look UI for project details goes here */}
+          <h2>{quickViewProject.title}</h2>
+          {/* ... */}
+        </div>
+      )}
+    </>
   );
 }
