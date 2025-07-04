@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import ArchiveList from "@/components/archive/archiveList";
+import PreviewPane from "@/components/archive/previewPane"; // ensure this exists
 import type { Project } from "@/lib/definitions";
 
 type ArchiveClientProps = {
@@ -17,7 +18,7 @@ export default function ArchiveClient({ projects, searchTerm }: ArchiveClientPro
   useEffect(() => {
     const id = searchParams.get("project");
     if (!id) return;
-    
+    // Optional: if you need to sync URL project param to preview pane
     const fetchProject = async () => {
       try {
         const res = await fetch(`/api/project/${id}`);
@@ -31,33 +32,27 @@ export default function ArchiveClient({ projects, searchTerm }: ArchiveClientPro
     fetchProject();
   }, [searchParams]);
 
-  // Look up the project by id and open its demo or code link
+  // On row click, open the preview pane with the project info
   const handleOpenProject = (id: string) => {
     const project = projects.find(p => p.id === id);
     if (!project) return;
-
-    // Defaukts to demo link if available
-    const preferredLink = project.links.find(
-      (link) => link.type === "code" && link.url
-    ) || project.links.find((link) => link.type === "demo" && link.url);
-
-    if (preferredLink && preferredLink.url) {
-      window.open(preferredLink.url, "_blank");
-    }
+    setQuickViewProject(project);
   };
 
+  const handleClosePreview = () => setQuickViewProject(null);
+
   return (
-    <>
-      <ArchiveList
-        projects={projects}
-        searchTerm={searchTerm}
-        onOpenProject={handleOpenProject}
-      />
+    <div style={{ display: "flex", position: "relative", height: "100%" }}>
+      <div style={{ flex: quickViewProject ? "0 0 calc(100% - 400px)" : "1 1 100%" }}>
+        <ArchiveList
+          projects={projects}
+          searchTerm={searchTerm}
+          onOpenProject={handleOpenProject}
+        />
+      </div>
       {quickViewProject && (
-        <div className="quick-look-panel">
-          {/* <h2>{quickViewProject.title}</h2> */}
-        </div>
+        <PreviewPane project={quickViewProject} onClose={handleClosePreview} />
       )}
-    </>
+    </div>
   );
 }
