@@ -20,7 +20,10 @@ export default function PreviewPane({ project, onClose }: PreviewPaneProps) {
       </div>
       <div className={styles.content}>
         <p>{project.description}</p>
-        {/* Add more project details as needed */}
+        
+        <p><strong>Date Added:</strong> {project.date}</p>
+        <p><strong>Categories:</strong> {project.categories} </p>
+        <p><strong>Tags:</strong> {project.tools}</p>
       </div>
     </aside>
   );
