@@ -5,13 +5,17 @@
   }
   
   .archiveListWrapper {
+    /* Smooth transition on width */
     transition: width 0.3s ease;
+    overflow: hidden;
   }
   
+  /* When preview pane is open, reduce the width */
   .withPreview {
     width: calc(100% - var(--space-preview-pane));
   }
   
+  /* When preview pane is closed, use full width */
   .withoutPreview {
     width: 100%;
   }
