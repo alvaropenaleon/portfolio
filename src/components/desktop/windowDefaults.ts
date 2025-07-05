@@ -23,8 +23,8 @@ export const windowDefaults: Record<WindowID, Geometry> = {
         position: 'fixed',
         top: 95,
         left: 90, 
-        width: '90%',
-        height: '80%',
+        width: '100%',
+        height: '100%',
     },
 
     work: {

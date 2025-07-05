@@ -1,10 +1,10 @@
 import React from 'react';
-import { Code, Link } from 'lucide-react';
+// import { Code, Link } from 'lucide-react';
 import { Project } from '@/lib/definitions';
 import stylesRow from '@/styles/ui/row.module.css';
 import styles from '@/styles/archive/archiveItem.module.css';
 import CategoryMapping from '@/components/ui/categoryMapping';
-// import Tag from '@/components/ui/tag';
+import Tag from '@/components/ui/tag';
 import { highlightText } from '@/lib/utils';
 import Image from 'next/image';
 
@@ -21,10 +21,9 @@ export default function ArchiveItem({
 }: ArchiveItemProps) {
     const lowerDesc = project.description.toLowerCase();
     const lowerSearch = searchTerm.toLowerCase();
-    const hasMatchInDescription =
-        searchTerm.trim() !== '' && lowerDesc.includes(lowerSearch);
-
-    const handleClick = () => {
+    const hasMatchInDescription = searchTerm.trim() !== '' && lowerDesc.includes(lowerSearch);
+    
+    const handleClick = () => { 
         onOpenProject?.(project.id);
     };
 
@@ -48,28 +47,32 @@ export default function ArchiveItem({
                 </div>
             </div>
 
-            {/* Col 2: title & description */}
+            {/* Col 2: title */}
             <div className={stylesRow.col2}>
                 <p className={styles.title}>{highlightText(project.title, searchTerm)}</p>
-                <p
-                    data-description
-                    className={`${styles.description} ${hasMatchInDescription ? styles.alwaysShow : ''
-                        }`}
-                >
-                    {highlightText(project.description, searchTerm)}
-                </p>
-            </div>
+            </div> 
 
-            {/* Col 3: categories */}
+            {/* Col 3: tags dots */}
             <div className={stylesRow.col3}>
                 {project.categories.map((c, i) => (
                     <CategoryMapping key={i} category={c} />
                 ))}
             </div>
 
-            {/* Col 4: tags 
+                        {/* Col 5: description with highlight */}
             <div className={stylesRow.col4}>
-                <a data-sublink>
+                <p
+                        data-description
+                        className={`${styles.description} ${hasMatchInDescription ? styles.alwaysShow : ''
+                            }`}
+                    >
+                        {highlightText(project.description, searchTerm)}
+                </p>
+            </div>
+
+            {/* Col 4: tags name */}
+            <div className={stylesRow.col5}>
+                <div className={styles.tags}>
                     {project.tools.map((tool, i) => (
                         <Tag
                             key={i}
@@ -77,17 +80,17 @@ export default function ArchiveItem({
                             withComma={i < project.tools.length - 1}
                         />
                     ))}
-                </a>
+                </div>
             </div>
-            */}
+            
 
             {/* Col 5: date */}
-            <p className={`${stylesRow.col4} ${styles.date}`}>
+            <p className={`${stylesRow.col6} ${styles.date}`}>
                 {project.date}
             </p>
 
-            {/* Col 6: code/demo icons on hover */}
-            <div className={stylesRow.col5}>
+            {/* Col 6: code/demo icons on hover
+            <div className={stylesRow.col7}>
                 {project.links
                     .filter((l) => l.url)
                     .map(({ url, type }, i) => (
@@ -108,6 +111,7 @@ export default function ArchiveItem({
                         </a>
                     ))}
             </div>
+            */}
         </div>
     );
 }

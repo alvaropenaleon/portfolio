@@ -1,54 +1,31 @@
-.title {
-    font-variation-settings: var(--var-lg);
+.title, .description, .tags, .date{
+    font-variation-settings: var(--var-md);
     font-size: var(--font-sm);
+
+
+}
+
+.description, .tags, .date{
+
+    color: rgba(var(--color-foreground-rgb), 0.7);
+
+}
+
+.description, .title, .tags {
+    display: block;            /* or inline-block if you prefer */
+    width: 100%;               /* fill your grid cell */
+    white-space: nowrap;       /* never wrap to a 2nd line */
+    overflow: hidden;          /* clip the overflowing part */
+    text-overflow: ellipsis;  
 }
 
 
 .description {
-
     margin-top: var(--space-xs);
-    font-size: var(--font-xs);
-    color: rgba(var(--color-foreground-rgb), 0.6);
+    font-size: var(--font-sm);
     line-height: 1.4;
-    
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    overflow: hidden;
-    opacity: 1;
   }
 
-
- /*  
-.description {
-    display: none;
-   
-    margin: 0;
-    padding: 0;
-    opacity: 0;
-  }
-
-[data-archive-row]:hover .description {
-
-    margin-top: var(--space-xs);
-    font-size: var(--font-xs);
-    color: rgba(var(--color-foreground-rgb), 0.6);
-    line-height: 1.4;
-    
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-    opacity: 1;
-  }
-*/
-
-
-.date {
-    font-size: var(--font-xs);
-    color: rgba(var(--color-foreground-rgb), 0.6);
-
-}
 
 .alwaysShow {
     display: block !important;
@@ -119,8 +96,8 @@
     justify-content: center;
 
     /* keep your original small size */
-    width: 55px;
-    height: 35px;
+    width: 25px;
+    height: 15px;
 
     /* — new frame + outer shadow — */
     background: #fff;
@@ -133,8 +110,8 @@
 
 /* —————————  The image itself (inner inset‐shadow) ————————— */
 .thumbnail {
-    width: 55px;
-    height: 35px;
+    width: 25px;
+    height: 15px;
     object-fit: cover;
 
     /* — new inner shadow — */
@@ -145,4 +122,19 @@
 .thumbnailWrapper:hover {
     transform: scale(4.2);
     z-index: 11;
+}
+
+
+@media (max-width: 768px) {
+
+    .row2col,
+    .row5col {
+        grid-template-columns: 1fr;
+    }
+
+    .row4col {
+        grid-template-columns: 1fr;
+
+    }
+
 }
