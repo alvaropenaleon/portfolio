@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import ArchiveList from "@/components/archive/archiveList";
-import PreviewPane from "@/components/archive/previewPane"; // ensure this exists
+import PreviewPane from "@/components/archive/previewPane";
 import type { Project } from "@/lib/definitions";
+import styles from "@/styles/archive/archiveClient.module.css";
 
 type ArchiveClientProps = {
   projects: Project[];
@@ -18,7 +19,6 @@ export default function ArchiveClient({ projects, searchTerm }: ArchiveClientPro
   useEffect(() => {
     const id = searchParams.get("project");
     if (!id) return;
-    // Optional: if you need to sync URL project param to preview pane
     const fetchProject = async () => {
       try {
         const res = await fetch(`/api/project/${id}`);
@@ -32,7 +32,6 @@ export default function ArchiveClient({ projects, searchTerm }: ArchiveClientPro
     fetchProject();
   }, [searchParams]);
 
-  // On row click, open the preview pane with the project info
   const handleOpenProject = (id: string) => {
     const project = projects.find(p => p.id === id);
     if (!project) return;
@@ -42,8 +41,8 @@ export default function ArchiveClient({ projects, searchTerm }: ArchiveClientPro
   const handleClosePreview = () => setQuickViewProject(null);
 
   return (
-    <div style={{ display: "flex", position: "relative", height: "100%" }}>
-      <div style={{ flex: quickViewProject ? "0 0 calc(100% - 400px)" : "1 1 100%" }}>
+    <div className={styles.container}>
+      <div className={`${styles.archiveListWrapper} ${quickViewProject ? styles.withPreview : styles.withoutPreview}`}>
         <ArchiveList
           projects={projects}
           searchTerm={searchTerm}
