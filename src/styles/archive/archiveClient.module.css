@@ -12,7 +12,7 @@
   
   /* When preview pane is open, reduce the width */
   .withPreview {
-    width: calc(100% - var(--space-preview-pane));
+    width: calc(100% - calc(var(--space-preview-pane) + var(--space-lg)));
   }
   
   /* When preview pane is closed, use full width */
