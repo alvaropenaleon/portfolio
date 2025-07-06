@@ -15,11 +15,12 @@ export default function ArchiveList({ projects, searchTerm, onOpenProject }: Arc
         {/* overlay header – NOT in scroller */}
         <div className={layout.headerRow}>
           <div className={layout.row}>
-            <p className={styles.col1}>Thumbnail</p>
-            <p className={styles.col2}>Project</p>
-            <p className={styles.col3}>Category</p>
-            <p className={styles.col4}>Date Added</p>
-            <p className={styles.col5} />
+            <p className={styles.col1}></p>
+            <p className={styles.col2}>Name</p>
+            <p className={styles.col3}></p>
+            <p className={styles.col4}>Comments</p>
+            <p className={styles.col5}>Tags</p>
+            <p className={styles.col6}>Date Added</p>
           </div>
         </div>
   

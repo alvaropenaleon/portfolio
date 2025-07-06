@@ -7,7 +7,7 @@
 
 .description, .tags, .date{
 
-    color: rgba(var(--color-foreground-rgb), 0.7);
+    color: rgba(var(--color-foreground-rgb), 0.6);
 
 }
 
@@ -18,13 +18,6 @@
     overflow: hidden;          /* clip the overflowing part */
     text-overflow: ellipsis;  
 }
-
-
-.description {
-    margin-top: var(--space-xs);
-    font-size: var(--font-sm);
-    line-height: 1.4;
-  }
 
 
 .alwaysShow {
@@ -101,7 +94,7 @@
 
     /* — new frame + outer shadow — */
     background: #fff;
-    padding: 1px;
+    padding: 2px;
     box-shadow: 0 0 0.1rem rgba(0, 0, 0, 0.5);
 
     transition: transform 0.2s ease-out;

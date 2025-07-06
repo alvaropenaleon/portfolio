@@ -3,8 +3,8 @@
 
     /* font variation settings: "opsz" auto, "wght" (specific) */
   --var-sm:  "wght" 400;
-  --var-md:  "wght" 430;
-  --var-lg:  "wght" 540;
+  --var-md:  "wght" 450;
+  --var-lg:  "wght" 550;
 
 
   /* Light Mode */
@@ -32,7 +32,7 @@
   --space-row: 1rem;
 
   /* Font sizes */
-  --font-xxs: calc(10rem/ 16);
+  --font-xxs: calc(11rem/ 16);
   --font-xs: calc(12rem/ 16);
   --font-sm: calc(13rem/ 16);
   --font-md: calc(14.5rem/ 16);
@@ -42,7 +42,7 @@
 
   /* Border Radius */
   --radius-xs: 4px;
-  --radius-sm: 8px;
+  --radius-sm: 6px;
   --radius-md: 12px;
   --radius-lg: 18px;
   --radius-xl: 24px;

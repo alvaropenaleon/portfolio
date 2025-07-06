@@ -10,34 +10,19 @@
     top: 0;
     left: 0; 
     right: 0;
-    height: var(--space-lg);   /* set once, reuse */         /* centres the .row grid */
-    align-items: center;
-  
-    /* glass look */
+
     background: rgba(var(--brand-grey-rgb), 0.01);
     backdrop-filter: blur(22px);
     -webkit-backdrop-filter: blur(22px);
     z-index: 999;
 
-    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
   }
-  
-  /* optional mask to hide scrollbar slice 
-  .headerRow::after {
-    content: '';
-    position: absolute;
-    top: 0; 
-    right: 0;
-    width: 0;
-    height: 100%;
-    background: inherit;
-    pointer-events: none;
-  }*/
   
   /* ───────── real scrolling area ───────── */
   .scroller {
     position: absolute;
-    top: var(--space-lg);      /* start below header */
+    top: 1.7rem;      /* start below header */
     left: 0; 
     right: 0; 
     bottom: 0;
@@ -50,19 +35,24 @@
   .row {
     display: grid;
     grid-template-columns:
-        minmax(130px, 0.25fr)
-        minmax(200px, 2.2fr)
-        minmax(60px, 0.3fr)
-        minmax(100px, 0.25fr)
-        minmax(80px, 0.2fr);
+        minmax(40px, 0.09fr)     /* Thumbnail */
+        minmax(200px, 1.3fr)      /* Project Name */
+        minmax(50px, 0.1fr)    /* Dots */
+        minmax(160px, 0.75fr)    /* Comments */
+        minmax(130px, 0.5fr)     /* Tags */
+        minmax(70px, 0.15fr);    /* Date */
+
+    padding: 0 0;
+    margin: 0 var(--space-lg);
+
     align-items: center;
-    padding: var(--space-sm) 0;
-    margin: 0 var(--space-md);
+    height: 1.7rem; 
+
   }
 
 .headerRow p {
-    font-size: var(--font-xs);
-    color: rgba(var(--color-foreground-rgb), 0.7);
+    font-size: var(--font-xxs);
+    color: rgba(var(--color-foreground-rgb), 0.6);
 
 }
 

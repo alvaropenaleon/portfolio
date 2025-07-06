@@ -7,21 +7,21 @@
         minmax(50px, 0.1fr)    /* Dots */
         minmax(160px, 0.75fr)    /* Comments */
         minmax(130px, 0.5fr)     /* Tags */
-        minmax(50px, 0.14fr);    /* Date */
+        minmax(70px, 0.15fr);    /* Date */
   
     align-items: center; /* baseline */
+    height: 1.5rem;
     
     overflow: visible;
     margin: 0  var(--space-md);
-    padding:  var(--space-sm)  var(--space-md) ;
+    padding:  0.38rem  var(--space-md) ;
     border-radius: var(--radius-sm);
-    height: 1.7rem;
 
 }
 
 /* Zebra-stripe odd rows */
 .row4col:nth-child(even) {
-    background-color: rgba(var(--brand-grey-rgb), 0.15);
+    background-color: rgba(var(--brand-grey-rgb), 0.07);
   }
   
   .row4col:nth-child(odd) {
@@ -30,14 +30,17 @@
   
   .row4col:hover {
     background-color: var(--color-background);
+    cursor: pointer;
 
   }
 
 .row4col:hover {
-    z-index: 10; /* anything > 0 will beat the default “auto” rows */
+    z-index: 10;
+    background-color: rgba(var(--brand-grey-rgb), 0.2);
   }
 
 
+  /*
 .row4col[data-archive-row]:hover {
     background-color: var(--color-background);
     border-radius: var(--radius-md);
@@ -54,13 +57,11 @@
     top: 0;
     left: 0;
     right: 0;
-    bottom: -1px;
+    bottom: 0;
 
     
-    background-color: rgba(var(--brand-grey-rgb), 0.08);
-    /*
+    background-color: rgba(var(--brand-grey-rgb), 0.15);
     border-radius: var(--radius-sm);
-    */
 
     z-index: 0;
 
@@ -81,7 +82,7 @@
 .row4col:has([data-sublink]:hover) [data-view] {
     transform: translate(-50%, -70%) scale(0);
 }
-
+*/
 
 .col1 {
     z-index: 4;
