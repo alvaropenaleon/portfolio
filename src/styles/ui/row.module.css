@@ -17,6 +17,8 @@
     padding:  0.38rem  var(--space-md) ;
     border-radius: var(--radius-sm);
 
+    --archive-title-color: var(--color-foreground);
+
 }
 
 .row4col:first-child {
@@ -46,8 +48,9 @@
   .row4col:focus {
     outline: none;
     background-color: var(--brand-blue) !important;
-    color: var(--color-foreground);
+    --archive-title-color: white;
   }
+
 
 
   /*

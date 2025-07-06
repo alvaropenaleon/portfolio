@@ -5,6 +5,10 @@
 
 }
 
+.title {
+    color: var(--archive-title-color);
+}
+
 .description, .tags, .date{
 
     color: rgba(var(--color-foreground-rgb), 0.6);
