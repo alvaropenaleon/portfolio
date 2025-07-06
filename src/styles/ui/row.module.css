@@ -39,6 +39,12 @@
     background-color: rgba(var(--brand-grey-rgb), 0.2);
   }
 
+  .row4col:focus {
+    outline: none;
+    background-color: var(--brand-blue) !important;
+    color: var(--color-foreground);
+  }
+
 
   /*
 .row4col[data-archive-row]:hover {

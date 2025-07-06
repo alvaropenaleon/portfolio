@@ -29,6 +29,7 @@ export default function ArchiveItem({
 
     return (
         <div
+            tabIndex={0}
             data-archive-row
             className={stylesRow.row4col}
             onClick={handleClick}
