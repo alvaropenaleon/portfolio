@@ -60,17 +60,6 @@ export default function ArchiveItem({
                 ))}
             </div>
 
-                        {/* Col 5: description with highlight */}
-            <div className={stylesRow.col4}>
-                <p
-                        data-description
-                        className={`${styles.description} ${hasMatchInDescription ? styles.alwaysShow : ''
-                            }`}
-                    >
-                        {highlightText(project.description, searchTerm)}
-                </p>
-            </div>
-
             {/* Col 4: tags name */}
             <div className={stylesRow.col5}>
                 <div className={styles.tags}>
@@ -83,9 +72,20 @@ export default function ArchiveItem({
                     ))}
                 </div>
             </div>
+
+            {/* Col 5: description with highlight */}
+            <div className={stylesRow.col4}>
+                <p
+                        data-description
+                        className={`${styles.description} ${hasMatchInDescription ? styles.alwaysShow : ''
+                            }`}
+                    >
+                        {highlightText(project.description, searchTerm)}
+                </p>
+            </div>
             
 
-            {/* Col 5: date */}
+            {/* Col 6: date */}
             <p className={`${stylesRow.col6} ${styles.date}`}>
                 {project.date}
             </p>

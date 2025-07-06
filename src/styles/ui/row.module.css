@@ -5,19 +5,23 @@
         minmax(40px, 0.09fr)     /* Thumbnail */
         minmax(200px, 1.3fr)      /* Project Name */
         minmax(50px, 0.1fr)    /* Dots */
-        minmax(160px, 0.75fr)    /* Comments */
         minmax(130px, 0.5fr)     /* Tags */
+        minmax(160px, 0.75fr)    /* Comments */
         minmax(70px, 0.15fr);    /* Date */
   
     align-items: center; /* baseline */
     height: 1.5rem;
     
     overflow: visible;
-    margin: 0  var(--space-md);
+    margin: 0 0.6rem;
     padding:  0.38rem  var(--space-md) ;
     border-radius: var(--radius-sm);
 
 }
+
+.row4col:first-child {
+    margin-top: 0.35rem;
+  }
 
 /* Zebra-stripe odd rows */
 .row4col:nth-child(even) {

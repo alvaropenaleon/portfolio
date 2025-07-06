@@ -38,8 +38,8 @@
         minmax(40px, 0.09fr)     /* Thumbnail */
         minmax(200px, 1.3fr)      /* Project Name */
         minmax(50px, 0.1fr)    /* Dots */
-        minmax(160px, 0.75fr)    /* Comments */
         minmax(130px, 0.5fr)     /* Tags */
+        minmax(160px, 0.75fr)    /* Comments */
         minmax(70px, 0.15fr);    /* Date */
 
     padding: 0 0;
