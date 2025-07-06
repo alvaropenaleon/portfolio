@@ -7,16 +7,16 @@
 
 .dot {
     display: inline-block;
-    width: 7px;
-    height: 7px;
+    width: 9.5px;
+    height: 9.5px;
     border-radius: 50%;
     margin-right: -4px;
     flex-shrink: 0;
-    min-width: 7px;
-    min-height: 7px;
+    min-width: 9.5px;
+    min-height: 9.5px;
     /* border: 1px solid rgba(var(--color-background-rgb), 1); */
     
-    border: 2px solid rgba(var(--color-background-rgb), 1);
+    border: 0px solid rgba(var(--color-background-rgb), 1);
 
     box-shadow: inset 0 0px 1px 0 rgba(0, 0, 0, 0.15);
 }

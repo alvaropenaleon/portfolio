@@ -6,13 +6,13 @@ type CategoryColorDotProps = {
 
 export default function CategoryColorDot({ category }: CategoryColorDotProps) {
   const categoryColors: Record<string, string> = {
-    Artwork: "var(--brand-red )",
-    Backend: "var(--brand-pink)",
-    "Data Science": "var(--brand-purple)",
-    Frontend: "var(--brand-green)",
-    "Graphic Design": "var(--brand-turquoise)",
-    Systems: "var(--brand-yellow)",
-    Writing: "var(--brand-navy)",
+    Artwork: "var(--tag-red )",
+    Backend: "var(--tag-orange)",
+    "Data Science": "var(--tag-purple)",
+    Frontend: "var(--tag-green)",
+    "Graphic Design": "var(--tag-blue)",
+    Systems: "var(--tag-yellow)",
+    Writing: "var(--tag-grey)",
   };
 
   const color = categoryColors[category] || "var(--brand-grey)";
