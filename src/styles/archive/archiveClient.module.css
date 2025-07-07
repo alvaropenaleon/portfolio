@@ -5,9 +5,13 @@
   }
   
   .archiveListWrapper {
-    /* Smooth transition on width */
-    transition: width 0.3s ease;
+    /* promote to GPU layer & isolate layout */
+    will-change: width;
+    contain: layout;
+  
     overflow: hidden;
+    /* duration + curve */
+    transition: width 0.25s cubic-bezier(.24,.02,.38,1);
   }
   
   /* When preview pane is open, reduce the width */

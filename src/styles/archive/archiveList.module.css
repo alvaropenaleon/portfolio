@@ -35,12 +35,12 @@
   .row {
     display: grid;
     grid-template-columns:
-        minmax(40px, 0.09fr)     /* Thumbnail */
-        minmax(150px, 1.3fr)      /* Project Name */
-        minmax(50px, 0.1fr)    /* Dots */
-        minmax(200px, 0.55fr)     /* Tags */
-        /* minmax(160px, 0.75fr)     Comments */
-        minmax(70px, 0.15fr);    /* Date */
+        40px                     /* Col 1 thumb – fixed */
+        minmax(0, 1fr)           /* Col 2 TITLE – the only flexible one  */
+        32px                     /* Col 3 dot stack – fixed             */
+        310px                    /* Col 4 tag names – fixed (or adjust)  */
+        /*1.6fr                     Col 5 description – can stay flex or fixed */
+        72px;                    /* Col 6 date – fixed   */
 
     padding: 0 0;
     margin: 0 var(--space-lg);

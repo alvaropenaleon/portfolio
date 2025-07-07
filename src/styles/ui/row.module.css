@@ -2,12 +2,22 @@
     position: relative;
     display: grid;
     grid-template-columns:
-        minmax(40px, 0.09fr)     /* Thumbnail */
-        minmax(150px, 1.3fr)      /* Project Name */
-        minmax(50px, 0.1fr)    /* Dots */
-        minmax(200px, 0.55fr)     /* Tags */
-        /* minmax(160px, 0.75fr)     Comments */
-        minmax(70px, 0.15fr);    /* Date */
+        40px                     /* Col 1 thumb – fixed */
+        minmax(0, 1fr)           /* Col 2 TITLE – the only flexible one  */
+        45px                     /* Col 3 dot stack – fixed             */
+        310px                    /* Col 4 tag names – fixed (or adjust)  */
+        /*1.6fr                     Col 5 description – can stay flex or fixed */
+        72px;                    /* Col 6 date – fixed   */
+
+    /*
+    grid-template-columns:
+        minmax(40px, 0.09fr) 
+        minmax(150px, 1.3fr)  
+        minmax(50px, 0.1fr)  
+        minmax(200px, 0.55fr) 
+        minmax(160px, 0.75fr)  
+        minmax(70px, 0.15fr);  
+    */
   
     align-items: center; /* baseline */
     height: 1.5rem;
@@ -18,6 +28,7 @@
     border-radius: var(--radius-sm);
 
     --archive-title-color: var(--color-foreground);
+    
 
 }
 
