@@ -40,6 +40,10 @@ export const TAG_FAMILY: Record<string, string> = {
   p5js: "var(--tag-yellow)",
   Photography: "var(--tag-yellow)", 
   Photoshop: "var(--tag-yellow)",
+
+  "Timescale DB": "var(--tag-orange)",
+  BERT: "var(--tag-red)",
+
 };
 
 /* --------------------------------------------------------------------- */
