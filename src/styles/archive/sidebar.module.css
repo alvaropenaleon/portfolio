@@ -1,6 +1,6 @@
 .title {
   margin: var(--space-md) var(--space-sm) var(--space-sm) var(--space-sm);
-  font-size: var(--font-sm);
+  font-size: var(--font-xs);
   color: rgba(var(--brand-grey-rgb), 0.7);
 }
 
