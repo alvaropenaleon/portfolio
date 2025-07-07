@@ -21,8 +21,8 @@ export default function WorkItem({ project }: WorkItemProps) {
 
       {/* Tools */}
       <div>
-        {project.tools.map((tool, index) => (
-          <span key={index}>{tool}</span>
+        {project.tags.map((tag, index) => (
+          <span key={index}>{tag}</span>
         ))}
       </div>
 

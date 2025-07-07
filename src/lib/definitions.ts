@@ -14,7 +14,7 @@ export type Project = {
   title: string;
   description: string;
   links: { url: string; type: 'code' | 'demo' }[];
-  tools: string[];
+  tags: string[];
   heroImage: string;
   categories: string[];
   text: string;
