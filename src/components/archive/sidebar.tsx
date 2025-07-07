@@ -3,7 +3,7 @@
 
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import styles from "@/styles/archive/sidebar.module.css";
-import CategoryColorDot from '@/components/ui/categoryMapping';
+// import CategoryColorDot from '@/components/ui/categoryMapping';
 import { FolderClosed } from 'lucide-react';
 import clsx from 'clsx';
 
@@ -42,18 +42,19 @@ export default function CategorySidebar({
         <FolderClosed className={styles.folderIcon} size={15} />
         Archive
         </li>
-        <h3 className={styles.title}>Tags</h3>
         {categories.map((cat) => (
           <li
             key={cat}
             className={clsx(styles.catItem, activeCategory === cat ? styles.active : '')}
             onClick={() => go(cat)}
           >
-            <CategoryColorDot category={cat} />
+            <FolderClosed  className={styles.folderIcon} size={15} />
             {cat}
           </li>
         ))}
       </ul>
+      <h3 className={styles.title}>Tags</h3>
+
     </div>
   );
 }
