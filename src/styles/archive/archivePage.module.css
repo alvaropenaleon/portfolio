@@ -11,7 +11,7 @@
   background: rgba(var(--brand-grey-rgb), 0.12);
   border-right: 1px solid var(--color-line);
   display: flex;
-  padding: 0 var(--space-md);
+  padding: 0 0.7rem;
   flex-direction: column;
   height: 100%;
   overflow-y: auto;                /* scroll only this pane */

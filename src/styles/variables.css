@@ -68,8 +68,13 @@
   */
   --brand-grey: #787880;
   --brand-grey-rgb: 120, 120, 128;
+
   --brand-blue: #0364E1;
   --brand-blue-rgb: 3, 100, 225;
+
+  --folder-blue: #0077ff;
+  
+
   --tag-red: #FF0008;
   --tag-grey: #6C6C70;
   --tag-yellow: #EFAF00;

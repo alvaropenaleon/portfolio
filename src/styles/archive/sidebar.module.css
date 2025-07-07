@@ -44,6 +44,5 @@
 
 .folderIcon {
     position: relative;
-
-    color: var(--brand-blue);
+    color: var(--folder-blue);
   }
