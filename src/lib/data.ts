@@ -40,7 +40,7 @@ export async function fetchAllProjects(): Promise<Project[]> {
         p.role,
         p.date,
         ARRAY_AGG(DISTINCT pc.category) AS categories,
-        ARRAY_AGG(DISTINCT pt.tool) AS tools,
+        ARRAY_AGG(DISTINCT pt.tool) AS tags,
         ARRAY_AGG(DISTINCT jsonb_build_object('url', pl.link, 'type', pl.type)) AS links,
         ARRAY_AGG(DISTINCT pi.image) AS images
       FROM projects p
@@ -72,7 +72,7 @@ export async function fetchProjectById(id: string[]): Promise<Project[]> {
         p.role,
         p.date,
         ARRAY_AGG(DISTINCT pc.category) AS categories,
-        ARRAY_AGG(DISTINCT pt.tool) AS tools,
+        ARRAY_AGG(DISTINCT pt.tool) AS tags,
         ARRAY_AGG(DISTINCT jsonb_build_object('url', pl.link, 'type', pl.type)) AS links,
         ARRAY_AGG(DISTINCT pi.image) AS images
       FROM projects p
@@ -167,7 +167,7 @@ export async function fetchFilteredProjects(
       p.heroimage AS "heroImage",
       p.date,
       ARRAY_AGG(DISTINCT pc.category) AS categories,
-      ARRAY_AGG(DISTINCT pt.tool) AS tools,
+      ARRAY_AGG(DISTINCT pt.tool) AS tags,
       ARRAY_AGG(DISTINCT jsonb_build_object('url', pl.link, 'type', pl.type)) AS links
     FROM projects p
       LEFT JOIN project_categories pc ON p.id = pc.project_id

@@ -3,8 +3,8 @@ import React from 'react';
 import { Project } from '@/lib/definitions';
 import stylesRow from '@/styles/ui/row.module.css';
 import styles from '@/styles/archive/archiveItem.module.css';
-import CategoryMapping from '@/components/ui/categoryMapping';
-import Tag from '@/components/ui/tag';
+// import CategoryMapping from '@/components/ui/categoryMapping';
+import Tag, { TagStack } from "@/components/ui/tag";
 import { highlightText } from '@/lib/utils';
 import Image from 'next/image';
 
@@ -53,24 +53,18 @@ export default function ArchiveItem({
                 <p className={styles.title}>{highlightText(project.title, searchTerm)}</p>
             </div> 
 
-            {/* Col 3: tags dots */}
+            {/* Col 3  – tag dots */}
             <div className={stylesRow.col3}>
-                {project.categories.map((c, i) => (
-                    <CategoryMapping key={i} category={c} />
-                ))}
+            <TagStack tags={project.tags} />
             </div>
 
-            {/* Col 4: tags name */}
+            {/* Col 4 – tag names */}
             <div className={stylesRow.col5}>
-                <div className={styles.tags}>
-                    {project.tools.map((tool, i) => (
-                        <Tag
-                            key={i}
-                            label={tool}
-                            withComma={i < project.tools.length - 1}
-                        />
-                    ))}
-                </div>
+            <div className={styles.tags}>
+                {(project.tags ?? []).map((t, i) => (
+                <Tag key={t} label={t} withComma={i < (project.tags?.length ?? 0) - 1} className={styles.tags} />
+                ))}
+            </div>
             </div>
 
             {/* Col 5: description with highlight */}
