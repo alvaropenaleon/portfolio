@@ -5,7 +5,7 @@ import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import styles from "@/styles/archive/sidebar.module.css";
 // import CategoryColorDot from '@/components/ui/categoryMapping';
 import { FolderClosed } from 'lucide-react';
-import { TagDot } from "@/components/ui/tag";
+import { TagDot, sortTagsByColor } from "@/components/ui/tag";
 import clsx from 'clsx';
 
 
@@ -64,7 +64,7 @@ export default function CategorySidebar({
 
       {/* Tags */}
       <h3 className={styles.title}>Tags</h3>
-      {tags.map((tag) => (
+      {sortTagsByColor(tags).map((tag) => (
         <li
           key={tag}
           className={clsx(styles.tagItem, activeTag === tag ? styles.active : "")}

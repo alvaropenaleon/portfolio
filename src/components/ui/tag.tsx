@@ -95,3 +95,19 @@ export function TagStack({ tags }: { tags?: string[] }) {   // ← optional
       </span>
     );
   }
+
+
+/* --------------------------------------------------------------------- */
+/* 5. COLOUR ORDER + SORT HELPER                                         */
+/* --------------------------------------------------------------------- */
+export const COLOR_ORDER = [
+    'green', 'blue', 'purple', 'red', 'orange', 'yellow', 'grey',
+  ];
+  
+  export function sortTagsByColor(tags: string[]) {
+    return [...tags].sort((a, b) => {
+      const ia = COLOR_ORDER.findIndex(c => TAG_FAMILY[a]?.includes(c));
+      const ib = COLOR_ORDER.findIndex(c => TAG_FAMILY[b]?.includes(c));
+      return ia !== ib ? ia - ib : a.localeCompare(b);
+    });
+  }
