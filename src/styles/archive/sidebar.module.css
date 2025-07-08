@@ -45,4 +45,9 @@
 .folderIcon {
     position: relative;
     color: var(--folder-blue);
-  }
+}
+
+.catItem .folderIcon{
+    position: relative;
+    color: var(--folder-turquoise);
+}

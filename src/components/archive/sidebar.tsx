@@ -45,7 +45,7 @@ export default function CategorySidebar({
           className={clsx(styles.favItem, !activeCategory ? styles.active : "")}
           onClick={() => go()}
       >
-        <FolderClosed size={15} className={styles.folderIcon} />
+        <FolderClosed size={15}  strokeWidth={1.6} className={styles.folderIcon} />
         Archive
       </li>
 
@@ -57,7 +57,7 @@ export default function CategorySidebar({
           className={clsx(styles.catItem, activeCategory === category ? styles.active : '')}
           onClick={() => go(category)}
         >
-          <FolderClosed size={15} className={styles.folderIcon} />
+          <FolderClosed size={15} strokeWidth={1.6} className={styles.folderIcon} />
           {category}
         </li>
       ))}
