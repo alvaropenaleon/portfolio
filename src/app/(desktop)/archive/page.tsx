@@ -9,6 +9,7 @@ interface PageProps {
   searchParams: Promise<{
     query?: string;
     category?: string;
+    tag?: string;
     page?: string;
     embed?: string;
   }>;
