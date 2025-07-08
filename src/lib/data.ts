@@ -125,6 +125,20 @@ export async function fetchProjectCategories(): Promise<string[]> {
   }
 }
 
+export async function fetchProjectTags(): Promise<string[]> {
+    try {
+      const result = await sql<{ tag: string }>`
+        SELECT DISTINCT tool AS tag
+        FROM project_tools
+        ORDER BY tag ASC
+      `;
+      return result.rows.map((r) => r.tag);
+    } catch (err) {
+      console.error("DB Error:", err);
+      throw new Error("Failed to fetch project tags.");
+    }
+  }
+
 /**
  * fetchFilteredProjects
  * @param query - The search query from the URL (if any)
@@ -137,6 +151,7 @@ export const ITEMS_PER_PAGE = 6;
 export async function fetchFilteredProjects(
   query: string = '',
   category: string = '',
+  tag = '',
   page: number = 1,
   limit: number = ITEMS_PER_PAGE
 ) {
@@ -154,6 +169,11 @@ export async function fetchFilteredProjects(
   if (category.trim()) {
     values.push(category.trim());
     filters.push(`pc.category = $${values.length}`);
+  }
+
+  if (tag.trim()) {
+    values.push(tag.trim());
+    filters.push(`pt.tool = $${values.length}`); // multi-select tags switch to: pt.tool = ANY($N::text[])
   }
 
   const whereClause = filters.length ? 'WHERE ' + filters.join(' AND ') : '';

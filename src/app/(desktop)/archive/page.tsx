@@ -1,4 +1,4 @@
-import { fetchFilteredProjects, fetchProjectCategories, ITEMS_PER_PAGE } from "@/lib/data";
+import { fetchFilteredProjects, fetchProjectCategories, fetchProjectTags, ITEMS_PER_PAGE } from "@/lib/data";
 import ArchiveClient from "@/components/archive/archiveClient";
 import Search from "@/components/archive/search";
 import Pagination from "@/components/archive/pagination";
@@ -20,12 +20,14 @@ export default async function ArchivePage({ searchParams }: PageProps) {
   const sp = await searchParams;
   const query = sp.query ?? "";
   const category = sp.category ?? "";
+  const tag = sp.tag ?? "";
   const currentPage = Number(sp.page) || 1;
 
   // fetch both projects *and* categories
-  const [{ projects, totalPages }, categories] = await Promise.all([
-    fetchFilteredProjects(query, category, currentPage, ITEMS_PER_PAGE),
+  const [{ projects, totalPages }, categories, tags] = await Promise.all([
+    fetchFilteredProjects(query, category, tag, currentPage, ITEMS_PER_PAGE),
     fetchProjectCategories(),
+    fetchProjectTags(),
   ]);
 
   const content = (
@@ -34,7 +36,9 @@ export default async function ArchivePage({ searchParams }: PageProps) {
       <Search placeholder="Search" />
         <CategorySidebar
           categories={categories}
+          tags={tags}
           activeCategory={category}
+          activeTag={tag}
         />
       </aside>
 
