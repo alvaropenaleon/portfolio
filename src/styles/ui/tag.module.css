@@ -7,9 +7,9 @@
     width: 9.5px;
     height: 9.5px;
     border-radius: 50%;
-    margin-right: -4px;
+    margin-right: -6px;
     flex-shrink: 0;
-    box-shadow: inset 0 0 1px rgba(0,0,0,.15);
+    box-shadow: inset 0 0 1px rgba(0,0,0,.5);
   }
   
   /* --- NEW: wraps 1-3 dots in a row --- */
@@ -17,6 +17,8 @@
     display: inline-flex;
     align-items: center;
     gap: 2px;              /* ≈ 0.1 rem */
+    float:right;
+    margin-right: var(--space-md); /* space between tag and dots */
   }
   
   /* --- NEW: “+n” counter after the dots --- */

@@ -2,7 +2,7 @@
     margin: 0 0;
     padding: 0 var(--space-xs);
     display: flex;
-    justify-content: left;
+    justify-content: center;
     gap: 0.1rem;
     background-color: rgba(var(--brand-grey-rgb), 0.05);
     /* border-top: 1px solid rgba(0,0,0,.15); */

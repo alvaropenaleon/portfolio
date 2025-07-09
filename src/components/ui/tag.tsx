@@ -84,14 +84,14 @@ export function TagDot({ tag }: { tag: string }) {
 export function TagStack({ tags }: { tags?: string[] }) {   // ← optional
     const safe = tags ?? [];          // fallback to empty array
     const vis   = safe.slice(0, 3);
-    const extra = safe.length - vis.length;
+    // const extra = safe.length - vis.length;
   
     return (
       <span className={styles.tagStack}>
         {vis.map((t) => (
           <TagDot key={t} tag={t} />
         ))}
-        {extra > 0 && <span className={styles.extraCount}>+{extra}</span>}
+       {/*  {extra > 0 && <span className={styles.extraCount}>+{extra}</span>} */}
       </span>
     );
   }
