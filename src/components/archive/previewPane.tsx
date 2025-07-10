@@ -40,7 +40,7 @@ export default function PreviewPane({ project, onClose }: PreviewPaneProps) {
 
         {/* file title + kind */}
         <h2 className={styles.title}>{title}</h2>
-        <p className={styles.kindLine}>HTML text – {Math.round(project.sizeKb ?? 0)} KB</p>
+        <p className={styles.kindLine}>HTML text – 0 KB</p>
 
         {/* collapsible “Information” (simple table for now) */}
         <table className={styles.infoTable}>
@@ -52,13 +52,14 @@ export default function PreviewPane({ project, onClose }: PreviewPaneProps) {
             )}
             {links?.length && (
               <tr><td>Links</td>
-                  <td>
-                    {links.map(l => (
-                      <a key={l.url} href={l.url} target="_blank" rel="noopener noreferrer">
-                        {l.type}
-                      </a>)
-                    ).reduce((prev,curr) => [prev," · ",curr])}
-                  </td>
+                <td>
+                {links.flatMap((l, idx) => [
+                    idx ? " · " : null,
+                    <a key={l.url} href={l.url} target="_blank" rel="noopener noreferrer">
+                    {l.type}
+                    </a>,
+                ])}
+                </td>
               </tr>
             )}
           </tbody>
