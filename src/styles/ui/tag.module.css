@@ -12,6 +12,7 @@
   
   /* --- NEW: wraps 1-3 dots in a row --- */
 .tagStack {
+    flex-direction:row-reverse;
     display: inline-flex;
     align-items: center;
     gap: 0px;
@@ -21,8 +22,8 @@
 /* applies only inside the stack */
 .tagStack .dot {
   /* size & overlap you already have */
-  width: 10px;
-  height: 10px;
+  width: 9.5px;
+  height: 9.5px;
   margin-right: -6px;
   flex-shrink: 0;
   position: relative;
