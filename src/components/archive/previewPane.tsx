@@ -1,9 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import React from "react";
 import type { Project } from "@/lib/definitions";
 import styles from "@/styles/archive/previewPane.module.css";
-import Image from "next/image";
+import Tag from "@/components/ui/tag";
 
 interface PreviewPaneProps {
   project: Project;
@@ -11,30 +12,73 @@ interface PreviewPaneProps {
 }
 
 export default function PreviewPane({ project, onClose }: PreviewPaneProps) {
+  const { title, heroImage, description, date, categories, tags, role, links, text } = project;
+
   return (
     <aside className={styles.sidebar}>
+      {/* header */}
       <div className={styles.header}>
-        <h5 className={styles.headerTitle}>Preview Pane </h5>
-        <button onClick={onClose} className={styles.closeButton}>
+        <h5 className={styles.headerTitle}>Preview Pane</h5>
+        <button onClick={onClose} className={styles.closeButton} aria-label="Close preview">
           &times;
         </button>
       </div>
+
+      {/* scrollable block */}
       <div className={styles.content}>
+        {/* thumbnail */}
         <div className={styles.thumbnailWrapper}>
           <Image
-            src={project.heroImage}
-            alt={project.title}
-            width={300}
-            height={200}
+            src={heroImage}
+            alt={title}
+            width={420}
+            height={260}
             className={styles.thumbnail}
-            quality={100}
+            quality={90}
           />
         </div>
-        <h2 className={styles.title}>{project.title}</h2>
-        <p>{project.description}</p>
-        <p><strong>Date Added:</strong> {project.date}</p>
-        <p><strong>Categories:</strong> {project.categories} </p>
-        <p><strong>Tags:</strong> {project.tags}</p>
+
+        {/* file title + kind */}
+        <h2 className={styles.title}>{title}</h2>
+        <p className={styles.kindLine}>HTML text – {Math.round(project.sizeKb ?? 0)} KB</p>
+
+        {/* collapsible “Information” (simple table for now) */}
+        <table className={styles.infoTable}>
+          <tbody>
+            <tr><td>Created</td><td>{date}</td></tr>
+            {role && <tr><td>Role</td><td>{role}</td></tr>}
+            {categories?.length && (
+              <tr><td>Categories</td><td>{categories.join(", ")}</td></tr>
+            )}
+            {links?.length && (
+              <tr><td>Links</td>
+                  <td>
+                    {links.map(l => (
+                      <a key={l.url} href={l.url} target="_blank" rel="noopener noreferrer">
+                        {l.type}
+                      </a>)
+                    ).reduce((prev,curr) => [prev," · ",curr])}
+                  </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+
+        {/* long description / text */}
+        {description && <p style={{marginBottom:'1rem'}}>{description}</p>}
+        {text && <p style={{whiteSpace:'pre-line',marginBottom:'1rem'}}>{text}</p>}
+
+        {/* tags */}
+        {tags?.length && (
+          <>
+            <h4 className={styles.kindLine}>Tags</h4>
+            <div className={styles.tagLine}>
+              {tags.map((t,i)=>(
+                <Tag key={t} label={t} withComma={i < tags.length-1}/>
+              ))}
+            </div>
+          </>
+        )}
       </div>
     </aside>
   );

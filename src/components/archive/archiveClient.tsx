@@ -1,56 +1,60 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
-import ArchiveList from "@/components/archive/archiveList";
-import PreviewPane from "@/components/archive/previewPane";
+import { useRouter, useSearchParams } from "next/navigation";
+import ArchiveList    from "@/components/archive/archiveList";
+import PreviewPane    from "@/components/archive/previewPane";
 import type { Project } from "@/lib/definitions";
-import styles from "@/styles/archive/archiveClient.module.css";
+import styles         from "@/styles/archive/archiveClient.module.css";
+import clsx           from "clsx";
 
-type ArchiveClientProps = {
-  projects: Project[];
-  searchTerm: string;
-};
+type Props = { projects: Project[]; searchTerm: string };
 
-export default function ArchiveClient({ projects, searchTerm }: ArchiveClientProps) {
-  const searchParams = useSearchParams();
-  const [quickViewProject, setQuickViewProject] = useState<Project | null>(null);
+export default function ArchiveClient({ projects, searchTerm }: Props) {
+  const sp      = useSearchParams();
+  const router  = useRouter();
+  const [quickView, setQuickView] = useState<Project | null>(null);
 
+  /* ---------------- helper to fetch full record ------------------- */
+  async function loadFullProject(id: string) {
+    try {
+      const res  = await fetch(`/api/project/${id}`);
+      if (!res.ok) throw new Error("Project not found");
+      const full = (await res.json()) as Project;
+      setQuickView(full);
+    } catch (err) {
+      console.error(err);
+      setQuickView(null);
+    }
+  }
+
+  /* ---------------- open preview if ?project=id is in URL --------- */
   useEffect(() => {
-    const id = searchParams.get("project");
-    if (!id) return;
-    const fetchProject = async () => {
-      try {
-        const res = await fetch(`/api/project/${id}`);
-        if (!res.ok) throw new Error("Project not found");
-        const proj: Project = await res.json();
-        setQuickViewProject(proj);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    fetchProject();
-  }, [searchParams]);
+    const id = sp.get("project");
+    if (id) loadFullProject(id);
+    else    setQuickView(null);
+  }, [sp]);
 
+  /* ---------------- row click handler ----------------------------- */
   const handleOpenProject = (id: string) => {
-    const project = projects.find(p => p.id === id);
-    if (!project) return;
-    setQuickViewProject(project);
-  };
+    // keeps URL in sync so Back/Forward works
+    router.replace(`?${new URLSearchParams({ ...Object.fromEntries(sp), project:id })}`);
 
-  const handleClosePreview = () => setQuickViewProject(null);
+    loadFullProject(id);          // fetch full payload
+  };
 
   return (
     <div className={styles.container}>
-      <div className={`${styles.archiveListWrapper} ${quickViewProject ? styles.withPreview : styles.withoutPreview}`}>
+      <div className={clsx(styles.archiveListWrapper, quickView ? styles.withPreview : styles.withoutPreview)}>
         <ArchiveList
-          projects={projects}
+          projects={projects}          /* light rows */
           searchTerm={searchTerm}
           onOpenProject={handleOpenProject}
         />
       </div>
-      {quickViewProject && (
-        <PreviewPane project={quickViewProject} onClose={handleClosePreview} />
+
+      {quickView && (
+        <PreviewPane project={quickView} onClose={() => router.replace("?")} />
       )}
     </div>
   );
