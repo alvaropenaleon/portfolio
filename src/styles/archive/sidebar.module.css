@@ -30,7 +30,7 @@
 .tagItem {
     display: flex;
     align-items: center;
-    gap: 0.9rem;            /* space between dot and label */
+    gap: 0.7rem;            /* space between dot and label */
     cursor: pointer;
   }
 
