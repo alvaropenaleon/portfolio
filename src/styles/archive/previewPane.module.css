@@ -114,6 +114,11 @@
     word-break: break-word;
     overflow-wrap: anywhere;
   }
+
+  .infoTable tr:last-child td { 
+    border-bottom: none; 
+}
+
   
   /* tag chips line --------------------------------------------------- */
   .tagLine {
