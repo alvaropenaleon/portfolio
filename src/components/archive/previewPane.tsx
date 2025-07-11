@@ -51,17 +51,20 @@ export default function PreviewPane({ project, onClose }: PreviewPaneProps) {
               <tr><td>Categories</td><td>{categories.join(", ")}</td></tr>
             )}
             {links?.length && (
-              <tr><td>Links</td>
-                <td>
-                {links.flatMap((l, idx) => [
-                    idx ? " · " : null,
-                    <a key={l.url} href={l.url} target="_blank" rel="noopener noreferrer">
-                    {l.type}
-                    </a>,
-                ])}
-                </td>
-              </tr>
-            )}
+                <>
+                    {links.map((l) => (
+                    <tr key={l.url}>
+                        <td>{l.type}</td>
+                        <td>
+                        <a href={l.url} target="_blank" rel="noopener noreferrer">
+                            {l.url}
+                        </a>
+                        </td>
+                    </tr>
+                    ))}
+                </>
+                )}
+
           </tbody>
         </table>
 
