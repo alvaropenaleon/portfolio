@@ -41,6 +41,7 @@
   --font-2xl:calc(45rem/ 16);
 
   /* Border Radius */
+  --radius-xxs: 2px;
   --radius-xs: 4px;
   --radius-sm: 6px;
   --radius-md: 12px;
