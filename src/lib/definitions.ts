@@ -13,7 +13,7 @@ export type Project = {
   id: string;
   title: string;
   description: string;
-  links: { url: string; type: 'code' | 'demo' }[];
+  links: { url: string; type: string }[];
   tags: string[];
   heroImage: string;
   categories: string[];
