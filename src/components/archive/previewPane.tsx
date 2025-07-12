@@ -40,9 +40,13 @@ export default function PreviewPane({ project, onClose }: PreviewPaneProps) {
 
         {/* file title + kind */}
         <h2 className={styles.title}>{title}</h2>
-        <p className={styles.kindLine}>HTML text – 0 KB</p>
+        <p className={styles.kindLine}>
+            {/* HTML text – 0 KB */}
+            {description}
+        </p>
 
         {/* collapsible “Information” (simple table for now) */}
+        <h4 className={styles.subheadingLine}>Information</h4>
         <table className={styles.infoTable}>
           <tbody>
             <tr><td>Created</td><td>{date}</td></tr>
@@ -69,13 +73,13 @@ export default function PreviewPane({ project, onClose }: PreviewPaneProps) {
         </table>
 
         {/* long description / text */}
-        {description && <p style={{marginBottom:'1rem'}}>{description}</p>}
+        {/* {description && <p style={{marginBottom:'1rem'}}>{description}</p>}*/}
         {text && <p style={{whiteSpace:'pre-line',marginBottom:'1rem'}}>{text}</p>}
 
         {/* tags */}
         {tags?.length && (
           <>
-            <h4 className={styles.kindLine}>Tags</h4>
+            <h4 className={styles.subheadingLine}>Tags</h4>
             <div className={styles.tagLine}>
               {tags.map((t,i)=>(
                 <Tag key={t} label={t} withComma={i < tags.length-1}/>

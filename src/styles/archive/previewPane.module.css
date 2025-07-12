@@ -87,20 +87,27 @@
     font-size: var(--font-sm);
     color: rgba(var(--color-foreground-rgb),.6);
     table-layout: fixed;
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-md);
+  }
+
+  .subheadingLine {
+    font-size: var(--font-sm);
+    color: var(--color-foreground);
+    table-layout: fixed;
+    margin-bottom: var(--space-xs);
   }
   
   /* info table ------------------------------------------------------- */
   .infoTable {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-md);
   }
   
   .infoTable td {
-    font-size: var(--font-xs);
-    font-variation-settings: var(--var-md);
-    padding: .25rem 0;
+    font-size: var(--font-xxs);
+    font-variation-settings: var(--var-lg);
+    padding: var(--space-xs) 0;
     border-bottom: 1px solid rgba(var(--color-foreground-rgb), 0.1);
   }
   
