@@ -69,6 +69,17 @@
   }
 
 
+  /* 1.  Disable pointer + highlight on blanks */
+.row4col[aria-hidden="true"] {
+    pointer-events: none;        /* ignore click / hover */
+  }
+  
+  .row4col[aria-hidden="true"]:hover {
+    background: transparent;     /* no blue/grey fill   */
+    cursor: default;             /* arrow cursor        */
+  }
+  
+
 
   /*
 .row4col[data-archive-row]:hover {
