@@ -111,3 +111,21 @@ export const COLOR_ORDER = [
       return ia !== ib ? ia - ib : a.localeCompare(b);
     });
   }
+
+  /* --------------------------------------------------------------------- */
+/* 6. PREVIEW-PANE RECTANGLE TAG                                         */
+/* --------------------------------------------------------------------- */
+export function PreviewTagChip({ tag }: { tag: string }) {
+    const bg = TAG_FAMILY[tag] ?? "var(--brand-grey)"; 
+  
+    return (
+      <span
+        className={`${styles.chip}`} 
+        style={{ backgroundColor: bg }}
+        title={tag}
+      >
+        {tag}
+      </span>
+    );
+  }
+  

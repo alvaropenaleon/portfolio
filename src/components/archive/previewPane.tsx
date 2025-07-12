@@ -4,7 +4,8 @@ import Image from "next/image";
 import React from "react";
 import type { Project } from "@/lib/definitions";
 import styles from "@/styles/archive/previewPane.module.css";
-import Tag from "@/components/ui/tag";
+import { PreviewTagChip } from "@/components/ui/tag";
+
 
 interface PreviewPaneProps {
   project: Project;
@@ -67,7 +68,7 @@ export default function PreviewPane({ project, onClose }: PreviewPaneProps) {
                 )}
             
             {role && <tr><td>Role</td><td>{role}</td></tr>}
-            
+
             {categories?.length && (
               <tr><td>Categories</td><td>{categories.join(", ")}</td></tr>
             )}
@@ -81,15 +82,13 @@ export default function PreviewPane({ project, onClose }: PreviewPaneProps) {
 
         {/* tags */}
         {tags?.length && (
-          <>
-            <h4 className={styles.subheadingLine}>Tags</h4>
-            <div className={styles.tagLine}>
-              {tags.map((t,i)=>(
-                <Tag key={t} label={t} withComma={i < tags.length-1}/>
-              ))}
-            </div>
-          </>
-        )}
+            <>
+                <h4 className={styles.subheadingLine}>Tags</h4>
+                <div className={styles.tagLine}>
+                {tags.map(t => <PreviewTagChip key={t} tag={t} />)}
+                </div>
+            </>
+            )}
       </div>
     </aside>
   );

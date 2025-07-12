@@ -50,3 +50,31 @@
     color: rgba(var(--color-foreground-rgb), 0.45);
     padding-left: 2px;
   }
+
+
+/* ---------- Finder-style chip ----------------------------------- */
+.chip {
+    position: relative;               /*  anchor the pseudo */
+    isolation: isolate;               /* new stacking ctx   */
+    display: inline-block;
+    padding: var(--space-xxs) var(--space-xs) var(--space-xxs);
+    border-radius: var(--radius-xxs);
+    font-size: var(--font-xxs);
+    white-space: nowrap;
+    color: #000;                      /* black text now readable */
+    background: var(--chip-bg);       /* set inline from TAG_FAMILY */
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.08);
+    font-variation-settings: var(--var-md);
+  }
+  
+.chip::before {                     /* ③ translucent white veil */
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: #fff;
+    opacity: .4;                     /* tweak to taste */
+    z-index: -1;                      /* sits below the text   */
+    pointer-events: none;
+  }
+  
