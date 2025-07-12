@@ -50,10 +50,7 @@ export default function PreviewPane({ project, onClose }: PreviewPaneProps) {
         <table className={styles.infoTable}>
           <tbody>
             <tr><td>Created</td><td>{date}</td></tr>
-            {role && <tr><td>Role</td><td>{role}</td></tr>}
-            {categories?.length && (
-              <tr><td>Categories</td><td>{categories.join(", ")}</td></tr>
-            )}
+
             {links?.length && (
                 <>
                     {links.map((l) => (
@@ -68,6 +65,12 @@ export default function PreviewPane({ project, onClose }: PreviewPaneProps) {
                     ))}
                 </>
                 )}
+            
+            {role && <tr><td>Role</td><td>{role}</td></tr>}
+            
+            {categories?.length && (
+              <tr><td>Categories</td><td>{categories.join(", ")}</td></tr>
+            )}
 
           </tbody>
         </table>
