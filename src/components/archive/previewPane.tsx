@@ -5,6 +5,7 @@ import React from "react";
 import type { Project } from "@/lib/definitions";
 import styles from "@/styles/archive/previewPane.module.css";
 import { PreviewTagChip } from "@/components/ui/tag";
+import { PanelRightClose } from "lucide-react";
 
 
 interface PreviewPaneProps {
@@ -19,11 +20,15 @@ export default function PreviewPane({ project, onClose }: PreviewPaneProps) {
     <aside className={styles.sidebar}>
       {/* header */}
       <div className={styles.header}>
-        <h5 className={styles.headerTitle}>Preview Pane</h5>
-        <button onClick={onClose} className={styles.closeButton} aria-label="Close preview">
-          &times;
-        </button>
-      </div>
+          <button
+            onClick={onClose}
+            className={styles.closeButton}
+            aria-label="Close preview"
+          >
+            <PanelRightClose size={20} strokeWidth={1.6}/>
+          </button>
+          <h5 className={styles.headerTitle}>Preview Pane</h5>
+        </div>
 
       {/* scrollable block */}
       <div className={styles.content}>

@@ -23,27 +23,32 @@
   }
   
   /* header ----------------------------------------------------------- */
+  /* header ----------------------------------------------------------- */
   .header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0;
+    /* justify-content: space-between; */
+    padding: 0 0 var(--space-md) 0;
     flex: 0 0 auto;
-  }
-  
-  .headerTitle {
-    font-size: var(--font-sm);
-    color: var(--brand-grey);
   }
   
   .closeButton {
     background: transparent;
     border: none;
-    font-size: 1.6rem;
-    line-height: 1;
+    padding: 0;
+    margin-right: 0.5rem;     /* space between icon & title */
     cursor: pointer;
     color: var(--brand-grey);
+    display: flex;
+    align-items: center;
   }
+  
+  .headerTitle {
+    margin: 0;                /* reset any default margins */
+    font-size: var(--font-sm);
+    color: var(--brand-grey);
+  }
+  
   
   /* scrollable content ---------------------------------------------- */
   .content {
