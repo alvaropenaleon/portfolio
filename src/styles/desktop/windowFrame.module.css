@@ -135,3 +135,6 @@
 /* Visibility helpers (unchanged) */
 .hidden  { display: none; }
 .visible { display: flex; }
+
+
+/* .titleBar    { cursor: grab; } */
