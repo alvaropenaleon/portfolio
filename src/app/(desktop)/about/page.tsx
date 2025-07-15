@@ -37,12 +37,12 @@ export default async function AboutPage() {
             </a></li>
             </ul>
             <br /><br />
-            <p><i>When there’s time to write longer thoughts, they’ll land in my <b>blog</b>. I post rarely, but feel free to browse (<a
+            <p>When there’s time to write longer thoughts, they’ll land in my <b>blog</b>. I post rarely, but feel free to browse (<a
                 href="https://www.linkedin.com/in/alvaropenaleon/"
                 target="_blank"
                 rel="noopener noreferrer"
             >find here</a>) if you’d like.
-            </i></p>
+            </p>
             <br /><br />
         </main>
     );
