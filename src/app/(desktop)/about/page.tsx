@@ -1,6 +1,7 @@
 // app/(desktop)/about/page.tsx
 import Bio from '@/components/about/bio';
 import { fetchUser } from '@/lib/data';
+import styles from '@/styles/about/aboutPage.module.css';
 
 export default async function AboutPage() {
 
@@ -8,9 +9,9 @@ export default async function AboutPage() {
     if (!user) return <p className="text-red-500">User data not found.</p>;
 
     const content = (
-        <main style={{ padding: "var(--space-md)" }}>
+        <main className={styles.aboutMain}>
             <Bio markdown={user.bio} />
-            <p><b>Want to say hi? </b>Tap a link below:</p>
+            <p>Want to say hi? Tap a link below:</p>
             <br />
             <ul>
             <li><a
