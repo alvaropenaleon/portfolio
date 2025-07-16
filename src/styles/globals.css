@@ -118,10 +118,27 @@ h2 a::after {
 .desktop-root {
     width: 100vw;
     height: 100vh;
-    background: url('/wallpaper.jpg');
     position: relative;
     overflow: hidden;
-}
+  
+    /* bottom-most layer = photo wallpaper */
+    background: url("/wallpaper.jpg") /*center/cover no-*/repeat;
+  }
+  
+  /* translucent 10 % gradient on top */
+  .desktop-root::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      var(--bg1) 0%,
+      var(--bg2) 0%,
+      var(--bg3) 0%
+    );
+    opacity: 1;                 /* 10 % */
+    pointer-events: none;         /* never block clicks */
+  }
 
 .icon-grid {
     display: grid;
@@ -183,17 +200,19 @@ h2 a::after {
 
 
 .icon-label {
-    margin-top: 0.25rem;
+    margin-top: var(--space-sm);
     padding: var(--space-xxs) var(--space-xs);
     font-size: var(--font-sm);
-    font-weight: 500;
     font-variation-settings: var(--var-lg);
     text-align: center;
+    color: white;
+    text-shadow:
+    0  1px   3px rgba(0,0,0,0.6),
+    0  3px  6px rgba(0,0,0,0.3);
 }
 
 .icon:hover>.icon-label {
     background-color: var(--brand-blue);
     border-radius: var(--radius-xs);
     color: white;
-
 }
