@@ -123,6 +123,7 @@ h2 a::after {
   
     /* bottom-most layer = photo wallpaper */
     background: url("/wallpaper.jpg") /*center/cover no-*/repeat;
+    background-size: 30px 30px;
   }
   
   /* translucent 10 % gradient on top */
