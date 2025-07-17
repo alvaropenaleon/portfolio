@@ -138,7 +138,7 @@ h2 a::after {
       var(--bg2) 30%,
       var(--bg3) 100%
     );
-    opacity: 1;
+    opacity: 0;
     pointer-events: none;
   }
 
