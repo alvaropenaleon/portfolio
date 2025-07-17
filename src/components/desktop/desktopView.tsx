@@ -39,7 +39,10 @@ export default function DesktopView() {
           title={titles[w.id]}
           zIndex={w.z}
           style={w.geom}
-          className={w.id === 'archive' ? styles.archiveWindowFrame : ''}
+          className={
+            w.id === 'archive' ? styles.archiveWindowFrame :
+            w.id === 'about'   ? styles.aboutWindowFrame   :
+             ''}
           onClose={() => close(w.id)}
           onFocus={() => bringToFront(w.id)}
           onMove={(geom) => moveWindow(w.id, geom)}
