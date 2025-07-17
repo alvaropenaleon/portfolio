@@ -1,7 +1,9 @@
 .archiveWindowFrame .titleBar {
-    background: rgba(var(--brand-grey-rgb), 0.12);
+  background: rgba(var(--brand-grey-rgb), 0.12);
   position: relative;
   z-index: 1;
+  height: 3rem;
+
 }
 
 /* draw the normal bg from X onward */
@@ -55,6 +57,34 @@
       ) !important;
   }
 
+  .archiveWindowFrame  .closeBtn {
+    width: 12px;
+    height: 12px;
+    margin-right: var(--space-sm);
+    margin-left: 0.3rem;
+    border: none;
+    border-radius: 50%;
+    background: #ff5f57;
+    cursor: pointer;
+}
+
+.aboutWindowFrame .titleBar {
+    justify-content: center;
+    height: 1.5rem;
+
+  }
+  
+  .aboutWindowFrame .title {
+    text-align: center;
+    margin-left: -0.4rem;
+    font-size: var(--font-sm);
+  }
+  
+  .aboutWindowFrame .closeBtn {
+    margin-left: -0.4rem;
+  }
+  
+
 /* ───────── Window frame (outer wrapper) ───────── */
 .windowFrame {
   display: flex;
@@ -71,30 +101,30 @@
   position: relative;   /* context for absolute children */
 }
 
+
 /* ───────── Title bar (unchanged) ───────── */
 .titleBar {
   display: flex;
   align-items: center;
-  height: var(--space-lg);
   padding: var(--space-xxs) var(--space-md);
   background: #f3f4f6;
   user-select: none;
   cursor: default;
 }
 
-.title {                 /* <span class="title"> */
-    flex: 1;               /* lets it center nicely between buttons */
-    font: 500 13px/1 "Inter", sans-serif;
+.title { 
+    flex: 1;
+    font-variation-settings: var(--var-lg);
     text-align: left;
     white-space: nowrap;
-    text-overflow: ellipsis; /* neat truncation if name is long */
+    text-overflow: ellipsis;
     padding: 0 var(--space-sm);
   }
 
 .closeBtn {
     width: 12px;
     height: 12px;
-    margin-right: 6px;
+    margin-right: var(--space-sm);
     border: none;
     border-radius: 50%;
     background: #ff5f57;
