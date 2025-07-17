@@ -27,8 +27,9 @@
 }
 
 /* push the title text over by 206px */
-.archiveWindowFrame .titleBar .title {
+.archiveWindowFrame .title {
   margin-left: 206px;
+  font-size: var(--font-md);
 }
 
 /* Disable outer window scrolling */
@@ -114,7 +115,7 @@
 
 .title { 
     flex: 1;
-    font-variation-settings: var(--var-lg);
+    font-variation-settings: var(--var-xl);
     text-align: left;
     white-space: nowrap;
     text-overflow: ellipsis;

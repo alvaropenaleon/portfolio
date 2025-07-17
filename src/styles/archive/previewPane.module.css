@@ -84,6 +84,7 @@
   /* title & kind line ------------------------------------------------ */
   .title {
     font-size: var(--font-md);
+    font-variation-settings: var(--var-lg);
     margin: .6rem 0 .2rem;
     word-break: break-word;
   }
