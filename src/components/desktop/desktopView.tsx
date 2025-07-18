@@ -36,7 +36,7 @@ export default function DesktopView() {
       {windows.map(w => (
         <WindowFrame
           key={w.id}
-          title={titles[w.id]}
+          title={w.dynamicTitle ?? titles[w.id]}
           zIndex={w.z}
           style={w.geom}
           className={

@@ -20,6 +20,7 @@ interface Win {
   z: number;
   visible: boolean;
   userMoved?: boolean;
+  dynamicTitle?: string; 
 }
 
 interface Ctx {
@@ -143,15 +144,33 @@ export function WindowManagerProvider({ children }: { children: ReactNode }) {
       const msg = e.data;
 
       if (msg?.type === "iframe-path") {
-        const { id, path: newPath } = msg as { id: WindowID; path: string };
+        const { id, path: newPath, title } = msg as {
+          id: WindowID;
+          path: string;
+          title?: string;
+        };
+      
+        // Update browser path (so the URL updates)
         router.replace(newPath.startsWith("/") ? newPath : "/" + newPath);
-        setWins(ws => ws.map(w => {
-          if (w.id !== id) return w;
-          const [oldBase] = w.path.split("?");
-          const [newBase] = newPath.split("?");
-          return oldBase === newBase ? w : { ...w, path: newPath };
-        }));
+      
+        setWins(ws =>
+          ws.map(w => {
+            if (w.id !== id) return w;
+      
+            const [oldBase] = w.path.split("?");
+            const [newBase] = newPath.split("?");
+      
+            const shouldUpdatePath = oldBase !== newBase;
+      
+            return {
+              ...w,
+              ...(shouldUpdatePath ? { path: newPath } : {}),
+              ...(title ? { dynamicTitle: title } : {}),
+            };
+          })
+        );
       }
+      
 
       if (msg?.type === "open-window") {
         const { id, params } = msg as { id: WindowID; params?: Record<string, string>; };

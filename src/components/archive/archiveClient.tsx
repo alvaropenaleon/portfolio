@@ -35,6 +35,41 @@ export default function ArchiveClient({ projects, searchTerm }: Props) {
     else    setQuickView(null);
   }, [sp]);
 
+    /* ---------------- update parent iframe path --------------------- */
+  useEffect(() => {
+    const rawPath = window.location.pathname + window.location.search;
+    const fixedPath = rawPath.startsWith("/embed/")
+      ? rawPath.replace("/embed", "")
+      : rawPath;
+  
+    const sp = new URLSearchParams(window.location.search);
+    const category = sp.get("category");
+    const tag = sp.get("tag");
+  
+    const title = category
+      ? `${prettify(category)}`
+      : tag
+      ? `${prettify(tag)}`
+      : "Archive";
+  
+    window.parent.postMessage(
+      {
+        type: "iframe-path",
+        id: "archive",
+        path: fixedPath,
+        title, // NEW
+      },
+      window.origin
+    );
+  }, [sp]); // reruns when tag or category changes
+  
+  function prettify(value: string): string {
+    return value
+      .replace(/[-_]/g, " ")
+      .replace(/\b\w/g, (l) => l.toUpperCase());
+  }
+  
+
   /* ---------------- row click handler ----------------------------- */
   const handleOpenProject = (id: string) => {
     // keeps URL in sync so Back/Forward works
