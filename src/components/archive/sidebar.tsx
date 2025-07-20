@@ -4,7 +4,7 @@
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import styles from "@/styles/archive/sidebar.module.css";
 // import CategoryColorDot from '@/components/ui/categoryMapping';
-import { FolderClosed } from 'lucide-react';
+import { FolderClosed, Settings } from 'lucide-react';
 import { TagDot, sortTagsByColor } from "@/components/ui/tag";
 import clsx from 'clsx';
 
@@ -49,18 +49,18 @@ export default function CategorySidebar({
         Archive
       </li>
 
-      {/* Categories */}
-      <h3 className={styles.title}>Categories</h3>
+      {/* Categories  
+      <h3 className={styles.title}>Categories</h3> */}
       {categories.map((category) => (
         <li
           key={category}
           className={clsx(styles.catItem, activeCategory === category ? styles.active : '')}
           onClick={() => go(category)}
         >
-          <FolderClosed size={15} strokeWidth={1.6} className={styles.folderIcon} />
+          <Settings size={15} strokeWidth={1.6} className={styles.folderIcon} />
           {category}
         </li>
-      ))}
+      ))} 
 
       {/* Tags */}
       <h3 className={styles.title}>Tags</h3>
