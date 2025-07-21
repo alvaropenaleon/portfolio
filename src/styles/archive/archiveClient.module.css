@@ -5,10 +5,10 @@
   }
   
   .archiveListWrapper {
-    /* promote to GPU layer & isolate layout */
-    will-change: width;
-    contain: layout;
-  
+    /* promote to GPU layer & isolate layout and paint */
+    contain: layout paint;
+    will-change: width, transform;
+    
     overflow: hidden;
     /* duration + curve */
     transition: width 0.25s cubic-bezier(.24,.02,.38,1);
@@ -23,3 +23,22 @@
   .withoutPreview {
     width: 100%;
   }
+
+
+
+.catChevron{
+    margin-left: -0.5rem;
+}
+
+.catFolder {
+    margin-top: -0.3rem;
+    margin-left: -1.5rem;
+}
+
+  /* if you’d like the category label a little offset from the icon */
+  .catLabel {
+    margin-left: var(--space-sm);
+    font-variation-settings: var(--var-md);
+    font-size: var(--font-sm);
+    margin-top: -0.3rem;
+}
