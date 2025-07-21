@@ -37,6 +37,13 @@
     display: none;
 }
 
+  
+/* col2 holds the folder + text: line them up with a gap */
+ .col2 {
+    display: flex;
+    align-items: center;
+  }
+
 .row4col:first-child {
     margin-top: 0.35rem;
   }
@@ -80,7 +87,10 @@
   }
   
 
-
+  /* indent child items */
+.indentedRow {
+  padding-left: 2.5rem;
+}
   /*
 .row4col[data-archive-row]:hover {
     background-color: var(--color-background);
@@ -90,6 +100,7 @@
  
 
 }
+
 
 
 .row4col[data-archive-row]::before {
