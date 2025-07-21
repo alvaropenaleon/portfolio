@@ -58,7 +58,7 @@ export default function Tag({
   }: TagProps & { className?: string }) {
     return (
       <>
-        <p className={`${styles.tag} ${className}`}>{label}</p>
+        <span className={`${styles.tag} ${className}`}>{label}</span>
         {withComma && <span>,&nbsp;</span>}
       </>
     );
