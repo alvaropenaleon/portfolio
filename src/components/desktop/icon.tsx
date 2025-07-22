@@ -16,6 +16,7 @@ export default function Icon({ label, iconSrc, onDoubleClick }: IconProps) {
         alt={label}
         width={64}
         height={64}
+        style={{ objectFit: 'contain' }}
         priority
       />
       <div className="icon-label">{label}</div>
