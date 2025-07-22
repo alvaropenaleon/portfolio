@@ -51,7 +51,9 @@ export default function CategorySidebar({
 
       {/* Categories  
       <h3 className={styles.title}>Categories</h3> */}
-      {categories.map((category) => (
+      {categories
+        .filter(cat => cat == 'Design')   // only render work category
+        .map((category) => (
         <li
           key={category}
           className={clsx(styles.catItem, activeCategory === category ? styles.active : '')}
