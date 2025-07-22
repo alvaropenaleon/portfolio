@@ -1,6 +1,8 @@
 import { fetchProjectById } from '@/lib/data';
 import WorkList from '@/components/work/workList';
 
+export const revalidate = 120;
+
 export default async function WorkPage() {
   const selectedProjectIds = [
     "acd50b8c-9e99-4fb5-b388-b5ed5aa80d20",
