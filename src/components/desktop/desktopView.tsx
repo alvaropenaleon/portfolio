@@ -27,9 +27,10 @@ export default function DesktopView() {
     <div className="desktop-root">
       {/* ───── Icons ───── */}
       <div className="icon-grid">
-        <Icon label="About"   iconSrc="/paper.png"  onDoubleClick={() => open('about')} />
         <Icon label="Archive" iconSrc="/folder.png" onDoubleClick={() => open('archive')} />
-        {/* <Icon label="Work"    iconSrc="/folder.png" onDoubleClick={() => open('work')} /> */}
+        <Icon label="Work"    iconSrc="/smart-folder.png" onDoubleClick={() => open('archive', { category: 'Design' })} />
+        <Icon label="About"   iconSrc="/paper.png"  onDoubleClick={() => open('about')} />
+
       </div>
 
       {/* ───── Windows ───── */}
