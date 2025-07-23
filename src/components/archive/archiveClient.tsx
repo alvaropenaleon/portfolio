@@ -179,7 +179,9 @@ export default function ArchiveClient({
             ))
           ) : (
             // grouped by folder
-            categories.map((cat) => (
+            categories
+                .filter(c => c !== "Work") // do not render work category
+                .map((cat) => (
                 <Fragment key={cat}>
                   <div
                     tabIndex={0}
