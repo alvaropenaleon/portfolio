@@ -5,4 +5,5 @@
   font-variation-settings: var(--var-md);
   line-height: 1.3;
   margin: 0 0.3rem;
+  font-size: var(--font-xs);
 }
