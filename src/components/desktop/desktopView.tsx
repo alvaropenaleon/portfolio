@@ -28,7 +28,7 @@ export default function DesktopView() {
       {/* ───── Icons ───── */}
       <div className="icon-grid">
         <Icon label="Archive" iconSrc="/folder.png" onDoubleClick={() => open('archive')} />
-        <Icon label="Work"    iconSrc="/smart-folder.png" onDoubleClick={() => open('archive', { category: 'Design' })} />
+        <Icon label="Work"    iconSrc="/smart-folder.png" onDoubleClick={() => open('archive', { category: 'Work' })} />
         <Icon label="About"   iconSrc="/paper.png"  onDoubleClick={() => open('about')} />
 
       </div>
