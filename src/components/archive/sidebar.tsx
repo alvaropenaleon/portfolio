@@ -52,7 +52,7 @@ export default function CategorySidebar({
       {/* Categories  
       <h3 className={styles.title}>Categories</h3> */}
       {categories
-        .filter(cat => cat == 'Design')   // only render work category
+        .filter(cat => cat == "Work")   // only render work category
         .map((category) => (
         <li
           key={category}
