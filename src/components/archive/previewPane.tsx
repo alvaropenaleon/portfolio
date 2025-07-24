@@ -72,6 +72,8 @@ export default function PreviewPane({ project, onClose }: PreviewPaneProps) {
                 </>
                 )}
             
+            <tr><td>Comments</td><td>{text}</td></tr>
+            
             {role && <tr><td>Role</td><td>{role}</td></tr>}
 
             {categories?.length && (
@@ -82,8 +84,8 @@ export default function PreviewPane({ project, onClose }: PreviewPaneProps) {
         </table>
 
         {/* long description / text */}
-        {/* {description && <p style={{marginBottom:'1rem'}}>{description}</p>}*/}
-        {text && <p style={{whiteSpace:'pre-line',marginBottom:'1rem'}}>{text}</p>}
+        {/* {description && <p style={{marginBottom:'1rem'}}>{description}</p>} */}
+        {/* {text && <p style={{whiteSpace:'pre-line',marginBottom:'1rem'}}>{text}</p>} */}
 
         {/* tags */}
         {tags?.length && (
