@@ -15,6 +15,7 @@ interface PreviewPaneProps {
 
 export default function PreviewPane({ project, onClose }: PreviewPaneProps) {
   const { title, heroImage, description, date, categories, tags, role, links, text } = project;
+  const categoriesFiltered = (categories ?? []).filter(c => c !== "Work");
 
   return (
     <aside className={styles.sidebar}>
@@ -57,10 +58,6 @@ export default function PreviewPane({ project, onClose }: PreviewPaneProps) {
           <tbody>
             <tr><td>Created</td><td>{date}</td></tr>
 
-            {categories?.length && (
-              <tr><td>Categories</td><td>{categories.join(", ")}</td></tr>
-            )}
-
             <tr><td>Comments</td><td>{text}</td></tr>
 
 
@@ -80,6 +77,10 @@ export default function PreviewPane({ project, onClose }: PreviewPaneProps) {
                 )}
                         
             {role && <tr><td>Role</td><td>{role}</td></tr>}
+
+            {categoriesFiltered?.length > 0 && (
+              <tr><td>Categories</td><td>{categoriesFiltered.join(", ")}</td></tr>
+            )}
 
           </tbody>
         </table>
