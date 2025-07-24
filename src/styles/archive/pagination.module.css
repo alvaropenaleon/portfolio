@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     gap: 0.1rem;
-    background-color: rgba(var(--brand-grey-rgb), 0.05);
+    background-color: rgba(var(--brand-grey-rgb), 0.12);
     /* border-top: 1px solid rgba(0,0,0,.15); */
     box-shadow: 0 -1px 1px 0 rgba(0, 0, 0, .15);
     z-index: 1000;
