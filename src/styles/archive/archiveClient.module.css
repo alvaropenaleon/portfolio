@@ -31,9 +31,11 @@
 }
 
 .catFolder {
-    margin-top: -0.15rem;
+    margin-top: -0.3rem;
     margin-left: -1.5rem;
-    height: auto;
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
 }
 
   /* if you’d like the category label a little offset from the icon */
