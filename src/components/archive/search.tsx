@@ -21,6 +21,9 @@ export default function ArchiveSearch({ placeholder }: SearchProps) {
 
         if (term) {
             params.set('query', term);
+            // remove any category or tag filter when you type
+            params.delete('category');
+            params.delete('tag');
         } else {
             params.delete('query');
         }
