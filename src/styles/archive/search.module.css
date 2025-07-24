@@ -16,17 +16,18 @@
 
 .searchInput {
     width: -webkit-fill-available;
-    background-color: rgba(var(--brand-grey-rgb), 0.12);
+    background-color: rgba(var(--brand-grey-rgb), 0);
     padding: 0.3rem var(--space-lg);
-    border: 2px solid transparent;
+    border: 1px solid rgba(var(--color-foreground-rgb), 0.12);
     border-radius: var(--radius-xs);
-    font-size:var(--font-md);
+    font-size:var(--font-sm);
     outline: none;
     transition: border-color 0s;
     font-variation-settings: var(--var-sm);
 }
 
 .searchInput:focus {
-    border-color: var(--brand-blue);
+    margin: -1px;
+    border: 2px solid rgba(var(--brand-blue-rgb), 0.5);
     background-color: var(--color-background);
 }

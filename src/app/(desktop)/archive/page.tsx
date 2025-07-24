@@ -40,7 +40,7 @@ import {
     return (
       <div className={pageStyles.archiveWindow}>
         <aside className={pageStyles.archiveSidebar}>
-          <Search placeholder="Search archive…" />
+          <Search placeholder="Search" />
           <CategorySidebar
             categories={categories}
             tags={tags}
