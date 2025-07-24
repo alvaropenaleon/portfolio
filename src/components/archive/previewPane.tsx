@@ -57,6 +57,13 @@ export default function PreviewPane({ project, onClose }: PreviewPaneProps) {
           <tbody>
             <tr><td>Created</td><td>{date}</td></tr>
 
+            {categories?.length && (
+              <tr><td>Categories</td><td>{categories.join(", ")}</td></tr>
+            )}
+
+            <tr><td>Comments</td><td>{text}</td></tr>
+
+
             {links?.length && (
                 <>
                     {links.map((l) => (
@@ -71,14 +78,8 @@ export default function PreviewPane({ project, onClose }: PreviewPaneProps) {
                     ))}
                 </>
                 )}
-            
-            <tr><td>Comments</td><td>{text}</td></tr>
-            
+                        
             {role && <tr><td>Role</td><td>{role}</td></tr>}
-
-            {categories?.length && (
-              <tr><td>Categories</td><td>{categories.join(", ")}</td></tr>
-            )}
 
           </tbody>
         </table>
