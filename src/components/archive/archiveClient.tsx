@@ -86,13 +86,16 @@ export default function ArchiveClient({
     const fixed = raw.startsWith("/embed/")
       ? raw.replace("/embed", "")
       : raw;
+    const query = sp.get("query");
     const cat = sp.get("category");
     const tag = sp.get("tag");
-    const title = cat
-      ? prettify(cat)
-      : tag
-      ? prettify(tag)
-      : "Archive";
+  const title = query
+    ? `Searching "${query}"`
+    : cat
+    ? prettify(cat)
+    : tag
+    ? prettify(tag)
+    : "Archive";
     window.parent.postMessage(
       { type: "iframe-path", id: "archive", path: fixed, title },
       window.origin
@@ -120,8 +123,8 @@ export default function ArchiveClient({
     });
   }, []);
 
-  /** Are we in filtered (flat) mode? */
-  const isFiltered = !!sp.get("category") || !!sp.get("tag");
+  /** flat mode when searching (or filtering by category/tag), render a single list of items */
+  const isFiltered = !!sp.get("query") || !!sp.get("category") || !!sp.get("tag");
 
   /** Compute placeholder rows for zebra stripes */
   useEffect(() => {
