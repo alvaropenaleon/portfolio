@@ -9,9 +9,6 @@ const nextConfig: NextConfig = {
 
   // SWC‑powered optimizations
   swcMinify: true, // use SWC to minify JS
-  experimental: {
-    optimizeCss: true, // inline critical CSS automatically
-  },
 
   // Add far‑future cache headers & strip ETags
   async headers() {
