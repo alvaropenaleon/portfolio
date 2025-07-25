@@ -4,8 +4,14 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   reactStrictMode: true,
 
-  // 1️Enable gzip/Brotli compression on the Next.js server
+  // Enable gzip/Brotli compression on the Next.js server
   compress: true,
+
+  // SWC‑powered optimizations
+  swcMinify: true, // use SWC to minify JS
+  experimental: {
+    optimizeCss: true, // inline critical CSS automatically
+  },
 
   // Add far‑future cache headers & strip ETags
   async headers() {
@@ -14,7 +20,7 @@ const nextConfig: NextConfig = {
         source: '/_next/static/:path*',
         headers: [
           { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
-          { key: 'ETag',           value: '' }
+          // { key: 'ETag', value: '' }
         ],
       },
       {
