@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import styles from '@/styles/about/notifications.module.scss';
 import { Notification } from "@/lib/definitions";
+// import Image from 'next/image';
 
 export default function ClientNotifications({ notifications }: { notifications: Notification[] }) {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -35,6 +36,15 @@ export default function ClientNotifications({ notifications }: { notifications: 
             style={{ cursor: idx === 0 && !isExpanded ? "pointer" : undefined }}
           >
             {note.cover_image_url && (
+            /*  <Image
+                src={note.cover_image_url}
+                alt={`${note.title} cover`}
+                fill
+                style={{ objectFit: 'cover' }}
+                fetchPriority="low"
+                priority={false}
+                />
+            */
               <img
                 src={note.cover_image_url}
                 alt={`${note.title} cover`}

@@ -7,10 +7,17 @@ const nextConfig: NextConfig = {
   // Enable gzip/Brotli compression on the Next.js server
   compress: true,
 
-  // SWC‑powered optimizations
-  swcMinify: true, // use SWC to minify JS
+  images: {
+    // external hosts:
+    domains: [
+    ],
+    // wildcard fallback:
+    // remotePatterns: [
+    //   { protocol: 'https', hostname: '**', pathname: '/**' },
+    // ],
+  },
 
-  // Add far‑future cache headers & strip ETags
+  // far‑future cache headers
   async headers() {
     return [
       {
