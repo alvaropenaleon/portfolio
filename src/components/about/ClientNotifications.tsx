@@ -13,7 +13,7 @@ export default function ClientNotifications({ notifications }: { notifications: 
         onClick={() => setIsExpanded(!isExpanded)}
         className={styles.expandButton}
       >
-        {isExpanded ? '↓ Show Less' : '↑ Show More'}
+        {isExpanded ? 'Show Less' : 'Show More'}
       </button>
 
       <ul

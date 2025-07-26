@@ -30,9 +30,11 @@ $max-z: 20;
     &.expanded {
         max-height: 100%;
         margin-bottom: var(--space-sm);
+        margin-top: -5px;
     }
 
     &.collapsed {
+        margin-top: -5px;
         .notificationCard {
             margin-bottom: -3.4rem;
             transform: translateY(0);
@@ -94,31 +96,40 @@ $max-z: 20;
 }
 
 .expandButton {
-    width: 120px;
-    padding: var(--space-sm);
-    font-size: var(--font-sm);
-    background-color: rgba(var(--brand-grey-rgb), 0.12);
+    margin: 0 5px;
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--font-xxs);
+    background-color: rgba(var(--color-background-rgb), 0.45);
     border: none;
     border-radius: var(--radius-lg);
     cursor: pointer;
     margin-bottom: var(--space-sm);
     transition: background-color 0.2s ease;
-    font-variation-settings: var(--var-sm);
+    font-variation-settings: var(--var-md);
     display: block;
     margin-left: auto;
 
-    color: var(--color-foreground);
+    color: rgba(var(--color-foreground-rgb), 0.5);
+    box-shadow:
+    0 0 1px 0 rgba(0, 0, 0, 0.40),
+    0 0 7px 0 rgba(0, 0, 0, 0.10);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
 }
 
 .expandButton:hover {
-    background-color: rgba(var(--brand-grey-rgb), 0.2);
+    background-color: rgba(var(--color-background-rgb), 0.45);
     color: var(--brand-blue);
 }
 
+.notificationCard:nth-child(1) {
+    margin: 5px 5px;
+}
+
 .notificationCard {
-    margin: 2px;
+    margin: 0 5px;
     position: relative;
-    background-color: rgba(var(--brand-grey-rgb), 0.12);
+    background-color: rgba(var(--color-background-rgb), 0.45);
     border-radius: var(--radius-lg);
     padding:calc(var(--space-sm) * 1.6);
     display: flex;
@@ -135,8 +146,8 @@ $max-z: 20;
     will-change: transform, opacity, max-height;
     transform: translate3d(0, 0, 0);
     box-shadow:
-        0 0 1px 0 rgba(0, 0, 0, 0.20),
-        0 0 2px 0 rgba(0, 0, 0, 0.20);
+    0 0 1px 0 rgba(0, 0, 0, 0.40),
+    0 0 7px 0 rgba(0, 0, 0, 0.10);
 }
 
 .notificationCard::before {
@@ -167,9 +178,9 @@ $max-z: 20;
     position: absolute;
     top: calc(var(--space-sm) * 1.6);
     right: var(--space-md);
-    opacity: 0.5;
-    font-size: var(--font-xs);
-    font-variation-settings: var(--var-sm);
+    color: rgba(var(--color-foreground-rgb), 0.5);
+    font-size: var(--font-xxs);
+    font-variation-settings: var(--var-md);
 }
 
 .details h3 {
