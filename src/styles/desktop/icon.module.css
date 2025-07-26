@@ -11,9 +11,9 @@
 
 .label {
     margin-top: var(--space-sm);
-    padding: var(--space-xxs) var(--space-xs);
-    font-size: var(--font-sm);
-    font-variation-settings: var(--var-lg);
+    padding: 0.05rem 0.25rem;
+    font-size: 12.5px;
+    font-variation-settings: var(--var-xl);
     text-align: center;
     color: white;
     text-shadow:
@@ -25,4 +25,5 @@
     background-color: var(--brand-blue);
     border-radius: var(--radius-xs);
     color: white;
+    text-shadow: none;
 }

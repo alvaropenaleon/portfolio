@@ -153,7 +153,7 @@ h2 a::after {
 .icon-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, 80px);
-    gap: 1rem;
+    gap: 1.1rem;
     padding: 2rem;
     position: absolute;
     top: 0;
