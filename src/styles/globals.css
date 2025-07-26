@@ -140,8 +140,8 @@ h2 a::after {
     );
     opacity: 1;
     pointer-events: none;
-    -webkit-backdrop-filter: blur(50px);
-    backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(0px);
+    backdrop-filter: blur(0px);
   }
 
   @media (prefers-color-scheme: dark) {
