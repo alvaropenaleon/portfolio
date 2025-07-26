@@ -9,20 +9,31 @@ export default function ClientNotifications({ notifications }: { notifications: 
 
   return (
     <div className={styles.notificationsContainer}>
-      <button
-        onClick={() => setIsExpanded(!isExpanded)}
-        className={styles.expandButton}
+            <div
+        className={`${styles.buttonWrapper} ${
+          isExpanded ? styles.visible : styles.hidden
+        }`}
       >
-        {isExpanded ? 'Show Less' : 'Show More'}
-      </button>
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className={styles.expandButton}
+        >
+          {isExpanded ? "Show Less" : "Show More"}
+        </button>
+      </div>
 
       <ul
         className={`${styles.notificationsList} ${
           isExpanded ? styles.expanded : styles.collapsed
         }`}
       >
-        {notifications.map((note) => (
-          <li key={note.id} className={styles.notificationCard}>
+        {notifications.map((note, idx) => (
+          <li
+            key={note.id}
+            className={styles.notificationCard}
+            onClick={idx === 0 && !isExpanded ? () => setIsExpanded(true) : undefined}
+            style={{ cursor: idx === 0 && !isExpanded ? "pointer" : undefined }}
+          >
             {note.cover_image_url && (
               <img
                 src={note.cover_image_url}

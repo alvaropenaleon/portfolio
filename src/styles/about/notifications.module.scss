@@ -22,7 +22,7 @@ $max-z: 20;
 
     /* Animate between max height and vh */
     max-height: 8rem;
-    min-height: 6rem;
+    min-height: 8rem;
 
     overflow: hidden;
     transition: max-height 0.5s ease;
@@ -36,7 +36,7 @@ $max-z: 20;
     &.collapsed {
         margin-top: -5px;
         .notificationCard {
-            margin-bottom: -3.4rem;
+            margin-bottom: -4rem;
             transform: translateY(0);
             opacity: 1;
 
@@ -63,7 +63,7 @@ $max-z: 20;
 
                 @else if $i ==3 {
                     transform: translateY(0rem) scale($scale);
-                    opacity: 0;
+                    opacity: 1;
                 }
 
                 @else {
@@ -96,7 +96,7 @@ $max-z: 20;
 }
 
 .expandButton {
-    margin: 0 5px;
+    margin: 5px 5px 0 0;
     padding: var(--space-sm) var(--space-md);
     font-size: var(--font-xxs);
     background-color: rgba(var(--color-background-rgb), 0.45);
@@ -121,6 +121,20 @@ $max-z: 20;
     background-color: rgba(var(--color-background-rgb), 0.45);
     color: var(--brand-blue);
 }
+
+.buttonWrapper {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: 
+      max-height 0.4s cubic-bezier(0.25, 0.1, 0.25, 1),
+      opacity    0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+  
+  .buttonWrapper.visible {
+    max-height: 3rem;
+    opacity: 1;
+  }
 
 .notificationCard:nth-child(1) {
     margin: 5px 5px;
