@@ -5,6 +5,8 @@ import { CSSProperties, ReactNode, useRef } from "react";
 import type { Geometry } from "./windowDefaults";
 import styles from "@/styles/desktop/windowFrame.module.css";
 
+const OVERFLOW = 100;
+
 interface Props {
   title: string;
   zIndex: number;
@@ -53,8 +55,8 @@ export default function WindowFrame({
 
     // compute & clamp
     const vw = window.innerWidth, vh = window.innerHeight;
-    const newLeft = Math.min(Math.max(left + dx, 0), vw - w);
-    const newTop  = Math.min(Math.max(top + dy, 0), vh - h);
+    const newLeft = Math.min(Math.max(left + dx, - OVERFLOW), vw - w  + OVERFLOW);
+    const newTop  = Math.min(Math.max(top + dy, 0), vh - h  + OVERFLOW);
 
     // update DOM directly for smooth drag
     const el = frameRef.current!;

@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { windowDefaults, type GeometryOrFn, type Geometry } from "./windowDefaults";
 
 /* ---------- constants ------------------------------------------------ */
-// const GUTTER = 16;
+const GUTTER = 15;
 const CASCADE_SHIFT = 30;
 
 export type WindowID = "about" | "archive" | "work";
@@ -47,8 +47,8 @@ function clampToViewport(
 ): Geometry {
   const w = Math.min(g.width, vw);
   const h = Math.min(g.height, vh);
-  const left = Math.min(Math.max(g.left, 0), vw - w);
-  const top = Math.min(Math.max(g.top, 0), vh - h);
+  const left = Math.min(Math.max(g.left, GUTTER), vw - w - GUTTER);
+  const top = Math.min(Math.max(g.top, GUTTER), vh - h - GUTTER);
   return { ...g, width: w, height: h, left, top };
 }
 
