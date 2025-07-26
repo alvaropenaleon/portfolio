@@ -199,6 +199,29 @@ $max-z: 20;
 
 @media (max-width: 768px) {
 
+    .notificationsContainer {
+        /* flex child that grows */
+        margin-top: auto;      /* pushes it to the bottom of the sidebar */
+        flex-shrink: 0;        
+      
+        /* fill remaining height */
+        max-height: 100%;      
+      
+        /* scroll its own contents */
+        overflow-y: auto;      
+        
+        /* drop it flush to the very bottom */
+        /*  set right/left if you want inset */
+        box-sizing: border-box;
+        
+        position: relative;
+        width: 100%;
+    
+        /* Safari transition optimisation */
+        will-change: transform;
+        transform: translate3d(0, 0, 0);
+      }
+
     .notificationsList {
         margin-bottom: calc(var(--space-sm));
 
