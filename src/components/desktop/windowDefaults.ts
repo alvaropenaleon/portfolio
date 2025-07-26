@@ -16,7 +16,7 @@ export type GeometryOrFn = Geometry | GeometryFn;
 /** Constants used for layout logic */
 const GUTTER = 16;
 const ARCHIVE_MAX_W = 1400;
-const ARCHIVE_MAX_H = 540;
+const ARCHIVE_MAX_H = 560;
 const ABOUT_MAX_W   = 700;
 const ABOUT_MAX_H   = 440;
 
