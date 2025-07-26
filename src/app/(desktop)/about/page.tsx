@@ -1,7 +1,5 @@
 // app/(desktop)/about/page.tsx
-
-export const runtime = 'edge';
-export const revalidate = 60;
+export const revalidate = 120;
 
 import Bio from '@/components/about/bio';
 import { fetchUser } from '@/lib/data';

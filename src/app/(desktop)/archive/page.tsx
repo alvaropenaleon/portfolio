@@ -1,7 +1,5 @@
 // app/(desktop)/archive/page.tsx
-
-export const runtime = 'edge';
-export const revalidate = 60;
+export const revalidate = 120;
 
 import {
     fetchFilteredProjects,
@@ -24,7 +22,7 @@ import {
       embed?: string;
     }>;
   }
-    
+  
   export default async function ArchivePage({ searchParams }: PageProps) {
     const sp = await searchParams;
     const query = sp.query ?? "";
