@@ -1,4 +1,2 @@
 // app/(embed)/archive/page.tsx
-export const revalidate = 120;
-
-export { default } from '../../(desktop)/archive/page';
+export { default, revalidate } from '../../(desktop)/archive/page';
