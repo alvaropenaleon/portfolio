@@ -1,29 +1,48 @@
-/* src/styles/desktop/icon.module.css */
-
-.icon {
+.iconContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 80px;     /* container width slightly bigger than image */
-    cursor: pointer;
-}
-
-
-.label {
-    margin-top: var(--space-sm);
-    padding: 0.05rem 0.25rem;
+    width: fit-content;
+    padding: 0.15rem;
+    gap: 0.2rem;
+  }
+  
+  /* icon image wrapper */
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-xxs);
+    padding: 2px;
+    cursor: default;
+    outline: 2px solid transparent;
+  }
+  
+  /* only the icon image gets background + border */
+  .iconContainer:hover  .icon {
+    outline: 2px solid rgba(150, 170, 190, 0.6);
+    background-color: rgba(23, 23, 23, 0.4);
+  }
+  
+  /* label stays clean */
+  .label {
     font-size: 12.5px;
     font-variation-settings: var(--var-xl);
     text-align: center;
     color: white;
+    white-space: nowrap;
     text-shadow:
-    0  1px   3px rgba(0,0,0,0.6),
-    0  3px  6px rgba(0,0,0,0.3);
-}
-
-.icon:hover>.label {
+      0 1px 3px rgba(0, 0, 0, 0.6),
+      0 3px 6px rgba(0, 0, 0, 0.3);
+    padding: 0rem 0.3rem;
+  }
+  
+  /* Optional: highlight label text on icon hover */
+  .iconContainer:hover .label {
     background-color: var(--brand-blue);
-    border-radius: var(--radius-xs);
     color: white;
     text-shadow: none;
-}
+    padding: 0rem 0.3rem;
+    border-radius: var(--radius-xs);
+  }
+  
