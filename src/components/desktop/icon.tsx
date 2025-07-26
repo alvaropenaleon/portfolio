@@ -1,5 +1,5 @@
-// src/components/Desktop/Icon.tsx
 // src/components/desktop/icon.tsx
+import styles from "@/styles/desktop/icon.module.css";
 import Image from 'next/image';
 
 interface IconProps {
@@ -10,16 +10,16 @@ interface IconProps {
 
 export default function Icon({ label, iconSrc, onDoubleClick }: IconProps) {
   return (
-    <div className="icon" onDoubleClick={onDoubleClick}>
+    <div className={styles.icon} onDoubleClick={onDoubleClick}>
       <Image
         src={iconSrc}
         alt={label}
-        width={64}
-        height={64}
+        width={60}
+        height={60}
         style={{ objectFit: 'contain' }}
         priority
       />
-      <div className="icon-label">{label}</div>
+      <div className={styles.label}>{label}</div>
     </div>
   );
 }
