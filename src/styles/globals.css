@@ -122,8 +122,8 @@ h2 a::after {
     overflow: hidden;
   
     /* bottom-most layer = photo wallpaper */
-    background: url("/wallpaper-light.jpg") /*center/cover no-*/repeat;
-    background-size: 30px 30px;
+    background: url("/wallpaper.png") center/cover no-repeat;
+    /* background-size: 30px 30px; */
 
   }
   
@@ -138,13 +138,15 @@ h2 a::after {
       var(--bg2) 30%,
       var(--bg3) 100%
     );
-    opacity: 0;
+    opacity: 1;
     pointer-events: none;
+    -webkit-backdrop-filter: blur(50px);
+    backdrop-filter: blur(50px);
   }
 
   @media (prefers-color-scheme: dark) {
     .desktop-root {
-      background-image: url('/wallpaper-dark.jpg');
+        background: url("/wallpaper.png")  center/cover no-repeat;
     }
   }
 
