@@ -67,7 +67,7 @@
 }  
 
 .row > *:not(:first-child) {
-  border-left: 1px solid rgba(0,0,0,.15);
+  border-left: 1px solid rgba(var(--color-foreground-rgb),.15);
   padding-left: 10px;
 }
 

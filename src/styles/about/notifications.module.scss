@@ -99,7 +99,7 @@ $max-z: 20;
     margin: 5px 5px 0 0;
     padding: var(--space-sm) var(--space-md);
     font-size: var(--font-xxs);
-    background-color: rgba(var(--color-background-rgb), 0.45);
+    background-color: rgba(var(--color-background-rgb), 0.55);
     border: none;
     border-radius: var(--radius-lg);
     cursor: pointer;
@@ -111,15 +111,14 @@ $max-z: 20;
 
     color: rgba(var(--color-foreground-rgb), 0.5);
     box-shadow:
-    0 0 1px 0 rgba(0, 0, 0, 0.40),
+    0 0 1px 0 rgba(var(--color-foreground-rgb), 0.30),
     0 0 7px 0 rgba(0, 0, 0, 0.10);
     backdrop-filter: blur(22px);
     -webkit-backdrop-filter: blur(22px);
 }
 
 .expandButton:hover {
-    background-color: rgba(var(--color-background-rgb), 0.45);
-    color: var(--brand-blue);
+    color: var(--color-foreground);
 }
 
 .buttonWrapper {
@@ -143,7 +142,7 @@ $max-z: 20;
 .notificationCard {
     margin: 0 5px;
     position: relative;
-    background-color: rgba(var(--color-background-rgb), 0.45);
+    background-color: rgba(var(--color-background-rgb), 0.55);
     border-radius: var(--radius-lg);
     padding:calc(var(--space-sm) * 1.6);
     display: flex;
@@ -160,7 +159,7 @@ $max-z: 20;
     will-change: transform, opacity, max-height;
     transform: translate3d(0, 0, 0);
     box-shadow:
-    0 0 1px 0 rgba(0, 0, 0, 0.40),
+    0 0 1px 0 rgba(var(--color-foreground-rgb), 0.30),
     0 0 7px 0 rgba(0, 0, 0, 0.10);
 }
 
