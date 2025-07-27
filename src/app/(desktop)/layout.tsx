@@ -11,6 +11,7 @@ export default function DesktopLayout() {
 
     <Head>
         {/* Warm up the browser cache for those routes without running entire js */}
+        <link rel="prefetch" href="/embed/archive?category=Work" as="document" />
         <link rel="prefetch" href="/embed/archive" as="document" />
         <link rel="prefetch" href="/embed/about"   as="document" />
       </Head>
