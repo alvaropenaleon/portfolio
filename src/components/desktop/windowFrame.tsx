@@ -114,7 +114,7 @@ export default function WindowFrame({
     }}
   >
       <div className={styles.titleBar} onPointerDown={onPointerDown}>
-        <button className={styles.closeBtn} onClick={onClose} />
+        <button className={styles.closeBtn} onPointerDown={e => e.stopPropagation()} onClick={onClose} />
         <span className={styles.title}>{title}</span>
       </div>
       <div className={styles.windowContent}>{children}</div>
