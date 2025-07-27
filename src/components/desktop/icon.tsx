@@ -5,13 +5,13 @@ import Image from 'next/image';
 interface IconProps {
   label: string;
   iconSrc: string;
-  onDoubleClick: () => void;
+  onClick: () => void;
 }
 
-export default function Icon({ label, iconSrc, onDoubleClick }: IconProps) {
+export default function Icon({ label, iconSrc, onClick }: IconProps) {
   return (
     <div className={styles.iconContainer}>
-    <div className={styles.icon} onDoubleClick={onDoubleClick}>
+    <div className={styles.icon} onClick={onClick}>
       <Image
         src={iconSrc}
         alt={label}
