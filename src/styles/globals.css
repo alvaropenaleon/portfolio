@@ -66,13 +66,11 @@ h3 {
 }
 
 h2 {
-    letter-spacing: -0.02em;
     font-optical-sizing: none;
     font-size: var(--font-lg);
 }
 
 h1 {
-    letter-spacing: -0.02em;
     font-optical-sizing: none;
     font-size: var(--font-xl);
     line-height: 1.3;
