@@ -90,6 +90,14 @@
 
 /* ───────── Window frame (outer wrapper) ───────── */
 .windowFrame {
+    transform: scale(0.8);
+    opacity: 0;
+    transition: 
+    transform 200ms cubic-bezier(0.4, 0.0, 0.2, 1),
+    opacity   200ms cubic-bezier(0.4, 0.0, 0.2, 1);
+    transform-origin: center center;
+    will-change: transform, opacity;
+
   display: flex;
   flex-direction: column;
   background: var(--color-background);
@@ -103,6 +111,11 @@
   overflow: hidden;     /* crop iframe corners */
   position: relative;   /* context for absolute children */
 }
+
+.windowFrame.open {
+    transform: scale(1);
+    opacity: 1;
+  }
 
 
 /* ───────── Title bar (unchanged) ───────── */

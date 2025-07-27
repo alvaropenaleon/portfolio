@@ -1,9 +1,11 @@
 // windowFrame.tsx
 "use client";
 
-import { CSSProperties, ReactNode, useRef } from "react";
+import { CSSProperties, ReactNode, useRef, useEffect, useState } from "react";
 import type { Geometry } from "./windowDefaults";
 import styles from "@/styles/desktop/windowFrame.module.css";
+import clsx from 'clsx';
+
 
 const OVERFLOW = 100;
 
@@ -32,6 +34,7 @@ export default function WindowFrame({
 }: Props) {
   const frameRef = useRef<HTMLDivElement>(null);
   const dragRef = useRef<{ x: number; y: number; left: number; top: number; w: number; h: number } | undefined>(undefined);
+  const [isOpen, setIsOpen] = useState(false);
 
   const onPointerDown = (e: React.PointerEvent) => {
     e.stopPropagation();
@@ -83,14 +86,33 @@ export default function WindowFrame({
     }
     dragRef.current = undefined;
   };
+
+  useEffect(() => {
+    if (!hidden) {
+      requestAnimationFrame(() => {
+        setIsOpen(true);
+      });
+    } else {
+      setIsOpen(false);
+    }
+  }, [hidden]);
   
 
   return (
     <div
-      ref={frameRef}
-      className={`${styles.windowFrame} ${className}`}
-      style={{ position: "absolute", display: hidden ? "none" : "flex", zIndex, ...style }}
-    >
+    ref={frameRef}
+    className={clsx(
+        styles.windowFrame,
+        isOpen && styles.open,
+        className
+      )}
+    style={{
+      position: "absolute",
+      visibility: hidden ? "hidden" : "visible",
+      zIndex,
+      ...style,
+    }}
+  >
       <div className={styles.titleBar} onPointerDown={onPointerDown}>
         <button className={styles.closeBtn} onClick={onClose} />
         <span className={styles.title}>{title}</span>
