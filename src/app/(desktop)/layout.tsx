@@ -1,4 +1,5 @@
 // app/(desktop)/layout.tsx
+import Head from 'next/head';                          // ← ADD this import
 import DesktopView         from '@/components/desktop/desktopView';
 import { WindowManagerProvider } from '@/components/desktop/windowManager';
 import Sidebar             from '@/components/ui/sidebar';
@@ -8,11 +9,11 @@ export default function DesktopLayout() {
   return (
     <>
 
-      {/* Warm‑up iframes (hidden) */}
-      <div style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden' }}>
-        <iframe src="/embed/archive" />
-        <iframe src="/embed/about" />
-      </div>
+    <Head>
+        {/* Warm up the browser cache for those routes without running entire js */}
+        <link rel="prefetch" href="/embed/archive" as="document" />
+        <link rel="prefetch" href="/embed/about"   as="document" />
+      </Head>
       
       <WindowManagerProvider>
         <DesktopView />   {/* no more {children} – windows are handled internally */}
