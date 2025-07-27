@@ -7,7 +7,7 @@ import styles from "@/styles/desktop/windowFrame.module.css";
 import clsx from 'clsx';
 
 
-const OVERFLOW = 100;
+const OVERFLOW = 400;
 
 interface Props {
   title: string;
