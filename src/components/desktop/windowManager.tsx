@@ -1,15 +1,18 @@
+// src/components/desktop/windowManager.tsx
 "use client";
 
 import {
-  useCallback, startTransition, createContext, useContext,
-  useState, useEffect, ReactNode,
+  useCallback,
+  startTransition,
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useRef,
+  ReactNode,
 } from "react";
 import { useRouter } from "next/navigation";
 import { windowDefaults, type GeometryOrFn, type Geometry } from "./windowDefaults";
-
-/* ---------- constants ------------------------------------------------ */
-const GUTTER = 15;
-const CASCADE_SHIFT = 30;
 
 export type WindowID = "about" | "archive" | "work";
 
@@ -20,7 +23,7 @@ interface Win {
   z: number;
   visible: boolean;
   userMoved?: boolean;
-  dynamicTitle?: string; 
+  dynamicTitle?: string;
 }
 
 interface Ctx {
@@ -33,9 +36,12 @@ interface Ctx {
 }
 
 const WinCtx = createContext<Ctx | null>(null);
+/* ---------- constants ------------------------------------------------ */
+const GUTTER = 15;
+const CASCADE_SHIFT = 30;
+
 
 /* ---------- utils ---------------------------------------------------- */
-
 function resolveGeometry(entry: GeometryOrFn): Geometry {
   return typeof entry === "function" ? entry() : entry;
 }
@@ -55,10 +61,14 @@ function clampToViewport(
 /* ================================================================== */
 /*  Provider                                                          */
 /* ================================================================== */
-
 export function WindowManagerProvider({ children }: { children: ReactNode }) {
   const router = useRouter();
   const [wins, setWins] = useState<Win[]>([]);
+  const winsRef = useRef<Win[]>([]);
+  // keep ref in sync
+  useEffect(() => {
+    winsRef.current = wins;
+  }, [wins]);
 
   const buildPath = (id: WindowID, params?: Record<string, string>) =>
     `/${id}${params ? "?" + new URLSearchParams(params).toString() : ""}`;
@@ -69,135 +79,158 @@ export function WindowManagerProvider({ children }: { children: ReactNode }) {
     setWins(ws => {
       const maxZ = Math.max(0, ...ws.map(w => w.z));
       const exists = ws.find(w => w.id === id);
-      if (exists) return ws.map(w => w.id === id ? { ...w, path, z: maxZ + 1 } : w);
+      if (exists) {
+        return ws.map(w =>
+          w.id === id ? { ...w, path, z: maxZ + 1 } : w
+        );
+      }
 
-      const vw = window.innerWidth, vh = window.innerHeight;
       const base = resolveGeometry(windowDefaults[id]);
-
-        const isCentered = typeof windowDefaults[id] === 'function'; // centered = function-based
-        const shift = isCentered ? 0 : ws.length * CASCADE_SHIFT;
-
-        const geom = clampToViewport({
+      const shift = typeof windowDefaults[id] === "function" ? 0 : ws.length * CASCADE_SHIFT;
+      const geom = clampToViewport({
         ...base,
-        left: (typeof base.left === "number" ? base.left : 0) + shift,
-        top:  (typeof base.top  === "number" ? base.top  : 0) + shift,
-        }, vw, vh);
+        left: base.left + shift,
+        top: base.top + shift,
+      });
 
-      return [...ws, { id, path, geom, z: maxZ + 1, visible: false, userMoved: false }];
+      return [
+        ...ws,
+        { id, path, geom, z: maxZ + 1, visible: false, userMoved: false },
+      ];
     });
 
-    startTransition(() => router.push(path));
+    startTransition(() => {
+      router.push(path);
+    });
   }, [router]);
 
-  useEffect(() => {
-    function handleResize() {
-      const vw = window.innerWidth, vh = window.innerHeight;
-      setWins(ws =>
-        ws.map(w => {
-          const base = resolveGeometry(windowDefaults[w.id]);
-
-          if (!w.userMoved) {
-            return { ...w, geom: clampToViewport(base, vw, vh) };
-          }
-
-          return {
-            ...w,
-            geom: clampToViewport({ ...w.geom, width: base.width, height: base.height }, vw, vh),
-          };
-        })
-      );
-    }
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  const markLoaded = (id: WindowID) =>
-    setWins(ws => ws.map(w => w.id === id ? { ...w, visible: true } : w));
-
-  const close = (id: WindowID) => {
-    const remaining = wins.filter(w => w.id !== id);
+  const close = useCallback((id: WindowID) => {
+    // read current from ref
+    const remaining = winsRef.current.filter(w => w.id !== id);
     setWins(remaining);
+
     startTransition(() => {
-      if (!remaining.length) router.replace("/");
-      else {
+      if (remaining.length === 0) {
+        router.replace("/");
+      } else {
         const top = remaining.reduce((a, b) => (a.z > b.z ? a : b));
         router.replace(top.path);
       }
     });
-  };
+  }, [router]);
 
-  const bringToFront = (id: WindowID) =>
+  const bringToFront = useCallback((id: WindowID) => {
     setWins(ws => {
       const maxZ = Math.max(0, ...ws.map(w => w.z));
-      return ws.map(w => w.id === id ? { ...w, z: maxZ + 1 } : w);
+      return ws.map(w =>
+        w.id === id ? { ...w, z: maxZ + 1 } : w
+      );
     });
+  }, []);
 
-  const moveWindow = (id: WindowID, geom: Geometry) =>
+  const moveWindow = useCallback((id: WindowID, geom: Geometry) => {
     setWins(ws =>
       ws.map(w => w.id === id ? { ...w, geom, userMoved: true } : w)
     );
+  }, []);
 
+  const markLoaded = useCallback((id: WindowID) => {
+    setWins(ws =>
+      ws.map(w => w.id === id ? { ...w, visible: true } : w)
+    );
+  }, []);
+
+  /* Re‑center on resize */
+  useEffect(() => {
+    const onResize = () => {
+      const vw = window.innerWidth, vh = window.innerHeight;
+      setWins(ws =>
+        ws.map(w => {
+          const base = resolveGeometry(windowDefaults[w.id]);
+          if (!w.userMoved) {
+            return { ...w, geom: clampToViewport(base, vw, vh) };
+          }
+          return {
+            ...w,
+            geom: clampToViewport(
+              { ...w.geom, width: base.width, height: base.height },
+              vw,
+              vh
+            ),
+          };
+        })
+      );
+    };
+
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  /* PostMessage handler */
   useEffect(() => {
     const handleMsg = (e: MessageEvent) => {
       if (e.origin !== window.location.origin) return;
       const msg = e.data;
-
       if (msg?.type === "iframe-path") {
         const { id, path: newPath, title } = msg as {
           id: WindowID;
           path: string;
           title?: string;
         };
-      
-        // Update browser path (so the URL updates)
+
         router.replace(newPath.startsWith("/") ? newPath : "/" + newPath);
-      
         setWins(ws =>
-          ws.map(w => {
-            if (w.id !== id) return w;
-      
-            const [oldBase] = w.path.split("?");
-            const [newBase] = newPath.split("?");
-      
-            const shouldUpdatePath = oldBase !== newBase;
-      
-            return {
-              ...w,
-              ...(shouldUpdatePath ? { path: newPath } : {}),
-              ...(title ? { dynamicTitle: title } : {}),
-            };
-          })
+          ws.map(w =>
+            w.id !== id
+              ? w
+              : {
+                  ...w,
+                  path:
+                    newPath.split("?")[0] !== w.path.split("?")[0]
+                      ? newPath
+                      : w.path,
+                  dynamicTitle: title ?? w.dynamicTitle,
+                }
+          )
         );
       }
-      
 
       if (msg?.type === "open-window") {
-        const { id, params } = msg as { id: WindowID; params?: Record<string, string>; };
-        open(id, params);
+        open(msg.id, msg.params);
       }
 
-      if (msg?.type === "close-window") close((msg as { id: WindowID }).id);
+      if (msg?.type === "close-window") {
+        close(msg.id);
+      }
     };
 
     window.addEventListener("message", handleMsg);
     return () => window.removeEventListener("message", handleMsg);
-  }, [router, open, close]);
+  }, [open, close, router]);
 
+  /* Initial URL → open window on mount */
   useEffect(() => {
-    if (typeof window === "undefined") return;
     const url = new URL(window.location.href);
     const seg = url.pathname.split("/")[1] as WindowID;
     if (["about", "archive", "work"].includes(seg)) {
-      const baseParams: Record<string, string> = {};
-      url.searchParams.forEach((v, k) => (baseParams[k] = v));
-      open(seg, Object.keys(baseParams).length ? baseParams : undefined);
+      const params: Record<string, string> = {};
+      url.searchParams.forEach((v, k) => (params[k] = v));
+      open(seg, Object.keys(params).length ? params : undefined);
     }
-  }, [open]);
+    // run only once
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <WinCtx.Provider
-      value={{ windows: wins, open, close, bringToFront, markLoaded, moveWindow }}
+      value={{
+        windows: wins,
+        open,
+        close,
+        bringToFront,
+        markLoaded,
+        moveWindow,
+      }}
     >
       {children}
     </WinCtx.Provider>
@@ -207,6 +240,6 @@ export function WindowManagerProvider({ children }: { children: ReactNode }) {
 /* ---------- hook -------------------------------------------------- */
 export function useWindowManager() {
   const ctx = useContext(WinCtx);
-  if (!ctx) throw new Error("useWindowManager must be used within provider");
+  if (!ctx) throw new Error("useWindowManager must be used within WindowManagerProvider");
   return ctx;
 }
