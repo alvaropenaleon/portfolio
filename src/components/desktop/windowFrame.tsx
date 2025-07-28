@@ -101,6 +101,7 @@ export default function WindowFrame({
   return (
     <div
     ref={frameRef}
+    onPointerDown={onFocus}
     className={clsx(
         styles.windowFrame,
         isOpen && styles.open,
