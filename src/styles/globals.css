@@ -130,12 +130,10 @@ h2 a::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      360deg,
-      var(--bg1) 0%,
-      var(--bg2) 30%,
-      var(--bg3) 100%
-    );
+    background: 
+    radial-gradient(circle at 20% 30%,  var(--bg1) 0%, transparent 70%),
+    radial-gradient(circle at 80% 40%,  var(--bg2) 0%, transparent 70%),
+    radial-gradient(circle at 10% 80%,  var(--bg3) 0%, transparent 70%);
     opacity: 1;
     pointer-events: none;
     -webkit-backdrop-filter: blur(0px);
