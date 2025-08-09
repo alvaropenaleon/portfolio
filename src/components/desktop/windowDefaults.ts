@@ -1,5 +1,5 @@
 // src/components/desktop/windowDefaults.ts
-import type { WindowID } from './windowManager';
+import type { WindowID } from '@/lib/definitions';
 
 /** Geometry for the window’s initial footprint */
 export interface Geometry {

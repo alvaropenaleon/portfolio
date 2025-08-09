@@ -1,48 +1,92 @@
 'use client';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useDebouncedCallback } from 'use-debounce';
 import { Search } from 'lucide-react';
 import styles from '@/styles/archive/search.module.css';
+import { useEffect, useState, useCallback } from 'react';
+import { useWindowNav } from '@/hooks/useWindowNav';
 
 type SearchProps = {
-    placeholder?: string;
+  placeholder?: string;
 };
 
 export default function ArchiveSearch({ placeholder }: SearchProps) {
-    const router = useRouter();
-    const pathname = usePathname();
-    const searchParams = useSearchParams();
+  const { params, replaceParams } = useWindowNav('archive');
+  
+  const currentQuery = params.get('query') || '';
+  const [inputValue, setInputValue] = useState(currentQuery);
 
-    // Use debounce to avoid hitting  database on every keystroke
-    const handleSearch = useDebouncedCallback((term: string) => {
-        const params = new URLSearchParams(searchParams.toString());
-        // Reset to page 1 when the query changes
-        params.set('page', '1');
+  // Reset input when params are cleared externally (e.g., switching tabs, closing window)
+  useEffect(() => {
+    const urlQuery = params.get('query') || '';
+    // Only update if there's a significant difference to avoid unnecessary re-renders
+    if (inputValue !== urlQuery) {
+      setInputValue(urlQuery);
+    }
+  }, [params, inputValue]);
 
-        if (term) {
-            params.set('query', term);
-            // remove any category or tag filter when you type
-            params.delete('category');
-            params.delete('tag');
-        } else {
-            params.delete('query');
-        }
-        // Replace current URL with updated query params
-        router.replace(`${pathname}?${params.toString()}`);
-    }, 100);
+  const applySearch = useCallback(
+    (term: string) => {
+      const trimmedTerm = term.trim();
+      if (trimmedTerm) {
+        replaceParams({
+          query: trimmedTerm,
+          category: undefined,
+          tag: undefined,
+          page: '1',
+        });
+      } else {
+        replaceParams({
+          query: undefined,
+          category: undefined,
+          tag: undefined,
+          page: '1',
+        });
+      }
+    },
+    [replaceParams]
+  );
 
-    return (
-        <div className={styles.searchContainer}>
-            <Search className={styles.searchIcon} size={15} />
-            <input
-                type="text"
-                defaultValue={searchParams.get('query') || ''}
-                placeholder={placeholder || 'Type to search'}
-                onChange={(e) => {
-                    handleSearch(e.target.value);
-                }}
-                className={styles.searchInput}
-            />
-        </div>
-    );
+  const debouncedApply = useDebouncedCallback((term: string) => {
+    applySearch(term);
+  }, 150);
+
+  const handleInputChange = (value: string) => {
+    setInputValue(value);
+    debouncedApply(value);
+  };
+
+  const handleClear = () => {
+    setInputValue('');
+    // Clear immediately without debouncing
+    replaceParams({
+      query: undefined,
+      category: undefined,
+      tag: undefined,
+      page: '1',
+    });
+  };
+
+  return (
+    <div className={styles.searchContainer}>
+      <Search className={styles.searchIcon} size={15} />
+      <input
+        type="text"
+        placeholder={placeholder}
+        value={inputValue}
+        onChange={(e) => handleInputChange(e.target.value)}
+        className={styles.searchInput}
+        aria-label="Archive search"
+      />
+      {inputValue && (
+        <button
+          onClick={handleClear}
+          className={styles.clearButton}
+          aria-label="Clear search"
+          style={{ marginLeft: 4 }}
+        >
+          ×
+        </button>
+      )}
+    </div>
+  );
 }

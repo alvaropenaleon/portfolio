@@ -1,13 +1,9 @@
-// components/archive/sidebar.tsx
 "use client";
-
-import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import styles from "@/styles/archive/sidebar.module.css";
-// import CategoryColorDot from '@/components/ui/categoryMapping';
 import { FolderClosed, Settings } from 'lucide-react';
 import { TagDot, sortTagsByColor } from "@/components/ui/tag";
 import clsx from 'clsx';
-
+import { useWindowNav } from '@/hooks/useWindowNav';
 
 interface Props {
   categories: string[];
@@ -18,58 +14,73 @@ interface Props {
 
 export default function CategorySidebar({
   categories,
-    tags,
+  tags,
   activeCategory,
-    activeTag,
+  activeTag,
 }: Props) {
-  const router = useRouter();
-  const pathname = usePathname();
-  const sp = useSearchParams();
+  const { replaceParams } = useWindowNav('archive');
 
   function go(category?: string, tag?: string) {
-    const params = new URLSearchParams(sp.toString());
-    params.set("page", "1");
-    
-    if (category) { params.set('category', category); params.delete('tag'); }
-    else if (tag) { params.set('tag', tag); params.delete('category'); }
-    else { params.delete('category'); params.delete('tag'); }
-
-    router.replace(`${pathname}?${params.toString()}`);
+    if (category) {
+      replaceParams({
+        category,
+        tag: undefined,
+        query: undefined,
+        page: '1',
+      });
+    } else if (tag) {
+      replaceParams({
+        tag,
+        category: undefined,
+        query: undefined,
+        page: '1',
+      });
+    } else {
+      // Going to root archive - clear all filters
+      replaceParams({
+        category: undefined,
+        tag: undefined,
+        query: undefined,
+        page: undefined, // Remove page param for clean root URL
+      });
+    }
   }
 
+  // Check if we're in the root archive view (no filters)
+  const isRootView = !activeCategory && !activeTag;
+  
   return (
     <ul className={styles.list}>
       {/* Favourites */}
       <h3 className={styles.title}>Favourites</h3>
       <li
-          className={clsx(styles.favItem, !activeCategory ? styles.active : "")}
-          onClick={() => go()}
+        className={clsx(styles.favItem, isRootView && styles.active)}
+        onClick={() => go()}
       >
-        <FolderClosed size={15}  strokeWidth={1.6} className={styles.folderIcon} />
+        <FolderClosed size={15} strokeWidth={1.6} className={styles.folderIcon} />
         Archive
       </li>
-
-      {/* Categories  
-      <h3 className={styles.title}>Categories</h3> */}
+      
+      {/* Categories - Only show Work category */}
       {categories
-        .filter(cat => cat == "Work")   // only render work category
+        .filter(cat => cat === "Work")
         .map((category) => (
-        <li
-          key={category}
-          className={clsx(styles.catItem, activeCategory === category ? styles.active : '')}
-          onClick={() => go(category)}
-        >
-          <Settings size={15} strokeWidth={1.6} className={styles.folderIcon} />
-          {category}
-        </li>
-      ))} 
-
+          <li
+            key={category}
+            className={clsx(styles.catItem, activeCategory === category && styles.active)}
+            onClick={() => go(category)}
+          >
+            <Settings size={15} strokeWidth={1.6} className={styles.folderIcon} />
+            {category}
+          </li>
+        ))}
+      
       {/* Tags */}
       <h3 className={styles.title}>Tags</h3>
       {sortTagsByColor(tags).map((tag) => (
         <li
           key={tag}
-          className={clsx(styles.tagItem, activeTag === tag ? styles.active : "")}
+          className={clsx(styles.tagItem, activeTag === tag && styles.active)}
           onClick={() => go(undefined, tag)}
         >
           <TagDot tag={tag} />

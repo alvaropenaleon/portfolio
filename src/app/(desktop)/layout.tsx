@@ -1,23 +1,24 @@
-// app/(desktop)/layout.tsx
-import Head from 'next/head';                          // ← ADD this import
-import DesktopView         from '@/components/desktop/desktopView';
+import Head from 'next/head';
 import { WindowManagerProvider } from '@/components/desktop/windowManager';
-import Sidebar             from '@/components/ui/sidebar';
-import Notifications       from '@/components/about/notifications';
+import Sidebar from '@/components/ui/sidebar';
+import Notifications from '@/components/about/notifications';
+import type { ReactNode } from 'react';
 
-export default function DesktopLayout() {
+export default function DesktopLayout({
+  children,
+}: {
+  children: ReactNode
+}) {
   return (
     <>
-
-    <Head>
-        {/* Warm up the browser cache for those routes without running entire js */}
-        <link rel="prefetch" href="/embed/archive?category=Work" as="document" />
-        <link rel="prefetch" href="/embed/archive" as="document" />
-        <link rel="prefetch" href="/embed/about"   as="document" />
+      <Head>
+        {/* Warm up the browser cache for key routes (no iframe usage anymore) */}
+        <link rel="prefetch" href="/about" as="document" />
+        <link rel="prefetch" href="/archive" as="document" />
       </Head>
-      
+
       <WindowManagerProvider>
-        <DesktopView />   {/* no more {children} – windows are handled internally */}
+        {children}
       </WindowManagerProvider>
 
       <Sidebar>
