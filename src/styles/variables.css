@@ -16,9 +16,10 @@
   --color-text: #222;
   --color-line: rgba(120, 120, 128, 0.4);
 
-  --bg1: hsl(226 100% 90% / 1);  /* periwinkle  (#c8d6ff) */
-  --bg2: hsl(348 100% 85% / 1);  /* rose        (#ffb3c1) */
-  --bg3: hsl(26 100% 82% / 1);   /* peach       (#ffd1a6) */
+  --bg1: #d7c823; /* yellow/green */
+  --bg2: #e228c0; /* magenta */
+  --bg3: #00ffe1; /* cyan */
+  --bg4: #1481f5; /* blue  */
 
   
 
@@ -121,9 +122,11 @@
     --color-foreground-rgb: 237, 237, 237;
     --color-line: rgba(252, 252, 252, 0.2);
 
-    --bg1: hsl(222 58% 10% / 1); /* deep indigo-navy (#11213a approx) */
-    --bg2: hsl(325 50% 15% / 1); /* deep plum       (#3d152b approx) */
-    --bg3: hsl(12 100% 30% / 1); /* deep coral      (#991e00 approx) */
+
+    --bg1: #b6a90f;
+    --bg2: #c01aa7;
+    --bg3: #00d6c2;
+    --bg4: #0f66d7;
     
     
 
