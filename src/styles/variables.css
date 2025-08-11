@@ -16,10 +16,11 @@
   --color-text: #222;
   --color-line: rgba(120, 120, 128, 0.4);
 
-  --bg1: #d7c823; /* yellow/green */
-  --bg2: #e228c0; /* magenta */
-  --bg3: #00ffe1; /* cyan */
-  --bg4: #1481f5; /* blue  */
+
+  --bg1: hsl(223 50% 52% / 1);  /* indigo-navy */
+  --bg2: hsl(262 43% 57% / 1);  /* iris */
+  --bg3: hsl(190 42% 52% / 1);  /* teal-cyan */
+  --bg4: hsl(43  62% 52% / 1);  /* brass/gold accent */
 
   
 
@@ -123,10 +124,11 @@
     --color-line: rgba(252, 252, 252, 0.2);
 
 
-    --bg1: #b6a90f;
-    --bg2: #c01aa7;
-    --bg3: #00d6c2;
-    --bg4: #0f66d7;
+
+    --bg1: hsl(223 52% 16% / 1);
+    --bg2: hsl(262 44% 28% / 1);
+    --bg3: hsl(190 44% 26% / 1);
+    --bg4: hsl(43  64% 40% / 1);
     
     
 

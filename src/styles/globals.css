@@ -159,7 +159,7 @@ h2 a::after {
       radial-gradient(100% 100% at var(--b4x) var(--b4y), var(--bg4) -100%, transparent),
       var(--color-background); /* same as the sample’s trailing #ffffff color */
     
-    animation: g-4 7s ease-in-out infinite;
+    animation: g-4 10s ease-in-out infinite;
   }
   
   /* Keyframes — mapped to b1..b4 */
