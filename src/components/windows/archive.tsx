@@ -20,29 +20,22 @@ type FilterSet = {
 };
 
 /**
- * Applies precedence query > tag > category to raw URL + stored payload
+ * Applies precedence query > tag > category to raw URL
  */
 function deriveFilters(
   rawQuery: string,
   rawCategory: string,
   rawTag: string,
-  stored?: { query: string; category: string; tag: string }
+
 ): { query: string; category: string; tag: string } {
   const query = rawQuery;
   const tag = query ? '' : rawTag;
-  const category = query || tag ? (tag ? '' : rawCategory) : rawCategory;
-  
-  // Only use stored values if there are no URL parameters
-  const hasUrlParams = rawQuery || rawCategory || rawTag;
-  
-  const effectiveQuery = query || (!hasUrlParams && stored?.query) || '';
-  const effectiveTag = tag || (!hasUrlParams && !query && stored?.tag) || '';
-  const effectiveCategory = category || (!hasUrlParams && !query && !tag && stored?.category) || '';
+  const category = query || tag ? '' : rawCategory;
   
   return {
-    query: effectiveQuery,
-    category: effectiveCategory,
-    tag: effectiveTag,
+    query: query || '',
+    category: category || '',
+    tag: tag || '',
   };
 }
 
@@ -66,7 +59,6 @@ export default function ArchiveClientWrapper() {
     rawQuery,
     rawCategory,
     rawTag,
-    storedPayload
   );
 
   const normFilters: FilterSet = {
@@ -86,11 +78,11 @@ export default function ArchiveClientWrapper() {
 
   // authoritative data from last successful fetch
   const [authoritative, setAuthoritative] = useState<ArchiveResponse | null>(null);
-
+  
   // Keep an unfiltered last full snapshot to derive immediate filtering
   const lastFullSnapshotRef = useRef<ArchiveResponse | null>(null);
 
-  // Reset state when window reopens without stored payload
+  // Reset state when window opens fresh (no stored payload)
   useEffect(() => {
     if (archiveWindow?.open && !storedPayload) {
       setLastApplied({
@@ -104,117 +96,147 @@ export default function ArchiveClientWrapper() {
     }
   }, [archiveWindow?.open, storedPayload]);
 
-  // Initialize from stored payload if available
+  // Initialize from stored payload if available AND it matches current filters
   useEffect(() => {
     if (storedPayload && !authoritative) {
-      setAuthoritative({
-        projects: storedPayload.projects,
-        totalPages: storedPayload.totalPages,
-        categories: storedPayload.categories,
-        tags: storedPayload.tags,
-      });
-      setLastApplied({
-        query: storedPayload.query || '',
-        category: storedPayload.category || '',
-        tag: storedPayload.tag || '',
-        page: '1',
-      });
-    }
-  }, [storedPayload, authoritative]);
+      
+      // Check if stored payload matches current filters
+      const payloadMatchesCurrent = 
+        (storedPayload.query || '') === normFilters.query &&
+        (storedPayload.category || '') === normFilters.category &&
+        (storedPayload.tag || '') === normFilters.tag;
 
-  // update last full snapshot when appropriate
+      if (payloadMatchesCurrent) {
+        setAuthoritative({
+          projects: storedPayload.projects,
+          totalPages: storedPayload.totalPages,
+          categories: storedPayload.categories,
+          tags: storedPayload.tags,
+        });
+        setLastApplied({
+          query: storedPayload.query || '',
+          category: storedPayload.category || '',
+          tag: storedPayload.tag || '',
+          page: '1',
+        });
+      } else {
+        // Clear authoritative if it doesn't match
+          lastFullSnapshotRef.current = {
+            projects: storedPayload.projects,
+            totalPages: storedPayload.totalPages,
+            categories: storedPayload.categories,
+            tags: storedPayload.tags,
+        };
+        }
+    }
+  }, [storedPayload, authoritative, normFilters]);
+
+  // Update last full snapshot when appropriate
   useEffect(() => {
     if (!authoritative) return;
-    const isBase =
+    
+    const isBaseState =
       lastApplied.query === '' &&
       lastApplied.tag === '' &&
       lastApplied.category === '';
-    if (isBase || !lastFullSnapshotRef.current) {
+    
+    if (isBaseState || !lastFullSnapshotRef.current) {
       lastFullSnapshotRef.current = authoritative;
     }
   }, [authoritative, lastApplied]);
 
   // Build the canonical URL string based on precedence
-  const buildCanonicalSearch = (): string => {
-    const params = new URLSearchParams();
-    if (normFilters.query) {
-      params.set('query', normFilters.query);
-    } else if (normFilters.tag) {
-      params.set('tag', normFilters.tag);
-    } else if (normFilters.category) {
-      params.set('category', normFilters.category);
-    }
-    if (normFilters.page && normFilters.page !== '1') {
-      params.set('page', normFilters.page);
-    }
-    return params.toString();
-  };
+  // Stable search string derived from filters
+    const canonicalSearch = useMemo(() => {
+        const p = new URLSearchParams();
+        if (normFilters.query) p.set('query', normFilters.query);
+        else if (normFilters.tag) p.set('tag', normFilters.tag);
+        else if (normFilters.category) p.set('category', normFilters.category);
+        if (normFilters.page && normFilters.page !== '1') p.set('page', normFilters.page);
+        return p.toString();
+    }, [normFilters]);
+  
 
-  // effect: fetch authoritative data when filters change
-  const abortRef = useRef<AbortController | null>(null);
-  useEffect(() => {
-    const canonicalSearch = buildCanonicalSearch();
-    
+  // Effect: fetch authoritative data when filters change
+  // Effect: fetch authoritative data when filters change
+    const abortRef = useRef<AbortController | null>(null);
+    useEffect(() => {
     // Check if we need to fetch
     if (
-      normFilters.query === lastApplied.query &&
-      normFilters.category === lastApplied.category &&
-      normFilters.tag === lastApplied.tag &&
-      normFilters.page === lastApplied.page &&
-      authoritative
+        normFilters.query === lastApplied.query &&
+        normFilters.category === lastApplied.category &&
+        normFilters.tag === lastApplied.tag &&
+        normFilters.page === lastApplied.page &&
+        authoritative
     ) {
-      return;
+        return;
     }
 
     if (abortRef.current) {
-      abortRef.current.abort();
+        abortRef.current.abort();
     }
     const ac = new AbortController();
     abortRef.current = ac;
 
     fetch(`/api/archive?${canonicalSearch}`, { signal: ac.signal })
-      .then((res) => {
+        .then((res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();
-      })
-      .then((fetched: ArchiveResponse) => {
+        })
+        .then((fetched: ArchiveResponse) => {
         if (ac.signal.aborted) return;
         setAuthoritative(fetched);
         setLastApplied(normFilters);
-        
+
         setPayload('archive', {
-          projects: fetched.projects,
-          totalPages: fetched.totalPages,
-          categories: fetched.categories,
-          tags: fetched.tags,
-          query: normFilters.query,
-          category: normFilters.category,
-          tag: normFilters.tag,
+            projects: fetched.projects,
+            totalPages: fetched.totalPages,
+            categories: fetched.categories,
+            tags: fetched.tags,
+            query: normFilters.query,
+            category: normFilters.category,
+            tag: normFilters.tag,
         });
-      })
-      .catch((err) => {
+        })
+        .catch((err) => {
         if (err.name === 'AbortError') return;
         console.error('Archive fetch error', err);
-      });
-  }, [
+        });
+    }, [
+    // stable URL
+    canonicalSearch,
+    // filter state we compare against lastApplied
     normFilters.query,
     normFilters.category,
     normFilters.tag,
     normFilters.page,
+    // compare-to baselines and setters
     lastApplied.query,
     lastApplied.category,
     lastApplied.tag,
     lastApplied.page,
     authoritative,
     setPayload,
-    buildCanonicalSearch
-  ]);
+    ]);
+
+    // Abort any in-flight fetch on unmount
+    useEffect(() => {
+        return () => {
+        if (abortRef.current) {
+            abortRef.current.abort();
+        }
+        };
+    }, []);
+  
+
 
   // Derive visible data without flash: authoritative if matching, else locally filtered snapshot
   const visibleData: ArchiveResponse | null = useMemo(() => {
-    if (!authoritative && !lastFullSnapshotRef.current) return null;
+    if (!authoritative && !lastFullSnapshotRef.current) {
+      return null;
+    }
     const base = lastFullSnapshotRef.current || authoritative!;
-
+    
     const matchesAuthoritative =
       lastApplied.query === normFilters.query &&
       lastApplied.category === normFilters.category &&
@@ -226,6 +248,7 @@ export default function ArchiveClientWrapper() {
       return authoritative;
     }
 
+    // Apply local filtering to base data
     let filtered = base.projects;
     if (normFilters.query) {
       const term = normFilters.query.toLowerCase();
