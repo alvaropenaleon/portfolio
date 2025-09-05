@@ -92,10 +92,15 @@ export const useWindowStore = create<WindowStore>()(
         const maxZ = Math.max(0, ...Object.values(state.wins).filter(Boolean).map(w => w!.z));
         
         if (existing) {
+          // Reset geometry to default position when reopening a window
+          const defaultGeom = getDefaultGeometry(id);
+          
           const updatedWin = {
             ...existing,
             z: maxZ + 1,
             open: true,
+            geom: existing.userMoved ? existing.geom : defaultGeom, // Keep custom position only if user moved it
+            userMoved: false, // Reset userMoved flag when reopening
             payload: init?.payload ?? existing.payload,
           };
           
@@ -107,6 +112,9 @@ export const useWindowStore = create<WindowStore>()(
               params[key] = value;
             });
             updatedWin.route = { pathname: `/${id}`, params };
+          } else {
+            // Clear route params when opening without pathOverride
+            updatedWin.route = { pathname: `/${id}`, params: {} };
           }
           
           const newState = {
@@ -127,6 +135,7 @@ export const useWindowStore = create<WindowStore>()(
           open: true,
           route: { pathname: `/${id}`, params: {} },
           payload: init?.payload,
+          userMoved: false,
         };
         
         // Handle pathOverride for new windows
@@ -152,14 +161,23 @@ export const useWindowStore = create<WindowStore>()(
     
     close: (id) => {
       set((state) => {
+        const win = state.wins[id];
+        if (!win) return state;
+        
         const newState = {
           wins: {
             ...state.wins,
-            [id]: state.wins[id] ? { ...state.wins[id]!, open: false } : undefined
+            [id]: { 
+              ...win, 
+              open: false,
+              // Reset position to default when closing
+              geom: getDefaultGeometry(id),
+              userMoved: false
+            }
           }
         };
         
-        // Reset archive params when closing archive window
+        // Clear archive-specific state when closing archive window
         if (id === 'archive' && newState.wins[id]) {
           newState.wins[id]!.route.params = {};
           // Clear payload to ensure fresh start
