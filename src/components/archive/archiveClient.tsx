@@ -50,16 +50,27 @@ export default function ArchiveClient({
   const currentCategory = params.get('category') || '';
   const currentTag = params.get('tag') || '';
 
-  useEffect(() => {
-    // Reset expansion state when switching between filtered and unfiltered views
-    const isFiltered = !!(currentQuery || currentCategory || currentTag);
-    if (isFiltered) {
-      setExpanded(new Set()); // Collapse all when filtering
-    } else {
-      // Auto-expand all categories when not filtering to show all items
-      setExpanded(new Set(categories));
-    }
-  }, [currentQuery, currentCategory, currentTag, categories]);
+  // Load initial folder state from sessionStorage on first render
+    useEffect(() => {
+        const savedExpanded = sessionStorage.getItem('archive-expanded-folders');
+        if (savedExpanded) {
+        try {
+            const expandedArray = JSON.parse(savedExpanded);
+            setExpanded(new Set(expandedArray));
+        } catch (error) {
+            console.error('Failed to parse saved folder state:', error);
+            setExpanded(new Set()); // Fallback to collapsed
+        }
+        } else {
+        setExpanded(new Set()); // Start collapsed on first visit
+        }
+    }, []); // Empty dependency array,  only run once on mount
+    
+    // Save folder state to sessionStorage whenever it changes
+    useEffect(() => {
+        const expandedArray = Array.from(expanded);
+        sessionStorage.setItem('archive-expanded-folders', JSON.stringify(expandedArray));
+    }, [expanded]);
 
   /** Fetch full record for preview */
   const loadFullProject = useCallback(async (id: string) => {
