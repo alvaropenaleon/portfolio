@@ -87,7 +87,6 @@ export default function ArchiveSearch({ placeholder }: SearchProps) {
           onClick={handleClear}
           className={styles.clearButton}
           aria-label="Clear search"
-          style={{ marginLeft: 4 }}
         >
           ×
         </button>
