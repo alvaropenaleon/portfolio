@@ -112,39 +112,84 @@ h2 a::after {
   */
 
 
-/* globals.css */
+
 .desktop-root {
     width: 100vw;
     height: 100vh;
     position: relative;
     overflow: hidden;
-  
-    /* bottom-most layer = photo wallpaper */
-    background: url("/wallpaper.jpg") center/cover no-repeat;
-    /* background-size: 30px 30px; */
-
+    /* isolation: isolate;
+    background: url("/wallpaper.jpg") center/cover no-repeat;  */
+    background-color: var(--color-background);
   }
   
-  /* translucent 10 % gradient on top */
+  /* Register animatable custom properties */
+  @property --b1x { syntax: "<percentage>"; inherits: false; initial-value: 87.23379629629622%; }
+  @property --b1y { syntax: "<percentage>"; inherits: false; initial-value: 83.08008213552361%; }
+  @property --b2x { syntax: "<percentage>"; inherits: false; initial-value: 18.900462962962923%; }
+  @property --b2y { syntax: "<percentage>"; inherits: false; initial-value: 78.15195071868584%; }
+  @property --b3x { syntax: "<percentage>"; inherits: false; initial-value: 88.62268518518512%; }
+  @property --b3y { syntax: "<percentage>"; inherits: false; initial-value: 15.071868583162217%; }
+  @property --b4x { syntax: "<percentage>"; inherits: false; initial-value: 11.712962962962967%; }
+  @property --b4y { syntax: "<percentage>"; inherits: false; initial-value: 16.550308008213555%; }
+  
+  /* Set starting values */
+  :root {
+    --b1x: 87.23379629629622%;
+    --b1y: 83.08008213552361%;
+    --b2x: 18.900462962962923%;
+    --b2y: 78.15195071868584%;
+    --b3x: 88.62268518518512%;
+    --b3y: 15.071868583162217%;
+    --b4x: 11.712962962962967%;
+    --b4y: 16.550308008213555%;
+  }
+  
+  /* Animated gradient overlay - CREDITS for gradient structure: gradient-tool-lovat.vercel.app by David Drobnak */
   .desktop-root::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      360deg,
-      var(--bg1) 0%,
-      var(--bg2) 30%,
-      var(--bg3) 100%
-    );
-    opacity: 1;
     pointer-events: none;
-    -webkit-backdrop-filter: blur(0px);
-    backdrop-filter: blur(0px);
+    opacity: 0;
+  
+    background:
+      radial-gradient(100% 100% at var(--b1x) var(--b1y), var(--bg1) -100%, transparent),
+      radial-gradient(100% 100% at var(--b2x) var(--b2y), var(--bg2) -100%, transparent),
+      radial-gradient(100% 100% at var(--b3x) var(--b3y), var(--bg3) -100%, transparent),
+      radial-gradient(100% 100% at var(--b4x) var(--b4y), var(--bg4) -100%, transparent),
+      var(--color-background); /* same as the sample’s trailing #ffffff color */
+    
+    animation: g-4 10s ease-in-out infinite;
   }
-
+  
+  /* Keyframes — mapped to b1..b4 */
+  @keyframes g-4 {
+    25% {
+      --b1x: 88.11342592592592%; --b1y: 17.74127310061603%;
+      --b2x: 86.99074074074056%; --b2y: 80.29774127310063%;
+      --b3x: 11.157407407407389%; --b3y: 18.80903490759754%;
+      --b4x: 15.543981481481403%; --b4y: 78.31622176591377%;
+    }
+    50% {
+      --b1x: 13.888888888888834%; --b1y: 18.891170431211524%;
+      --b2x: 85.20833333333329%;  --b2y: 17.874743326488705%;
+      --b3x: 15%;                  --b3y: 85%;
+      --b4x: 100%;                 --b4y: 100%;
+    }
+    75% {
+      --b1x: 17.071759259259224%; --b1y: 75.56468172484597%;
+      --b2x: 13.136574074074%;    --b2y: 20.739219712525706%;
+      --b3x: 84.25925925925932%;  --b3y: 74.94866529774129%;
+      --b4x: 81.82870370370377%;  --b4y: 16.837782340862468%;
+    }
+  }
+  
+  /* Dark mode wallpaper , bg */
   @media (prefers-color-scheme: dark) {
     .desktop-root {
-        background: url("/wallpaper.jpg")  center/cover no-repeat;
+      /* background: url("/wallpaper.jpg") center/cover no-repeat; */
+      background-color: var(--color-background);
     }
   }
 

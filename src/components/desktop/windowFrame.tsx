@@ -1,11 +1,9 @@
-// windowFrame.tsx
 "use client";
 
 import { CSSProperties, ReactNode, useRef, useEffect, useState } from "react";
 import type { Geometry } from "./windowDefaults";
 import styles from "@/styles/desktop/windowFrame.module.css";
 import clsx from 'clsx';
-
 
 const OVERFLOW = 400;
 
@@ -43,8 +41,6 @@ export default function WindowFrame({
     const rect = el.getBoundingClientRect();
     dragRef.current = { x: e.clientX, y: e.clientY, left: rect.left, top: rect.top, w: rect.width, h: rect.height };
     el.setPointerCapture(e.pointerId);
-
-    // listen on the element
     el.addEventListener("pointermove", onPointerMove);
     el.addEventListener("pointerup", onPointerUp);
   };
@@ -55,13 +51,9 @@ export default function WindowFrame({
     const { x, y, left, top, w, h } = dragRef.current;
     const dx = e.clientX - x;
     const dy = e.clientY - y;
-
-    // compute & clamp
     const vw = window.innerWidth, vh = window.innerHeight;
     const newLeft = Math.min(Math.max(left + dx, - OVERFLOW), vw - w  + OVERFLOW);
     const newTop  = Math.min(Math.max(top + dy, 0), vh - h  + OVERFLOW);
-
-    // update DOM directly for smooth drag
     const el = frameRef.current!;
     el.style.left = newLeft + "px";
     el.style.top  = newTop  + "px";
@@ -72,8 +64,6 @@ export default function WindowFrame({
     el.releasePointerCapture(e.pointerId);
     el.removeEventListener("pointermove", onPointerMove);
     el.removeEventListener("pointerup", onPointerUp);
-
-    // commit final position into React state
     if (dragRef.current && onMove) {
       const left = parseFloat(el.style.left || "0");
       const top  = parseFloat(el.style.top  || "0");
@@ -96,24 +86,23 @@ export default function WindowFrame({
       setIsOpen(false);
     }
   }, [hidden]);
-  
 
   return (
     <div
-    ref={frameRef}
-    onPointerDown={onFocus}
-    className={clsx(
+      ref={frameRef}
+      onPointerDown={onFocus}
+      className={clsx(
         styles.windowFrame,
         isOpen && styles.open,
         className
       )}
-    style={{
-      position: "absolute",
-      visibility: hidden ? "hidden" : "visible",
-      zIndex,
-      ...style,
-    }}
-  >
+      style={{
+        position: "absolute",
+        visibility: hidden ? "hidden" : "visible",
+        zIndex,
+        ...style,
+      }}
+    >
       <div className={styles.titleBar} onPointerDown={onPointerDown}>
         <button className={styles.closeBtn} onPointerDown={e => e.stopPropagation()} onClick={onClose} />
         <span className={styles.title}>{title}</span>

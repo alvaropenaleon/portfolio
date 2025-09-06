@@ -16,9 +16,12 @@
   --color-text: #222;
   --color-line: rgba(120, 120, 128, 0.4);
 
-  --bg1: hsla(266deg 100% 95% / 0.5);
-  --bg2: hsla(267deg 100% 90% / 0.5);
-  --bg3: hsla(224deg 100% 80% / 0.5);
+
+  --bg1: hsl(224, 100%, 70%); 
+  --bg2: hsl(275, 100%, 72%);
+  --bg3: hsl(115, 100%, 71%);
+  --bg4: hsl(43, 100%, 71%);
+
   
 
    /* Spacing */
@@ -74,7 +77,7 @@
   --brand-grey-rgb: 111,162,208;
   */
   --brand-grey: #787880;
-  --brand-grey-rgb: 115, 147, 179;
+  --brand-grey-rgb: 173, 173, 179;
 
   --brand-blue: #0364E1;
   --brand-blue-rgb: 3, 100, 225;
@@ -120,9 +123,15 @@
     --color-foreground-rgb: 237, 237, 237;
     --color-line: rgba(252, 252, 252, 0.2);
 
-    --bg1: hsla(266deg 100% 35% / 0.5);
-    --bg2: hsla(267deg 100% 30% / 0.5);
-    --bg3: hsla(224deg 100% 20% / 0.5);
+
+
+    --bg1: hsl(224, 100%, 29%);
+    --bg2: hsl(275, 100%, 32%);
+    --bg3: hsl(115, 100%, 31%);
+    --bg4: hsl(43, 100%, 31%);
+    
+    
+
   
     --shadow-xs: 0 1px 2px rgba(255, 255, 255, 0.05);
     --shadow-sm: 0 2px 4px rgba(255, 255, 255, 0.05);

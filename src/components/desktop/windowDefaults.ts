@@ -1,5 +1,5 @@
 // src/components/desktop/windowDefaults.ts
-import type { WindowID } from './windowManager';
+import type { WindowID } from '@/lib/definitions';
 
 /** Geometry for the window’s initial footprint */
 export interface Geometry {
@@ -15,8 +15,8 @@ export type GeometryOrFn = Geometry | GeometryFn;
 
 /** Constants used for layout logic */
 const GUTTER = 16;
-const ARCHIVE_MAX_W = 1380;
-const ARCHIVE_MAX_H = 560;
+const ARCHIVE_MAX_W = 1300;
+const ARCHIVE_MAX_H = 500;
 const ABOUT_MAX_W   = 700;
 const ABOUT_MAX_H   = 440;
 
