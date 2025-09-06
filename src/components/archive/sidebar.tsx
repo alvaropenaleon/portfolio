@@ -18,7 +18,9 @@ export default function CategorySidebar({
   activeCategory,
   activeTag,
 }: Props) {
-  const { replaceParams } = useWindowNav('archive');
+  const { replaceParams, params } = useWindowNav('archive');
+  const currentProject = params.get('project') || undefined;
+
 
   function go(category?: string, tag?: string) {
     if (category) {
@@ -27,6 +29,7 @@ export default function CategorySidebar({
         tag: undefined,
         query: undefined,
         page: '1',
+        project: currentProject,
       });
     } else if (tag) {
       replaceParams({
@@ -34,6 +37,7 @@ export default function CategorySidebar({
         category: undefined,
         query: undefined,
         page: '1',
+        project: currentProject,
       });
     } else {
       // Going to root archive - clear all filters
@@ -42,6 +46,7 @@ export default function CategorySidebar({
         tag: undefined,
         query: undefined,
         page: undefined, // Remove page param for clean root URL
+        project: currentProject,
       });
     }
   }

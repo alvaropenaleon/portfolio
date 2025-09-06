@@ -11,9 +11,11 @@ type SearchProps = {
 
 export default function ArchiveSearch({ placeholder }: SearchProps) {
   const { params, replaceParams } = useWindowNav('archive');
+  const currentProject = params.get('project') || undefined;
   
   const currentQuery = params.get('query') || '';
   const [inputValue, setInputValue] = useState(currentQuery);
+  
 
   // Reset input when params are cleared externally (e.g., switching tabs, closing window)
   useEffect(() => {
@@ -33,6 +35,7 @@ export default function ArchiveSearch({ placeholder }: SearchProps) {
           category: undefined,
           tag: undefined,
           page: '1',
+          project: currentProject,
         });
       } else {
         replaceParams({
@@ -40,6 +43,7 @@ export default function ArchiveSearch({ placeholder }: SearchProps) {
           category: undefined,
           tag: undefined,
           page: '1',
+          project: currentProject,
         });
       }
     },
