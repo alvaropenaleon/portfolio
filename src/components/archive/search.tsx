@@ -47,7 +47,7 @@ export default function ArchiveSearch({ placeholder }: SearchProps) {
         });
       }
     },
-    [replaceParams]
+    [replaceParams, currentProject]
   );
 
   const debouncedApply = useDebouncedCallback((term: string) => {
@@ -67,6 +67,7 @@ export default function ArchiveSearch({ placeholder }: SearchProps) {
       category: undefined,
       tag: undefined,
       page: '1',
+      project: currentProject,
     });
   };
 
