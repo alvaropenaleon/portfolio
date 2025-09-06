@@ -40,17 +40,24 @@ export default function DesktopShell({ preload }: Props) {
   }, [clampAllToViewport]);
 
   // Initialize windows from URL path on mount (client-only)
-  useEffect(() => {
-    const pathParts = window.location.pathname.split('/');
-    const rawId = pathParts[1]; // about or archive
-    if (rawId === 'about' || rawId === 'archive') {
-      const already = windows.find((w) => w.id === rawId);
-      if (!already) {
-        if (rawId === 'about') open('about', { payload: preload.about });
-        if (rawId === 'archive') open('archive', { payload: preload.archive });
-      }
-    }
-  }, [open, windows, preload]);
+    useEffect(() => {
+        const pathParts = window.location.pathname.split('/');
+        const rawId = pathParts[1]; // about or archive
+        if (rawId === 'about' || rawId === 'archive') {
+        const already = windows.find((w) => w.id === rawId);
+        if (!already) {
+            if (rawId === 'about') open('about', { payload: preload.about });
+            if (rawId === 'archive') {
+            // Parse URL parameters and pass them to open
+            const pathOverride = window.location.pathname + window.location.search;
+            open('archive', { 
+                payload: preload.archive,
+                pathOverride: pathOverride  // preserves the URL parameters
+            });
+            }
+        }
+        }
+    }, [open, windows, preload]);
 
   return (
     <div className="desktop-root">
