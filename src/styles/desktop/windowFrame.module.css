@@ -86,6 +86,10 @@
     margin-left: -0.4rem;
   }
 
+  .aboutWindowFrame .windowContent {
+    padding: var(--space-sm);
+  }
+
   .archiveWindowFrame .titleBar,
 .aboutWindowFrame .titleBar {
     background: rgba(var(--brand-grey-rgb), 0.12);
@@ -155,7 +159,7 @@
   flex: 1;
   position: relative;
   overflow: auto;
-  padding: 16px;   
+  padding: 0px;   
 }
 
 /* Inner shadow exactly: 0 1 1 0 rgba(0,0,0,0.15) *
