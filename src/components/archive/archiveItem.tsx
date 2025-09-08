@@ -11,7 +11,9 @@ import clsx from "clsx";
 type Props = {
   project: Project;
   searchTerm: string;
-  onOpenProject?: (id: string) => void;
+  onOpenProject?: (project: Project) => void;
+  onHover?: () => void;
+  onFocus?: () => void;
   className?: string;
 };
 
@@ -19,6 +21,8 @@ function ArchiveItem({
   project,
   searchTerm,
   onOpenProject,
+  onHover, 
+  onFocus,
   className,
 }: Props) {
   const matched =
@@ -32,7 +36,9 @@ function ArchiveItem({
       tabIndex={0}
       data-archive-row
       className={clsx(rowStyles.row4col, className)}
-      onClick={() => onOpenProject?.(project.id)}
+      onClick={() => onOpenProject?.(project)}
+      onMouseEnter={onHover}
+      onFocus={onFocus ?? onHover}  
     >
       {/* col1: thumbnail */}
       <div className={rowStyles.col1}>

@@ -72,27 +72,72 @@ export default function ArchiveClient({
         sessionStorage.setItem('archive-expanded-folders', JSON.stringify(expandedArray));
     }, [expanded]);
 
-  /** Fetch full record for preview */
-  const loadFullProject = useCallback(async (id: string) => {
-    try {
-      const res = await fetch(`/api/project/${id}`);
-      if (res.ok) {
-        const project = (await res.json()) as Project;
-        setQuickView(project);
-      } else {
-        setQuickView(null);
-      }
-    } catch (error) {
-      console.error('Failed to load project:', error);
-      setQuickView(null);
-    }
-  }, []);
+    // cache
+    const projectCacheRef = useRef(new Map<string, Project>());
+    const inflightRef = useRef(new Map<string, Promise<Project | undefined>>());
 
-  /** Open a project but preserve category/tag filters */
-  const handleOpenProject = useCallback((id: string) => {
-    setParam("project", id);
-    loadFullProject(id);
-  }, [setParam, loadFullProject]);
+    const getProject = useCallback((id: string): Promise<Project | undefined> => {
+    const cached = projectCacheRef.current.get(id);
+    if (cached) return Promise.resolve(cached);
+
+    const existing = inflightRef.current.get(id);
+    if (existing) return existing;
+
+    const p = fetch(`/api/project/${id}`)
+        .then(res => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json() as Promise<Project>;
+        })
+        .then(proj => {
+        projectCacheRef.current.set(id, proj);
+        return proj;
+        })
+        .catch(e => {
+        console.error('Failed to fetch project', e);
+        return undefined;
+        })
+        .finally(() => {
+        inflightRef.current.delete(id);
+        });
+
+    inflightRef.current.set(id, p);
+    return p;
+    }, []);
+
+    // hover prefetch = warm cache + image, but DO NOT setQuickView
+    const prefetchProject = useCallback((p: Project) => {
+    if (!projectCacheRef.current.has(p.id)) void getProject(p.id);
+    const img = new window.Image();
+    img.src = p.heroImage;
+    }, [getProject]);
+
+    // click = show immediately, then enrich
+    const handleOpenProject = useCallback((p: Project) => {
+    setParam('project', p.id);
+    setQuickView(p);                    // optimistic
+    void getProject(p.id).then(full => {
+        if (full) {
+        setQuickView(prev => prev?.id === p.id ? { ...prev, ...full } : prev);
+        }
+    });
+    }, [setParam, getProject]);
+
+    // URL sync (avoid double fetch + stale overwrites)
+    const lastReqIdRef = useRef(0);
+    useEffect(() => {
+    const id = params.get('project');
+    if (!id) { setQuickView(null); return; }
+    if (quickView?.id === id) return;
+
+    const reqId = ++lastReqIdRef.current;
+    void getProject(id).then(full => {
+        if (full && reqId === lastReqIdRef.current) {
+        setQuickView(full);
+        }
+    });
+    }, [params, quickView?.id, getProject]);
+
+  
 
   /** Select a category as filter (flat list) */
   const handleCategorySelect = useCallback((cat: string) => {
@@ -102,15 +147,6 @@ export default function ArchiveClient({
     setQuickView(null);
   }, [setParam]);
 
-  /** Sync URL → quickView */
-  useEffect(() => {
-    const id = params.get("project");
-    if (id) {
-      loadFullProject(id);
-    } else {
-      setQuickView(null);
-    }
-  }, [params, loadFullProject]);
 
   /** Dynamic title into store */
   useEffect(() => {
@@ -203,6 +239,8 @@ export default function ArchiveClient({
                 project={p}
                 searchTerm={searchTerm}
                 onOpenProject={handleOpenProject}
+                onHover={() => prefetchProject(p)} 
+                onFocus={() => prefetchProject(p)}
               />
             ))
           ) : (
@@ -252,6 +290,8 @@ export default function ArchiveClient({
                         project={p}
                         searchTerm=""
                         onOpenProject={handleOpenProject}
+                        onHover={() => prefetchProject(p)} 
+                        onFocus={() => prefetchProject(p)}
                         className={rowStyles.indentedRow}
                       />
                     ))}
