@@ -28,6 +28,7 @@
     border-radius: var(--radius-sm);
 
     --archive-title-color: var(--color-foreground);
+    --archive-tag-color: rgba(var(--color-foreground-rgb), 0.6);
     
 
 }
@@ -72,7 +73,8 @@
     outline: none;
     background-color: var(--brand-blue) !important;
     --archive-title-color: white;
-    --dot-ring: white;  
+    --dot-ring: white;
+    --archive-tag-color: rgba(255,255,255, 0.8);
   }
 
 

@@ -28,6 +28,7 @@
 
 .catChevron{
     margin-left: -0.5rem;
+    color: var(--archive-title-color);
 }
 
 .catFolder {
@@ -44,4 +45,5 @@
     font-variation-settings: var(--var-md);
     font-size: var(--font-sm);
     margin-top: -0.3rem;
+    color: var(--archive-title-color);
 }

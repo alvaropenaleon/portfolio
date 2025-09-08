@@ -11,9 +11,10 @@
 
 .description, .tags, .date{
 
-    color: rgba(var(--color-foreground-rgb), 0.6);
+    color: var(--archive-tag-color);
 
 }
+
 
 .description, .title, .tags {
     display: block;            /* or inline-block if you prefer */
