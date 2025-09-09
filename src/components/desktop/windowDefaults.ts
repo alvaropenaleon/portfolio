@@ -19,6 +19,8 @@ const ARCHIVE_MAX_W = 1300;
 const ARCHIVE_MAX_H = 500;
 const ABOUT_MAX_W   = 700;
 const ABOUT_MAX_H   = 440;
+const IMAGE_MAX_W   = 720;
+const IMAGE_MAX_H   = 520;
 
 /** Per-window default size & position */
 export const windowDefaults: Record<WindowID, GeometryOrFn> = {
@@ -47,6 +49,20 @@ export const windowDefaults: Record<WindowID, GeometryOrFn> = {
       height: h,
       left: (vw - w) / 2,
       top: (vh - h) / 1.5,
+    };
+  },
+
+  image: () => {
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const w = Math.min(IMAGE_MAX_W, vw - GUTTER * 2);
+    const h = Math.min(IMAGE_MAX_H, vh - GUTTER * 2);
+    return{ 
+        position: "fixed",
+        width: w,
+        height: h,
+        left: (vw - w) / 5,
+        top: (vh - h) / 6,
     };
   },
 

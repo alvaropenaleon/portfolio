@@ -12,6 +12,7 @@ type Props = {
   project: Project;
   searchTerm: string;
   onOpenProject?: (project: Project) => void;
+  onOpenInWindow?: (project: Project) => void;
   onHover?: () => void;
   onFocus?: () => void;
   className?: string;
@@ -21,6 +22,7 @@ function ArchiveItem({
   project,
   searchTerm,
   onOpenProject,
+  onOpenInWindow,
   onHover, 
   onFocus,
   className,
@@ -37,6 +39,7 @@ function ArchiveItem({
       data-archive-row
       className={clsx(rowStyles.row4col, className)}
       onClick={() => onOpenProject?.(project)}
+      onDoubleClick={() => onOpenInWindow?.(project)}
       onMouseEnter={onHover}
       onFocus={onFocus ?? onHover}  
     >

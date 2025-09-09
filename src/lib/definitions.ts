@@ -49,13 +49,16 @@ export type ArchivePayload = {
 
 export type WorkPayload = { projectId?: string } | null;
 
+export type ImagePayload = { src: string; title?: string };
+
 export interface WindowPayloads {
   about: AboutPayload;
   archive: ArchivePayload;
   work: WorkPayload;
+  image: ImagePayload;
 }
 
-export type WindowID = keyof WindowPayloads; // 'about' | 'archive' | 'work'
+export type WindowID = keyof WindowPayloads; // 'about' | 'archive' | 'work' | 'image'
 
 // Archive filter helpers
 export type ArchiveFilters = {

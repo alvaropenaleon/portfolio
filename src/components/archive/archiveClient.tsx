@@ -44,6 +44,18 @@ export default function ArchiveClient({
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [placeCnt, setPlaceCnt] = useState(0);
+  const { open } = useWindowStore();
+
+  const openImageWindow = useCallback((p: Project) => {
+    // If you already have a window id for viewing images/files, use that id.
+    // I'll call it 'image' here.
+    open('image', {
+      payload: { src: p.heroImage, title: p.title },   // whatever your payload shape is
+      // Optional: make URL pretty if you want the address bar to reflect it
+      // pathOverride: `/image?src=${encodeURIComponent(p.heroImage)}`
+      pathOverride: `/image?id=${encodeURIComponent(p.id)}&title=${encodeURIComponent(p.title)}`
+    });
+  }, [open]);
 
   // Reset expansion state when filters change
   const currentQuery = params.get('query') || '';
@@ -239,6 +251,7 @@ export default function ArchiveClient({
                 project={p}
                 searchTerm={searchTerm}
                 onOpenProject={handleOpenProject}
+                onOpenInWindow={openImageWindow} 
                 onHover={() => prefetchProject(p)} 
                 onFocus={() => prefetchProject(p)}
               />
@@ -290,6 +303,7 @@ export default function ArchiveClient({
                         project={p}
                         searchTerm=""
                         onOpenProject={handleOpenProject}
+                        onOpenInWindow={openImageWindow} 
                         onHover={() => prefetchProject(p)} 
                         onFocus={() => prefetchProject(p)}
                         className={rowStyles.indentedRow}

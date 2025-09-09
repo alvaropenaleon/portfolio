@@ -1,12 +1,14 @@
 'use client';
 import React, { useEffect } from 'react';
-import type { WindowID, WorkPayload } from '@/lib/definitions';
+import type { ImagePayload, WindowID, WorkPayload } from '@/lib/definitions';
 import type { WindowPayloads } from '@/lib/definitions';
 import AboutContent from '@/components/windows/aboutContent';
 import ArchiveClientWrapper from '@/components/windows/archive';
 import WorkWindow from '@/components/windows/work';
 import { useWindowStore } from '@/store/windowStore';
 import { useWindowNav } from '@/hooks/useWindowNav';
+import ImageWindow from '@/components/windows/imageContent';
+
 
 type Props = {
   id: WindowID;
@@ -43,6 +45,8 @@ function WindowShell({ id, payload }: Props) {
     computedTitle = 'About';
   } else if (id === 'work') {
     computedTitle = 'Work';
+  }  else if (id === 'image') {
+    computedTitle = (payload as ImagePayload | undefined)?.title || 'Image';
   } else {
     computedTitle = capitalize(id as string);
   }
@@ -66,6 +70,11 @@ function WindowShell({ id, payload }: Props) {
   if (id === 'work') {
     return <WorkWindow payload={payload as WorkPayload} />;
   }
+
+  if (id === 'image') {
+    return <ImageWindow payload={payload as ImagePayload} />;
+  }
+  
 
   return <div>Loading...</div>;
 }

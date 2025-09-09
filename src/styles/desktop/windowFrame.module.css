@@ -131,8 +131,12 @@
   display: flex;
   align-items: center;
   padding: var(--space-xxs) var(--space-md);
+  font-size: var(--font-sm);
   user-select: none;
   cursor: default;
+  background: rgba(var(--brand-grey-rgb), 0.12);
+  height: 1.5rem;
+  box-shadow: inset 0 -1px 1px 0 rgba(0, 0, 0, 0.1);
 }
 
 .title { 
@@ -152,6 +156,7 @@
     border-radius: 50%;
     background: #ff5f57;
     cursor: pointer;
+    margin-left: -0.4rem;
 }
 
 /* ───────── Inner content area ───────── */
