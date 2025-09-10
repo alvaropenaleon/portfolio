@@ -81,7 +81,8 @@ export default function DesktopShell({ preload }: Props) {
           hidden={!w.open}
           className={
             w.id === 'archive' ? styles.archiveWindowFrame :
-            w.id === 'about' ? styles.aboutWindowFrame : ''
+            w.id === 'about' ? styles.aboutWindowFrame :
+            w.id === 'image' ? styles.imageWindowFrame : ''
           }
           onClose={() => close(w.id)}
           onFocus={() => bringToFront(w.id)}

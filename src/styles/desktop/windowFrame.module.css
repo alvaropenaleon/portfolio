@@ -94,7 +94,10 @@
 .aboutWindowFrame .titleBar {
     background: rgba(var(--brand-grey-rgb), 0.12);
 }
-  
+
+.imageWindowFrame .titleBar {
+    box-shadow: inset 0 -1px 1px 0 rgba(0, 0, 0, 0.1);
+  }
 
 /* ───────── Window frame (outer wrapper) ───────── */
 .windowFrame {
@@ -136,7 +139,6 @@
   cursor: default;
   background: rgba(var(--brand-grey-rgb), 0.12);
   height: 1.5rem;
-  box-shadow: inset 0 -1px 1px 0 rgba(0, 0, 0, 0.1);
 }
 
 .title { 
