@@ -9,7 +9,7 @@ const ROW_H = 36;
 type Props = {
   projects: Project[];
   searchTerm: string;
-  onOpenProject?: (id: string) => void;
+  onOpenProject?: (project: Project) => void;
 };
 
 export default function ArchiveList({
