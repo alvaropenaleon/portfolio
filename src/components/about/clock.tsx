@@ -10,21 +10,23 @@ function getMelbourneTime() {
 
   const dayOfWeek = now.toLocaleDateString("en-AU", {
     timeZone: "Australia/Melbourne",
-    weekday: "long",
+    weekday: "short",
   });
 
   const month = now.toLocaleDateString("en-AU", {
     timeZone: "Australia/Melbourne",
-    month: "long",
+    month: "short",
   });
 
   const day = now.getDate();
 
   // Compute UTC offset for Melbourne
+  /*
   const totalOffsetMinutes = -now.getTimezoneOffset();
   const offsetHours = Math.floor(totalOffsetMinutes / 60);
   const offsetMinutes = Math.abs(totalOffsetMinutes % 60);
 
+   
   const sign = offsetHours >= 0 ? "+" : "-";
   const absHours = Math.abs(offsetHours);
   const offsetStr =
@@ -32,8 +34,9 @@ function getMelbourneTime() {
       ? `${absHours}`
       : `${absHours}:${String(offsetMinutes).padStart(2, "0")}`;
 
-  const formattedOffset = `UTC${sign}${offsetStr}`;
-  const formattedDate = `${dayOfWeek}, ${month} ${day}, ${formattedOffset}`;
+  const formattedOffset = `UTC${sign}${offsetStr}`; 
+  */
+  const formattedDate = `${dayOfWeek} ${day} ${month} `;
 
   const formattedTime = now.toLocaleTimeString("en-AU", {
     timeZone: "Australia/Melbourne",
@@ -57,11 +60,9 @@ export default function Clock() {
 
   return (
     <div className={styles.clockContainer}>
-      <div className={styles.topRow}>
-        <div className={styles.location}>Melbourne, AU</div>
-        <div className={styles.time}>{dateTime.formattedTime}</div>
-      </div>
-      <div className={styles.date}>{dateTime.formattedDate}</div>
+        {dateTime.formattedDate}
+        {dateTime.formattedTime}
+
     </div>
   );
 }

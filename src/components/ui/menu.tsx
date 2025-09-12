@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import styles from "@/styles/ui/menu.module.css";
-import { Mail } from "lucide-react";
 import ThemeButton from "@/components/ui/themeButton";
+import ClockClient from "../about/clockClient";
 
 export default function MenuBar({ user }: { user: { email: string } }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,25 +14,77 @@ export default function MenuBar({ user }: { user: { email: string } }) {
       onMouseLeave={() => setIsOpen(false)}
     >
       <div className={styles.menuBar}>
-        <h1 className={styles.menuText} onMouseEnter={() => setIsOpen(true)}>
-          Menu
-        </h1>
-        <div className={styles.rightIcons}>
-            <a href={`mailto:${user.email}`}>
-            <Mail size={17} />
-            </a>
-            <ThemeButton /> 
+        <div className={styles.leftGroup}>
+        <h1 className={styles.logo}>🐱</h1>
+          <h1 className={styles.logo}>Perfect Blue</h1>
+
+          <button
+            className={styles.menuText}
+            onMouseEnter={() => setIsOpen(true)}
+            onFocus={() => setIsOpen(true)}
+            onClick={() => setIsOpen((v) => !v)}
+            aria-haspopup="menu"
+            aria-expanded={isOpen}
+            aria-controls="menudropdown"
+            type="button"
+          >
+            Menu
+          </button>
+        </div>
+
+        <div className={styles.rightGroup}>
+          <div className={styles.rightIcons}>
+            {/* <a href={`mailto:${user.email}`}><Mail size={15} /></a> */}
+            <ThemeButton />
+          </div>
+          <ClockClient />
         </div>
       </div>
 
       {isOpen && (
-        <div className={styles.menuDropdown}>
-          <h1>
-            <a href="/about">About</a>
-            <a href="/archive">Archive</a>
-            <a href={`mailto:${user.email}`}>Contact</a>
-          </h1>
-        </div>
+        <nav id="menudropdown" className={styles.menuDropdown} aria-label="Main">
+          <ul className={styles.menuList} role="menu">
+            <li className={styles.item} role="menuitem">
+              <a className={styles.row} href="/about">
+                <span className={styles.label}>About</span>
+              </a>
+            </li>
+
+            <li className={styles.item} role="menuitem">
+              <a className={styles.row} href="/archive">
+                <span className={styles.label}>Archive</span>
+              </a>
+            </li>
+
+            {/* submenu (opens on hover) */}
+            <li className={`${styles.item} ${styles.hasSubmenu}`} role="menuitem" tabIndex={-1}>
+              <button className={styles.row} type="button">
+                <span className={styles.label}>Recent Folders</span>
+                <span className={styles.submenuGlyph} aria-hidden>▸</span>
+              </button>
+
+              <ul className={styles.submenu} role="menu">
+                <li className={styles.item} role="menuitem">
+                  <a className={styles.row} href="archive?category=Software">Software</a>
+                </li>
+                <li className={styles.item} role="menuitem">
+                  <a className={styles.row} href="/archive?category=Graphic+Design">Graphic Design</a>
+                </li>
+                <li className={styles.item} role="menuitem">
+                  <a className={styles.row} href="archive?category=Science">Science</a>
+                </li>
+              </ul>
+            </li>
+
+            <li className={styles.separator} role="separator" />
+
+            <li className={styles.item} role="menuitem">
+              <a className={styles.row} href={`mailto:${user.email}`}>
+                <span className={styles.label}>Contact</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
       )}
     </div>
   );

@@ -1,155 +1,252 @@
+/* === Top bar ============================================================= */
+
 .menuContainer {
     position: fixed;
     top: 0;
     left: 0;
-
-    overflow: hidden;
+    right: 0;
+  
     z-index: 50;
-    width: calc(var(--space-sidebar) - var(--space-lg) + var(--space-lg));
-    max-width: 100%;
-    z-index: 50;
-
-    background: linear-gradient(
-        var(--color-background) 45%,
-        rgb(var(--color-background-rgb), 0.8) 75%,
-        transparent 100%);
-
-    max-height: 100px;
-    min-height: 90px;
-    transition: max-height 3s ease-in-out;
-
-    padding-bottom: 0;
-    padding-right: var(--space-lg);
-    padding-left: var(--space-lg);
-    padding-top: var(--space-lg);
-}
-
-.menuContainer.expanded {
-    max-height: 300px;
-    min-height: 200px;
-}
-
-.menuBar {
+    width: calc(100% - var(--space-lg));
+  
+    /* Content layer stays transparent; blur lives on ::before */
+    background: transparent;
+    box-shadow:  0 1px 0 rgba(var(--color-foreground-rgb), 0.08);
+  
+    --bar-h: 24px;
+    height: var(--bar-h);
+  
+    padding: var(--space-xs) var(--space-md);
+  
+    /* Needed so the ::before blur isolates correctly */
+    isolation: isolate;
+  
+    /* Let dropdowns/submenus render outside by default */
+    overflow: visible;
+  }
+  
+  /* Blur layer for the top bar */
+  .menuContainer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+  
+    /* Non-zero alpha so Safari renders the blur */
+    background: rgba(var(--color-background-rgb), 0.12);
+    backdrop-filter: saturate(180%) blur(22px);
+    -webkit-backdrop-filter: saturate(180%) blur(22px);
+  
+    pointer-events: none;
+    z-index: -1;
+  }
+  
+  .menuContainer.expanded {
+    max-height: 260px;
+    /* keep overflow visible so submenus can escape the bar */
+  }
+  
+  .menuBar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: default;
-}
-
-.menuText {
-    margin-right: auto;
-    font-size: var(--font-xl);
-    font-variation-settings: var(--var-lg);
-}
-
-.rightIcons {
+  }
+  
+  .leftGroup,
+  .rightGroup {
     display: flex;
-    gap: 5px;
-}
-
-
-.rightIcons>* {
-    display: flex;
-    justify-content: center;
     align-items: center;
-    height: 2rem;
+    gap: var(--space-md);
+  }
+  
+  .logo {
+    margin: 0;
+    line-height: 1;
+    font-size: 0.875rem; /* ~14px */
+    font-variation-settings: var(--var-lg);
+    color: var(--color-foreground);
+  }
+  
+  .menuText {
+    font-size: 0.875rem;
+    font-variation-settings: var(--var-md);
+    color: var(--color-foreground);
+    background: transparent;
+    border: 0;
+    padding: 2px 6px;
+    border-radius: var(--radius-xs);
+    cursor: default;
+    height: 1.5rem;
+  }
+  .menuText:hover,
+  .menuText:focus-visible {
+    background-color: rgba(var(--brand-grey-rgb), 0.3);
+  }
+  
+  .rightIcons {
+    display: flex;
+    gap: var(--space-xs);
+  }
+  
+  .rightIcons > * {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 1.5rem;
     width: 2rem;
     color: var(--color-foreground);
-    background-color: rgba(var(--brand-grey-rgb), 0.12);
-    border-radius: var(--radius-xl);
-    backdrop-filter: blur(22px);
-    -webkit-backdrop-filter: blur(22px);
-}
-
-
-.rightIcons>*:hover {
-    background-color: rgba(var(--brand-grey-rgb), 0.2);
-    color: var(--brand-blue)
-}
-
-.rightIcons> :nth-child(2) {
-    padding: 0;
-}
-
-.rightIcons> :nth-child(3) {
-    padding: 0 var(--space-sm);
-
-}
-
-.rightIcons a::after {
-    content: none;
-}
-
-.menuDropdown {
-    margin-top: 0;
-}
-
-.menuDropdown a {
-    position: relative;
-    /* So the arrow can be absolutely placed */
-    display: block;
-    padding-right: 1.5rem;
-    /* Space for arrow on the right */
-    font-size: var(--font-xl);
-    text-decoration: none;
-    line-height: 1.2;
-    color: var(--color-foreground);
-    font-variation-settings: var(--var-lg);
-    transition: 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
-}
-
-.menuDropdown a::after {
-    content: none;
-}
-
-.menuDropdown a::before {
+    background: transparent;
+    border-radius: var(--radius-xs);
+  }
+  .rightIcons > *:hover {
+    background: rgba(var(--brand-grey-rgb), 0.3);
+  }
+  
+  /* === macOS-like dropdown panel ========================================== */
+  
+  .menuDropdown {
+    position: absolute;
+    top: calc(var(--bar-h) + var(--space-sm));
+    width: 260px;
+  
+    /* Content transparent; blur on ::before */
+    background: transparent;
+  
+    border-radius: var(--radius-sm);
+    box-shadow:
+      0 0 1px 0 rgba(var(--color-foreground-rgb), 0.30),
+      0 0 7px 0 rgba(0, 0, 0, 0.10);
+    padding: 6px;
+    z-index: 55;
+  
+    isolation: isolate; /* contain the blur layer */
+  }
+  
+  /* Blur layer for dropdown */
+  .menuDropdown::before {
     content: "";
     position: absolute;
-    top: 45%;
-    left: 0;
-    rotate: 45deg;
-    width: 0px;
-    height: 0px;
-
-    /* Mask the arrow.svg file onto this box */
-    -webkit-mask-image: url("/arrow.svg");
-    mask-image: url("/arrow.svg");
-    -webkit-mask-size: contain;
-    mask-size: contain;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-
-    /* Start transparent so it's “hidden” initially */
-    transition: 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
-    background-color: transparent;
-
-    /* Smooth transitions for color/position changes */
-}
-
-/* On hover, change text color and reveal the arrow */
-.menuDropdown a:hover {
-    padding-left: 2rem;
-    transition: 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
-}
-
-.menuDropdown a:hover::before {
-    background-color: currentColor;
-    /* matches the text color on hover */
-    transition: 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
-    top: 15%;
-    width: 30px;
-    height: 30px;
-}
-
-
-@media (max-width: 768px) {
+    inset: 0;
+    border-radius: inherit;
+  
+    background: rgba(var(--color-background-rgb), 0.72);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+  
+    pointer-events: none;
+    z-index: -1;
+  }
+  
+  .menuList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Standard menu row */
+  .row {
+    box-sizing: border-box;
+    width: 100%;            /* was: calc(100%) */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 25px;
+    padding: 0 10px;
+    border: 0;
+    background: none;
+    color: var(--color-foreground);
+    text-decoration: none;
+    font-size: var(--font-sm);
+    font-variation-settings: var(--var-md);
+    border-radius: var(--radius-xs);
+    cursor: default;
+  }
+  
+  /* Hover highlight like macOS */
+  .item:hover > .row,
+  .item:focus-within > .row {
+    background: var(--brand-blue);
+    color: white;
+  }
+  
+  /* Separators */
+  .separator {
+    height: 1px;
+    margin: 6px 4px;
+    background: rgba(var(--color-foreground-rgb), 0.12);
+  }
+  
+  /* Disabled items */
+  .item[aria-disabled="true"] .row,
+  .item .row:disabled {
+    opacity: 0.45;
+    pointer-events: none;
+  }
+  
+  /* === Submenu (cascading) ================================================= */
+  
+  .hasSubmenu { position: relative;
+     }
+  
+  .submenuGlyph {
+    margin-left: 12px;
+    opacity: 0.7;
+  }
+  
+  /* hidden by default, appears to the right on hover/focus */
+  .submenu {
+    position: absolute;
+    top: -6px;
+    left: calc(100%);
+    width: 220px;
+    list-style: none;
+  
+    /* Content transparent; blur on ::before */
+    background: transparent;
+  
+    border-radius: var(--radius-sm);
+    box-shadow:
+      0 0 1px 0 rgba(var(--color-foreground-rgb), 0.30),
+      0 0 7px 0 rgba(0, 0, 0, 0.10);
+    padding: 6px;
+  
+    opacity: 0;
+    transform: translateX(-6px);
+    pointer-events: none;
+  
+    isolation: isolate; /* contain the blur layer */
+  }
+  
+  /* Blur layer for submenu */
+  .submenu::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+  
+    background: rgba(var(--color-background-rgb), 0.72);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+  
+    pointer-events: none;
+    z-index: -1;
+  }
+  
+  /* reveal on parent hover/focus */
+  .hasSubmenu:hover > .submenu,
+  .hasSubmenu:focus-within > .submenu {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+  
+  /* === Mobile ============================================================= */
+  
+  @media (max-width: 768px) {
     .menuContainer {
-        width: calc(100% - var(--space-sm) * var(--space-sm));
-        top: 0;
-        left: 0;
-        right: 0;
-        padding: 0 var(--space-md);
-        padding-top: var(--space-md);
+      padding: 0 var(--space-md);
+      padding-top: var(--space-md);
     }
-
-}
+  }
+  

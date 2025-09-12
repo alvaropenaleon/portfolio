@@ -3,6 +3,7 @@ import { WindowManagerProvider } from '@/components/desktop/windowManager';
 import Sidebar from '@/components/ui/sidebar';
 import Notifications from '@/components/about/notifications';
 import type { ReactNode } from 'react';
+import MenuBar from '@/components/ui/menu';
 
 export default function DesktopLayout({
   children,
@@ -16,6 +17,10 @@ export default function DesktopLayout({
         <link rel="prefetch" href="/about" as="document" />
         <link rel="prefetch" href="/archive" as="document" />
       </Head>
+
+      <MenuBar user={{
+              email: ''
+          }}></MenuBar>
 
       <WindowManagerProvider>
         {children}
