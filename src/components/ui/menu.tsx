@@ -6,6 +6,20 @@ import ThemeButton from "@/components/ui/themeButton";
 import ClockClient from "../about/clockClient";
 import Image from "next/image";
 
+function FolderIcon({ size = 14 }: { size?: number }) {
+    return (
+      <Image
+        src="/folder.png"
+        alt=""
+        aria-hidden="true"
+        width={size}
+        height={size}
+        quality={100}
+        style={{ objectFit: 'contain' }}
+        className={styles.rowIcon}
+      />
+    );
+}
 
 export default function MenuBar({ user }: { user: { email: string } }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -70,48 +84,21 @@ export default function MenuBar({ user }: { user: { email: string } }) {
               <ul className={styles.submenu} role="menu">
               <li className={styles.item} role="menuitem">
                 <a className={styles.row} href="/archive?category=Software">
-                    <Image
-                    src="/folder.png"
-                    alt=""
-                    width={16}
-                    height={16}
-                    quality={100}
-                    style={{ objectFit: 'contain' }}
-                    className={styles.rowIcon}
-                    aria-hidden="true"
-                    />
+                    <FolderIcon />
                     <span>Software</span>
                 </a>
                 </li>
 
                 <li className={styles.item} role="menuitem">
                 <a className={styles.row} href="/archive?category=Graphic+Design">
-                    <Image
-                    src="/folder.png"
-                    alt=""
-                    width={16}
-                    height={16}
-                    quality={100}
-                    style={{ objectFit: 'contain' }}
-                    className={styles.rowIcon}
-                    aria-hidden="true"
-                    />
+                    <FolderIcon />
                     <span>Graphic Design</span>
                 </a>
                 </li>
 
                 <li className={styles.item} role="menuitem">
                 <a className={styles.row} href="/archive?category=Science">
-                    <Image
-                    src="/folder.png"
-                    alt=""
-                    width={16}
-                    height={16}
-                    quality={100}
-                    style={{ objectFit: 'contain' }}
-                    className={styles.rowIcon}
-                    aria-hidden="true"
-                    />
+                    <FolderIcon />
                     <span>Science</span>
                 </a>
                 </li>

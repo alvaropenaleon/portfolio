@@ -199,7 +199,7 @@
     position: absolute;
     top: -6px;
     left: calc(100%);
-    width: 220px;
+    width: max-content;
     list-style: none;
   
     /* Content transparent; blur on ::before */
@@ -247,12 +247,10 @@
     /* icon sizing + spacing */
     .rowIcon {
     flex: 0 0 16px;
-    width: 16px;
-    height: 16px;
-    margin-right: 8px;
+    margin-right: 5px;
     display: inline-block;
     vertical-align: middle;
-    image-rendering: -webkit-optimize-contrast; /* crisp pngs */
+    image-rendering: -webkit-optimize-contrast;
     }
   
   /* === Mobile ============================================================= */
