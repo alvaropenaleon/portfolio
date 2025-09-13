@@ -57,13 +57,20 @@
   .rightGroup {
     display: flex;
     align-items: center;
+  }
+
+  .leftGroup {
     gap: var(--space-md);
+  }
+ 
+  .rightGroup {
+    gap: var(--space-xxs);
   }
   
   .logo {
     margin: 0;
     line-height: 1;
-    font-size: 0.875rem; /* ~14px */
+    font-size: 0.875rem;
     font-variation-settings: var(--var-lg);
     color: var(--color-foreground);
   }
@@ -108,7 +115,7 @@
   .menuDropdown {
     position: absolute;
     top: calc(var(--bar-h) + var(--space-sm));
-    width: 260px;
+    width: 230px;
   
     /* Content transparent; blur on ::before */
     background: transparent;
