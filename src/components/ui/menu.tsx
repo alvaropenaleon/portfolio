@@ -58,6 +58,8 @@ export default function MenuBar({ user }: { user: { email: string } }) {
               </a>
             </li>
 
+            <li className={styles.separator} role="separator" />
+
             {/* submenu (opens on hover) */}
             <li className={`${styles.item} ${styles.hasSubmenu}`} role="menuitem" tabIndex={-1}>
               <button className={styles.row} type="button">
