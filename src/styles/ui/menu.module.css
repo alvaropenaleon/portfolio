@@ -204,9 +204,10 @@
   /* hidden by default, appears to the right on hover/focus */
   .submenu {
     position: absolute;
+    white-space: nowrap;
     top: -6px;
     left: calc(100%);
-    width: max-content;
+    width: fit-content;
     list-style: none;
   
     /* Content transparent; blur on ::before */
