@@ -4,6 +4,8 @@ import { useState } from "react";
 import styles from "@/styles/ui/menu.module.css";
 import ThemeButton from "@/components/ui/themeButton";
 import ClockClient from "../about/clockClient";
+import Image from "next/image";
+
 
 export default function MenuBar({ user }: { user: { email: string } }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -64,15 +66,54 @@ export default function MenuBar({ user }: { user: { email: string } }) {
               </button>
 
               <ul className={styles.submenu} role="menu">
-                <li className={styles.item} role="menuitem">
-                  <a className={styles.row} href="archive?category=Software">Software</a>
+              <li className={styles.item} role="menuitem">
+                <a className={styles.row} href="/archive?category=Software">
+                    <Image
+                    src="/folder.png"
+                    alt=""
+                    width={16}
+                    height={16}
+                    quality={100}
+                    style={{ objectFit: 'contain' }}
+                    className={styles.rowIcon}
+                    aria-hidden="true"
+                    />
+                    <span>Software</span>
+                </a>
                 </li>
+
                 <li className={styles.item} role="menuitem">
-                  <a className={styles.row} href="/archive?category=Graphic+Design">Graphic Design</a>
+                <a className={styles.row} href="/archive?category=Graphic+Design">
+                    <Image
+                    src="/folder.png"
+                    alt=""
+                    width={16}
+                    height={16}
+                    quality={100}
+                    style={{ objectFit: 'contain' }}
+                    className={styles.rowIcon}
+                    aria-hidden="true"
+                    />
+                    <span>Graphic Design</span>
+                </a>
                 </li>
+
                 <li className={styles.item} role="menuitem">
-                  <a className={styles.row} href="archive?category=Science">Science</a>
+                <a className={styles.row} href="/archive?category=Science">
+                    <Image
+                    src="/folder.png"
+                    alt=""
+                    width={16}
+                    height={16}
+                    quality={100}
+                    style={{ objectFit: 'contain' }}
+                    className={styles.rowIcon}
+                    aria-hidden="true"
+                    />
+                    <span>Science</span>
+                </a>
                 </li>
+
               </ul>
             </li>
 

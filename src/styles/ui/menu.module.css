@@ -151,7 +151,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 25px;
+    height: 24px;
     padding: 0 10px;
     border: 0;
     background: none;
@@ -240,6 +240,20 @@
     transform: translateX(0);
     pointer-events: auto;
   }
+
+  /* make submenu rows align icon + text on the left */
+    .submenu .row { justify-content: flex-start; }
+
+    /* icon sizing + spacing */
+    .rowIcon {
+    flex: 0 0 16px;
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    display: inline-block;
+    vertical-align: middle;
+    image-rendering: -webkit-optimize-contrast; /* crisp pngs */
+    }
   
   /* === Mobile ============================================================= */
   
