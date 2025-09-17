@@ -5,9 +5,9 @@ import styles from "@/styles/ui/menu.module.css";
 import ThemeButton from "@/components/ui/themeButton";
 import ClockClient from "../about/clockClient";
 import Image from "next/image";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, File, FolderCog, Mail } from "lucide-react";
 
-function FolderIcon({ size = 14 }: { size?: number }) {
+function FolderIcon({ size = 16 }: { size?: number }) {
   return (
     <Image
       src="/folder.png"
@@ -16,6 +16,7 @@ function FolderIcon({ size = 14 }: { size?: number }) {
       width={size}
       height={size}
       sizes={`${size}px`}
+      quality={100}
       className={styles.rowIcon}
       style={{ objectFit: "contain" }}
     />
@@ -69,10 +70,19 @@ export default function MenuBar({ user }: { user: { email: string } }) {
               <nav id="menudropdown" className={styles.menuDropdown} aria-label="Main">
                 <ul className={styles.menuList} role="menu">
                   <li className={styles.item} role="menuitem">
-                    <a className={styles.row} href="/about"><span className={styles.label}>Information</span></a>
+                    <a className={styles.row} href="/about">
+                    <span className={styles.label}>
+                        <File size={16} className={styles.rowIcon}/>Information
+                    </span>
+                    </a>
                   </li>
                   <li className={styles.item} role="menuitem">
-                    <a className={styles.row} href="/archive"><span className={styles.label}>Selected Work</span></a>
+                    <a className={styles.row} href="/archive">
+                    <span className={styles.label}>
+                        <FolderCog size={16} className={styles.rowIcon}/>
+                        Selected Work
+                    </span>
+                    </a>
                   </li>
 
                   <li className={styles.separator} role="separator" />
@@ -85,13 +95,22 @@ export default function MenuBar({ user }: { user: { email: string } }) {
 
                     <ul className={styles.submenu} role="menu">
                       <li className={styles.item} role="menuitem">
-                        <a className={styles.row} href="/archive?category=Software"><FolderIcon /><span>Software</span></a>
+                        <a className={styles.row} href="/archive?category=Software">
+                        <FolderIcon />
+                        <span>Software</span>
+                        </a>
                       </li>
                       <li className={styles.item} role="menuitem">
-                        <a className={styles.row} href="/archive?category=Graphic+Design"><FolderIcon /><span>Graphic Design</span></a>
+                        <a className={styles.row} href="/archive?category=Graphic+Design">
+                        <FolderIcon />
+                        <span>Graphic Design</span>
+                        </a>
                       </li>
                       <li className={styles.item} role="menuitem">
-                        <a className={styles.row} href="/archive?category=Science"><FolderIcon /><span>Science</span></a>
+                        <a className={styles.row} href="/archive?category=Science">
+                        <FolderIcon />
+                        <span>Science</span>
+                        </a>
                       </li>
                     </ul>
                   </li>
@@ -99,7 +118,12 @@ export default function MenuBar({ user }: { user: { email: string } }) {
                   <li className={styles.separator} role="separator" />
 
                   <li className={styles.item} role="menuitem">
-                    <a className={styles.row} href={`mailto:${user.email}`}><span className={styles.label}>Contact</span></a>
+                    <a className={styles.row} href={`mailto:${user.email}`}>
+                    <span className={styles.label}>
+                        <Mail size={16} className={styles.rowIcon}/>
+                        Contact
+                    </span>
+                    </a>
                   </li>
                 </ul>
               </nav>

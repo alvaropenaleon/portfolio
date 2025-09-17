@@ -270,8 +270,10 @@
 
     /* icon sizing + spacing */
     .rowIcon {
-    flex: 0 0 16px;
-    margin-right: 5px;
+    width: 15px;
+    height: 15px;
+    margin-right: 6px;
+    margin-top: -1px;
     display: inline-block;
     vertical-align: middle;
     image-rendering: -webkit-optimize-contrast;
