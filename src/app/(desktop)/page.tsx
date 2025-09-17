@@ -1,5 +1,7 @@
 import { fetchUser, fetchFilteredProjects, fetchProjectCategories, fetchProjectTags, ITEMS_PER_PAGE } from '@/lib/data';
 import DesktopShell from '@/components/desktop/desktopShell';
+import MenuBar from '@/components/ui/menu';
+
 
 export default async function DesktopPage() {
   const user = await fetchUser();
@@ -23,5 +25,14 @@ export default async function DesktopPage() {
     }
   };
 
-  return <DesktopShell preload={preload} />;
+  return (
+    <>
+      {/* ✅ Now MenuBar has the same payloads the desktop icons use */}
+      <MenuBar
+        user={{ email: user.email ?? '' }}
+        preload={preload}
+      />
+      <DesktopShell preload={preload} />
+    </>
+  );
 }

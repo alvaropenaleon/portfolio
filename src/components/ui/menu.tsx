@@ -6,6 +6,9 @@ import ThemeButton from "@/components/ui/themeButton";
 import ClockClient from "../about/clockClient";
 import Image from "next/image";
 import { ChevronRight, File, FolderCog, Mail } from "lucide-react";
+import { useWindowManager } from "@/components/desktop/windowManager";
+import { useWindowStore } from "@/store/windowStore";
+import type { WindowPayloads } from "@/lib/definitions";
 
 function FolderIcon({ size = 16 }: { size?: number }) {
   return (
@@ -23,12 +26,48 @@ function FolderIcon({ size = 16 }: { size?: number }) {
   );
 }
 
-export default function MenuBar({ user }: { user: { email: string } }) {
+type MenuBarProps = {
+  user: { email: string };
+  preload?: {
+    about?: WindowPayloads["about"];
+    archive?: WindowPayloads["archive"];
+  };
+};
+
+export default function MenuBar({ user, preload }: MenuBarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const triggerRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLElement>(null);
 
-  // Close on outside click (anything that's NOT in trigger or dropdown)
+  const { open, bringToFront } = useWindowManager();
+  const { wins, replaceParams } = useWindowStore();
+
+  // --- window open helpers ---------------------------------------------------
+  const handleOpenAbout = () => {
+    open("about", { payload: preload?.about });   // instant render
+    bringToFront("about");
+    setIsOpen(false);
+  };
+
+  const handleOpenArchive = (qs?: string) => {
+    const existing = wins.archive;
+    const paramsObj: Record<string, string | undefined> = {};
+    if (qs) new URLSearchParams(qs).forEach((v, k) => (paramsObj[k] = v));
+
+    if (existing?.open) {
+      // no remount: just update params and focus
+      replaceParams("archive", paramsObj);
+      bringToFront("archive");
+    } else {
+      // FIRST open: pass payload so it doesn't show "Initializing..."
+      const pathOverride = qs ? `/archive?${qs}` : "/archive";
+      open("archive", { payload: preload?.archive, pathOverride });
+      bringToFront("archive");
+    }
+    setIsOpen(false);
+  };
+
+  // Close on outside click
   useEffect(() => {
     if (!isOpen) return;
     const onDocClick = (e: MouseEvent) => {
@@ -53,8 +92,7 @@ export default function MenuBar({ user }: { user: { email: string } }) {
           <h1 className={styles.logo}>🐱</h1>
           <h1 className={styles.logo}>Perfect Blue</h1>
 
-          {/* NEW: tiny wrapper so dropdown aligns with the button via CSS */}
-          <div className={styles.menuTrigger}>
+          <div className={styles.menuTrigger} ref={triggerRef}>
             <button
               className={`${styles.menuText} ${isOpen ? styles.menuTextActive : ""}`}
               onClick={() => setIsOpen((v) => !v)}
@@ -67,22 +105,29 @@ export default function MenuBar({ user }: { user: { email: string } }) {
             </button>
 
             {isOpen && (
-              <nav id="menudropdown" className={styles.menuDropdown} aria-label="Main">
+              <nav
+                id="menudropdown"
+                className={styles.menuDropdown}
+                aria-label="Main"
+                ref={dropdownRef}
+              >
                 <ul className={styles.menuList} role="menu">
                   <li className={styles.item} role="menuitem">
-                    <a className={styles.row} href="/about">
-                    <span className={styles.label}>
-                        <File size={16} className={styles.rowIcon}/>Information
-                    </span>
-                    </a>
+                    <button className={styles.row} type="button" onClick={handleOpenAbout}>
+                      <span className={styles.label}>
+                        <File size={16} className={styles.rowIcon} />
+                        Information
+                      </span>
+                    </button>
                   </li>
+
                   <li className={styles.item} role="menuitem">
-                    <a className={styles.row} href="/archive">
-                    <span className={styles.label}>
-                        <FolderCog size={16} className={styles.rowIcon}/>
+                    <button className={styles.row} type="button" onClick={() => handleOpenArchive("category=Work")}>
+                      <span className={styles.label}>
+                        <FolderCog size={16} className={styles.rowIcon} />
                         Selected Work
-                    </span>
-                    </a>
+                      </span>
+                    </button>
                   </li>
 
                   <li className={styles.separator} role="separator" />
@@ -90,31 +135,30 @@ export default function MenuBar({ user }: { user: { email: string } }) {
                   <li className={`${styles.item} ${styles.hasSubmenu}`} role="menuitem" tabIndex={-1}>
                     <button className={styles.row} type="button">
                       <span className={styles.label}>Recent Folders</span>
-                      <span className={styles.submenuGlyph} aria-hidden><ChevronRight size={20}/></span>
+                      <span className={styles.submenuGlyph} aria-hidden><ChevronRight size={20} /></span>
                     </button>
 
                     <ul className={styles.submenu} role="menu">
-
                       <li className={styles.item} role="menuitem">
-                        <a className={styles.row} href="/archive">
-                        <FolderIcon />
-                        <span>Archive</span>
-                        </a>
+                        <button className={styles.row} type="button" onClick={() => handleOpenArchive()}>
+                          <FolderIcon />
+                          <span>Archive</span>
+                        </button>
                       </li>
 
                       <li className={styles.item} role="menuitem">
-                        <a className={styles.row} href="/archive?category=Software">
-                        <FolderIcon />
-                        <span>Software</span>
-                        </a>
-                      </li>
-                      <li className={styles.item} role="menuitem">
-                        <a className={styles.row} href="/archive?category=Graphic+Design">
-                        <FolderIcon />
-                        <span>Graphic Design</span>
-                        </a>
+                        <button className={styles.row} type="button" onClick={() => handleOpenArchive("category=Software")}>
+                          <FolderIcon />
+                          <span>Software</span>
+                        </button>
                       </li>
 
+                      <li className={styles.item} role="menuitem">
+                        <button className={styles.row} type="button" onClick={() => handleOpenArchive("category=Graphic+Design")}>
+                          <FolderIcon />
+                          <span>Graphic Design</span>
+                        </button>
+                      </li>
                     </ul>
                   </li>
 
@@ -122,10 +166,10 @@ export default function MenuBar({ user }: { user: { email: string } }) {
 
                   <li className={styles.item} role="menuitem">
                     <a className={styles.row} href={`mailto:${user.email}`}>
-                    <span className={styles.label}>
-                        <Mail size={16} className={styles.rowIcon}/>
+                      <span className={styles.label}>
+                        <Mail size={16} className={styles.rowIcon} />
                         Contact
-                    </span>
+                      </span>
                     </a>
                   </li>
                 </ul>
