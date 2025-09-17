@@ -94,6 +94,14 @@ export default function MenuBar({ user }: { user: { email: string } }) {
                     </button>
 
                     <ul className={styles.submenu} role="menu">
+
+                      <li className={styles.item} role="menuitem">
+                        <a className={styles.row} href="/archive">
+                        <FolderIcon />
+                        <span>Archive</span>
+                        </a>
+                      </li>
+
                       <li className={styles.item} role="menuitem">
                         <a className={styles.row} href="/archive?category=Software">
                         <FolderIcon />
@@ -106,12 +114,7 @@ export default function MenuBar({ user }: { user: { email: string } }) {
                         <span>Graphic Design</span>
                         </a>
                       </li>
-                      <li className={styles.item} role="menuitem">
-                        <a className={styles.row} href="/archive?category=Science">
-                        <FolderIcon />
-                        <span>Science</span>
-                        </a>
-                      </li>
+
                     </ul>
                   </li>
 
