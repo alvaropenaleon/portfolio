@@ -345,8 +345,9 @@
     .submenu .row {
         justify-content: flex-start;
         padding-left: 10px;
-        /* indent under parent */
-        height: var(--bar-h);
+        /* indent under parent
+        height: 1.5rem;
+         */
         /* bigger tap target */
     }
 
