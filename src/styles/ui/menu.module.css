@@ -3,85 +3,86 @@
 /* Wrap around the Menu button so dropdown aligns purely with CSS */
 .menuTrigger {
     position: relative;
-    display: inline-block;        /* shrink-to-content (the Menu button) */
-  }
-  
-  .menuContainer {
+    display: inline-block;
+    /* shrink-to-content (the Menu button) */
+}
+
+.menuContainer {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-  
+
     z-index: 50;
     width: calc(100% - var(--space-lg));
-  
+
     /* Content layer stays transparent; blur lives on ::before */
     background: transparent;
-    box-shadow:  0 1px 0 rgba(var(--color-foreground-rgb), 0.08);
-  
+    box-shadow: 0 1px 0 rgba(var(--color-foreground-rgb), 0.08);
+
     --bar-h: 24px;
     height: var(--bar-h);
-  
+
     padding: var(--space-xs) var(--space-md);
-  
+
     /* Needed so the ::before blur isolates correctly */
     isolation: isolate;
-  
+
     /* Let dropdowns/submenus render outside by default */
     overflow: visible;
-  }
-  
-  /* Blur layer for the top bar */
-  .menuContainer::before {
+}
+
+/* Blur layer for the top bar */
+.menuContainer::before {
     content: "";
     position: absolute;
     inset: 0;
     border-radius: inherit;
-  
+
     /* Non-zero alpha so Safari renders the blur */
     background: rgba(var(--color-background-rgb), 0.12);
     backdrop-filter: saturate(180%) blur(22px);
     -webkit-backdrop-filter: saturate(180%) blur(22px);
-  
+
     pointer-events: none;
     z-index: -1;
-  }
-  
-  .menuContainer.expanded {
+}
+
+.menuContainer.expanded {
     max-height: 260px;
     /* keep overflow visible so submenus can escape the bar */
-  }
-  
-  .menuBar {
+}
+
+.menuBar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: default;
-  }
-  
-  .leftGroup,
-  .rightGroup {
+}
+
+.leftGroup,
+.rightGroup {
     display: flex;
     align-items: center;
-  }
+}
 
-  .leftGroup {
+.leftGroup {
     gap: var(--space-md);
-  }
- 
-  .rightGroup {
+}
+
+.rightGroup {
     gap: var(--space-xxs);
-  }
-  
-  .logo {
+}
+
+.logo {
     margin: 0;
     line-height: 1;
     font-size: 0.85rem;
     font-variation-settings: var(--var-lg);
     color: var(--color-foreground);
-  }
-  
-  .menuText {
+}
+
+.menuText {
     font: inherit;
     font-size: 0.85rem;
     font-variation-settings: var(--var-md);
@@ -92,18 +93,19 @@
     border-radius: var(--radius-xs);
     cursor: default;
     height: 1.5rem;
-  }
-  .menuText:hover,
-  .menuText:focus-visible {
+}
+
+.menuText:hover,
+.menuText:focus-visible {
     background-color: rgba(var(--brand-grey-rgb), 0.3);
-  }
-  
-  .rightIcons {
+}
+
+.rightIcons {
     display: flex;
     gap: var(--space-xs);
-  }
-  
-  .rightIcons > * {
+}
+
+.rightIcons>* {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -112,63 +114,66 @@
     color: var(--color-foreground);
     background: transparent;
     border-radius: var(--radius-xs);
-  }
-  .rightIcons > *:hover {
+}
+
+.rightIcons>*:hover {
     background: rgba(var(--brand-grey-rgb), 0.3);
-  }
-  
-  /* === macOS-like dropdown panel ========================================== */
-  
-  .menuDropdown {
-    
+}
+
+/* === macOS-like dropdown panel ========================================== */
+
+.menuDropdown {
     position: absolute;
     top: calc(var(--bar-h) + 0.3rem);
     left: 0;
     width: min(230px, calc(100vw - 16px));
     max-width: calc(100vw - 16px);
     z-index: 1000;
-  
+
     /* Content transparent; blur on ::before */
     background: rgba(var(--color-background-rgb), 0.7);
-  
+
     border-radius: var(--radius-sm);
     box-shadow:
-      0 0 1px 0 rgba(var(--color-foreground-rgb), 0.60),
-      0 0 7px 0 rgba(0, 0, 0, 0.20);
+        0 0 1px 0 rgba(var(--color-foreground-rgb), 0.6),
+        0 0 7px 0 rgba(0, 0, 0, 0.2);
     padding: 6px;
     z-index: 55;
-  
-    isolation: isolate; /* contain the blur layer */
-  }
-  
-  /* Blur layer for dropdown */
-  .menuDropdown::before {
+
+    isolation: isolate;
+    /* contain the blur layer */
+}
+
+/* Blur layer for dropdown */
+.menuDropdown::before {
     content: "";
     position: absolute;
     inset: 0;
     border-radius: inherit;
-  
+
     background: rgba(var(--brand-grey-rgb), 0.1);
     backdrop-filter: saturate(180%) blur(20px);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
-  
+
     pointer-events: none;
     z-index: -1;
-  }
-  .menuTextActive {
+}
+
+.menuTextActive {
     background-color: rgba(var(--brand-grey-rgb), 0.3);
-  }
-  
-  .menuList {
+}
+
+.menuList {
     list-style: none;
     margin: 0;
     padding: 0;
-  }
-  
-  /* Standard menu row */
-  .row {
+}
+
+/* Standard menu row */
+.row {
     box-sizing: border-box;
-    width: 100%;            /* was: calc(100%) */
+    width: 100%;
+    /* was: calc(100%) */
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -183,94 +188,98 @@
     font-variation-settings: var(--var-md);
     border-radius: var(--radius-xs);
     cursor: default;
-  }
-  
-  /* Hover highlight like macOS */
-  .item:hover > .row,
-  .item:focus-within > .row {
+}
+
+/* Hover highlight like macOS */
+.item:hover>.row,
+.item:focus-within>.row {
     background: var(--brand-blue);
     color: white;
-  }
-  
-  /* Separators */
-  .separator {
+}
+
+/* Separators */
+.separator {
     height: 1px;
     margin: 6px 4px;
     background: rgba(var(--color-foreground-rgb), 0.12);
-  }
-  
-  /* Disabled items */
-  .item[aria-disabled="true"] .row,
-  .item .row:disabled {
+}
+
+/* Disabled items */
+.item[aria-disabled="true"] .row,
+.item .row:disabled {
     opacity: 0.45;
     pointer-events: none;
-  }
-  
-  /* === Submenu (cascading) ================================================= */
-  
-  .hasSubmenu { position: relative;
-     }
-  
-  .submenuGlyph {
+}
+
+/* === Submenu (cascading) ================================================= */
+
+.hasSubmenu {
+    position: relative;
+}
+
+.submenuGlyph {
     margin-top: 4px;
     margin-left: 12px;
-    margin-right: -7px;
+    margin-right: -10px;
     opacity: 0.9;
-  }
-  
-  /* hidden by default, appears to the right on hover/focus */
-  .submenu {
+}
+
+/* hidden by default, appears to the right on hover/focus */
+.submenu {
     position: absolute;
     white-space: nowrap;
     top: -6px;
     left: calc(100%);
     width: fit-content;
     list-style: none;
-  
+
     /* Content transparent; blur on ::before */
     background: rgba(var(--color-background-rgb), 0.7);
-  
+
     border-radius: var(--radius-sm);
     box-shadow:
-      0 0 1px 0 rgba(var(--color-foreground-rgb), 0.60),
-      0 0 7px 0 rgba(0, 0, 0, 0.20);
+        0 0 1px 0 rgba(var(--color-foreground-rgb), 0.6),
+        0 0 7px 0 rgba(0, 0, 0, 0.2);
     padding: 6px;
-  
+
     opacity: 0;
     transform: translateX(-6px);
     pointer-events: none;
-  
-    isolation: isolate; /* contain the blur layer */
-  }
-  
-  /* Blur layer for submenu */
-  .submenu::before {
+
+    isolation: isolate;
+    /* contain the blur layer */
+}
+
+/* Blur layer for submenu */
+.submenu::before {
     content: "";
     position: absolute;
     inset: 0;
     border-radius: inherit;
-  
+
     background: rgba(var(--brand-grey-rgb), 0.1);
     backdrop-filter: saturate(180%) blur(20px);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
-  
+
     pointer-events: none;
     z-index: -1;
-  }
-  
-  /* reveal on parent hover/focus */
-  .hasSubmenu:hover > .submenu,
-  .hasSubmenu:focus-within > .submenu {
+}
+
+/* reveal on parent hover/focus */
+.hasSubmenu:hover>.submenu,
+.hasSubmenu:focus-within>.submenu {
     opacity: 1;
     transform: translateX(0);
     pointer-events: auto;
-  }
+}
 
-  /* make submenu rows align icon + text on the left */
-    .submenu .row { justify-content: flex-start; }
+/* make submenu rows align icon + text on the left */
+.submenu .row {
+    justify-content: flex-start;
+}
 
-    /* icon sizing + spacing */
-    .rowIcon {
+/* icon sizing + spacing */
+.rowIcon {
     width: 15px;
     height: 15px;
     margin-right: 6px;
@@ -278,14 +287,70 @@
     display: inline-block;
     vertical-align: middle;
     image-rendering: -webkit-optimize-contrast;
+}
+
+/* === Mobile ============================================================= */
+
+@media (max-width: 768px) {
+    .leftGroup {
+        gap: var(--space-sm);
     }
-  
-  /* === Mobile ============================================================= */
-  
-  @media (max-width: 768px) {
-    .menuContainer {
-      padding: 0 var(--space-md);
-      padding-top: var(--space-md);
+
+    /* Make the dropdown a viewport sheet */
+    .menuTrigger {
+        position: static;
     }
-  }
-  
+
+    .menuDropdown {
+        position: fixed;
+        left: 8px;
+        right: 8px;
+        top: calc(var(--bar-h) + var(--space-md));
+        width: auto;
+        max-height: calc(100dvh - (var(--bar-h) + var(--space-sm)));
+        overflow: auto;
+        overscroll-behavior: contain;
+        padding-bottom: 10px;
+    }
+
+    /* Submenu becomes a simple stacked list (no background / no shadow) */
+    .hasSubmenu>.submenu {
+        position: static;
+        margin-top: 6px;
+        padding: 0 0 0;
+        white-space: normal;
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+        width: 100%;
+
+        background: transparent !important;
+        /* kill panel bg */
+        box-shadow: none !important;
+        /* kill shadow */
+        border-radius: 0;
+    }
+
+    .hasSubmenu>.submenu::before {
+        display: none;
+    }
+
+    /* kill blur layer */
+
+    /* Indent submenu rows a bit and align like a normal list */
+    .submenu .row {
+        justify-content: flex-start;
+        padding-left: 10px;
+        /* indent under parent */
+        height: var(--bar-h);
+        /* bigger tap target */
+    }
+
+    /*  rotate chevron so it reads as “expands below” */
+    .submenuGlyph {
+        transform: rotate(90deg);
+        margin-right: -5px;
+        margin-top: 0px;
+    }
+
+}
