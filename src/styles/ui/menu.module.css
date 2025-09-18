@@ -13,17 +13,19 @@
     left: 0;
     right: 0;
 
-    z-index: 50;
+    z-index: 9999;
     width: calc(100% - var(--space-lg));
 
     /* Content layer stays transparent; blur lives on ::before */
     background: transparent;
     box-shadow: 0 1px 0 rgba(var(--color-foreground-rgb), 0.08);
 
-    --bar-h: 24px;
+    --bar-h: 35px;
     height: var(--bar-h);
+    display: flex;
+    align-items: center;
 
-    padding: var(--space-xs) var(--space-md);
+    padding: 0 var(--space-md);
 
     /* Needed so the ::before blur isolates correctly */
     isolation: isolate;
@@ -55,10 +57,12 @@
 
 .menuBar {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    cursor: default;
-}
+    justify-content: space-between;
+    width: 100%; /* or: flex: 1 1 auto; */
+    min-width: 0; /* prevents overflow  */
+    height: 100%; /* match --bar-h via container */
+  }
 
 .leftGroup,
 .rightGroup {
@@ -124,7 +128,7 @@
 
 .menuDropdown {
     position: absolute;
-    top: calc(var(--bar-h) + 0.3rem);
+    top: calc(var(--bar-h) - 0.3rem);
     left: 0;
     width: min(230px, calc(100vw - 16px));
     max-width: calc(100vw - 16px);
@@ -305,7 +309,7 @@
         position: fixed;
         left: 8px;
         right: 8px;
-        top: calc(var(--bar-h) + var(--space-md));
+        top: calc(var(--bar-h) + var(--space-sm));
         width: auto;
         max-height: calc(100dvh - (var(--bar-h) + var(--space-sm)));
         overflow: auto;
