@@ -32,7 +32,10 @@ export default function DesktopShell({ preload }: Props) {
   // Handle window resize (move clamping logic from store to component)
   useEffect(() => {
     const handleResize = () => {
-      clampAllToViewport(window.innerWidth, window.innerHeight);
+        const root = document.querySelector('.desktop-root') as HTMLElement | null;
+        const w = root?.clientWidth ?? window.innerWidth;
+        const h = root?.clientHeight ?? window.innerHeight;
+      clampAllToViewport(w, h);
     };
 
     window.addEventListener('resize', handleResize);
