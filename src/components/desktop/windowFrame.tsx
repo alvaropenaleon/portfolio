@@ -39,7 +39,16 @@ export default function WindowFrame({
     onFocus();
     const el = frameRef.current!;
     const rect = el.getBoundingClientRect();
-    dragRef.current = { x: e.clientX, y: e.clientY, left: rect.left, top: rect.top, w: rect.width, h: rect.height };
+
+    const parent = (el.parentElement || document.body);
+    const parentRect = parent.getBoundingClientRect();
+    dragRef.current = { 
+        x: e.clientX, 
+        y: e.clientY, 
+        left: rect.left - parentRect.left, 
+        top: rect.top - parentRect.top, 
+        w: rect.width, 
+        h: rect.height };
     el.setPointerCapture(e.pointerId);
     el.addEventListener("pointermove", onPointerMove);
     el.addEventListener("pointerup", onPointerUp);
