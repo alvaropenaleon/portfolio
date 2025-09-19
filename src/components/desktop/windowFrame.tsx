@@ -60,10 +60,16 @@ export default function WindowFrame({
     const { x, y, left, top, w, h } = dragRef.current;
     const dx = e.clientX - x;
     const dy = e.clientY - y;
-    const vw = window.innerWidth, vh = window.innerHeight;
+
+    const el = frameRef.current!;
+    const parent = (el.offsetParent as HTMLElement) || document.documentElement;
+
+    const vw = parent.clientWidth;
+    const vh = parent.clientHeight;
+
     const newLeft = Math.min(Math.max(left + dx, - OVERFLOW), vw - w  + OVERFLOW);
     const newTop  = Math.min(Math.max(top + dy, 0), vh - h  + OVERFLOW);
-    const el = frameRef.current!;
+
     el.style.left = newLeft + "px";
     el.style.top  = newTop  + "px";
   };
