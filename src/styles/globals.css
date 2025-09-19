@@ -116,8 +116,12 @@ h2 a::after {
 .desktop-root {
     width: 100vw;
     height: 100vh;
-    position: relative;
-    overflow: hidden;
+    position: fixed;
+    overflow: visible;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: var(--menu-safe-top);
     /* isolation: isolate;
     background: url("/wallpaper.jpg") center/cover no-repeat;  */
     background-color: var(--color-background);

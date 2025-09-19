@@ -20,7 +20,6 @@
     background: transparent;
     box-shadow: 0 1px 0 rgba(var(--color-foreground-rgb), 0.08);
 
-    --bar-h: 35px;
     height: var(--bar-h);
     display: flex;
     align-items: center;
