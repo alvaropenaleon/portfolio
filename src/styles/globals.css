@@ -125,6 +125,7 @@ h2 a::after {
     /* isolation: isolate;
     background: url("/wallpaper.jpg") center/cover no-repeat;  */
     background-color: var(--color-background);
+    z-index: 0;
   }
   
   /* Register animatable custom properties */
