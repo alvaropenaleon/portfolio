@@ -4,6 +4,7 @@
     align-items: center;
     background-color: rgba(var(--brand-grey-rgb), 0);
     border-radius: var(--radius-xs);
+    border: none;
     padding: 0 var(--space-sm);
     font-size: 0.85rem;
     font-variation-settings: var(--var-md);
