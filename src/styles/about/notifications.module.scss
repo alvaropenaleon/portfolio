@@ -111,8 +111,8 @@ $max-z: 20;
 
     color: rgba(var(--color-foreground-rgb), 0.5);
     box-shadow:
-    0 0 1px 0 rgba(var(--color-foreground-rgb), 0.30),
-    0 0 4px 0 rgba(0, 0, 0, 0.20);
+    0 0 1px 0 rgba(var(--color-foreground-rgb), 0.70),
+    0 0 5px 0 rgba(0, 0, 0, 0.10);
     backdrop-filter: blur(22px);
     -webkit-backdrop-filter: blur(22px);
 }
@@ -159,8 +159,8 @@ $max-z: 20;
     will-change: transform, opacity, max-height;
     transform: translate3d(0, 0, 0);
     box-shadow:
-    0 0 1px 0 rgba(var(--color-foreground-rgb), 0.30),
-    0 0 4px 0 rgba(0, 0, 0, 0.20);
+    0 0 1px 0 rgba(var(--color-foreground-rgb), 0.70),
+    0 0 5px 0 rgba(0, 0, 0, 0.10);
 }
 
 .notificationCard::before {
