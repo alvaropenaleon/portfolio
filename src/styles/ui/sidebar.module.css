@@ -1,26 +1,40 @@
-/* src/styles/ui/sidebar.module.css */
+/* Slide-over notifications panel */
 .sidebar {
-    position: absolute;
-    top: var(--space-lg);
-    right: var(--space-lg);
-    width: var(--space-sidebar);
-    height: calc(100vh - var(--space-lg) * 2);
+    position: fixed;
+    top: var(--menu-safe-top);              /* below the menu bar */
+    right: 0;
+    height: calc(100dvh - var(--menu-safe-top));
+    width: min(var(--space-sidebar, 360px), 92vw);
     padding: var(--space-md);
     overflow-y: auto;
-    /* hide scrollbar if you like */
-    scrollbar-width: none;
-  }
-  .sidebar::-webkit-scrollbar {
-    display: none;
-  }
-
-  @media (max-width: 768px) {
-
-    .sidebar {
-    
-        display: flex;
-        flex-direction: column;
-      }
-
-  }
+    background: rgba(var(--color-background-rgb), 0.55);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border-left: 1px solid rgba(var(--color-foreground-rgb), 0.12);
+    box-shadow: 0 0 7px rgba(0,0,0,0.20);
   
+    transform: translateX(100%);           /* hidden */
+    transition: transform 220ms ease;
+    z-index: 40;                            /* > windows (10), < menu (50) */
+    pointer-events: none;                   /* don't block when hidden */
+  }
+  .sidebar.open {
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+  .sidebar::-webkit-scrollbar { display: none; }
+  
+  /* Click-catcher for outside clicks (doesn't cover the menu bar) */
+  .overlay {
+    position: fixed;
+    top: var(--menu-safe-top);
+    left: 0; right: 0; bottom: 0;
+    background: transparent;
+    z-index: 35;                            /* under the panel */
+    pointer-events: none;                   /* inert when closed */
+  }
+  .overlay.open { pointer-events: auto; }
+  
+  @media (max-width: 768px) {
+    .sidebar { width: min(400px, 100vw); }
+  }

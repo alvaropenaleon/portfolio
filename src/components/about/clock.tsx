@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import styles from "@/styles/about/clock.module.css";
 
 function getMelbourneTime() {
@@ -58,11 +58,20 @@ export default function Clock() {
     return () => clearInterval(interval);
   }, []);
 
+  const toggleSidebar = useCallback(() => {
+    window.dispatchEvent(new Event('toggleSidebar'));
+  }, []);
+
   return (
-    <div className={styles.clockContainer}>
+    <button 
+    type='button'
+    className={styles.clockContainer}
+    onClick={toggleSidebar}
+    aria-label="Toggle sidebar"
+    >
         {dateTime.formattedDate}
         {dateTime.formattedTime}
 
-    </div>
+    </button>
   );
 }
