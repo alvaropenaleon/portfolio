@@ -97,13 +97,13 @@ $max-z: 20;
 
 .expandButton {
     margin: 5px 5px 0 0;
-    padding: var(--space-sm) var(--space-md);
+    padding: 0.35rem 0.75rem;
     font-size: var(--font-xxs);
-    background-color: rgba(var(--color-background-rgb), 0.55);
+    background-color: rgba(var(--color-foreground-rgb), 0.03);
     border: none;
     border-radius: var(--radius-lg);
     cursor: pointer;
-    margin-bottom: var(--space-sm);
+    margin-bottom: var(--space-md);
     transition: background-color 0.2s ease;
     font-variation-settings: var(--var-md);
     display: block;
@@ -112,7 +112,7 @@ $max-z: 20;
     color: rgba(var(--color-foreground-rgb), 0.5);
     box-shadow:
     0 0 1px 0 rgba(var(--color-foreground-rgb), 0.30),
-    0 0 7px 0 rgba(0, 0, 0, 0.10);
+    0 0 4px 0 rgba(0, 0, 0, 0.20);
     backdrop-filter: blur(22px);
     -webkit-backdrop-filter: blur(22px);
 }
@@ -142,7 +142,7 @@ $max-z: 20;
 .notificationCard {
     margin: 0 5px;
     position: relative;
-    background-color: rgba(var(--color-background-rgb), 0.55);
+    background-color: rgba(var(--color-background-rgb), 0.7);
     border-radius: var(--radius-lg);
     padding:calc(var(--space-sm) * 1.6);
     display: flex;
@@ -160,15 +160,16 @@ $max-z: 20;
     transform: translate3d(0, 0, 0);
     box-shadow:
     0 0 1px 0 rgba(var(--color-foreground-rgb), 0.30),
-    0 0 7px 0 rgba(0, 0, 0, 0.10);
+    0 0 4px 0 rgba(0, 0, 0, 0.20);
 }
 
 .notificationCard::before {
-    /* content: ""; */
+    content: "";
     position: absolute;
     inset: 0;
-    backdrop-filter: blur(22px);
-    -webkit-backdrop-filter: blur(22px);
+    background: rgba(var(--brand-grey-rgb), 0.1);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
     border-radius: inherit;
     z-index: -1;
 }
