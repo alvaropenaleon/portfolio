@@ -7,11 +7,14 @@
     width: min(var(--space-sidebar, 360px), 92vw);
     padding: var(--space-md);
     overflow-y: auto;
-    background: rgba(var(--color-background-rgb), 0.55);
-    backdrop-filter: blur(22px);
+    background: rgba(var(--color-background-rgb), 0.6);
+   /*
+   backdrop-filter: blur(22px);
     -webkit-backdrop-filter: blur(22px);
+    
     border-left: 1px solid rgba(var(--color-foreground-rgb), 0.12);
-    box-shadow: 0 0 7px rgba(0,0,0,0.20);
+    */
+    box-shadow: 0 1px 1px rgba(var(--color-foreground-rgb), 0.2);
   
     transform: translateX(100%);           /* hidden */
     transition: transform 220ms ease;
