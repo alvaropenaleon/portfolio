@@ -89,13 +89,13 @@
   --folder-turquoise: #00bcd4;
   
 
-  --tag-red: #FF0008;
-  --tag-grey: #6C6C70;
-  --tag-yellow: #EFAF00;
-  --tag-orange: #F57401;
-  --tag-green: #02B701;
-  --tag-blue: #0070FD;
-  --tag-purple: #A740CC;
+  --tag-red: rgb(255, 0, 8);
+  --tag-grey: rgb(108, 108, 112);
+  --tag-yellow: rgb(239, 175, 0);
+  --tag-orange: rgb(245, 116, 1);
+  --tag-green: rgb(2, 183, 1);
+  --tag-blue: rgb(0, 112, 253);
+  --tag-purple: rgb(167, 64, 204);
 }
 
 
