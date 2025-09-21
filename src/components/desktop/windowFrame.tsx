@@ -5,7 +5,7 @@ import type { Geometry } from "./windowDefaults";
 import styles from "@/styles/desktop/windowFrame.module.css";
 import clsx from 'clsx';
 
-const OVERFLOW = 400;
+const OVERFLOW = 300;
 
 interface Props {
   title: string;
