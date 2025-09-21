@@ -39,5 +39,7 @@
   .overlay.open { pointer-events: auto; }
   
   @media (max-width: 768px) {
-    .sidebar { width: min(400px, 100vw); }
+    /*
+    .sidebar { width: min(400px, 100vw); }ç
+    */
   }
