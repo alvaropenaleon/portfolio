@@ -33,22 +33,24 @@ export default function WindowFrame({
   const frameRef = useRef<HTMLDivElement>(null);
   const dragRef = useRef<{ x: number; y: number; left: number; top: number; w: number; h: number } | undefined>(undefined);
   const [isOpen, setIsOpen] = useState(false);
+  const [isfullscreen, setIsFullscreen] = useState(false);
+  const prevGeomRef = useRef<Geometry | null>(null);
 
   const onPointerDown = (e: React.PointerEvent) => {
     e.stopPropagation();
     onFocus();
+    if (isfullscreen) return;
+  
     const el = frameRef.current!;
-    const rect = el.getBoundingClientRect();
-
-    const parent = (el.parentElement || document.body);
-    const parentRect = parent.getBoundingClientRect();
-    dragRef.current = { 
-        x: e.clientX, 
-        y: e.clientY, 
-        left: rect.left - parentRect.left, 
-        top: rect.top - parentRect.top, 
-        w: rect.width, 
-        h: rect.height };
+    dragRef.current = {
+      x: e.clientX,
+      y: e.clientY,
+      left: el.offsetLeft,
+      top: el.offsetTop,
+      w: el.offsetWidth,
+      h: el.offsetHeight,
+    };
+    
     el.setPointerCapture(e.pointerId);
     el.addEventListener("pointermove", onPointerMove);
     el.addEventListener("pointerup", onPointerUp);
@@ -92,6 +94,26 @@ export default function WindowFrame({
     dragRef.current = undefined;
   };
 
+  const toggleFullScreen = () => {
+    const el = frameRef.current!;
+  
+    if (!isfullscreen) {
+      prevGeomRef.current = {
+        width: el.offsetWidth,
+        height: el.offsetHeight,
+        left: el.offsetLeft,
+        top: el.offsetTop,
+      };
+      setIsFullscreen(true);
+    } else {
+      setIsFullscreen(false);
+      if (prevGeomRef.current && onMove) {
+        onMove(prevGeomRef.current);
+      }
+    }
+  };
+  
+  
   useEffect(() => {
     if (!hidden) {
       requestAnimationFrame(() => {
@@ -102,6 +124,23 @@ export default function WindowFrame({
     }
   }, [hidden]);
 
+  const frameStyle: CSSProperties = {
+    position: "absolute",
+    visibility: hidden ? "hidden" : "visible",
+    zIndex,
+    ...style,
+  };
+  if (isfullscreen) {
+    Object.assign(frameStyle, {
+      position: "fixed",
+      top: "var(--menu-safe-top, 0px)",
+      left: 0,
+      width: "100vw",
+      height: "calc(100dvh - var(--menu-safe-top, 0px))",
+    });
+  }
+
+
   return (
     <div
       ref={frameRef}
@@ -109,20 +148,35 @@ export default function WindowFrame({
       className={clsx(
         styles.windowFrame,
         isOpen && styles.open,
+        isfullscreen && styles.fullscreen,
         className
       )}
-      style={{
-        position: "absolute",
-        visibility: hidden ? "hidden" : "visible",
-        zIndex,
-        ...style,
-      }}
+      style={frameStyle}
     >
-      <div className={styles.titleBar} onPointerDown={onPointerDown}>
-        <button className={styles.closeBtn} onPointerDown={e => e.stopPropagation()} onClick={onClose} />
-        <span className={styles.title}>{title}</span>
+      <div 
+        className={styles.titleBar} 
+        onPointerDown={onPointerDown}
+        onDoubleClick={toggleFullScreen}
+        >
+        <button 
+            className={styles.closeBtn}
+            onPointerDown={e => e.stopPropagation()} 
+            onClick={onClose}
+            aria-label="Close window"
+        />
+        <button 
+            className={styles.zoomBtn}
+            onPointerDown={e => e.stopPropagation()} 
+            onClick={toggleFullScreen}
+            aria-label={isfullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
+        />
+        <span className={styles.title}>
+            {title}
+        </span>
       </div>
-      <div className={styles.windowContent}>{children}</div>
+      <div className={styles.windowContent}>
+        {children}
+        </div>
     </div>
   );
 }
