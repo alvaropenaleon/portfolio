@@ -81,20 +81,7 @@
     cursor: pointer;
 }
 
-.aboutWindowFrame .titleBar {
-    justify-content: center;
-    height: 1.5rem;
-    box-shadow: inset 0 -1px 1px 0 rgba(0, 0, 0, 0.1);
 
-
-  }
-  
-  .aboutWindowFrame .title {
-    text-align: center;
-    margin-right: 1rem;
-    font-size: var(--font-sm);
-  }
-  
   .aboutWindowFrame .closeBtn {
     margin-left: -0.4rem;
   }
@@ -108,8 +95,30 @@
     background: rgba(var(--brand-grey-rgb), 0.12);
 }
 
+.aboutWindowFrame .titleBar,
 .imageWindowFrame .titleBar {
+    position: relative;
+    display: flex;
+    align-items: center;
     box-shadow: inset 0 -1px 1px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .aboutWindowFrame .title,
+    .imageWindowFrame .title {
+    position: absolute;
+    left:  var(--space-2xl);
+    right: var(--space-2xl);
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
+    padding: 0;
+  
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  
+    pointer-events: none;          /* so clicks go to buttons beneath */
   }
 
 /* ───────── Window frame (outer wrapper) ───────── */
