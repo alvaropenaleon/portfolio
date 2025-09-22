@@ -9,6 +9,7 @@ import { ChevronRight, File, FolderCog, Mail } from "lucide-react";
 import { useWindowManager } from "@/components/desktop/windowManager";
 import { useWindowStore } from "@/store/windowStore";
 import type { WindowPayloads } from "@/lib/definitions";
+import ThemeColourButton from "@/components/ui/themeColourButton";
 
 function FolderIcon({ size = 16 }: { size?: number }) {
   return (
@@ -179,7 +180,10 @@ export default function MenuBar({ user, preload }: MenuBarProps) {
         </div>
 
         <div className={styles.rightGroup}>
-          <div className={styles.rightIcons}><ThemeButton /></div>
+          <div className={styles.rightIcons}>
+          <ThemeColourButton />
+          <ThemeButton />
+          </div>
           <ClockClient />
         </div>
       </div>
