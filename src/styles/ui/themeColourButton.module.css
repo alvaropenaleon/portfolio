@@ -42,8 +42,8 @@
   border-radius: var(--radius-xl);
   background: rgba(var(--brand-grey-rgb), 0.12);
   box-shadow:
-    0 0 1px 0 rgba(var(--color-foreground-rgb), 0.40),
-    0 8px 24px rgba(0,0,0,.18);
+  0 0 1px 0 rgba(var(--color-foreground-rgb), 0.6),
+  0 0 7px 0 rgba(0, 0, 0, 0.2);
   backdrop-filter: saturate(160%) blur(14px);
   -webkit-backdrop-filter: saturate(160%) blur(14px);
   z-index: 1000;
