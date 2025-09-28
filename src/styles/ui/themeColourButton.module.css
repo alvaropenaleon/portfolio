@@ -1,7 +1,9 @@
 .wrap {
   position: relative;
   display: inline-block;
+  /*
   margin-right: var(--space-xxs);
+  */
 }
 
 /* trigger with hover bg  */
@@ -9,8 +11,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  /*
   width: 32px;
   height: 24px;
+  */
   border: 0;
   padding: 0;
   background: transparent;
@@ -18,7 +22,7 @@
 }
 .trigger:hover,
 .trigger:focus-visible {
-  background: transparent;
+  background: rgba(var(--brand-grey-rgb), 0.08);
   outline: none;
 }
 
@@ -34,12 +38,13 @@
 .pop {
   position: absolute;
   top: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%);
+  /* centered below button  left 50% and translateX(-50%)*/
+  left: 0%;
+  transform: translateX(-1%);
   display: flex;
   gap: 12px;
   padding: 12px 16px;
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-sm);
   background: rgba(var(--brand-grey-rgb), 0.12);
   box-shadow:
   0 0 1px 0 rgba(var(--color-foreground-rgb), 0.6),

@@ -90,10 +90,13 @@ export default function MenuBar({ user, preload }: MenuBarProps) {
     <div className={`${styles.menuContainer} ${isOpen ? styles.expanded : ""}`}>
       <div className={styles.menuBar}>
         <div className={styles.leftGroup}>
-          <h1 className={styles.logo}>🐱</h1>
+         {/* 
+         <h1 className={styles.logo}>🐱</h1>
           <h1 className={styles.logo}>Perfect Blue</h1>
+          */}
 
-          <div className={styles.menuTrigger} ref={triggerRef}>
+<ThemeColourButton />
+<div className={styles.menuTrigger} ref={triggerRef}>
             <button
               className={`${styles.menuText} ${isOpen ? styles.menuTextActive : ""}`}
               onClick={() => setIsOpen((v) => !v)}
@@ -102,7 +105,7 @@ export default function MenuBar({ user, preload }: MenuBarProps) {
               aria-controls="menudropdown"
               type="button"
             >
-              Menu
+              Navigation
             </button>
 
             {isOpen && (
@@ -181,7 +184,6 @@ export default function MenuBar({ user, preload }: MenuBarProps) {
 
         <div className={styles.rightGroup}>
           <div className={styles.rightIcons}>
-          <ThemeColourButton />
           <ThemeButton />
           </div>
           <ClockClient />
