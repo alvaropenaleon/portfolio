@@ -1,4 +1,15 @@
-.archiveWindowFrame .titleBar {
+/* Default: sidebar visible */
+.archiveWindowFrame {
+    --sidebar-pad: 206px;                 /* 👈 single source of truth */
+  }
+  
+  /* Collapsed: sidebar hidden */
+  .archiveWindowFrame.collapsed {
+    --sidebar-pad: 0px;
+  }
+  
+  
+  .archiveWindowFrame .titleBar {
   position: relative;
   z-index: 1;
   height: 3rem;
@@ -10,12 +21,13 @@
   content: "";
   position: absolute;
   top: 0;
-  left: 205px;
+  left: calc(var(--sidebar-pad) - 1px);
   right: 0;
   bottom: 0;
   z-index: -1;
   box-shadow: inset 1px 0 0 0 rgba(var(--color-foreground-rgb), 0.1),
   inset 0 -1px 1px 0 rgba(0, 0, 0, 0.1);
+  transition: left 180ms ease-in-out;
 
 }
 
@@ -27,18 +39,47 @@
 
 /* push the title text over by 206px */
 .archiveWindowFrame .title {
-  margin-left: calc(206px - 1.6rem);
+  margin-left: calc(var(--sidebar-pad) - 1.6rem);
   font-size: var(--font-md);
+  transition: margin-left 180ms ease-in-out;
+
 }
 
-/* Disable outer window scrolling */
-.archiveWindowFrame .windowContent {
-  overflow: hidden;
-}
+.archiveWindowFrame.collapsed .title {
+    margin-left: 2.6rem;
+  
+  }
+
+  /* now target the local .windowContent under that marker */
+  .archiveWindowFrame .windowContent {
+    overflow: hidden;           /* kill the host scroll */
+    background: linear-gradient(
+        to right,
+        transparent var(--sidebar-pad),
+        var(--color-background) var(--sidebar-pad)
+      ) !important;
+  }
+
 
 .archiveWindowFrame .windowContent::before {
     /* shorthand for top:0; right:0; bottom:0; left:206px; */
-    inset: 0 0 0 206px !important;
+    inset: 0 0 0 var(--sidebar-pad) !important;
+    transition: left 180ms ease-in-out;
+  }
+
+  /* The toggle button that lives in the title bar */
+.sidebarToggle {
+    position: absolute;
+    left: 4.2rem;                 /* tweak to sit nicely after the red/yellow/green dots */
+    top: 50%;
+    transform: translateY(-50%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background: transparent;
+    color: var(--brand-grey);
+    cursor: pointer;
   }
 
 /* MARKER: this class lives in the same file, so it’s a true CSS-module */
@@ -46,16 +87,6 @@
     background: transparent;    /* wipe out the default white BG */
   }
   
-  /* now target the local .windowContent under that marker */
-  .archiveWindowFrame .windowContent {
-    overflow: hidden;           /* kill the host scroll */
-    background:                  /* transparent sidebar + white main */
-      linear-gradient(
-        to right,
-        transparent 206px,
-        var(--color-background) 206px
-      ) !important;
-  }
 
   .archiveWindowFrame  .closeBtn {
     width: 12px;

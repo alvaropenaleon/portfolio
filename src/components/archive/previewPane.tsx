@@ -26,7 +26,7 @@ export default function PreviewPane({ project, onClose }: PreviewPaneProps) {
             className={styles.closeButton}
             aria-label="Close preview"
           >
-            <PanelRightClose size={20} strokeWidth={1.6}/>
+            <PanelRightClose size={19} strokeWidth={1.6}/>
           </button>
           <h5 className={styles.headerTitle}>Preview Pane</h5>
         </div>

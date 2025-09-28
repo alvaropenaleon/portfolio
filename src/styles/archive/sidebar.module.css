@@ -7,11 +7,12 @@
 
 .list {
   list-style: none;
-  padding: 0;
+  padding: 0 0.7rem;
   margin: 0;
   display: flex;
   flex-direction: column;
   gap: 1px;
+  white-space: nowrap;
 }
 
 .list li {
@@ -47,9 +48,14 @@
 .folderIcon {
     position: relative;
     color: var(--folder-blue);
+    flex-shrink: 0;
+    display: inline-flex;
+    justify-content: center;
+    
 }
 
 .catItem .folderIcon{
     position: relative;
     color: var(--folder-blue);
 }
+

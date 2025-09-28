@@ -1,9 +1,11 @@
 /* 3a) Fill the entire content rectangle */
 .archiveWindow {
   position: absolute;
-  top: 0; right: 0; bottom: 0; left: 0;
+  inset: 0;
+  /* top: 0; right: 0; bottom: 0; left: 0; */
   display: grid;
-  grid-template-columns: 206px 1fr;  /* sidebar fixed width */
+  grid-template-columns: var(--sidebar-pad) 1fr;  /* sidebar fixed width */
+  transition:  grid-template-columns 180ms ease-in-out;
 }
 
 /* 3b) Sidebar: full height, its own scroll */
@@ -11,7 +13,7 @@
   background: rgba(var(--brand-grey-rgb), 0.12);
   box-shadow: inset -1px 0 0 0 rgba(var(--color-foreground-rgb), 0.1);
   display: flex;
-  padding: 0 0.7rem;
+  padding: 0;
   flex-direction: column;
   height: 100%;
   overflow-y: auto;                /* scroll only this pane */
@@ -24,6 +26,7 @@
   height: 100%;
   background: transparent; 
   overflow-y: auto;
+  min-width: 0;
 }
 
 /* 3e) Scrollable list below */

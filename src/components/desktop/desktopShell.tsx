@@ -5,8 +5,10 @@ import { useWindowManager } from '@/components/desktop/windowManager';
 import WindowShell from './windowShell';
 import styles from '@/styles/desktop/windowFrame.module.css';
 import { Project } from '@/lib/definitions';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useWindowStore } from '@/store/windowStore';
+import { PanelLeft, PanelLeftClose } from 'lucide-react';
+import clsx from 'clsx';
 
 type PreloadedData = {
   about: { bio: string };
@@ -28,6 +30,7 @@ type Props = {
 export default function DesktopShell({ preload }: Props) {
   const { windows, open, close, bringToFront, moveWindow } = useWindowManager();
   const { clampAllToViewport } = useWindowStore();
+  const [archiveCollapsed, setArchiveCollapsed] = useState(false);
 
   // Handle window resize (move clamping logic from store to component)
   useEffect(() => {
@@ -83,9 +86,21 @@ export default function DesktopShell({ preload }: Props) {
           }}
           hidden={!w.open}
           className={
-            w.id === 'archive' ? styles.archiveWindowFrame :
+            w.id === 'archive' ? clsx(styles.archiveWindowFrame, archiveCollapsed && styles.collapsed) :
             w.id === 'about' ? styles.aboutWindowFrame :
             w.id === 'image' ? styles.imageWindowFrame : ''
+          }
+          titleControls={
+            w.id === 'archive' ? (
+              <button
+                type="button"
+                className={styles.sidebarToggle}
+                aria-label={archiveCollapsed ? 'Show sidebar' : 'Hide sidebar'}
+                onClick={() => setArchiveCollapsed(v => !v)}
+              >
+                {archiveCollapsed ? <PanelLeft size={19} strokeWidth={1.6}/> : <PanelLeftClose size={19} strokeWidth={1.6}/>}
+              </button>
+            ) : null
           }
           onClose={() => close(w.id)}
           onFocus={() => bringToFront(w.id)}

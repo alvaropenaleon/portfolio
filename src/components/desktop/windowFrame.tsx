@@ -16,7 +16,8 @@ interface Props {
   onMove?(geom: Geometry): void;
   style?: CSSProperties;
   hidden?: boolean;
-  className?: string; 
+  className?: string;
+  titleControls?: ReactNode; 
 }
 
 export default function WindowFrame({
@@ -29,17 +30,21 @@ export default function WindowFrame({
   style = {}, 
   hidden = false, 
   className = '',
+    titleControls,
 }: Props) {
   const frameRef = useRef<HTMLDivElement>(null);
+  const dragTargetRef = useRef<HTMLElement | null>(null);
   const dragRef = useRef<{ x: number; y: number; left: number; top: number; w: number; h: number } | undefined>(undefined);
   const [isOpen, setIsOpen] = useState(false);
   const [isfullscreen, setIsFullscreen] = useState(false);
   const prevGeomRef = useRef<Geometry | null>(null);
 
   const onPointerDown = (e: React.PointerEvent) => {
-    e.stopPropagation();
+    // e.stopPropagation();
     onFocus();
     if (isfullscreen) return;
+    if (e.button !== 0) return; // Only left button
+    if (e.detail > 1) return; // Ignore double-click
   
     const el = frameRef.current!;
     dragRef.current = {
@@ -50,10 +55,14 @@ export default function WindowFrame({
       w: el.offsetWidth,
       h: el.offsetHeight,
     };
+
+    const target = e.target as HTMLElement; 
+    dragTargetRef.current = target;
     
-    el.setPointerCapture(e.pointerId);
-    el.addEventListener("pointermove", onPointerMove);
-    el.addEventListener("pointerup", onPointerUp);
+    try { target.setPointerCapture(e.pointerId); } catch {}
+    target.setPointerCapture(e.pointerId);
+    target.addEventListener("pointermove", onPointerMove);
+    target.addEventListener("pointerup", onPointerUp);
   };
 
   const onPointerMove = (e: PointerEvent) => {
@@ -170,6 +179,7 @@ export default function WindowFrame({
             onClick={toggleFullScreen}
             aria-label={isfullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
         />
+        {titleControls}
         <span className={styles.title}>
             {title}
         </span>
