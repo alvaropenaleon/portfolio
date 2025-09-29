@@ -1,23 +1,30 @@
 /* styles/bear.module.css */
 .bear {
     color: var(--color-foreground);
-    font-size: 0.96rem;
-    line-height: 1.4;
+    font-size: var(--font-sm);
+    font-variation-settings: var(--var-md);
+    line-height: auto;
     word-break: break-word;
   }
   
   .bear h1, .bear h2, .bear h3, .bear h4, .bear h5, .bear h6 {
-    font-weight: 700;
+    font-variation-settings: var(--var-lg);
     line-height: 1.25;
     margin: 1.2rem 0 0.6rem;
     letter-spacing: -0.01em;
   }
-  .bear h1 { font-size: 1.6rem; margin-top: 0.5rem; }
-  .bear h2 { font-size: 1.35rem; }
-  .bear h3 { font-size: 1.15rem; }
+  .bear h1 { font-size: var(--font-md); margin-top: 0.5rem; }
+  .bear h2 { font-size: var(--font-md); }
+  .bear h3 { font-size: var(--font-md); }
   
-  .bear p { margin: 0.8rem 0; color: var(--color-foreground); }
-  .bear strong { font-weight: 700; }
+  .bear p { 
+    margin: 0.8rem 0; 
+    color: var(--color-foreground);     
+    font-variation-settings: var(--var-md);
+  }
+  .bear strong { 
+    font-variation-settings: var(--var-lg); 
+}
   .bear em { opacity: 0.95; }
   
   .bear a {
@@ -34,11 +41,17 @@
     color: var(--color-background);
   }
   
-  .bear ul, .bear ol { margin: 0.6rem 0; padding-left: 1.2rem; }
-  .bear li { margin: 0.25rem 0; }
+  .bear ul, .bear ol { 
+    margin: 0.6rem 0; 
+    padding-left: 1.2rem; }
+  .bear li { 
+    margin: auto 0; 
+}
   
   /* task list (Bear-like checkboxes) */
-  .bear :global(.task-list-item) { list-style: none; }
+  .bear :global(.task-list-item) { 
+    list-style: none; 
+}
   .bear :global(.task-list-item input[type="checkbox"]) {
     margin-right: 0.55rem;
     width: 1rem; height: 1rem;
@@ -47,17 +60,19 @@
   }
   
   .codeBlock {
-    background: rgba(var(--brand-grey-rgb), 0.4);
-    border-radius: 10px;
-    padding: 0.9rem 1rem;
+    font-size: var(--font-xs);
+    background: rgba(var(--brand-grey-rgb), 0.2);
+    border-radius: var(--radius-xs);
+    padding: var(--space-sm) var(--font-sm);
     overflow: auto;
-    margin: 0.9rem 0;
+    margin: var(--space-md) 0;
     border: 1px solid rgba(var(--brand-dark-grey-rgb), 0.1);
   }
   .codeInline {
-    background: rgba(var(--brand-grey-rgb), 0.4);
-    padding: 0.1rem 0.35rem;
-    border-radius: 6px;
+    font-size: var(--font-xs);
+    background: rgba(var(--brand-grey-rgb), 0.2);
+    padding: 0.1rem 0.3rem;
+    border-radius: var(--radius-xs);
     border: 1px solid var(--color-line);
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
     font-size: 0.92em;
