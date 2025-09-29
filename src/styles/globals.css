@@ -93,6 +93,20 @@ h2 a::after {
     visibility: hidden; 
 }
 
+.hljs {
+    color: var(--color-foreground) !important;
+    background: rgba(var(--brand-grey-rgb), .0) !important;
+    color: var(--color-foreground) !important;
+}
+
+.hljs-title, .hljs-title.class_, .hljs-title.class_.inherited__, .hljs-title.function_ ,
+.hljs-built_in, .hljs-symbol,
+.hljs-doctag, .hljs-keyword, .hljs-meta .hljs-keyword, .hljs-template-tag, .hljs-template-variable, .hljs-type, .hljs-variable.language_,
+.hljs-attr, .hljs-attribute, .hljs-literal, .hljs-meta, .hljs-number, .hljs-operator, .hljs-variable, .hljs-selector-attr, .hljs-selector-class, .hljs-selector-id{
+    color: var(--color-foreground) !important;
+    }
+
+
 @media (max-width: 1024px) {}
 
 @media (max-width: 768px) {
@@ -149,7 +163,7 @@ h2 a::after {
     --b4x: 11.712962962962967%;
     --b4y: 16.550308008213555%;
   }
-  
+
   /* Animated gradient overlay - CREDITS for gradient structure: gradient-tool-lovat.vercel.app by David Drobnak */
   .desktop-root::before {
     content: "";
