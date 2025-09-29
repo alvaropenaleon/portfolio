@@ -1,0 +1,94 @@
+/* styles/bear.module.css */
+.bear {
+    color: var(--color-foreground);
+    font-size: 0.96rem;
+    line-height: 1.4;
+    word-break: break-word;
+  }
+  
+  .bear h1, .bear h2, .bear h3, .bear h4, .bear h5, .bear h6 {
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 1.2rem 0 0.6rem;
+    letter-spacing: -0.01em;
+  }
+  .bear h1 { font-size: 1.6rem; margin-top: 0.5rem; }
+  .bear h2 { font-size: 1.35rem; }
+  .bear h3 { font-size: 1.15rem; }
+  
+  .bear p { margin: 0.8rem 0; color: var(--color-foreground); }
+  .bear strong { font-weight: 700; }
+  .bear em { opacity: 0.95; }
+  
+  .bear a {
+    color:rgba(var(--brand-blue-rgb), 0.6);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(122,162,247,0.35);
+  }
+  .bear a:hover { border-bottom-color: rgba(var(--brand-blue-rgb), 0.6); }
+  
+  .bear blockquote {
+    margin: 0.9rem 0;
+    padding: 0.1rem 0 0.1rem 0.9rem;
+    border-left: 3px solid var(--color-line);
+    color: var(--color-background);
+  }
+  
+  .bear ul, .bear ol { margin: 0.6rem 0; padding-left: 1.2rem; }
+  .bear li { margin: 0.25rem 0; }
+  
+  /* task list (Bear-like checkboxes) */
+  .bear :global(.task-list-item) { list-style: none; }
+  .bear :global(.task-list-item input[type="checkbox"]) {
+    margin-right: 0.55rem;
+    width: 1rem; height: 1rem;
+    accent-color: rgba(var(--brand-blue-rgb), 0.6);
+    transform: translateY(1px);
+  }
+  
+  .codeBlock {
+    background: rgba(var(--brand-grey-rgb), 0.4);
+    border-radius: 10px;
+    padding: 0.9rem 1rem;
+    overflow: auto;
+    margin: 0.9rem 0;
+    border: 1px solid rgba(var(--brand-dark-grey-rgb), 0.1);
+  }
+  .codeInline {
+    background: rgba(var(--brand-grey-rgb), 0.4);
+    padding: 0.1rem 0.35rem;
+    border-radius: 6px;
+    border: 1px solid var(--color-line);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    font-size: 0.92em;
+  }
+  
+  .bear table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.8rem 0;
+    font-variant-numeric: tabular-nums;
+  }
+  .bear th, .bear td {
+    border: 1px solid var(--color-line);
+    padding: 0.45rem 0.6rem;
+  }
+  .bear th {
+    text-align: left;
+    background: rgba(255,255,255,0.04);
+  }
+  
+  .rule {
+    border: none;
+    border-top: 1px solid var(--color-line);
+    margin: 1.2rem 0;
+  }
+  
+  .bear img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin: 0.8rem 0;
+    border: 1px solid var(--color-line);
+  }
+  

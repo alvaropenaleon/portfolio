@@ -6,6 +6,7 @@ import type { Project } from "@/lib/definitions";
 import styles from "@/styles/archive/previewPane.module.css";
 import { PreviewTagChip } from "@/components/ui/tag";
 import { PanelRightClose } from "lucide-react";
+import Markdown from "@/components/ui/markdown";
 
 
 interface PreviewPaneProps {
@@ -58,8 +59,6 @@ export default function PreviewPane({ project, onClose }: PreviewPaneProps) {
           <tbody>
             <tr><td>Created</td><td>{date}</td></tr>
 
-            <tr><td>Comments</td><td>{text}</td></tr>
-
 
             {links?.length && (
                 <>
@@ -88,6 +87,8 @@ export default function PreviewPane({ project, onClose }: PreviewPaneProps) {
         {/* long description / text */}
         {/* {description && <p style={{marginBottom:'1rem'}}>{description}</p>} */}
         {/* {text && <p style={{whiteSpace:'pre-line',marginBottom:'1rem'}}>{text}</p>} */}
+        <Markdown content={text}/>
+
 
         {/* tags */}
         {tags?.length && (

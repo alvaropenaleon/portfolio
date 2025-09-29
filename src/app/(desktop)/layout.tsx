@@ -4,6 +4,8 @@ import Sidebar from '@/components/ui/sidebar';
 import Notifications from '@/components/about/notifications';
 import type { ReactNode } from 'react';
 // import MenuBar from '@/components/ui/menu';
+import 'highlight.js/styles/github-dark.css';
+
 
 export default function DesktopLayout({
   children,
