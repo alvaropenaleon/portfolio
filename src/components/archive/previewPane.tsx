@@ -15,7 +15,7 @@ interface PreviewPaneProps {
 }
 
 export default function PreviewPane({ project, onClose }: PreviewPaneProps) {
-  const { title, heroImage, description, date, categories, tags, role, links, text } = project;
+  const { title, heroImage, description, date, categories, tags, role, links, text, images } = project;
   const categoriesFiltered = (categories ?? []).filter(c => c !== "Work");
 
   return (
@@ -88,6 +88,27 @@ export default function PreviewPane({ project, onClose }: PreviewPaneProps) {
         {/* {description && <p style={{marginBottom:'1rem'}}>{description}</p>} */}
         {/* {text && <p style={{whiteSpace:'pre-line',marginBottom:'1rem'}}>{text}</p>} */}
         <Markdown content={text}/>
+
+        {/* optional gallery below text */}
+        {images?.length ? (
+        <>
+            <h4 className={styles.subheadingLine}>Images</h4>
+            <div className={styles.galleryGrid}>
+            {project.images.map((src, i) => (
+                <div className={styles.galleryItem} key={src + i}>
+                <Image
+                    src={src}
+                    alt={`${title} – image ${i + 1}`}
+                    width={800}
+                    height={600}
+                    className={styles.galleryImage}
+                    quality={90}
+                />
+                </div>
+            ))}
+            </div>
+        </>
+        ) : null}
 
 
         {/* tags */}

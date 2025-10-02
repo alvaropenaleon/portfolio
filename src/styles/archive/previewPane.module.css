@@ -142,3 +142,22 @@
     flex-wrap: wrap;
   }
   
+
+  .galleryGrid {
+    display: grid;
+    grid-template-columns: 1fr; 
+    gap: 12px;
+    margin-top: 12px;
+  }
+  
+  .galleryItem {
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+  }
+  
+  .galleryImage {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
