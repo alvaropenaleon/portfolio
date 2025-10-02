@@ -38,7 +38,9 @@
   --space-2xl: 4rem;
   --space-3xl: 5rem;
 
-  --space-preview-pane: 330px;
+  --space-preview-pane: calc(330px + 2 * var(--space-lg));
+  --space-preview-pane-condensed: 0px;
+  --space-lg: 16px;
   --space-sidebar: 330px;
   --space-row: 1rem;
 

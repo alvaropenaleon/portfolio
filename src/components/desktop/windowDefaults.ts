@@ -16,7 +16,7 @@ export type GeometryOrFn = Geometry | GeometryFn;
 /** Constants used for layout logic */
 const GUTTER = 16;
 const ARCHIVE_MAX_W = 1300;
-const ARCHIVE_MAX_H = 500;
+const ARCHIVE_MAX_H = 650;
 const ABOUT_MAX_W   = 700;
 const ABOUT_MAX_H   = 440;
 const IMAGE_MAX_W   = 720;
@@ -48,7 +48,7 @@ export const windowDefaults: Record<WindowID, GeometryOrFn> = {
       width: w,
       height: h,
       left: (vw - w) / 2,
-      top: (vh - h) / 1.5,
+      top: (vh - h) / 3,
     };
   },
 
