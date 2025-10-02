@@ -1,4 +1,5 @@
 "use client";
+
 import {
   useEffect,
   useMemo,
@@ -9,6 +10,7 @@ import {
 } from "react";
 import Image from "next/image";
 import PreviewPane from "@/components/archive/previewPane";
+import ProjectView from "@/components/archive/projectView";
 import ArchiveItem from "@/components/archive/archiveItem";
 import type { Project } from "@/lib/definitions";
 import styles from "@/styles/archive/archiveClient.module.css";
@@ -22,9 +24,7 @@ import { useWindowNav } from "@/hooks/useWindowNav";
 const ROW_H = 36;
 
 function prettify(val: string) {
-  return val
-    .replace(/[-_]/g, " ")
-    .replace(/\b\w/g, (l) => l.toUpperCase());
+  return val.replace(/[-_]/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
 }
 
 type Props = {
@@ -38,129 +38,101 @@ export default function ArchiveClient({
   categories,
   searchTerm,
 }: Props) {
-  const { params, setParam } = useWindowNav('archive');
-  const { setTitle } = useWindowStore();
+  const { params, setParam } = useWindowNav("archive");
+  const { setTitle, open } = useWindowStore();
+
   const [quickView, setQuickView] = useState<Project | null>(null);
+  const [paneCollapsed, setPaneCollapsed] = useState(false);
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [placeCnt, setPlaceCnt] = useState(0);
-  const { open } = useWindowStore();
 
-  const openImageWindow = useCallback((p: Project) => {
-    // If you already have a window id for viewing images/files, use that id.
-    // I'll call it 'image' here.
-    open('image', {
-      payload: { src: p.heroImage, title: p.title },   // whatever your payload shape is
-      // Optional: make URL pretty if you want the address bar to reflect it
-      // pathOverride: `/image?src=${encodeURIComponent(p.heroImage)}`
-      pathOverride: `/image?id=${encodeURIComponent(p.id)}&title=${encodeURIComponent(p.title)}`
-    });
-  }, [open]);
+  const currentQuery = params.get("query") || "";
+  const currentCategory = params.get("category") || "";
+  const currentTag = params.get("tag") || "";
+  const currentProjectId = params.get("project") || "";
+  const isFullView = params.get("view") === "full";
 
-  // Reset expansion state when filters change
-  const currentQuery = params.get('query') || '';
-  const currentCategory = params.get('category') || '';
-  const currentTag = params.get('tag') || '';
+  const openImageWindow = useCallback(
+    (p: Project) => {
+      open("image", {
+        payload: { src: p.heroImage, title: p.title },
+        pathOverride: `/image?id=${encodeURIComponent(p.id)}&title=${encodeURIComponent(p.title)}`,
+      });
+    },
+    [open]
+  );
 
-  // Load initial folder state from sessionStorage on first render
-    useEffect(() => {
-        const savedExpanded = sessionStorage.getItem('archive-expanded-folders');
-        if (savedExpanded) {
-        try {
-            const expandedArray = JSON.parse(savedExpanded);
-            setExpanded(new Set(expandedArray));
-        } catch (error) {
-            console.error('Failed to parse saved folder state:', error);
-            setExpanded(new Set()); // Fallback to collapsed
-        }
-        } else {
-        setExpanded(new Set()); // Start collapsed on first visit
-        }
-    }, []); // Empty dependency array,  only run once on mount
-    
-    // Save folder state to sessionStorage whenever it changes
-    useEffect(() => {
-        const expandedArray = Array.from(expanded);
-        sessionStorage.setItem('archive-expanded-folders', JSON.stringify(expandedArray));
-    }, [expanded]);
+  // caching / fetching
+  const projectCacheRef = useRef(new Map<string, Project>());
+  const inflightRef = useRef(new Map<string, Promise<Project | undefined>>());
 
-    // cache
-    const projectCacheRef = useRef(new Map<string, Project>());
-    const inflightRef = useRef(new Map<string, Promise<Project | undefined>>());
-
-    const getProject = useCallback((id: string): Promise<Project | undefined> => {
+  const getProject = useCallback((id: string): Promise<Project | undefined> => {
     const cached = projectCacheRef.current.get(id);
     if (cached) return Promise.resolve(cached);
-
     const existing = inflightRef.current.get(id);
     if (existing) return existing;
 
     const p = fetch(`/api/project/${id}`)
-        .then(res => {
+      .then((res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json() as Promise<Project>;
-        })
-        .then(proj => {
+      })
+      .then((proj) => {
         projectCacheRef.current.set(id, proj);
         return proj;
-        })
-        .catch(e => {
-        console.error('Failed to fetch project', e);
+      })
+      .catch((e) => {
+        console.error("Failed to fetch project", e);
         return undefined;
-        })
-        .finally(() => {
+      })
+      .finally(() => {
         inflightRef.current.delete(id);
-        });
+      });
 
     inflightRef.current.set(id, p);
     return p;
-    }, []);
+  }, []);
 
-    // hover prefetch = warm cache + image, but DO NOT setQuickView
-    const prefetchProject = useCallback((p: Project) => {
-    if (!projectCacheRef.current.has(p.id)) void getProject(p.id);
-    const img = new window.Image();
-    img.src = p.heroImage;
-    }, [getProject]);
+  const prefetchProject = useCallback(
+    (p: Project) => {
+      if (!projectCacheRef.current.has(p.id)) void getProject(p.id);
+      const img = new window.Image();
+      img.src = p.heroImage;
+    },
+    [getProject]
+  );
 
-    // click = show immediately, then enrich
-    const handleOpenProject = useCallback((p: Project) => {
-    setParam('project', p.id);
-    setQuickView(p);                    // optimistic
-    void getProject(p.id).then(full => {
-        if (full) {
-        setQuickView(prev => prev?.id === p.id ? { ...prev, ...full } : prev);
-        }
-    });
-    }, [setParam, getProject]);
+  const handleOpenProject = useCallback(
+    (p: Project) => {
+      setParam("project", p.id);
+      setParam("view", undefined); // ensure not in full mode yet
+      setPaneCollapsed(false);
+      setQuickView(p); // optimistic
+      void getProject(p.id).then((full) => {
+        if (full) setQuickView((prev) => (prev?.id === p.id ? { ...prev, ...full } : prev));
+      });
+    },
+    [setParam, getProject]
+  );
 
-    // URL sync (avoid double fetch + stale overwrites)
-    const lastReqIdRef = useRef(0);
-    useEffect(() => {
-    const id = params.get('project');
-    if (!id) { setQuickView(null); return; }
-    if (quickView?.id === id) return;
+  // sync quickView with URL
+  const lastReqIdRef = useRef(0);
+  useEffect(() => {
+    if (!currentProjectId) {
+      setQuickView(null);
+      setPaneCollapsed(false);
+      return;
+    }
+    if (quickView?.id === currentProjectId) return;
 
     const reqId = ++lastReqIdRef.current;
-    void getProject(id).then(full => {
-        if (full && reqId === lastReqIdRef.current) {
-        setQuickView(full);
-        }
+    void getProject(currentProjectId).then((full) => {
+      if (full && reqId === lastReqIdRef.current) setQuickView(full);
     });
-    }, [params, quickView?.id, getProject]);
+  }, [currentProjectId, quickView?.id, getProject]);
 
-  
-
-  /** Select a category as filter (flat list) */
-  const handleCategorySelect = useCallback((cat: string) => {
-    setParam("category", cat);
-    setParam("tag", undefined);
-    setParam("project", undefined);
-    setQuickView(null);
-  }, [setParam]);
-
-
-  /** Dynamic title into store */
+  // Title
   useEffect(() => {
     const query = params.get("query");
     const category = params.get("category");
@@ -172,33 +144,27 @@ export default function ArchiveClient({
     setTitle("archive", title);
   }, [params, setTitle]);
 
-  /** Group projects by category */
+  // By category
   const byCategory = useMemo(() => {
     const map: Record<string, Project[]> = {};
     categories.forEach((c) => {
-      map[c] = projects.filter((p) =>
-        p.categories.includes(c)
-      );
+      map[c] = projects.filter((p) => p.categories.includes(c));
     });
     return map;
   }, [projects, categories]);
 
-  /** Toggle expand/collapse */
   const toggle = useCallback((cat: string) => {
     setExpanded((prev) => {
       const next = new Set(prev);
-      if (next.has(cat)) {
-        next.delete(cat);
-      } else {
-        next.add(cat);
-      }
+      if (next.has(cat)) next.delete(cat);
+      else next.add(cat);
       return next;
     });
   }, []);
 
   const isFiltered = !!(currentQuery || currentCategory || currentTag);
 
-  // Calculate placeholder rows for zebra striping
+  // zebra placeholders
   useEffect(() => {
     const el = scrollerRef.current;
     if (!el) return;
@@ -207,7 +173,7 @@ export default function ArchiveClient({
       const visibleRows = isFiltered
         ? projects.length
         : categories
-            .filter(c => c !== "Work") // don't count Work category
+            .filter((c) => c !== "Work")
             .reduce((sum, c) => {
               sum++; // folder row
               if (expanded.has(c)) sum += byCategory[c].length;
@@ -216,19 +182,50 @@ export default function ArchiveClient({
       const rowsFit = Math.ceil(el.clientHeight / ROW_H);
       setPlaceCnt(Math.max(rowsFit - visibleRows, 0));
     });
-    
+
     ro.observe(el);
     return () => ro.disconnect();
   }, [projects.length, categories, expanded, byCategory, isFiltered]);
 
+  // actions
+  const openFullView = useCallback(() => {
+    if (!quickView) return;
+    setParam("view", "full");
+  }, [quickView, setParam]);
+
+  const closeFullView = useCallback(() => {
+    // NEW: closing content also closes preview (no gap remains)
+    setParam("view", undefined);
+    // setParam("project", undefined);
+    // setQuickView(null);
+    setPaneCollapsed(false);
+  }, [setParam]);
+
+  const handleCategorySelect = useCallback(
+    (cat: string) => {
+      setParam("category", cat);
+      setParam("tag", undefined);
+      // also ensure list view is reset
+      setParam("project", undefined);
+      setParam("view", undefined);
+      setQuickView(null);
+      setPaneCollapsed(false);
+    },
+    [setParam]
+  );
+
   return (
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      data-pane={paneCollapsed ? "condensed" : "normal"}  // drives CSS var
+    >
       <div
         className={clsx(
           styles.archiveListWrapper,
           quickView ? styles.withPreview : styles.withoutPreview
         )}
       >
+        {/* header row */}
         <div className={listStyles.headerRow}>
           <div className={listStyles.row}>
             <p className={rowStyles.col1}></p>
@@ -239,27 +236,24 @@ export default function ArchiveClient({
             <p className={rowStyles.col6}>Date Added</p>
           </div>
         </div>
-        <div
-          className={listStyles.scroller}
-          ref={scrollerRef}
-        >
+
+        {/* rows scroller */}
+        <div className={listStyles.scroller} ref={scrollerRef}>
           {isFiltered ? (
-            // Show flat filtered list
             projects.map((p) => (
               <ArchiveItem
                 key={p.id}
                 project={p}
                 searchTerm={searchTerm}
                 onOpenProject={handleOpenProject}
-                onOpenInWindow={openImageWindow} 
-                onHover={() => prefetchProject(p)} 
+                onOpenInWindow={openImageWindow}
+                onHover={() => prefetchProject(p)}
                 onFocus={() => prefetchProject(p)}
               />
             ))
           ) : (
-            // Show categorized view
             categories
-              .filter(c => c !== "Work") // do not render work category
+              .filter((c) => c !== "Work")
               .map((cat) => (
                 <Fragment key={cat}>
                   <div
@@ -267,7 +261,6 @@ export default function ArchiveClient({
                     className={rowStyles.row4col}
                     onDoubleClick={() => handleCategorySelect(cat)}
                   >
-                    {/* Col 1: arrow icon only toggles expand/collapse */}
                     <div className={rowStyles.col1}>
                       <span
                         onClick={(e) => {
@@ -277,22 +270,14 @@ export default function ArchiveClient({
                         style={{ cursor: "pointer" }}
                       >
                         {expanded.has(cat) ? (
-                          <ChevronDown className={styles.catChevron} size={18} strokeWidth={2.6}/>
+                          <ChevronDown className={styles.catChevron} size={18} strokeWidth={2.6} />
                         ) : (
                           <ChevronRight className={styles.catChevron} size={18} strokeWidth={2.6} />
                         )}
                       </span>
-                    </div>                    
-                    {/* Col 2: folder icon, centered */}
+                    </div>
                     <div className={rowStyles.col2}>
-                      <Image
-                        src="/folder.png"
-                        alt="Folder"
-                        width={34}
-                        height={34}
-                        className={styles.catFolder}
-                      />
-                      {/* category name */}
+                      <Image src="/folder.png" alt="Folder" width={34} height={34} className={styles.catFolder} />
                       <span className={styles.catLabel}>{cat}</span>
                     </div>
                   </div>
@@ -303,8 +288,8 @@ export default function ArchiveClient({
                         project={p}
                         searchTerm=""
                         onOpenProject={handleOpenProject}
-                        onOpenInWindow={openImageWindow} 
-                        onHover={() => prefetchProject(p)} 
+                        onOpenInWindow={openImageWindow}
+                        onHover={() => prefetchProject(p)}
                         onFocus={() => prefetchProject(p)}
                         className={rowStyles.indentedRow}
                       />
@@ -312,22 +297,42 @@ export default function ArchiveClient({
                 </Fragment>
               ))
           )}
-          {/* placeholder rows for zebra */}
+
+          {/* placeholders */}
           {Array.from({ length: placeCnt }).map((_, i) => (
-            <div
-              key={i}
-              className={rowStyles.row4col}
-              aria-hidden="true"
-            />
+            <div key={i} className={rowStyles.row4col} aria-hidden="true" />
           ))}
         </div>
       </div>
-      {quickView && (
+
+      {/* Preview Pane */}
+      {quickView ? (
         <PreviewPane
           project={quickView}
-          onClose={() => setParam("project", undefined)}
+          onClose={() => {
+            setParam("project", undefined);
+            setParam("view", undefined);
+            setQuickView(null);
+            setPaneCollapsed(false);
+          }}
+          onOpenFullView={openFullView}
+          onCloseFullView={closeFullView}
+          condensed={paneCollapsed}
+          isFullView={isFullView}     // <— hide hero/desc while reading
         />
-      )}
+      ) : null}
+
+      {/* Project Full View Overlay (covers only the rows area) */}
+      {quickView && isFullView ? (
+        <div className={styles.overlay}>
+          <ProjectView
+            project={quickView}
+            onClose={closeFullView} // closing content also closes preview
+            onTogglePane={() => setPaneCollapsed((v) => !v)}
+            paneCollapsed={paneCollapsed}
+          />
+        </div>
+      ) : null}
     </div>
   );
 }

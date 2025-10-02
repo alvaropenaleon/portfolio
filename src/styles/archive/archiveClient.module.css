@@ -1,49 +1,62 @@
-.container {
+/* Default variables */
+
+  .container {
     display: flex;
     position: relative;
     height: 100%;
+  
+    /* live width var used by both list and overlay */
+    --pane-width: var(--space-preview-pane);
   }
   
+  /* When pane is condensed, reduce the var globally for this container */
+  .container[data-pane="condensed"] {
+    --pane-width: var(--space-preview-pane-condensed);
+  }
+  
+  /* archive list takes remaining width left of preview pane */
   .archiveListWrapper {
-    /* promote to GPU layer & isolate layout and paint */
     contain: layout paint;
     will-change: width, transform;
-    
     overflow: hidden;
-    /* duration + curve */
-    transition: width 0.25s cubic-bezier(.24,.02,.38,1);
+    transition: width 0.2s ease;
+    position: relative; /* so overlay can absolutely position to it */
   }
   
-  /* When preview pane is open, reduce the width */
+  /* When preview pane is open, reduce the width by the CURRENT pane width */
   .withPreview {
-    width: calc(100% - calc(var(--space-preview-pane) + var(--space-lg)));
+    width: calc(100% - calc(var(--space-preview-pane)));
   }
   
   /* When preview pane is closed, use full width */
   .withoutPreview {
     width: 100%;
   }
-
-
-
-.catChevron{
-    margin-left: -0.5rem;
-    color: var(--archive-title-color);
-}
-
-.catFolder {
-    margin-top: -0.3rem;
-    margin-left: -1.5rem;
-    width: 34px;
-    height: 34px;
-    object-fit: contain;
-}
-
-  /* if you’d like the category label a little offset from the icon */
-  .catLabel {
-    margin-left: var(--space-sm);
-    font-variation-settings: var(--var-md);
-    font-size: var(--font-sm);
-    margin-top: -0.3rem;
-    color: var(--archive-title-color);
-}
+  
+  /* Full view overlay that sits on top of the rows area only */
+  .overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0; /* cover the archive list wrapper area */
+    right: calc(var(--pane-width)); /* always leave the preview visible with current width */
+    pointer-events: auto;
+    z-index: 9; /* below preview (z-index:10) but above rows */
+  
+    overflow: auto;
+    background: var(--color-background);
+  
+    opacity: 0;
+    transform: translateX(8px);
+    animation: ovIn .18s ease forwards;
+  }
+  
+  @keyframes ovIn {
+    to { opacity: 1; transform: translateX(0); }
+  }
+  
+  /* Chevron / folder tweaks */
+  .catChevron { margin-left: -0.5rem; color: var(--archive-title-color); }
+  .catFolder { margin-top: -0.3rem; margin-left: -1.5rem; width: 34px; height: 34px; object-fit: contain; }
+  .catLabel { margin-left: var(--space-sm); font-variation-settings: var(--var-md); font-size: var(--font-sm); margin-top: -0.3rem; color: var(--archive-title-color); }
+  
