@@ -54,6 +54,11 @@
   @keyframes ovIn {
     to { opacity: 1; transform: translateX(0); }
   }
+
+  /* When data-notrans="1", width changes should be instant (no slide) */
+.container[data-notrans="1"] .archiveListWrapper {
+    transition: none !important;
+  }
   
   /* Chevron / folder tweaks */
   .catChevron { margin-left: -0.5rem; color: var(--archive-title-color); }

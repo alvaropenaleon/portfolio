@@ -46,6 +46,8 @@ export default function ArchiveClient({
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [placeCnt, setPlaceCnt] = useState(0);
+  const [noWidthTransition, setNoWidthTransition] = useState(false);
+
 
   const currentQuery = params.get("query") || "";
   const currentCategory = params.get("category") || "";
@@ -194,12 +196,47 @@ export default function ArchiveClient({
   }, [quickView, setParam]);
 
   const closeFullView = useCallback(() => {
-    // NEW: closing content also closes preview (no gap remains)
-    setParam("view", undefined);
-    // setParam("project", undefined);
-    // setQuickView(null);
-    setPaneCollapsed(false);
-  }, [setParam]);
+    if (paneCollapsed) {
+      // Disable the width transition just for this close, to avoid the slide.
+      setNoWidthTransition(true);
+  
+      // Wait a frame so the class is applied before we change layout.
+      requestAnimationFrame(() => {
+        // Remove both overlay and preview: rows should snap to full width
+        setParam("view", undefined);
+        setParam("project", undefined);
+        setQuickView(null);
+        setPaneCollapsed(false);
+  
+        // Re-enable transitions after the snap (another frame is safest)
+        requestAnimationFrame(() => setNoWidthTransition(false));
+      });
+    } else {
+      // Pane expanded → no width jump, close overlay normally.
+      setParam("view", undefined);
+    }
+  }, [paneCollapsed, setParam]);
+  
+
+  //  smart close handler for the Preview Pane
+  const handlePreviewClose = useCallback(() => {
+    if (isFullView) {
+      // While reading: toggle condensed <-> expanded (don’t close)
+      setPaneCollapsed(prev => !prev);
+    } else {
+      // Not reading:
+      if (paneCollapsed) {
+        // If collapsed, clicking close re-opens (expands) the pane
+        setPaneCollapsed(false);
+      } else {
+        // If expanded, actually close the preview
+        setParam("project", undefined);
+        setParam("view", undefined);
+        setQuickView(null);
+      }
+    }
+  }, [isFullView, paneCollapsed, setParam]);
+  
 
   const handleCategorySelect = useCallback(
     (cat: string) => {
@@ -218,6 +255,7 @@ export default function ArchiveClient({
     <div
       className={styles.container}
       data-pane={paneCollapsed ? "condensed" : "normal"}  // drives CSS var
+      data-notrans={noWidthTransition ? "1" : "0"}
     >
       <div
         className={clsx(
@@ -308,18 +346,13 @@ export default function ArchiveClient({
       {/* Preview Pane */}
       {quickView ? (
         <PreviewPane
-          project={quickView}
-          onClose={() => {
-            setParam("project", undefined);
-            setParam("view", undefined);
-            setQuickView(null);
-            setPaneCollapsed(false);
-          }}
-          onOpenFullView={openFullView}
-          onCloseFullView={closeFullView}
-          condensed={paneCollapsed}
-          isFullView={isFullView}     // <— hide hero/desc while reading
-        />
+        project={quickView}
+        onClose={handlePreviewClose}            // ← use the smart close
+        onOpenFullView={openFullView}
+        onCloseFullView={closeFullView}
+        condensed={paneCollapsed}
+        isFullView={isFullView}
+      />
       ) : null}
 
       {/* Project Full View Overlay (covers only the rows area) */}
