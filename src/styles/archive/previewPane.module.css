@@ -16,9 +16,10 @@
   
     /*  make the pane itself scroll, not the inner content */
     overflow-y: auto;
+    overflow-x: visible;
     /* important so flex children can shrink inside a constrained parent */
     min-height: 0;
-    z-index: 10;
+    z-index: 3;
   }
   
   /* When condensed, width changes but scrolling behavior stays the same */
@@ -51,7 +52,7 @@
     backdrop-filter: saturate(180%) blur(20px);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
     flex: 0 0 auto;
-    z-index: 999;
+    z-index: 4;
   }
   
   .closeButton,
@@ -70,6 +71,21 @@
     order: 3;
     margin-left: auto;         /* belt-and-suspenders push to the edge */
   }
+
+  /*when collapsed dock both icons at the content’s top-right = left of the pane */
+.condensed .header .headerIcon,
+.condensed .header .closeButton {
+  position: fixed;
+  top: 1rem;
+  right: 2rem; 
+  z-index: 5;
+  pointer-events: auto;
+}
+
+/* small horizontal separation so they dont overlap */
+.condensed .header .closeButton {
+  transform: translateX(-28px);
+}
   
   .headerTitle {
     order: 2;
