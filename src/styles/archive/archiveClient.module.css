@@ -21,6 +21,7 @@
     overflow: hidden;
     transition: width 0.2s ease;
     position: relative; /* so overlay can absolutely position to it */
+    z-index: 1;
   }
   
   /* When preview pane is open, reduce the width by the CURRENT pane width */
@@ -41,7 +42,7 @@
     left: 0; /* cover the archive list wrapper area */
     right: calc(var(--pane-width)); /* always leave the preview visible with current width */
     pointer-events: auto;
-    z-index: 9; /* below preview (z-index:10) but above rows */
+    z-index: 2;
   
     overflow: auto;
     background: var(--color-background);
