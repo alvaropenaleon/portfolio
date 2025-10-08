@@ -5,6 +5,7 @@ import React from "react";
 import type { Project } from "@/lib/definitions";
 import Markdown from "@/components/ui/markdown";
 import styles from "@/styles/archive/projectView.module.css";
+import { ChevronLeft } from "lucide-react";
 
 interface Props {
   project: Project;
@@ -22,11 +23,12 @@ export default function ProjectView({
   const { title, heroImage, text, tags, images } = project;
 
   return (
-    <div className={styles.articleRoot}>
+    <>
       <div className={styles.articleHeader}>
         <div className={styles.headerLeft}>
           <button className={styles.backBtn} onClick={onClose} aria-label="Close full view">
-            Close
+          <ChevronLeft className={styles.catChevron} size={18} strokeWidth={2.6} />
+          Back
           </button>
         </div>
 
@@ -46,6 +48,7 @@ export default function ProjectView({
         </div>
       </div>
 
+    <div className={styles.articleRoot}>
       {/* Optional hero at top of article (kept here, not in preview) */}
       {heroImage ? (
         <div className={styles.hero}>
@@ -91,5 +94,6 @@ export default function ProjectView({
         </div>
       ) : null}
     </div>
+    </>
   );
 }
