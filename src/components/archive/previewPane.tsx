@@ -151,8 +151,8 @@ export default function PreviewPane({
 
       {/* footer CTA — visible only when NOT in full view */}
       {!isFullView && onOpenFullView ? (
-        <div className={styles.footerBar}>
-          <button className={styles.primaryCta} onClick={onOpenFullView}>
+        <div className={styles.footerBar} onClick={onOpenFullView}>
+          <button className={styles.primaryCta}>
             Open full view
           </button>
         </div>

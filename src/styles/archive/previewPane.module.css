@@ -134,6 +134,8 @@
     align-items: center;
     gap: 8px;
     flex: 0 0 auto;
+
+    cursor: pointer;
   }
 
   .footerBar::before {
