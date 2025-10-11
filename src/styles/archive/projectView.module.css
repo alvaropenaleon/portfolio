@@ -18,6 +18,7 @@
     z-index: 2;
     backdrop-filter: saturate(180%) blur(22px);
     -webkit-backdrop-filter: saturate(180%) blur(22px);
+    border-bottom: 1px solid rgba(var(--color-foreground-rgb), .10);
 }
 
 .headerLeft {
@@ -32,7 +33,7 @@
 .paneToggle {
     appearance: none;
     border: none;
-    font-size: var(--font-xs);
+    font-size: var(--font-sm);
     cursor: pointer;
     background: none;
 }
