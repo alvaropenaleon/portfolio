@@ -3,15 +3,15 @@
     color: var(--color-foreground);
     font-size: var(--font-sm);
     font-variation-settings: var(--var-md);
-    line-height: auto;
+    line-height: var(--line-h);
     word-break: break-word;
   }
   
   .bear h1, .bear h2, .bear h3, .bear h4, .bear h5, .bear h6 {
     font-variation-settings: var(--var-lg);
-    line-height: 1.25;
+    line-height: var(--line-h);
     margin: 1.2rem 0 0.6rem;
-    letter-spacing: -0.01em;
+    letter-spacing: auto;
   }
   .bear h1 { font-size: var(--font-md); margin-top: 0.5rem; }
   .bear h2 { font-size: var(--font-md); }

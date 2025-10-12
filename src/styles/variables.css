@@ -22,7 +22,7 @@
   --bg3: hsl(115, 100%, 71%);
   --bg4: hsl(43, 100%, 71%);
 
-
+  
   --bar-h: 35px;
   --menu-safe-top: calc(var(--bar-h) + 1px);
   
@@ -52,6 +52,7 @@
   --font-lg: calc(23rem/ 16);
   --font-xl: calc(35rem/ 16);
   --font-2xl:calc(45rem/ 16);
+  --line-h: 1.5;
 
   /* Border Radius */
   --radius-xxs: 2px;
