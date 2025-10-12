@@ -13,7 +13,7 @@
     margin: 1.2rem 0 0.6rem;
     letter-spacing: auto;
   }
-  .bear h1 { font-size: var(--font-md); margin-top: 0.5rem; }
+  .bear h1 { font-size: var(--font-lg); margin-top: 0.5rem; }
   .bear h2 { font-size: var(--font-md); }
   .bear h3 { font-size: var(--font-sm); }
   
