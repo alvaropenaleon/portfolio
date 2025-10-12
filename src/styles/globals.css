@@ -29,6 +29,7 @@ body {
 p {
     font-size: var(--font-sm);
     font-variation-settings: var(--var-sm);
+    line-height: var(--line-h);
     /*font-variation-settings: var(--var-sm);*/
 }
 
@@ -51,7 +52,7 @@ ul li { font-size: var(--font-sm) }
 } 
 
 h5,h4,h3,h2,h1 {
-    line-height: 1.3;
+    line-height: var(--line-h);
     font-weight:500;
     font-variation-settings: var( --var-lg);
 }

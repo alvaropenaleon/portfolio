@@ -15,7 +15,7 @@
   }
   .bear h1 { font-size: var(--font-md); margin-top: 0.5rem; }
   .bear h2 { font-size: var(--font-md); }
-  .bear h3 { font-size: var(--font-md); }
+  .bear h3 { font-size: var(--font-sm); }
   
   .bear p { 
     margin: 0.8rem 0; 

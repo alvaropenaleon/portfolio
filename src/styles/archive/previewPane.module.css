@@ -136,12 +136,14 @@
     font-variation-settings: var(--var-lg);
     margin: .6rem 0 .2rem;
     word-break: break-word;
+    line-height: 1.6;
 }
 
 .kindLine {
     font-size: var(--font-sm);
     color: rgba(var(--color-foreground-rgb), .6);
     margin-bottom: var(--space-md);
+    line-height: 1.6;
 }
 
 .subheadingLine {

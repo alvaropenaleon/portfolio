@@ -52,7 +52,7 @@
   --font-lg: calc(23rem/ 16);
   --font-xl: calc(35rem/ 16);
   --font-2xl:calc(45rem/ 16);
-  --line-h: 1.5;
+  --line-h: auto;
 
   /* Border Radius */
   --radius-xxs: 2px;
