@@ -125,7 +125,7 @@
 .heroImg {
     width: 100%;
     height: auto;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-xxs);
     display: block;
 }
 
@@ -142,7 +142,7 @@
 
 .galleryItem {
     overflow: hidden;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-xxs);
 }
 
 .galleryImage {

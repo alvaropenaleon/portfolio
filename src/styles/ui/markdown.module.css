@@ -62,7 +62,7 @@
   .codeBlock {
     font-size: var(--font-xs);
     background: rgba(var(--brand-grey-rgb), 0.2);
-    border-radius: var(--radius-xs);
+    border-radius: var(--radius-xxs);
     padding: var(--space-sm) var(--font-sm);
     overflow: auto;
     margin: var(--space-md) 0;

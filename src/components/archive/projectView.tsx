@@ -20,7 +20,7 @@ export default function ProjectView({
   onTogglePane,
   paneCollapsed,
 }: Props) {
-  const { title, heroImage, text, images } = project;
+  const { title, text, images } = project; // pass heroImage if used
 
   return (
     <>
@@ -49,7 +49,7 @@ export default function ProjectView({
       </div>
 
     <div className={styles.articleRoot}>
-      {/* Optional hero at top of article (kept here, not in preview) */}
+      {/* hero at top of article
       {heroImage ? (
         <div className={styles.hero}>
           <Image
@@ -62,6 +62,7 @@ export default function ProjectView({
           />
         </div>
       ) : null}
+      */}
 
       <div className={styles.body}>
         <Markdown content={text ?? ""} />
