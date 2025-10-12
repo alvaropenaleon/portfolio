@@ -11,7 +11,7 @@
 
 
 body {
-    font-family:  var(--font-inter),-apple-system,  BlinkMacSystemFont,  "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family:  -apple-system,  BlinkMacSystemFont, var(--font-inter), "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     /* Adjust this value as needed */
     font-optical-sizing: auto;
     font-feature-settings: 'liga' 1, 'calt' 1;
