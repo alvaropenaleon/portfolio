@@ -150,17 +150,3 @@
     height: auto;
     display: block;
 }
-
-.tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 16px;
-}
-
-.tag {
-    border: 1px solid rgba(var(--color-foreground-rgb), .15);
-    border-radius: 999px;
-    padding: 2px 8px;
-    font-size: var(--font-xxs);
-}

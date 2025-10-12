@@ -20,7 +20,7 @@ export default function ProjectView({
   onTogglePane,
   paneCollapsed,
 }: Props) {
-  const { title, heroImage, text, tags, images } = project;
+  const { title, heroImage, text, images } = project;
 
   return (
     <>
@@ -84,15 +84,6 @@ export default function ProjectView({
         </div>
       ) : null}
 
-      {tags?.length ? (
-        <div className={styles.tags}>
-          {tags.map((t) => (
-            <span key={t} className={styles.tag}>
-              {t}
-            </span>
-          ))}
-        </div>
-      ) : null}
     </div>
     </>
   );
