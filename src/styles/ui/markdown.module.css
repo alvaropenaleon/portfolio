@@ -86,7 +86,7 @@
   }
   .bear th, .bear td {
     border: 1px solid var(--color-line);
-    padding: 0.45rem 0.6rem;
+    padding: var(--space-xs) var(--space-sm);
   }
   .bear th {
     text-align: left;
