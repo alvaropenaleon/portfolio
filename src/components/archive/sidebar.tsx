@@ -79,6 +79,21 @@ export default function CategorySidebar({
             {category}
           </li>
         ))}
+        
+     {/* Categories show rest */}
+     <h3 className={styles.title}>Categories</h3>
+      {categories
+        .filter(cat => cat !== "Work")
+        .map((category) => (
+          <li
+            key={category}
+            className={clsx(styles.catItem, activeCategory === category && styles.active)}
+            onClick={() => go(category)}
+          >
+            <FolderClosed size={15} strokeWidth={1.6} className={styles.folderIcon} />
+            {category}
+          </li>
+        ))}
       
       {/* Tags */}
       <h3 className={styles.title}>Tags</h3>
