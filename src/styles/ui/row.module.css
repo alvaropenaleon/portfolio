@@ -5,7 +5,7 @@
         40px                     /* Col 1 thumb – fixed */
         minmax(0, 1fr)           /* Col 2 TITLE – the only flexible one  */
         45px                     /* Col 3 dot stack – fixed             */
-        210px                    /* Col 4 tag names – fixed (or adjust)  */
+        minmax(210px, 0.45fr)                    /* Col 4 tag names – fixed (or adjust)  */
         /*1.6fr                     Col 5 description – can stay flex or fixed */
         72px;                    /* Col 6 date – fixed   */
 
