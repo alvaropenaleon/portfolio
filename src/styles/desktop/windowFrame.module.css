@@ -82,6 +82,14 @@
     cursor: pointer;
   }
 
+.archiveTitleControls {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
 /* MARKER: this class lives in the same file, so it’s a true CSS-module */
 .archiveWindowFrame {
     background: transparent;    /* wipe out the default white BG */

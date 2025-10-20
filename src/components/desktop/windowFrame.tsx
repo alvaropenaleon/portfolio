@@ -179,10 +179,10 @@ export default function WindowFrame({
             onClick={toggleFullScreen}
             aria-label={isfullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
         />
-        {titleControls}
         <span className={styles.title}>
             {title}
         </span>
+        {titleControls}
       </div>
       <div className={styles.windowContent}>
         {children}

@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { useWindowStore } from '@/store/windowStore';
 import { PanelLeft, PanelLeftClose } from 'lucide-react';
 import clsx from 'clsx';
+import Search from '@/components/archive/search';
 
 type PreloadedData = {
   about: { bio: string };
@@ -92,6 +93,7 @@ export default function DesktopShell({ preload }: Props) {
           }
           titleControls={
             w.id === 'archive' ? (
+            <div className={styles.archiveTitleControls} onPointerDown={(e) => e.stopPropagation()}>
               <button
                 type="button"
                 className={styles.sidebarToggle}
@@ -100,6 +102,8 @@ export default function DesktopShell({ preload }: Props) {
               >
                 {archiveCollapsed ? <PanelLeft size={19} strokeWidth={1.6}/> : <PanelLeftClose size={19} strokeWidth={1.6}/>}
               </button>
+              <Search placeholder="Search" />
+              </div>
             ) : null
           }
           onClose={() => close(w.id)}

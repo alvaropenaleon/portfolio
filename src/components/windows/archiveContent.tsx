@@ -1,6 +1,6 @@
 import type { Project } from '@/lib/definitions';
 import ArchiveClient from '@/components/archive/archiveClient';
-import Search from '@/components/archive/search';
+// import Search from '@/components/archive/search';
 import Pagination from '@/components/archive/pagination';
 import CategorySidebar from '@/components/archive/sidebar';
 import styles from '@/styles/archive/archivePage.module.css';
@@ -27,7 +27,7 @@ export default function ArchiveContent({
   return (
     <div className={styles.archiveWindow}>
       <aside className={styles.archiveSidebar}>
-        <Search placeholder="Search" />
+       {/* <Search placeholder="Search" /> */}
         <CategorySidebar
           categories={categories}
           tags={tags}
