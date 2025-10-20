@@ -1,9 +1,10 @@
 .searchContainer {
     position: relative;
     max-width: auto;
-    width: 100%;
+    width: auto;
     /* margin-left: auto; */
     padding: var(--space-sm) 0;
+    margin: 0  0.7rem;
   }
   
   .searchIcon {
@@ -17,7 +18,7 @@
 .searchInput {
     width: -webkit-fill-available;
     background-color: rgba(var(--brand-grey-rgb), 0);
-    padding: 0.3rem var(--space-lg);
+    padding: 0.3rem 1.9rem;
     border: 1px solid rgba(var(--color-foreground-rgb), 0.12);
     border-radius: var(--radius-xs);
     font-size:var(--font-sm);

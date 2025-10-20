@@ -52,7 +52,7 @@ export default function ArchiveSearch({ placeholder }: SearchProps) {
 
   const debouncedApply = useDebouncedCallback((term: string) => {
     applySearch(term);
-  }, 150);
+  }, 0);
 
   const handleInputChange = (value: string) => {
     setInputValue(value);
