@@ -93,14 +93,14 @@
 .indentedRow {
     grid-template-columns:
         40px                     /* Col 1 thumb – fixed */
-        minmax(300px, 0.96fr)           /* Col 2 TITLE – the only flexible one  */
+        minmax(300px, 0.98fr)           /* Col 2 TITLE – the only flexible one  */
         45px                     /* Col 3 dot stack – fixed             */
         minmax(110px, 0.45fr)                    /* Col 4 tag names – fixed (or adjust)  */
         /*1.6fr                     Col 5 description – can stay flex or fixed */
         72px;                    /* Col 6 date – fixed   */
 
     padding:  0.38rem 0;
-    padding-left: 3.5rem;
+    padding-left: 2.2rem;
     padding-right: var(--space-md);
 }
   /*
