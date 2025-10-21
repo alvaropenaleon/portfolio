@@ -31,7 +31,7 @@ type Props = {
 export default function DesktopShell({ preload }: Props) {
   const { windows, open, close, bringToFront, moveWindow } = useWindowManager();
   const { clampAllToViewport } = useWindowStore();
-  const [archiveCollapsed, setArchiveCollapsed] = useState(false);
+  const [archiveCollapsed, setArchiveCollapsed] = useState(true);
 
   // Handle window resize (move clamping logic from store to component)
   useEffect(() => {
