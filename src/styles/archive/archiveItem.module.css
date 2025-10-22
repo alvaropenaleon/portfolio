@@ -85,37 +85,30 @@
   
 
 
-/* —————————  Thumbnail container (outer frame + drop-shadow) ————————— */
 .thumbnailWrapper {
     position: relative;
     overflow: visible;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    /* keep your original small size */
-    width: 25px;
-    height: 15px;
-
-    /* — new frame + outer shadow — */
-    background: #fff;
-    padding: 2px;
-    box-shadow: 0 0 0.1rem rgba(0, 0, 0, 0.5);
+    margin-top: -2px;
     
-    /* 
-    transition: transform 0.2s ease-out;
-    transform-origin: top left;
-    */
+    /* Delimited area - can be wider for horizontal images */
+    width: 27px;
+    height: 27px;
 }
 
-/* —————————  The image itself (inner inset‐shadow) ————————— */
 .thumbnail {
-    width: 25px;
-    height: 15px;
-    object-fit: cover;
-
-    /* — new inner shadow — */
-    /* box-shadow: inset 0 0 0.1rem rgba(0, 0, 0, 0.5);*/
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    
+    /* White border and shadow on the image itself */
+    background: #fff;
+    padding: 1.5px;
+    box-shadow: 0 0 0.1rem rgba(0, 0, 0, 0.5);
 }
 
 /* — scale up on hover, keeping it on top —
