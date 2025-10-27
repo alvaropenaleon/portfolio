@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Inter,  JetBrains_Mono } from "next/font/google";
 import "@/styles/globals.css";
 import { ThemeProvider } from "@/components/ui/themeProvider";
 
@@ -10,11 +10,12 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const jetbrains = JetBrains_Mono({
-    subsets: ["latin"],
-    display: "swap",
-    variable: "--font-jetbrains",
-  });
+const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["300","400","500","700"], // adjust to taste
+  variable: "--font-mono",
+});
 
 export const metadata: Metadata = {
   title: "Alvaro Leon",
@@ -28,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
-      <body className={`${inter.variable} ${jetbrains.variable}`}>
+      <body className={`${inter.variable} ${mono.variable}`}>
         <ThemeProvider
             attribute="class"
             defaultTheme="system"
