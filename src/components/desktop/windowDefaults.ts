@@ -14,8 +14,9 @@ export type GeometryFn = () => Geometry;
 export type GeometryOrFn = Geometry | GeometryFn;
 
 /** Constants used for layout logic */
-const GUTTER = 16;
-const SAFE_TOP = 35;
+export const GUTTER = 16;
+export const SAFE_TOP = 35;
+
 const ARCHIVE_MAX_W = 1300;
 const ARCHIVE_MAX_H = 650;
 const ABOUT_MAX_W   = 700;

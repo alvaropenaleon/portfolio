@@ -3,6 +3,7 @@ import { devtools } from 'zustand/middleware';
 import type { WindowPayloads, WindowID } from '@/lib/definitions';
 import type { Geometry } from '@/components/desktop/windowDefaults';
 import { windowDefaults, type GeometryOrFn } from '@/components/desktop/windowDefaults';
+import { GUTTER, SAFE_TOP } from '@/components/desktop/windowDefaults';
 
 type Route = { 
   pathname: `/${WindowID}`; 
@@ -39,9 +40,6 @@ function resolveGeometry(entry: GeometryOrFn): Geometry {
 }
 
 /** Clamp geometry to viewport with gutter */
-const GUTTER = 15;
-const SAFE_TOP = 35;
-
 function clampToViewport(
   g: Geometry,
   vw = typeof window !== 'undefined' ? window.innerWidth : g.width,
