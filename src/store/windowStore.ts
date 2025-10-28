@@ -40,15 +40,21 @@ function resolveGeometry(entry: GeometryOrFn): Geometry {
 
 /** Clamp geometry to viewport with gutter */
 const GUTTER = 15;
+const SAFE_TOP = 35;
+
 function clampToViewport(
   g: Geometry,
   vw = typeof window !== 'undefined' ? window.innerWidth : g.width,
   vh = typeof window !== 'undefined' ? window.innerHeight : g.height
 ): Geometry {
+  const safeHeight = vh - SAFE_TOP;
+
   const w = Math.min(g.width, vw);
-  const h = Math.min(g.height, vh);
+  const h = Math.min(g.height, safeHeight);
+
   const left = Math.min(Math.max(g.left, GUTTER), vw - w - GUTTER);
-  const top = Math.min(Math.max(g.top, GUTTER), vh - h - GUTTER);
+  const top = Math.min(Math.max(g.top, SAFE_TOP), vh - h - GUTTER); // start below SAFE_TOP
+
   return { ...g, width: w, height: h, left, top };
 }
 
@@ -57,7 +63,7 @@ function getDefaultGeometry(id: WindowID): Geometry {
     return { width: 800, height: 600, left: 100, top: 100 };
   }
   const resolved = resolveGeometry(windowDefaults[id]);
-  return clampToViewport(resolved, window.innerWidth, window.innerHeight);
+  return clampToViewport(resolved, window.innerWidth, window.innerHeight - SAFE_TOP);
 }
 
 function updateBrowserUrl(state: Record<WindowID, Win | undefined>) {
@@ -230,7 +236,7 @@ export const useWindowStore = create<WindowStore>()(
           if (!win.userMoved) {
             newWins[id as WindowID] = {
               ...win,
-              geom: clampToViewport(base, vw, vh)
+              geom: clampToViewport(base, vw, vh - SAFE_TOP)
             };
           } else {
             newWins[id as WindowID] = {
@@ -238,7 +244,7 @@ export const useWindowStore = create<WindowStore>()(
               geom: clampToViewport(
                 { ...win.geom, width: base.width, height: base.height },
                 vw, 
-                vh
+                vh - SAFE_TOP
               )
             };
           }
