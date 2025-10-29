@@ -1,7 +1,7 @@
 import type { Project } from '@/lib/definitions';
 import ArchiveClient from '@/components/archive/archiveClient';
 // import Search from '@/components/archive/search';
-import Pagination from '@/components/archive/pagination';
+// import Pagination from '@/components/archive/pagination';
 import CategorySidebar from '@/components/archive/sidebar';
 import styles from '@/styles/archive/archivePage.module.css';
 
@@ -17,7 +17,7 @@ type Props = {
 
 export default function ArchiveContent({
   projects,
-  totalPages,
+  // totalPages,
   categories,
   tags,
   query,
@@ -44,7 +44,7 @@ export default function ArchiveContent({
             searchTerm={query}
           />
         </div>
-        <Pagination totalPages={totalPages} />
+        {/* <Pagination totalPages={totalPages} />*/}
       </section>
     </div>
   );
