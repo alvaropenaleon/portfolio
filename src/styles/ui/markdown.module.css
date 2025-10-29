@@ -2,7 +2,7 @@
 .bear {
     color: var(--color-foreground);
     font-size: var(--font-sm);
-    font-variation-settings: var(--var-md);
+    font-variation-settings: var(--var-sm);
     line-height: var(--line-h);
     word-break: break-word;
   }
@@ -13,14 +13,14 @@
     margin: 1.2rem 0 0.6rem;
     letter-spacing: auto;
   }
-  .bear h1 { font-size: var(--font-lg); margin-top: 0.5rem; }
-  .bear h2 { font-size: var(--font-md); }
+  .bear h1 { font-size: var(--font-md); margin-top: 0.5rem; }
+  .bear h2 { font-size: var(--font-sm); }
   .bear h3 { font-size: var(--font-sm); }
   
   .bear p { 
     margin: 0.8rem 0; 
     color: var(--color-foreground);     
-    font-variation-settings: var(--var-md);
+    font-variation-settings: var(--var-sm);
   }
   .bear strong { 
     font-variation-settings: var(--var-lg); 
@@ -72,8 +72,8 @@
     font-size: var(--font-xs);
     background: rgba(var(--brand-grey-rgb), 0.2);
     padding: 0.1rem 0.3rem;
-    border-radius: var(--radius-xs);
-    border: 1px solid var(--color-line);
+    border-radius: var(--radius-xxs);
+     border: 1px solid rgba(var(--brand-dark-grey-rgb), 0.1);
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
     font-size: 0.92em;
   }

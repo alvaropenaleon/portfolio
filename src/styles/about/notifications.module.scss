@@ -186,6 +186,8 @@ $max-z: 20;
 .details {
     display: flex;
     flex-direction: column;
+    line-height: var(--line-h-sm);
+
 }
 
 .activityLabel {
@@ -195,6 +197,8 @@ $max-z: 20;
     color: rgba(var(--color-foreground-rgb), 0.5);
     font-size: var(--font-xxs);
     font-variation-settings: var(--var-md);
+    line-height: var(--line-h-sm);
+
 }
 
 .details h3 {
@@ -202,6 +206,8 @@ $max-z: 20;
     text-align: left;
     font-size: var(--font-sm);
     font-variation-settings: var( --var-lg);
+    line-height: var(--line-h-sm);
+
 }
 
 .details p {
@@ -209,6 +215,9 @@ $max-z: 20;
     text-align: left;
     font-size: var(--font-sm);
     font-variation-settings: var(--var-sm);
+    line-height: var(--line-h-sm);
+
+
 }
 
 @media (max-width: 768px) {

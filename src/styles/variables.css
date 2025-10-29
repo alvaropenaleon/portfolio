@@ -2,7 +2,7 @@
 :root {
     
   /* font variation settings: "opsz" auto, "wght" (specific) */
-  --var-sm:  "wght" 400;
+  --var-sm:  "wght" 420;
   --var-md:  "wght" 480;
   --var-lg:  "wght" 580;
   --var-xl:  "wght" 680;
@@ -52,7 +52,8 @@
   --font-lg: calc(23rem/ 16);
   --font-xl: calc(35rem/ 16);
   --font-2xl:calc(45rem/ 16);
-  --line-h: auto;
+  --line-h: 1.5;
+  --line-h-sm: 1.3;
 
   /* Border Radius */
   --radius-xxs: 2px;
