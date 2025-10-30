@@ -13,6 +13,7 @@
   flex-direction: column;
   gap: 1px;
   white-space: nowrap;
+  line-height: var(--line-h-xs);
 }
 
 .list li {
