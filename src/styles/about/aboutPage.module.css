@@ -3,6 +3,6 @@
 .aboutMain * {
   font-family: var(--font-mono), monospace;
   font-variation-settings: var(--var-md);
-  line-height: auto;
+  line-height: var(--line-h);
   font-size: var(--font-xs);
 }
