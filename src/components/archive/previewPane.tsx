@@ -5,7 +5,7 @@ import React from "react";
 import type { Project } from "@/lib/definitions";
 import styles from "@/styles/archive/previewPane.module.css";
 import { PreviewTagChip } from "@/components/ui/tag";
-import { PanelRightClose, Maximize2, Minimize2 } from "lucide-react";
+// import { PanelRightClose, Maximize2, Minimize2 } from "lucide-react";
 
 interface PreviewPaneProps {
   project: Project;
@@ -18,9 +18,9 @@ interface PreviewPaneProps {
 
 export default function PreviewPane({
   project,
-  onClose,
+  // onClose,
   onOpenFullView,
-  onCloseFullView,
+  // onCloseFullView,
   condensed = false,
   isFullView = false,
 }: PreviewPaneProps) {
@@ -39,7 +39,7 @@ export default function PreviewPane({
 
   return (
     <aside className={`${styles.sidebar} ${condensed ? styles.condensed : ""}`}>
-      {/* header */}
+      {/* header 
       <div className={styles.header}>
         <button
           onClick={onClose}
@@ -50,7 +50,6 @@ export default function PreviewPane({
           <PanelRightClose size={19} strokeWidth={1.6} />
         </button>
 
-        {/* open/close full view toggle */}
         {isFullView ? (
           <button
             className={styles.headerIcon}
@@ -73,6 +72,7 @@ export default function PreviewPane({
 
         <h5 className={styles.headerTitle}>Preview Pane</h5>
       </div>
+      */}
 
       {/* scrollable block */}
       <div className={styles.content}>
