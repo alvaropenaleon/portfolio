@@ -20,7 +20,7 @@ export default function PreviewPane({
   project,
   // onClose,
   onOpenFullView,
-  // onCloseFullView,
+  onCloseFullView,
   condensed = false,
   isFullView = false,
 }: PreviewPaneProps) {
@@ -153,13 +153,31 @@ export default function PreviewPane({
       </div>
 
       {/* footer CTA — visible only when NOT in full view */}
-      {!isFullView && onOpenFullView ? (
-        <div className={styles.footerBar} onClick={onOpenFullView}>
-          <button className={styles.primaryCta}>
-            Open full view
-          </button>
-        </div>
-      ) : null}
+      {isFullView
+        ? (onCloseFullView ? (
+            <div className={styles.footerBar}>
+              <button
+                className={styles.primaryCta}
+                onClick={onCloseFullView}
+                aria-label="Exit full view"
+                title="Exit full view"
+              >
+                Exit full view
+              </button>
+            </div>
+          ) : null)
+        : (onOpenFullView ? (
+            <div className={styles.footerBar}>
+              <button
+                className={styles.primaryCta}
+                onClick={onOpenFullView}
+                aria-label="Open full view"
+                title="Open full view"
+              >
+                Open full view
+              </button>
+            </div>
+          ) : null)}
     </aside>
   );
 }
