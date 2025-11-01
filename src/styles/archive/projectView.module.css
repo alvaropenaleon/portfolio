@@ -33,7 +33,7 @@
     background: color-mix(in oklab,
             var(--color-background) calc(100% - 30% * var(--frost)),
             transparent);
-    border-bottom: 1px solid rgba(var(--color-foreground-rgb), .10);
+    /* border-bottom: 1px solid rgba(var(--color-foreground-rgb), .10); */
 
 
     backdrop-filter: saturate(180%) blur(calc(22px * var(--frost)));
