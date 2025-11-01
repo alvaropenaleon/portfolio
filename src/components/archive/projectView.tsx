@@ -5,7 +5,7 @@ import React from "react";
 import type { Project } from "@/lib/definitions";
 import Markdown from "@/components/ui/markdown";
 import styles from "@/styles/archive/projectView.module.css";
-import { ChevronLeft } from "lucide-react";
+// import { ChevronLeft } from "lucide-react";
 
 interface Props {
   project: Project;
@@ -16,14 +16,15 @@ interface Props {
 
 export default function ProjectView({
   project,
-  onClose,
-  onTogglePane,
-  paneCollapsed,
+  // onClose,
+  // onTogglePane,
+  // paneCollapsed,
 }: Props) {
   const { title, text, images } = project; // pass heroImage if used
 
   return (
     <>
+    {/*}
       <div className={styles.articleHeader}>
         <div className={styles.headerLeft}>
           <button className={styles.backBtn} onClick={onClose} aria-label="Close full view">
@@ -47,6 +48,7 @@ export default function ProjectView({
           ) : null}
         </div>
       </div>
+      */}
 
     <div className={styles.articleRoot}>
       {/* hero at top of article
