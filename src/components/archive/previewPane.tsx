@@ -155,24 +155,26 @@ export default function PreviewPane({
       {/* footer CTA — visible only when NOT in full view */}
       {isFullView
         ? (onCloseFullView ? (
-            <div className={styles.footerBar}>
-              <button
-                className={styles.primaryCta}
+            <div 
+                className={styles.footerBar}
                 onClick={onCloseFullView}
                 aria-label="Exit full view"
-                title="Exit full view"
+                title="Exit full view">
+              <button
+                className={styles.primaryCta}
               >
                 Exit full view
               </button>
             </div>
           ) : null)
         : (onOpenFullView ? (
-            <div className={styles.footerBar}>
-              <button
-                className={styles.primaryCta}
+            <div 
+                className={styles.footerBar}
                 onClick={onOpenFullView}
                 aria-label="Open full view"
-                title="Open full view"
+                title="Open full view">
+              <button
+                className={styles.primaryCta}
               >
                 Open full view
               </button>
