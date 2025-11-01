@@ -50,7 +50,7 @@ export const windowDefaults: Record<WindowID, GeometryOrFn> = {
       width: w,
       height: h,
       left: (vw - w) / 2,
-      top: SAFE_TOP + (vh - h) / 3,
+      top: SAFE_TOP + (vh - h) / 5,
     };
   },
 
