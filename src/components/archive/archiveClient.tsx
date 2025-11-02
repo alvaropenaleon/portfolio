@@ -236,6 +236,22 @@ export default function ArchiveClient({
       }
     }
   }, [isFullView, paneCollapsed, setParam]);
+
+ // keep icon in sync (rows & full view)
+ useEffect(() => {
+   window.dispatchEvent(
+     new CustomEvent("archive-preview-state", {
+       detail: { collapsed: paneCollapsed, visible: !!quickView },
+     })
+   );
+ }, [paneCollapsed, quickView]);
+
+    // Allow title-bar button to trigger the SAME handler (no duplication)
+    useEffect(() => {
+    const listener: EventListener = () => handlePreviewClose();
+    window.addEventListener("archive-preview-close", listener);
+    return () => window.removeEventListener("archive-preview-close", listener);
+    }, [handlePreviewClose]);
   
 
   const handleCategorySelect = useCallback(

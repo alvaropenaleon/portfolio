@@ -8,6 +8,7 @@ import { Project } from '@/lib/definitions';
 import { useEffect, useState } from 'react';
 import { useWindowStore } from '@/store/windowStore';
 import { PanelLeft, PanelLeftClose } from 'lucide-react';
+import { PanelRight, PanelRightClose } from 'lucide-react';
 import clsx from 'clsx';
 import Search from '@/components/archive/search';
 
@@ -32,6 +33,9 @@ export default function DesktopShell({ preload }: Props) {
   const { windows, open, close, bringToFront, moveWindow } = useWindowManager();
   const { clampAllToViewport } = useWindowStore();
   const [archiveCollapsed, setArchiveCollapsed] = useState(true);
+  const [previewCollapsed, setPreviewCollapsed] = useState(false);
+  const [previewVisible, setPreviewVisible] = useState(false);
+
 
   // Handle window resize (move clamping logic from store to component)
   useEffect(() => {
@@ -45,6 +49,16 @@ export default function DesktopShell({ preload }: Props) {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, [clampAllToViewport]);
+
+ useEffect(() => {
+   const onState = (e: Event) => {
+     const ce = e as CustomEvent<{ collapsed?: boolean; visible?: boolean }>;
+     if (typeof ce.detail?.collapsed === "boolean") setPreviewCollapsed(ce.detail.collapsed);
+     if (typeof ce.detail?.visible === "boolean") setPreviewVisible(ce.detail.visible);
+   };
+   window.addEventListener("archive-preview-state", onState);
+   return () => window.removeEventListener("archive-preview-state", onState);
+ }, []);
 
   // Initialize windows from URL path on mount (client-only)
     useEffect(() => {
@@ -103,6 +117,17 @@ export default function DesktopShell({ preload }: Props) {
                 {archiveCollapsed ? <PanelLeft size={19} strokeWidth={1.6}/> : <PanelLeftClose size={19} strokeWidth={1.6}/>}
               </button>
               <Search placeholder="Search" />
+              {/* Preview-pane toggle lives in the Archive window title bar */}
+               <button
+                 type="button"
+                 className={styles.previewToggle}
+                 aria-label="Toggle preview pane"
+                 title="Toggle preview pane"
+                 onClick={() => window.dispatchEvent(new Event("archive-preview-close"))}
+                 disabled={!previewVisible}  // only rows-click can reopen; reflect that
+               >
+                {!previewVisible || previewCollapsed ? <PanelRight size={19} strokeWidth={1.6}/> : <PanelRightClose size={19} strokeWidth={1.6}/>}
+               </button>
               </div>
             ) : null
           }
