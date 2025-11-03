@@ -67,7 +67,7 @@
     transition: left 180ms ease-in-out;
   }
 
-  /* The toggle button that lives in the title bar */
+/* The toggle sidebar that lives in archive title bar */
 .sidebarToggle {
     position: absolute;
     left: 4.2rem;                 /* tweak to sit nicely after the red/yellow/green dots */
@@ -81,6 +81,35 @@
     color: var(--brand-grey);
     cursor: pointer;
   }
+
+/* The toggle preview that lives in archive title bar */
+.previewToggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background: transparent;
+    color: var(--brand-grey);
+    cursor: pointer;
+  }
+
+
+/* hover/focus (enabled only) */
+.sidebarToggle:not(:disabled):hover,
+.sidebarToggle:not(:disabled):focus-visible,
+.previewToggle:not(:disabled):hover,
+.previewToggle:not(:disabled):focus-visible {
+  color: rgba(var(--color-foreground-rgb), .9);
+}
+
+/* not-allowed + no hover effects */
+.previewToggle[aria-disabled="true"]:hover,
+.previewToggle[aria-disabled="true"]:focus,
+.previewToggle:disabled {
+  color: rgba(var(--color-foreground-rgb), .2); /* lighter */
+  cursor: not-allowed;
+}
+  
 
 .archiveTitleControls {
   margin-left: auto;
