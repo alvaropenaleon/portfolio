@@ -251,10 +251,10 @@ export default function ArchiveClient({
  useEffect(() => {
    window.dispatchEvent(
      new CustomEvent("archive-preview-state", {
-       detail: { collapsed: paneCollapsed, visible: !!quickView },
+       detail: { collapsed: paneCollapsed, visible: paneOpen },
      })
    );
- }, [paneCollapsed, quickView]);
+ }, [paneCollapsed, paneOpen]);
 
     // Allow title-bar button to trigger the SAME handler (no duplication)
     useEffect(() => {
@@ -262,6 +262,24 @@ export default function ArchiveClient({
     window.addEventListener("archive-preview-close", listener);
     return () => window.removeEventListener("archive-preview-close", listener);
     }, [handlePreviewClose]);
+
+  // If user changes filters while the pane was collapsed (after full view),
+  // clear any lingering selection and broadcast not visible so the title-bar
+  // toggle disables
+  useEffect(() => {
+    if (!isFullView && paneCollapsed && (quickView || paneProject)) {
+      setQuickView(null);
+      setPaneProject(null);
+      setPaneOpen(false);
+      setParam("project", undefined);
+      setParam("view",   undefined);
+      window.dispatchEvent(
+        new CustomEvent("archive-preview-state", {
+          detail: { collapsed: true, visible: false },
+        })
+      );
+    }
+  }, [currentQuery, currentCategory, currentTag]); // runs on filter changes
   
 
   const handleCategorySelect = useCallback(
