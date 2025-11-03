@@ -7,7 +7,7 @@
   
     /* live width var used by both list and overlay */
     --pane-width: var(--space-preview-pane);
-    --pane-dur: .5s;
+    --pane-dur: .4s;
   }
   
   /* When pane is condensed, reduce the var globally for this container */
