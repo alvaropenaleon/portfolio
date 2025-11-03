@@ -65,6 +65,7 @@ export default function PreviewPane({
         data-ready={ready ? "1" : "0"}
         data-open={open ? "1" : "0"}
         data-condensed={condensed ? "1" : "0"}
+        data-lock={isFullView && condensed ? "1" : "0"}
     >
     <div ref={chromeRef} className={styles.chrome}>
       {/* header 

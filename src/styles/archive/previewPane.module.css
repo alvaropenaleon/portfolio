@@ -33,6 +33,11 @@
   transition: transform var(--pane-dur) ease;       /* reuse same timing everywhere */
 }
 
+.sidebar[data-lock="1"] {
+  pointer-events: none;   /* scroll/clicks go to the overlay */
+  z-index: 1;             /* sit below the overlay (which is z-index:2) */
+}
+
 /* OPEN, expanded pane → fully visible */
 .sidebar[data-ready="1"][data-open="1"][data-condensed="0"] .chrome {
   transform: translateX(0);
