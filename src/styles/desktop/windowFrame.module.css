@@ -1,7 +1,7 @@
 /* Default: sidebar visible */
 .archiveWindowFrame {
     --sidebar-pad: 206px;
-    --pane-dur-fast: .25s;                 /* 👈 single source of truth */
+    --pane-dur-fast: .35s;                 /* 👈 single source of truth */
   }
   
   /* Collapsed: sidebar hidden */
