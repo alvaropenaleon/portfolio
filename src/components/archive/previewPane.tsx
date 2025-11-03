@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
+import { useEffect, useState, useRef } from "react";
 import type { Project } from "@/lib/definitions";
 import styles from "@/styles/archive/previewPane.module.css";
 import { PreviewTagChip } from "@/components/ui/tag";
@@ -14,6 +14,8 @@ interface PreviewPaneProps {
   onCloseFullView?: () => void;  // closes content overlay only
   condensed?: boolean;
   isFullView?: boolean;          // switches button icon + hides hero/desc
+  open?: boolean;                 // drives slide in/out
+  onExited?: () => void;          // called after slide-out finishes
 }
 
 export default function PreviewPane({
@@ -23,6 +25,8 @@ export default function PreviewPane({
   onCloseFullView,
   condensed = false,
   isFullView = false,
+  open = true,
+  onExited,
 }: PreviewPaneProps) {
   const {
     title,
@@ -36,9 +40,33 @@ export default function PreviewPane({
   } = project;
 
   const categoriesFiltered = (categories ?? []).filter((c) => c !== "Work");
+  const [ready, setReady] = useState(false);
+ const chromeRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setReady(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
+
+  // when closing, wait for transform transition to end, then notify parent to unmount
+  useEffect(() => {
+    const el = chromeRef.current;
+    if (!el) return;
+    const onEnd = (e: TransitionEvent) => {
+      if (!open && e.propertyName === "transform") onExited?.();
+    };
+    el.addEventListener("transitionend", onEnd);
+    return () => el.removeEventListener("transitionend", onEnd);
+  }, [open, onExited]);
 
   return (
-    <aside className={`${styles.sidebar} ${condensed ? styles.condensed : ""}`}>
+    <aside 
+        className={`${styles.sidebar} ${condensed ? styles.condensed : ""}`}
+        data-ready={ready ? "1" : "0"}
+        data-open={open ? "1" : "0"}
+        data-condensed={condensed ? "1" : "0"}
+    >
+    <div ref={chromeRef} className={styles.chrome}>
       {/* header 
       <div className={styles.header}>
         <button
@@ -180,6 +208,7 @@ export default function PreviewPane({
               </button>
             </div>
           ) : null)}
+    </div>
     </aside>
   );
 }

@@ -7,6 +7,7 @@
   
     /* live width var used by both list and overlay */
     --pane-width: var(--space-preview-pane);
+    --pane-dur: .5s;
   }
   
   /* When pane is condensed, reduce the var globally for this container */
@@ -19,14 +20,14 @@
     contain: layout paint;
     will-change: width, transform;
     overflow: hidden;
-    transition: width 0.2s ease;
+    transition: width var(--pane-dur) ease;
     position: relative; /* so overlay can absolutely position to it */
     z-index: 1;
   }
   
   /* When preview pane is open, reduce the width by the CURRENT pane width */
   .withPreview {
-    width: calc(100% - calc(var(--space-preview-pane)));
+    width: calc(100% - var(--pane-width));
   }
   
   /* When preview pane is closed, use full width */
@@ -50,6 +51,7 @@
     opacity: 0;
     transform: translateX(8px);
     animation: ovIn .18s ease forwards;
+    transition: right var(--pane-dur) ease;
   }
   
   @keyframes ovIn {

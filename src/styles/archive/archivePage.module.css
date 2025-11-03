@@ -5,7 +5,7 @@
   /* top: 0; right: 0; bottom: 0; left: 0; */
   display: grid;
   grid-template-columns: var(--sidebar-pad) 1fr;  /* sidebar fixed width */
-  transition:  grid-template-columns 180ms ease-in-out;
+  transition:  grid-template-columns var(--pane-dur-fast) ease-in-out;
 }
 
 /* 3b) Sidebar: full height, its own scroll */

@@ -5,18 +5,13 @@
     top: 0;
     bottom: 0;
     width: var(--space-preview-pane);
-    background: var(--color-background);
-    box-shadow: inset 1px 0 0 0 rgba(var(--color-foreground-rgb), 0.1);
-    transform: translateX(100%);
-    animation: slideIn 0.3s forwards;
     padding: 0rem;
 
     display: flex;
     flex-direction: column;
 
     /*  make the pane itself scroll, not the inner content */
-    overflow-y: auto;
-    overflow-x: visible;
+    overflow: hidden;
     /* important so flex children can shrink inside a constrained parent */
     min-height: 0;
     z-index: 3;
@@ -26,16 +21,32 @@
     container-name: sidebar;
 }
 
-/* When condensed, width changes but scrolling behavior stays the same */
-.condensed {
-    padding: 0rem;
-    width: var(--space-preview-pane-condensed);
+
+/* sliding chrome holds the background + border and does the transition */
+.chrome {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-background);
+  box-shadow: inset 1px 0 0 0 rgba(var(--color-foreground-rgb), 0.1);
+  transform: translateX(100%);          /* initial: fully hidden */
+  transition: transform var(--pane-dur) ease;       /* reuse same timing everywhere */
+}
+
+/* OPEN, expanded pane → fully visible */
+.sidebar[data-ready="1"][data-open="1"][data-condensed="0"] .chrome {
+  transform: translateX(0);
+}
+
+/* OPEN, condensed pane → slide in by the delta between widths */
+.sidebar[data-ready="1"][data-open="1"][data-condensed="1"] .chrome {
+  transform: translateX(calc(var(--space-preview-pane) - var(--space-preview-pane-condensed)));
 }
 
 /* The main content just grows, no internal scroll */
 .content {
     flex: 1 1 auto;
-    overflow: visible;
+    overflow: auto;
     padding: 1rem;
 }
 

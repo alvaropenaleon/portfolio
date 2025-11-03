@@ -3,6 +3,23 @@
     margin: 0 auto;
     line-height: 1.65;
     padding: 16px 20px 40px;
+    transition: margin-inline-end var(--pv-dur) ease;
+}
+
+/* When full view overlay is present, tie the end margin to the live pane width */
+/* Normal (pane expanded) uses full pane width */
+.container[data-pane="normal"] .overlay .articleRoot {
+  margin-inline-end: var(--space-preview-pane);
+}
+
+/* Condensed uses condensed width */
+.container[data-pane="condensed"] .overlay .articleRoot {
+  margin-inline-end: var(--space-preview-pane-condensed);
+}
+
+/* If you ever render full view with preview fully hidden (no pane), you can zero it out like this (only needed if that state exists): */
+.container .overlay[data-pane-visible="0"] .articleRoot {
+  margin-inline-end: 0;
 }
 
 @property --frost {

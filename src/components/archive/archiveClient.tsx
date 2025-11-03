@@ -42,6 +42,8 @@ export default function ArchiveClient({
   const { setTitle, open } = useWindowStore();
 
   const [quickView, setQuickView] = useState<Project | null>(null);
+  const [paneProject, setPaneProject] = useState<Project | null>(null); // keep mounted for exit anim
+  const [paneOpen, setPaneOpen] = useState(false);      
   const [paneCollapsed, setPaneCollapsed] = useState(false);
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
   const scrollerRef = useRef<HTMLDivElement>(null);
@@ -111,6 +113,8 @@ export default function ArchiveClient({
       setParam("view", undefined); // ensure not in full mode yet
       setPaneCollapsed(false);
       setQuickView(p); // optimistic
+      setPaneProject(p);     // make sure pane is rendered
+      setPaneOpen(true);     // slide in
       void getProject(p.id).then((full) => {
         if (full) setQuickView((prev) => (prev?.id === p.id ? { ...prev, ...full } : prev));
       });
@@ -123,7 +127,7 @@ export default function ArchiveClient({
   useEffect(() => {
     if (!currentProjectId) {
       setQuickView(null);
-      setPaneCollapsed(false);
+      setPaneOpen(false);
       return;
     }
     if (quickView?.id === currentProjectId) return;
@@ -134,6 +138,14 @@ export default function ArchiveClient({
     });
   }, [currentProjectId, quickView?.id, getProject]);
 
+    // when we have fresh data, ensure the mounted pane shows it and stays open
+    useEffect(() => {
+        if (quickView) {
+        setPaneProject(quickView);
+        setPaneOpen(true);
+        }
+    }, [quickView]);
+    
   // Title
   useEffect(() => {
     const query = params.get("query");
@@ -230,9 +242,7 @@ export default function ArchiveClient({
         setPaneCollapsed(false);
       } else {
         // If expanded, actually close the preview
-        setParam("project", undefined);
-        setParam("view", undefined);
-        setQuickView(null);
+        setPaneOpen(false);
       }
     }
   }, [isFullView, paneCollapsed, setParam]);
@@ -276,7 +286,7 @@ export default function ArchiveClient({
       <div
         className={clsx(
           styles.archiveListWrapper,
-          quickView ? styles.withPreview : styles.withoutPreview
+          paneOpen ? styles.withPreview : styles.withoutPreview
         )}
       >
         {/* header row */}
@@ -360,14 +370,22 @@ export default function ArchiveClient({
       </div>
 
       {/* Preview Pane */}
-      {quickView ? (
+      {paneProject ? (
         <PreviewPane
-        project={quickView}
+        project={paneProject}
+        open={paneOpen}
         onClose={handlePreviewClose}            // ← use the smart close
         onOpenFullView={openFullView}
         onCloseFullView={closeFullView}
         condensed={paneCollapsed}
         isFullView={isFullView}
+        onExited={() => {
+         // after slide-out, clear URL + local state
+          setPaneProject(null);
+          setParam("project", undefined);
+          setParam("view", undefined);
+          setQuickView(null);
+        }}
       />
       ) : null}
 
