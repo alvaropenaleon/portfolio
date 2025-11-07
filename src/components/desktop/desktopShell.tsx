@@ -109,8 +109,18 @@ export default function DesktopShell({ preload }: Props) {
           titleControls={
             w.id === 'archive' ? (
             <div className={styles.archiveTitleControls} onPointerDown={(e) => e.stopPropagation()}>
+
+            <button
+                type="button"
+                className={styles.sidebarToggle}
+                aria-label={archiveCollapsed ? 'Show sidebar' : 'Hide sidebar'}
+                onClick={() => setArchiveCollapsed(v => !v)}
+              >
+                {archiveCollapsed ? <PanelLeft size={19} strokeWidth={1.6}/> : <PanelLeftClose size={19} strokeWidth={1.6}/>}
+              </button>
             
             {/* Back/Forward */}
+            <div className={styles.leftGroup}>
              <button
                type="button"
                className={styles.navBtn}
@@ -120,7 +130,7 @@ export default function DesktopShell({ preload }: Props) {
                onPointerDown={(e) => e.stopPropagation()}
                disabled={!wins.archive || wins.archive.historyIndex <= 0}
              >
-               <ChevronLeft size={16} strokeWidth={1.8} />
+               <ChevronLeft size={19} strokeWidth={1.8} />
              </button>
              <button
                type="button"
@@ -131,18 +141,13 @@ export default function DesktopShell({ preload }: Props) {
                onPointerDown={(e) => e.stopPropagation()}
                disabled={ !wins.archive ||wins.archive.historyIndex >= (wins.archive.history.length - 1) }
              >
-               <ChevronRight size={16} strokeWidth={1.8} />
+               <ChevronRight size={19} strokeWidth={1.8} />
              </button>
+             </div>
 
-              <button
-                type="button"
-                className={styles.sidebarToggle}
-                aria-label={archiveCollapsed ? 'Show sidebar' : 'Hide sidebar'}
-                onClick={() => setArchiveCollapsed(v => !v)}
-              >
-                {archiveCollapsed ? <PanelLeft size={19} strokeWidth={1.6}/> : <PanelLeftClose size={19} strokeWidth={1.6}/>}
-              </button>
-              <Search placeholder="Search" />
+
+            <div className={styles.rightGroup}>
+               <Search placeholder="Search" />
               {/* Preview-pane toggle lives in the Archive window title bar */}
                <button
                  type="button"
@@ -154,6 +159,7 @@ export default function DesktopShell({ preload }: Props) {
                >
                 {!previewVisible || previewCollapsed ? <PanelRight size={19} strokeWidth={1.6}/> : <PanelRightClose size={19} strokeWidth={1.6}/>}
                </button>
+              </div>
               </div>
             ) : null
           }

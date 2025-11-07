@@ -1,77 +1,86 @@
 /* Default: sidebar visible */
 .archiveWindowFrame {
     --sidebar-pad: 206px;
-    --pane-dur-fast: .3s;                 /* 👈 single source of truth */
-  }
-  
-  /* Collapsed: sidebar hidden */
-  .archiveWindowFrame.collapsed {
+    --pane-dur-fast: .3s;
+
+    /* NEW: tune these two so alignment matches your title */
+    --nav-base: 2.6rem;
+    /* distance from the traffic lights area */
+    --nav-extra: 0rem;
+    /* extra shove when collapsed */
+}
+
+/* Collapsed: sidebar hidden */
+.archiveWindowFrame.collapsed {
     --sidebar-pad: 0px;
-  }
-  
-  
-  .archiveWindowFrame .titleBar {
-  position: relative;
-  z-index: 1;
-  height: 3rem;
+    --nav-extra: 4.2rem;
+    /* adjust to taste to mirror your 7.2rem title feel */
+}
+
+
+
+.archiveWindowFrame .titleBar {
+    position: relative;
+    z-index: 1;
+    height: 3rem;
 
 }
 
 /* draw the normal bg from X onward */
 .archiveWindowFrame .titleBar::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: calc(var(--sidebar-pad) - 1px);
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-  box-shadow: inset 1px 0 0 0 rgba(var(--color-foreground-rgb), 0.1),
-  inset 0 -1px 1px 0 rgba(0, 0, 0, 0.1);
-  transition: left var(--pane-dur-fast) ease-in-out;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: calc(var(--sidebar-pad) - 1px);
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    box-shadow: inset 1px 0 0 0 rgba(var(--color-foreground-rgb), 0.1),
+        inset 0 -1px 1px 0 rgba(0, 0, 0, 0.1);
+    transition: left var(--pane-dur-fast) ease-in-out;
 
 }
 
 /* keep the close button at absolute left */
 .archiveWindowFrame .titleBar .closeBtn {
-  position: absolute;
+    position: absolute;
 
 }
 
 /* push the title text over by 206px */
 .archiveWindowFrame .title {
-  margin-left: calc(var(--sidebar-pad) - 1.6rem);
-  font-size: var(--font-md);
-  transition: margin-left var(--pane-dur-fast) ease-in-out;
+    margin-left: calc(var(--sidebar-pad) + 3.2rem);
+    font-size: var(--font-md);
+    transition: margin-left var(--pane-dur-fast) ease-in-out;
 
 }
 
 .archiveWindowFrame.collapsed .title {
-    margin-left: 2.6rem;
-  
-  }
+    margin-left: 7.2rem;
 
-  /* now target the local .windowContent under that marker */
-  .archiveWindowFrame .windowContent {
-    overflow: hidden;           /* kill the host scroll */
-    background: linear-gradient(
-        to right,
-        transparent var(--sidebar-pad),
-        var(--color-background) var(--sidebar-pad)
-      ) !important;
-  }
+}
+
+/* now target the local .windowContent under that marker */
+.archiveWindowFrame .windowContent {
+    overflow: hidden;
+    /* kill the host scroll */
+    background: linear-gradient(to right,
+            transparent var(--sidebar-pad),
+            var(--color-background) var(--sidebar-pad)) !important;
+}
 
 
 .archiveWindowFrame .windowContent::before {
     /* shorthand for top:0; right:0; bottom:0; left:206px; */
     inset: 0 0 0 var(--sidebar-pad) !important;
     transition: left var(--pane-dur-fast) ease-in-out;
-  }
+}
 
 /* The toggle sidebar that lives in archive title bar */
 .sidebarToggle {
     position: absolute;
-    left: 4.2rem;                 /* tweak to sit nicely after the red/yellow/green dots */
+    left: 4.2rem;
+    /* tweak to sit nicely after the red/yellow/green dots */
     top: 50%;
     transform: translateY(-50%);
     display: inline-flex;
@@ -81,7 +90,13 @@
     background: transparent;
     color: var(--brand-grey);
     cursor: pointer;
-  }
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border-radius: var(--radius-xs);
+    background: transparent;
+
+}
 
 /* The toggle preview that lives in archive title bar */
 .previewToggle {
@@ -92,7 +107,14 @@
     background: transparent;
     color: var(--brand-grey);
     cursor: pointer;
-  }
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    margin-right: var(--space-xs);
+    border-radius: var(--radius-xs);
+    background: transparent;
+
+}
 
 
 /* hover/focus (enabled only) */
@@ -100,33 +122,36 @@
 .sidebarToggle:not(:disabled):focus-visible,
 .previewToggle:not(:disabled):hover,
 .previewToggle:not(:disabled):focus-visible {
-  color: rgba(var(--color-foreground-rgb), .9);
+    color: rgba(var(--color-foreground-rgb), .9);
+    background: rgba(var(--color-foreground-rgb), .1);
 }
 
 /* not-allowed + no hover effects */
 .previewToggle[aria-disabled="true"]:hover,
 .previewToggle[aria-disabled="true"]:focus,
 .previewToggle:disabled {
-  color: rgba(var(--color-foreground-rgb), .2); /* lighter */
-  cursor: not-allowed;
+    color: rgba(var(--color-foreground-rgb), .2);
+    /* lighter */
+    cursor: not-allowed;
 }
-  
+
 
 .archiveTitleControls {
-  margin-left: auto;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 }
 
 
 /* MARKER: this class lives in the same file, so it’s a true CSS-module */
 .archiveWindowFrame {
-    background: transparent;    /* wipe out the default white BG */
-  }
-  
+    background: transparent;
+    /* wipe out the default white BG */
+}
 
-  .archiveWindowFrame  .closeBtn {
+
+.archiveWindowFrame .closeBtn {
     width: 12px;
     height: 12px;
     margin-right: var(--space-sm);
@@ -134,11 +159,11 @@
     border: none;
     border-radius: 50%;
     background: #ff5f57;
-    box-shadow: inset 0 0 0 1px rgba(0,0,0,.15);
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15);
     cursor: pointer;
 }
 
-.archiveWindowFrame  .zoomBtn {
+.archiveWindowFrame .zoomBtn {
     width: 12px;
     height: 12px;
     margin-right: var(--space-sm);
@@ -146,20 +171,20 @@
     border: none;
     border-radius: 50%;
     background: #2ecc71;
-    box-shadow: inset 0 0 0 1px rgba(0,0,0,.15);
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15);
     cursor: pointer;
 }
 
 
-  .aboutWindowFrame .closeBtn {
+.aboutWindowFrame .closeBtn {
     margin-left: -0.4rem;
-  }
+}
 
-  .aboutWindowFrame .windowContent {
+.aboutWindowFrame .windowContent {
     padding: var(--space-sm);
-  }
+}
 
-  .archiveWindowFrame .titleBar,
+.archiveWindowFrame .titleBar,
 .aboutWindowFrame .titleBar {
     background: rgba(var(--brand-grey-rgb), 0.12);
 }
@@ -170,76 +195,79 @@
     display: flex;
     align-items: center;
     box-shadow: inset 0 -1px 1px 0 rgba(0, 0, 0, 0.1);
-  }
+}
 
-  .aboutWindowFrame .title,
-    .imageWindowFrame .title {
+.aboutWindowFrame .title,
+.imageWindowFrame .title {
     position: absolute;
-    left:  var(--space-2xl);
+    left: var(--space-2xl);
     right: var(--space-2xl);
     top: 50%;
     transform: translateY(-50%);
     margin: 0;
     padding: 0;
-  
+
     text-align: center;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-  
-    pointer-events: none;          /* so clicks go to buttons beneath */
-  }
+
+    pointer-events: none;
+    /* so clicks go to buttons beneath */
+}
 
 /* ───────── Window frame (outer wrapper) ───────── */
 .windowFrame {
     transform: scale(0.9);
     opacity: 0;
-    transition: 
-    transform 100ms cubic-bezier(0.4, 0.0, 0.2, 1),
-    opacity   100ms cubic-bezier(0.4, 0.0, 0.2, 1);
+    transition:
+        transform 100ms cubic-bezier(0.4, 0.0, 0.2, 1),
+        opacity 100ms cubic-bezier(0.4, 0.0, 0.2, 1);
     transform-origin: center center;
     will-change: transform, opacity;
 
-  display: flex;
-  flex-direction: column;
-  background: var(--color-background);
-  border-radius: var(--radius-md);
-  /* TWO stacked outer shadows (layer order = top-to-bottom)          *
+    display: flex;
+    flex-direction: column;
+    background: var(--color-background);
+    border-radius: var(--radius-md);
+    /* TWO stacked outer shadows (layer order = top-to-bottom)          *
    * 1) 0 0 1 0  rgba(0,0,0,0.80)  – crisp outline                    *
    * 2) 0 0 30 0 rgba(0,0,0,0.30)  – soft ambient drop shadow         */
-  box-shadow:
-    0 0 1px 0 rgba(var(--color-foreground-rgb), 0.60),
-    0 10px 20px 0 rgba(0, 0, 0, 0.20);
-  overflow: hidden;     /* crop iframe corners */
-  position: relative;   /* context for absolute children */
+    box-shadow:
+        0 0 1px 0 rgba(var(--color-foreground-rgb), 0.60),
+        0 10px 20px 0 rgba(0, 0, 0, 0.20);
+    overflow: hidden;
+    /* crop iframe corners */
+    position: relative;
+    /* context for absolute children */
 }
 
 .windowFrame.open {
     transform: scale(1);
     opacity: 1;
-  }
+}
 
 
 /* ───────── Title bar (unchanged) ───────── */
 .titleBar {
-  display: flex;
-  align-items: center;
-  padding: var(--space-xxs) var(--space-md);
-  font-size: var(--font-sm);
-  user-select: none;
-  cursor: default;
-  background: rgba(var(--brand-grey-rgb), 0.12);
-  height: 1.5rem;
+    display: flex;
+    align-items: center;
+    padding: var(--space-xxs) var(--space-md);
+    font-size: var(--font-sm);
+    user-select: none;
+    cursor: default;
+    background: rgba(var(--brand-grey-rgb), 0.12);
+    height: 1.5rem;
 }
 
-.title { 
+.title {
     flex: 1;
     font-variation-settings: var(--var-xl);
     text-align: left;
     white-space: nowrap;
     text-overflow: ellipsis;
     padding: 0 var(--space-sm);
-  }
+}
 
 .closeBtn {
     width: 12px;
@@ -248,11 +276,14 @@
     border: none;
     border-radius: 50%;
     background: #ff5f57;
-    box-shadow: inset 0 0 0 1px rgba(0,0,0,.15);
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15);
     cursor: pointer;
     margin-left: -0.4rem;
 }
-.closeBtn:hover { filter: brightness(0.95); }
+
+.closeBtn:hover {
+    filter: brightness(0.95);
+}
 
 .zoomBtn {
     appearance: none;
@@ -262,12 +293,15 @@
     height: 12px;
     border-radius: 50%;
     background: #2ecc71;
-    box-shadow: inset 0 0 0 1px rgba(0,0,0,.15);
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15);
     cursor: pointer;
-  }
-  .zoomBtn:hover { filter: brightness(0.95); }
-  
-  /* When window is fullscreen reduce radius/shadow  
+}
+
+.zoomBtn:hover {
+    filter: brightness(0.95);
+}
+
+/* When window is fullscreen reduce radius/shadow  
   .fullscreen {
     border-radius: 0 !important;
     box-shadow: none !important;
@@ -276,37 +310,96 @@
 
 /* ───────── Inner content area ───────── */
 .windowContent {
-  flex: 1;
-  position: relative;
-  overflow: auto;
-  padding: 0px;   
+    flex: 1;
+    position: relative;
+    overflow: auto;
+    padding: 0px;
 }
 
 /* Inner shadow exactly: 0 1 1 0 rgba(0,0,0,0.15) *
  * Added with a ::before layer so scrolling content
  * doesn’t blur the shadow.                        */
 .windowContent::before {
-  content: "";
-  position: absolute;
-  inset: 0;                 /* stretch over full area */
-  pointer-events: none;     /* keep clicks on content */
-  border-radius: inherit;   /* follow outer rounding  */
-  z-index: 1;           /* above content, below title */
+    content: "";
+    position: absolute;
+    inset: 0;
+    /* stretch over full area */
+    pointer-events: none;
+    /* keep clicks on content */
+    border-radius: inherit;
+    /* follow outer rounding  */
+    z-index: 1;
+    /* above content, below title */
 }
 
 /* ───────── Iframe fill helper (unchanged) ───────── */
 .fillFrame {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-  border-radius: inherit;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    border-radius: inherit;
 }
 
 /* Visibility helpers (unchanged) */
-.hidden  { display: none; }
-.visible { display: flex; }
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: flex;
+}
 
 
 /* .titleBar    { cursor: grab; } */
+
+/* Finder-style nav buttons */
+.navBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: 0px solid rgba(var(--color-foreground-rgb), 0.12);
+    border-radius: var(--radius-xs);
+    padding: 0;
+    background: transparent;
+    color: var(--brand-grey);
+    cursor: pointer;
+}
+
+.navBtn:hover {
+    background: rgba(var(--color-foreground-rgb), .1);
+    color: rgba(var(--color-foreground-rgb), .9);
+}
+
+.navBtn:disabled {
+    opacity: .45;
+    cursor: default;
+}
+
+
+/* LEFT group: one animated property, no margins */
+.leftGroup {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    /* slides with sidebar via vars — NO margin-left at all */
+    left: calc(var(--sidebar-pad) + var(--nav-base) + var(--nav-extra));
+    display: inline-flex;
+    gap: 6px;
+    transition: left var(--pane-dur-fast) ease-in-out;
+    z-index: 2;
+}
+
+/* RIGHT group: pinned to the right edge */
+.rightGroup {
+    position: absolute;
+    top: 50%;
+    right: 0.5rem;
+    transform: translateY(-50%);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
