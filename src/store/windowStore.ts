@@ -19,6 +19,8 @@ type Win = {
   userMoved?: boolean;
   route: Route;
   payload?: WindowPayloads[WindowID];
+  history: Route[];        // stack of routes
+  historyIndex: number;    // current pointer
 };
 
 interface WindowStore {
@@ -32,7 +34,28 @@ interface WindowStore {
   setPayload(id: WindowID, payload: WindowPayloads[WindowID]): void;
   setParam(id: WindowID, key: string, value?: string): void;
   replaceParams(id: WindowID, params: Record<string, string | undefined>): void;
+  goBack(id: WindowID): void;
+  goForward(id: WindowID): void;
 }
+
+function routesEqual(a: Route, b: Route) {
+  if (a.pathname !== b.pathname) return false;
+  const ak = Object.keys(a.params).sort();
+  const bk = Object.keys(b.params).sort();
+  if (ak.length !== bk.length) return false;
+  return ak.every((k, i) => k === bk[i] && a.params[k] === b.params[k]);
+}
+
+function pushRoute(win: Win, next: Route): Win {
+  // If same as current, don't push
+  const current = win.history[win.historyIndex];
+  if (current && routesEqual(current, next)) return win;
+  // Drop forward segment, push next, advance index
+  const trimmed = win.history.slice(0, win.historyIndex + 1);
+  trimmed.push(next);
+  return { ...win, route: next, history: trimmed, historyIndex: trimmed.length - 1 };
+}
+
 
 /** Resolve geometry entry which may be a function */
 function resolveGeometry(entry: GeometryOrFn): Geometry {
@@ -117,8 +140,11 @@ export const useWindowStore = create<WindowStore>()(
             });
             updatedWin.route = { pathname: `/${id}`, params };
           } else {
-            // Clear route params when opening without pathOverride
-            updatedWin.route = { pathname: `/${id}`, params: {} };
+            // Keep current route; also ensure it's tracked in history
+            if (updatedWin.history.length === 0) {
+              updatedWin.history = [updatedWin.route];
+              updatedWin.historyIndex = 0;
+            }
           }
           
           const newState = {
@@ -132,12 +158,15 @@ export const useWindowStore = create<WindowStore>()(
         }
         
         // Create new window
+        const firstRoute: Route = { pathname: `/${id}`, params: {} };
         const newWin: Win = {
           id,
           z: maxZ + 1,
           geom: getDefaultGeometry(id),
           open: true,
-          route: { pathname: `/${id}`, params: {} },
+          route: firstRoute,
+          history: [firstRoute],
+          historyIndex: 0,
           payload: init?.payload,
           userMoved: false,
         };
@@ -149,7 +178,10 @@ export const useWindowStore = create<WindowStore>()(
           url.searchParams.forEach((value, key) => {
             params[key] = value;
           });
-          newWin.route = { pathname: `/${id}`, params };
+          const routed: Route = { pathname: `/${id}`, params };
+          newWin.route = routed;
+          newWin.history = [routed];
+          newWin.historyIndex = 0;
         }
         
         const newState = {
@@ -186,6 +218,10 @@ export const useWindowStore = create<WindowStore>()(
           newState.wins[id]!.route.params = {};
           // Clear payload to ensure fresh start
           newState.wins[id]!.payload = undefined;
+          // Reset history
+          const base: Route = { pathname: `/${id}`, params: {} };
+          newState.wins[id]!.history = [base];
+          newState.wins[id]!.historyIndex = 0;
         }
         
         setTimeout(() => updateBrowserUrl(newState.wins), 0);
@@ -287,13 +323,9 @@ export const useWindowStore = create<WindowStore>()(
         } else {
           newParams[key] = value;
         }
-        const newWins = {
-          ...state.wins,
-          [id]: {
-            ...win,
-            route: { ...win.route, params: newParams }
-          }
-        };
+        const nextRoute: Route = { pathname: win.route.pathname, params: newParams };
+        const pushed = pushRoute(win, nextRoute);
+        const newWins = { ...state.wins, [id]: pushed };
         setTimeout(() => updateBrowserUrl(newWins), 0);
         return { wins: newWins };
       });
@@ -309,16 +341,41 @@ export const useWindowStore = create<WindowStore>()(
             cleanParams[k] = v;
           }
         });
-        const newWins = {
-          ...state.wins,
-          [id]: {
-            ...win,
-            route: { ...win.route, params: cleanParams }
-          }
-        };
+        const nextRoute: Route = { pathname: win.route.pathname, params: cleanParams };
+        const pushed = pushRoute(win, nextRoute);
+        const newWins = { ...state.wins, [id]: pushed };
         setTimeout(() => updateBrowserUrl(newWins), 0);
         return { wins: newWins };
       });
     },
+
+    goBack: (id) => {
+      set((state) => {
+        const win = state.wins[id];
+        if (!win) return state;
+        if (win.historyIndex <= 0) return state;
+        const idx = win.historyIndex - 1;
+        const prev = win.history[idx];
+        const updated: Win = { ...win, historyIndex: idx, route: prev };
+        const newWins = { ...state.wins, [id]: updated };
+        setTimeout(() => updateBrowserUrl(newWins), 0);
+        return { wins: newWins };
+      });
+    },
+
+    goForward: (id) => {
+      set((state) => {
+        const win = state.wins[id];
+        if (!win) return state;
+        if (win.historyIndex >= win.history.length - 1) return state;
+        const idx = win.historyIndex + 1;
+        const next = win.history[idx];
+        const updated: Win = { ...win, historyIndex: idx, route: next };
+        const newWins = { ...state.wins, [id]: updated };
+        setTimeout(() => updateBrowserUrl(newWins), 0);
+        return { wins: newWins };
+      });
+    },
+
   }))
 );

@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { useWindowStore } from '@/store/windowStore';
 import { PanelLeft, PanelLeftClose } from 'lucide-react';
 import { PanelRight, PanelRightClose } from 'lucide-react';
+import {  ChevronLeft, ChevronRight } from 'lucide-react';
 import clsx from 'clsx';
 import Search from '@/components/archive/search';
 
@@ -31,7 +32,7 @@ type Props = {
 
 export default function DesktopShell({ preload }: Props) {
   const { windows, open, close, bringToFront, moveWindow } = useWindowManager();
-  const { clampAllToViewport } = useWindowStore();
+  const { clampAllToViewport, wins, goBack, goForward } = useWindowStore();
   const [archiveCollapsed, setArchiveCollapsed] = useState(true);
   const [previewCollapsed, setPreviewCollapsed] = useState(false);
   const [previewVisible, setPreviewVisible] = useState(false);
@@ -108,6 +109,31 @@ export default function DesktopShell({ preload }: Props) {
           titleControls={
             w.id === 'archive' ? (
             <div className={styles.archiveTitleControls} onPointerDown={(e) => e.stopPropagation()}>
+            
+            {/* Back/Forward */}
+             <button
+               type="button"
+               className={styles.navBtn}
+               aria-label="Back"
+               title="Back"
+               onClick={() => goBack('archive')}
+               onPointerDown={(e) => e.stopPropagation()}
+               disabled={!wins.archive || wins.archive.historyIndex <= 0}
+             >
+               <ChevronLeft size={16} strokeWidth={1.8} />
+             </button>
+             <button
+               type="button"
+               className={styles.navBtn}
+               aria-label="Forward"
+               title="Forward"
+               onClick={() => goForward('archive')}
+               onPointerDown={(e) => e.stopPropagation()}
+               disabled={ !wins.archive ||wins.archive.historyIndex >= (wins.archive.history.length - 1) }
+             >
+               <ChevronRight size={16} strokeWidth={1.8} />
+             </button>
+
               <button
                 type="button"
                 className={styles.sidebarToggle}
