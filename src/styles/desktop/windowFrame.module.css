@@ -4,7 +4,7 @@
     --pane-dur-fast: .3s;
 
     /* NEW: tune these two so alignment matches your title */
-    --nav-base: 2.6rem;
+    --nav-base: 0.7rem;
     /* distance from the traffic lights area */
     --nav-extra: 0rem;
     /* extra shove when collapsed */
@@ -13,7 +13,7 @@
 /* Collapsed: sidebar hidden */
 .archiveWindowFrame.collapsed {
     --sidebar-pad: 0px;
-    --nav-extra: 4.2rem;
+    --nav-extra: 5.8rem;
     /* adjust to taste to mirror your 7.2rem title feel */
 }
 
@@ -49,14 +49,14 @@
 
 /* push the title text over by 206px */
 .archiveWindowFrame .title {
-    margin-left: calc(var(--sidebar-pad) + 3.2rem);
+    margin-left: calc(var(--sidebar-pad) + 1.1rem);
     font-size: var(--font-md);
     transition: margin-left var(--pane-dur-fast) ease-in-out;
 
 }
 
 .archiveWindowFrame.collapsed .title {
-    margin-left: 7.2rem;
+    margin-left: 6.8rem;
 
 }
 
@@ -96,6 +96,7 @@
     border-radius: var(--radius-xs);
     background: transparent;
 
+
 }
 
 /* The toggle preview that lives in archive title bar */
@@ -114,6 +115,7 @@
     border-radius: var(--radius-xs);
     background: transparent;
 
+
 }
 
 
@@ -131,8 +133,7 @@
 .previewToggle[aria-disabled="true"]:focus,
 .previewToggle:disabled {
     color: rgba(var(--color-foreground-rgb), .2);
-    /* lighter */
-    cursor: not-allowed;
+    cursor: default;
 }
 
 
@@ -367,6 +368,7 @@
     background: transparent;
     color: var(--brand-grey);
     cursor: pointer;
+
 }
 
 .navBtn:hover {
@@ -375,8 +377,10 @@
 }
 
 .navBtn:disabled {
-    opacity: .45;
+    color: rgba(var(--color-foreground-rgb), .2);
     cursor: default;
+    background: transparent;
+
 }
 
 
@@ -388,7 +392,7 @@
     /* slides with sidebar via vars — NO margin-left at all */
     left: calc(var(--sidebar-pad) + var(--nav-base) + var(--nav-extra));
     display: inline-flex;
-    gap: 6px;
+    gap: 8px;
     transition: left var(--pane-dur-fast) ease-in-out;
     z-index: 2;
 }
