@@ -125,7 +125,8 @@
 .previewToggle:not(:disabled):hover,
 .previewToggle:not(:disabled):focus-visible {
     color: rgba(var(--color-foreground-rgb), .9);
-    background: rgba(var(--color-foreground-rgb), .1);
+      background-color: rgba(var(--brand-grey-rgb), 0.20);
+
 }
 
 /* not-allowed + no hover effects */
@@ -372,7 +373,7 @@
 }
 
 .navBtn:hover {
-    background: rgba(var(--color-foreground-rgb), .1);
+      background-color: rgba(var(--brand-grey-rgb), 0.20);
     color: rgba(var(--color-foreground-rgb), .9);
 }
 
