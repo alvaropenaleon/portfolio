@@ -341,7 +341,7 @@ export default function ArchiveClient({
                   <div
                     tabIndex={0}
                     className={rowStyles.row4col}
-                    onDoubleClick={() => handleCategorySelect(cat)}
+                    onClick={() => handleCategorySelect(cat)}
                   >
                     <div className={rowStyles.col1}>
                       <span
