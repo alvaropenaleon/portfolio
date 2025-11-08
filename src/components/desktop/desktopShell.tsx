@@ -128,6 +128,8 @@ export default function DesktopShell({ preload }: Props) {
                title="Back"
                onClick={() => goBack('archive')}
                onPointerDown={(e) => e.stopPropagation()}
+               data-no-fullscreen="1"
+               onDoubleClickCapture={(e) => e.stopPropagation()}
                disabled={!wins.archive || wins.archive.historyIndex <= 0}
              >
                <ChevronLeft size={19} strokeWidth={1.8} />
@@ -139,6 +141,8 @@ export default function DesktopShell({ preload }: Props) {
                title="Forward"
                onClick={() => goForward('archive')}
                onPointerDown={(e) => e.stopPropagation()}
+               data-no-fullscreen="1"
+               onDoubleClickCapture={(e) => e.stopPropagation()}
                disabled={ !wins.archive ||wins.archive.historyIndex >= (wins.archive.history.length - 1) }
              >
                <ChevronRight size={19} strokeWidth={1.8} />
@@ -147,7 +151,9 @@ export default function DesktopShell({ preload }: Props) {
 
 
             <div className={styles.rightGroup}>
-               <Search placeholder="Search" />
+                <div data-no-fullscreen="1" onDoubleClick={(e)=> e.stopPropagation()}>
+                    <Search placeholder="Search" />
+                </div>
               {/* Preview-pane toggle lives in the Archive window title bar */}
                <button
                  type="button"
@@ -155,6 +161,8 @@ export default function DesktopShell({ preload }: Props) {
                  aria-label="Toggle preview pane"
                  title="Toggle preview pane"
                  onClick={() => window.dispatchEvent(new Event("archive-preview-close"))}
+                 data-no-fullscreen="1"
+                 onDoubleClickCapture={(e) => e.stopPropagation()}
                  disabled={!previewVisible}  // only rows-click can reopen; reflect that
                >
                 {!previewVisible || previewCollapsed ? <PanelRight size={19} strokeWidth={1.6}/> : <PanelRightClose size={19} strokeWidth={1.6}/>}

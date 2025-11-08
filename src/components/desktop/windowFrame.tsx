@@ -165,7 +165,11 @@ export default function WindowFrame({
       <div 
         className={styles.titleBar} 
         onPointerDown={onPointerDown}
-        onDoubleClick={toggleFullScreen}
+        onDoubleClick={(e) => {
+            // ignore dblclicks from any child that opts out
+            if ((e.target as HTMLElement)?.closest('[data-no-fullscreen="1"]')) return;
+            toggleFullScreen();
+        }}
         >
         <button 
             className={styles.closeBtn}
