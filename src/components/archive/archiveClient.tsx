@@ -352,9 +352,9 @@ export default function ArchiveClient({
                         style={{ cursor: "pointer" }}
                       >
                         {expanded.has(cat) ? (
-                          <ChevronDown className={styles.catChevron} size={18} strokeWidth={2.6} />
+                          <ChevronDown className={styles.catChevron} size={19} strokeWidth={1.8} />
                         ) : (
-                          <ChevronRight className={styles.catChevron} size={18} strokeWidth={2.6} />
+                          <ChevronRight className={styles.catChevron} size={19} strokeWidth={1.8} />
                         )}
                       </span>
                     </div>

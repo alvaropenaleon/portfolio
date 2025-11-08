@@ -1,70 +1,105 @@
 /* Default variables */
 
-  .container {
+.container {
     display: flex;
     position: relative;
     height: 100%;
-  
+
     /* live width var used by both list and overlay */
     --pane-width: var(--space-preview-pane);
     --pane-dur: .4s;
-  }
-  
-  /* When pane is condensed, reduce the var globally for this container */
-  .container[data-pane="condensed"] {
+}
+
+/* When pane is condensed, reduce the var globally for this container */
+.container[data-pane="condensed"] {
     --pane-width: var(--space-preview-pane-condensed);
-  }
-  
-  /* archive list takes remaining width left of preview pane */
-  .archiveListWrapper {
+}
+
+/* archive list takes remaining width left of preview pane */
+.archiveListWrapper {
     contain: layout paint;
     will-change: width, transform;
     overflow: hidden;
     transition: width var(--pane-dur) ease;
-    position: relative; /* so overlay can absolutely position to it */
+    position: relative;
+    /* so overlay can absolutely position to it */
     z-index: 1;
-  }
-  
-  /* When preview pane is open, reduce the width by the CURRENT pane width */
-  .withPreview {
+}
+
+/* When preview pane is open, reduce the width by the CURRENT pane width */
+.withPreview {
     width: calc(100% - var(--pane-width));
-  }
-  
-  /* When preview pane is closed, use full width */
-  .withoutPreview {
+}
+
+/* When preview pane is closed, use full width */
+.withoutPreview {
     width: 100%;
-  }
-  
-  /* Full view overlay that sits on top of the rows area only */
-  .overlay {
+}
+
+/* Full view overlay that sits on top of the rows area only */
+.overlay {
     position: absolute;
     top: 0;
     bottom: 0;
-    left: 0; /* cover the archive list wrapper area */
-    right: calc(var(--pane-width)); /* always leave the preview visible with current width */
+    left: 0;
+    /* cover the archive list wrapper area */
+    right: calc(var(--pane-width));
+    /* always leave the preview visible with current width */
     pointer-events: auto;
     z-index: 2;
-  
+
     overflow: auto;
     background: var(--color-background);
-  
+
     opacity: 0;
     transform: translateX(8px);
     animation: ovIn .18s ease forwards;
     transition: right var(--pane-dur) ease;
-  }
-  
-  @keyframes ovIn {
-    to { opacity: 1; transform: translateX(0); }
-  }
+}
 
-  /* When data-notrans="1", width changes should be instant (no slide) */
+@keyframes ovIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* When data-notrans="1", width changes should be instant (no slide) */
 .container[data-notrans="1"] .archiveListWrapper {
     transition: none !important;
-  }
-  
-  /* Chevron / folder tweaks */
-  .catChevron { margin-left: -0.5rem; color: var(--archive-title-color); }
-  .catFolder { margin-top: -0.3rem; margin-left: -1.5rem; width: 34px; height: 34px; object-fit: contain; }
-  .catLabel { margin-left: var(--space-sm); font-variation-settings: var(--var-md); font-size: var(--font-sm); margin-top: -0.3rem; color: var(--archive-title-color); }
-  
+}
+
+/* Chevron / folder tweaks */
+.catChevron {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 0px solid rgba(var(--color-foreground-rgb), 0.12);
+    border-radius: var(--radius-xs);
+    padding: 0.25rem;
+    background: transparent;
+    color: var(--archive-title-color);
+    cursor: pointer;
+
+    margin-left: -0.7rem;
+    margin-top: -0.1rem;
+
+
+}
+
+.catFolder {
+    margin-top: -0.4rem;
+    margin-left: -1.25rem;
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+}
+
+.catLabel {
+    margin-left: var(--space-sm);
+    font-variation-settings: var(--var-md);
+    font-size: var(--font-sm);
+    margin-top: -0.3rem;
+    color: var(--archive-title-color);
+}
