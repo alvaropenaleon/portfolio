@@ -65,7 +65,7 @@
   cursor: pointer;
   box-shadow: inset 0 0 0 1px rgba(0,0,0,.08);
 }
-.swatch:hover { filter: brightness(0.95); }
+.swatch:hover { box-shadow: inset 0 0 0 1px rgba(0,0,0,.2); }
 .swatch:focus-visible {
   outline: 2px solid rgba(var(--brand-grey-rgb), 0.5);
   outline-offset: 2px;
