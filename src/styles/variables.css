@@ -131,6 +131,9 @@
     --color-foreground-rgb: 237, 237, 237;
     --color-line: rgba(252, 252, 252, 0.2);
 
+      --brand-grey: hsl(240, 3%, 59%);
+      --brand-grey-rgb: 147, 147, 154;
+
 
 
     --bg1: hsl(224, 100%, 29%);

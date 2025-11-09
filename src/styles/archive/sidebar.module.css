@@ -24,11 +24,11 @@
 }
 
 .list li:hover {
-  background-color: rgba(var(--brand-grey-rgb), 0.08);
+  background-color: rgba(var(--brand-grey-rgb), 0.20);
 }
 
 .active {
-  background-color: rgba(var(--brand-grey-rgb), 0.20);
+  background-color: rgba(var(--brand-grey-rgb), 0.1);
 }
 
 .tagItem {
@@ -48,7 +48,7 @@
 
 .folderIcon {
     position: relative;
-    color: var(--folder-blue);
+    color: var(--brand-grey);
     flex-shrink: 0;
     display: inline-flex;
     justify-content: center;
@@ -57,6 +57,6 @@
 
 .catItem .folderIcon{
     position: relative;
-    color: var(--folder-blue);
+    color: var(--brand-grey);
 }
 

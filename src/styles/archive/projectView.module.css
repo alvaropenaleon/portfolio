@@ -159,7 +159,7 @@
 
 .galleryItem {
     overflow: hidden;
-    border-radius: var(--radius-xxs);
+    border-radius: 0;
 }
 
 .galleryImage {
