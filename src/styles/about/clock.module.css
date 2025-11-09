@@ -6,9 +6,11 @@
     border-radius: var(--radius-xs);
     border: none;
     padding: 0 var(--space-sm);
+    margin-right: 0.3rem;
     font-size: 0.85rem;
     font-variation-settings: var(--var-md);
     height: 1.5rem;
+    cursor: pointer;
 }
 
 .clockContainer:hover {
