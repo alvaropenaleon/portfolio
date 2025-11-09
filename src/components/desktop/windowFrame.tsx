@@ -2,6 +2,7 @@
 
 import { CSSProperties, ReactNode, useRef, useEffect, useState } from "react";
 import type { Geometry } from "./windowDefaults";
+import { X, Plus, Minus } from "lucide-react";
 import styles from "@/styles/desktop/windowFrame.module.css";
 import clsx from 'clsx';
 
@@ -176,13 +177,21 @@ export default function WindowFrame({
             onPointerDown={e => e.stopPropagation()} 
             onClick={onClose}
             aria-label="Close window"
-        />
+        > 
+            <X size={11} strokeWidth={2} />
+        </button>
         <button 
             className={styles.zoomBtn}
             onPointerDown={e => e.stopPropagation()} 
             onClick={toggleFullScreen}
             aria-label={isfullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
-        />
+        >
+            {isfullscreen ? (
+                <Minus size={10} strokeWidth={3} />
+            ) : (
+                <Plus size={10} strokeWidth={3} />
+            )}
+        </button>
         <span className={styles.title}>
             {title}
         </span>

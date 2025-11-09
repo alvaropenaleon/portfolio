@@ -125,7 +125,7 @@
 .previewToggle:not(:disabled):hover,
 .previewToggle:not(:disabled):focus-visible {
     color: rgba(var(--color-foreground-rgb), .9);
-      background-color: rgba(var(--brand-grey-rgb), 0.20);
+    background-color: rgba(var(--brand-grey-rgb), 0.20);
 
 }
 
@@ -158,7 +158,6 @@
     margin-left: 0.3rem;
     border: none;
     border-radius: 50%;
-    background: #ff5f57;
     box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15);
     cursor: pointer;
 }
@@ -168,7 +167,6 @@
     margin-left: 1.6rem;
     border: none;
     border-radius: 50%;
-    background: #2ecc71;
     box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15);
     cursor: pointer;
 }
@@ -268,35 +266,48 @@
 }
 
 .closeBtn {
-    width: 12px;
-    height: 12px;
+    width: 13px;
+    height: 13px;
     margin-right: var(--space-sm);
     border: none;
     border-radius: 50%;
-    background: #ff5f57;
+    background:rgba(var(--brand-grey-rgb), 0.2); /* #ff5f57; */
     box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15);
     cursor: pointer;
     margin-left: -0.4rem;
+    display: grid;
+    place-items: center;
+    line-height: 0;
+    padding: 0;
+    cursor: pointer;
+    color: transparent;
 }
 
 .closeBtn:hover {
-    filter: brightness(0.95);
+    filter: brightness(1);
+    color: black;
 }
 
 .zoomBtn {
     appearance: none;
     border: 0;
     padding: 0;
-    width: 12px;
-    height: 12px;
+    width: 13px;
+    height: 13px;
     border-radius: 50%;
-    background: #2ecc71;
+    background: rgba(var(--brand-grey-rgb), 0.2); /* #2ecc71; */
     box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15);
+    display: grid;
+    place-items: center;
+    line-height: 0;
+    padding: 0;
     cursor: pointer;
+    color: transparent;
 }
 
 .zoomBtn:hover {
-    filter: brightness(0.95);
+    filter: brightness(1);
+    color: black;
 }
 
 /* When window is fullscreen reduce radius/shadow  
@@ -369,7 +380,7 @@
 }
 
 .navBtn:hover {
-      background-color: rgba(var(--brand-grey-rgb), 0.20);
+    background-color: rgba(var(--brand-grey-rgb), 0.20);
     color: rgba(var(--color-foreground-rgb), .9);
 }
 
