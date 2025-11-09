@@ -154,21 +154,12 @@
 
 
 .archiveWindowFrame .closeBtn {
-    margin-right: var(--space-sm);
     margin-left: 0.3rem;
-    border: none;
-    border-radius: 50%;
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15);
-    cursor: pointer;
+
 }
 
 .archiveWindowFrame .zoomBtn {
-    margin-right: var(--space-sm);
     margin-left: 1.6rem;
-    border: none;
-    border-radius: 50%;
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15);
-    cursor: pointer;
 }
 
 
@@ -272,7 +263,7 @@
     border: none;
     border-radius: 50%;
     background:rgba(var(--brand-grey-rgb), 0.2); /* #ff5f57; */
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15);
+    box-shadow: inset 0 0 0 1px rgba(var(--color-foreground-rgb), .15);
     cursor: pointer;
     margin-left: -0.4rem;
     display: grid;
@@ -296,7 +287,7 @@
     height: 13px;
     border-radius: 50%;
     background: rgba(var(--brand-grey-rgb), 0.2); /* #2ecc71; */
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15);
+    box-shadow: inset 0 0 0 1px rgba(var(--color-foreground-rgb), .15);
     display: grid;
     place-items: center;
     line-height: 0;
