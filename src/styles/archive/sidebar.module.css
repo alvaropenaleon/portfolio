@@ -24,11 +24,11 @@
 }
 
 .list li:hover {
-  background-color: rgba(var(--brand-grey-rgb), 0.20);
+  background-color: rgba(var(--brand-grey-rgb), 0.2);
 }
 
 .active {
-  background-color: rgba(var(--brand-grey-rgb), 0.1);
+  background-color: rgba(var(--brand-grey-rgb), 0.2);
 }
 
 .tagItem {
