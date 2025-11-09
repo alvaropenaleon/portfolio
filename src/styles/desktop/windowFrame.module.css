@@ -285,7 +285,7 @@
 
 .closeBtn:hover {
     filter: brightness(1);
-    color: black;
+    color: var(--color-foreground);
 }
 
 .zoomBtn {
@@ -307,7 +307,7 @@
 
 .zoomBtn:hover {
     filter: brightness(1);
-    color: black;
+    color: var(--color-foreground);
 }
 
 /* When window is fullscreen reduce radius/shadow  
