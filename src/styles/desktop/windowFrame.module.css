@@ -154,8 +154,6 @@
 
 
 .archiveWindowFrame .closeBtn {
-    width: 12px;
-    height: 12px;
     margin-right: var(--space-sm);
     margin-left: 0.3rem;
     border: none;
@@ -166,8 +164,6 @@
 }
 
 .archiveWindowFrame .zoomBtn {
-    width: 12px;
-    height: 12px;
     margin-right: var(--space-sm);
     margin-left: 1.6rem;
     border: none;
