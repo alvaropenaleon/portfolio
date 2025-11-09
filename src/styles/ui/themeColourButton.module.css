@@ -11,10 +11,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  /*
-  width: 32px;
-  height: 24px;
-  */
+  
+  height: 1.5rem;
+  width: 2rem;
+  
   border: 0;
   padding: 0;
   background: transparent;
@@ -22,15 +22,16 @@
 }
 .trigger:hover,
 .trigger:focus-visible {
-  background: rgba(var(--brand-grey-rgb), 0.08);
+    border-radius: var(--radius-xs);
+  background: rgba(var(--brand-grey-rgb), 0.3);
   outline: none;
 }
 
 /* inner dot shows current colour */
 .dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 999px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
   box-shadow: inset 0 0 0 1px rgba(0,0,0,.08);
 }
 
