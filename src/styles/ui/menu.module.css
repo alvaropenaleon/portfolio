@@ -17,7 +17,7 @@
     width: calc(100% - var(--space-lg));
 
     /* Content layer stays transparent; blur lives on ::before */
-    background: transparent;
+    background: rgba(var(--color-background-rgb), 0.7);
     box-shadow: 0 1px 0 rgba(var(--color-foreground-rgb), 0.08);
 
     height: var(--bar-h);
@@ -41,7 +41,7 @@
     border-radius: inherit;
 
     /* Non-zero alpha so Safari renders the blur */
-    background: rgba(var(--color-background-rgb), 0.12);
+    background: rgba(var(--brand-grey-rgb), 0);
     backdrop-filter: saturate(180%) blur(22px);
     -webkit-backdrop-filter: saturate(180%) blur(22px);
 
@@ -127,7 +127,7 @@
 
 .menuDropdown {
     position: absolute;
-    top: calc(var(--bar-h) - 0.3rem);
+    top: calc(var(--bar-h) - 0.18rem);
     left: 0;
     width: min(230px, calc(100vw - 16px));
     max-width: calc(100vw - 16px);

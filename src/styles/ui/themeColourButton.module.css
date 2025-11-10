@@ -38,7 +38,7 @@
 /* popover palette */
 .pop {
   position: absolute;
-  top: calc(100% + 8px);
+  top: calc(100% + 7px);
   /* centered below button  left 50% and translateX(-50%)*/
   left: 0%;
   transform: translateX(-1%);
