@@ -45,7 +45,7 @@ export default function CategorySidebar({
         category: undefined,
         tag: undefined,
         query: undefined,
-        page: undefined, // Remove page param for clean root URL
+        page: '1',
         project: currentProject,
       });
     }
