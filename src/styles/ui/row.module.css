@@ -25,7 +25,7 @@
     overflow: visible;
     margin: 0 0.6rem;
     padding:  0.38rem  var(--space-md) ;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-xs);
 
     --archive-title-color: var(--color-foreground);
     --archive-tag-color: rgba(var(--color-foreground-rgb), 0.6);
