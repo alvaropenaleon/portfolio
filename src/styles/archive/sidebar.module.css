@@ -21,6 +21,7 @@
   padding:  0.4rem var(--space-sm);
   border-radius: var(--radius-xs);
   font-size: var(--font-sm);
+  font-variation-settings: var(--var-md);
 }
 
 .list li:hover {

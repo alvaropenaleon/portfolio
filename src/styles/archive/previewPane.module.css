@@ -168,6 +168,7 @@
 
 .kindLine {
     font-size: var(--font-sm);
+    font-variation-settings: var(--var-md);
     color: rgba(var(--color-foreground-rgb), .6);
     margin-bottom: var(--space-md);
     line-height: var(--line-h);
