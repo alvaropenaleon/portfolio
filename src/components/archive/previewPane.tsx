@@ -39,7 +39,7 @@ export default function PreviewPane({
     links,
   } = project;
 
-  const categoriesFiltered = (categories ?? []).filter((c) => c !== "Work");
+  const categoriesFiltered = (categories ?? []).filter((c) => c !== "Projects");
   const [ready, setReady] = useState(false);
  const chromeRef = useRef<HTMLDivElement>(null);
 
