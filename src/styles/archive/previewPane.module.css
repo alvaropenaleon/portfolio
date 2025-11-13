@@ -176,6 +176,7 @@
 
 .subheadingLine {
     font-size: var(--font-sm);
+    font-variation-settings: var(--var-lg);
     color: var(--color-foreground);
     margin-bottom: var(--space-xs);
 }

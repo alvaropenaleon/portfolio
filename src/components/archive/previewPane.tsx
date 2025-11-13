@@ -189,11 +189,11 @@ export default function PreviewPane({
                 onClick={onCloseFullView}
                 aria-label="Exit full view"
                 title="Exit full view">
-              <button
+              <p
                 className={styles.primaryCta}
               >
                 Exit full view
-              </button>
+              </p>
             </div>
           ) : null)
         : (onOpenFullView ? (
@@ -202,11 +202,11 @@ export default function PreviewPane({
                 onClick={onOpenFullView}
                 aria-label="Open full view"
                 title="Open full view">
-              <button
+              <p
                 className={styles.primaryCta}
               >
                 Open full view
-              </button>
+              </p>
             </div>
           ) : null)}
     </div>
