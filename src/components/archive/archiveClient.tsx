@@ -378,9 +378,9 @@ export default function ArchiveClient({
                                             </span>
                                         </div>
                                         <div className={rowStyles.col2}>
-                                            <Image src={cat === "Work" ? "/smart-folder.png" : "/folder.png"} alt="Folder" width={34} height={34} className={styles.catFolder} />
+                                            <Image src={cat === "Projects" ? "/smart-folder.png" : "/folder.png"} alt="Folder" width={34} height={34} className={styles.catFolder} />
                                             <span className={styles.catLabel}>
-                                                {cat === "Work" ? "Projects" : cat}
+                                                {cat}
                                             </span>
                                         </div>
                                     </div>

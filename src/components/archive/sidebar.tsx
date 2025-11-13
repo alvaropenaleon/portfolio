@@ -80,7 +80,7 @@ export default function CategorySidebar({
       
       {/* Categories - Only show Work category */}
       {categories
-        .filter(cat => cat === "Work")
+        .filter(cat => cat === "Projects")
         .map((category) => (
           <li
             key={category}
@@ -88,7 +88,7 @@ export default function CategorySidebar({
             onClick={() => go(category)}
           >
             <Settings size={15} strokeWidth={1.6} className={styles.folderIcon} />
-            {category === "Work" ? "Projects" : category}
+            {category}
           </li>
         ))}
         
