@@ -2,7 +2,7 @@
     max-width: 72ch;
     margin: 0 auto;
     line-height: 1.65;
-    padding: 16px 20px 40px;
+    padding: 20px 30px 30px;
     transition: margin-inline-end var(--pv-dur) ease;
 }
 

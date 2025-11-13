@@ -170,7 +170,8 @@
     font-size: var(--font-sm);
     font-variation-settings: var(--var-md);
     color: rgba(var(--color-foreground-rgb), .6);
-    margin-bottom: var(--space-md);
+    margin-top: var(--space-xs);
+    margin-bottom: 0;
     line-height: var(--line-h);
 
 }
@@ -179,14 +180,14 @@
     font-size: var(--font-sm);
     font-variation-settings: var(--var-lg);
     color: var(--color-foreground);
-    margin-bottom: var(--space-xs);
+    margin-bottom: var(--space-sm);
+    margin-top: var(--space-md);
 }
 
 /* table */
 .infoTable {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: var(--space-md);
 }
 
 .infoTable td {
@@ -208,7 +209,12 @@
     overflow-wrap: anywhere;
 }
 
+.infoTable tr:first-child td {
+    padding-top: 0;
+}
+
 .infoTable tr:last-child td {
+    padding-bottom: 0;
     border-bottom: none;
 }
 
