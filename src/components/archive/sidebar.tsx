@@ -1,6 +1,6 @@
 "use client";
 import styles from "@/styles/archive/sidebar.module.css";
-import { FolderClosed, Settings } from 'lucide-react';
+import { FolderClosed, FolderOpen, Settings } from 'lucide-react';
 import { TagDot, sortTagsByColor } from "@/components/ui/tag";
 import clsx from 'clsx';
 import { useWindowNav } from '@/hooks/useWindowNav';
@@ -62,7 +62,19 @@ export default function CategorySidebar({
         className={clsx(styles.favItem, isRootView && styles.active)}
         onClick={() => go()}
       >
-        <FolderClosed size={15} strokeWidth={1.6} className={styles.folderIcon} />
+        {isRootView ? (
+          <FolderOpen
+            size={15}
+            strokeWidth={1.6}
+            className={styles.folderIcon}
+          />
+        ) : (
+          <FolderClosed
+            size={15}
+            strokeWidth={1.6}
+            className={styles.folderIcon}
+          />
+        )}
         Archive
       </li>
       
@@ -82,18 +94,30 @@ export default function CategorySidebar({
         
      {/* Categories show rest */}
      <h3 className={styles.title}>Categories</h3>
-      {categories
-        .filter(cat => cat !== "Work")
-        .map((category) => (
-          <li
-            key={category}
-            className={clsx(styles.catItem, activeCategory === category && styles.active)}
-            onClick={() => go(category)}
-          >
-            <FolderClosed size={15} strokeWidth={1.6} className={styles.folderIcon} />
-            {category}
-          </li>
-        ))}
+{categories
+  .filter((cat) => cat !== "Work")
+  .map((category) => (
+    <li
+      key={category}
+      className={clsx(styles.catItem, activeCategory === category && styles.active)}
+      onClick={() => go(category)}
+    >
+      {activeCategory === category ? (
+        <FolderOpen
+          size={15}
+          strokeWidth={1.6}
+          className={styles.folderIcon}
+        />
+      ) : (
+        <FolderClosed
+          size={15}
+          strokeWidth={1.6}
+          className={styles.folderIcon}
+        />
+      )}
+      {category}
+    </li>
+  ))}
       
       {/* Tags */}
       <h3 className={styles.title}>Tags</h3>
