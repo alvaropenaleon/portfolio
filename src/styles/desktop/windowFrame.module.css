@@ -250,7 +250,7 @@
 
 .title {
     flex: 1;
-    font-variation-settings: var(--var-xl);
+    font-variation-settings: var(--var-lg);
     text-align: left;
     white-space: nowrap;
     text-overflow: ellipsis;
