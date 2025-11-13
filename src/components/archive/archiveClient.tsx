@@ -380,7 +380,7 @@ export default function ArchiveClient({
                                         <div className={rowStyles.col2}>
                                             <Image src={cat === "Work" ? "/smart-folder.png" : "/folder.png"} alt="Folder" width={34} height={34} className={styles.catFolder} />
                                             <span className={styles.catLabel}>
-                                                {cat === "Work" ? "Selected Projects" : cat}
+                                                {cat === "Work" ? "Projects" : cat}
                                             </span>
                                         </div>
                                     </div>
