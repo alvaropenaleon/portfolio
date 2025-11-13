@@ -95,7 +95,7 @@ export default function CategorySidebar({
      {/* Categories show rest */}
      <h3 className={styles.title}>Categories</h3>
 {categories
-  .filter((cat) => cat !== "Work")
+  .filter((cat) => cat !== "Projects")
   .map((category) => (
     <li
       key={category}
