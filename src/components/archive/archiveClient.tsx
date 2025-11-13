@@ -206,7 +206,7 @@ export default function ArchiveClient({
             const visibleRows = isFiltered
                 ? projects.length
                 : categories
-                    /* .filter((c) => c !== "Projects") */
+                    .filter((c) => c !== "Projects")
                     .reduce((sum, c) => {
                         sum++; // folder row
                         if (expanded.has(c)) sum += byCategory[c].length;
@@ -354,7 +354,7 @@ export default function ArchiveClient({
                         ))
                     ) : (
                         categories
-                            /* .filter((c) => c !== "Projects") */
+                            .filter((c) => c !== "Projects")
                             .map((cat) => (
                                 <Fragment key={cat}>
                                     <div
