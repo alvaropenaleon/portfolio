@@ -53,7 +53,7 @@
 
     opacity: 0;
     transform: translateX(8px);
-    animation: ovIn .18s ease forwards;
+    animation: ovIn .0s ease forwards; /* duration set to 0s to avoid delay on full view project load, prev set to .18s */
     transition: right var(--pane-dur) ease;
 }
 
