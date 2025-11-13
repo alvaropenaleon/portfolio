@@ -39,8 +39,12 @@ hr {
 }
 
 a {
-    color: inherit;
+    color: var(--brand-blue);
     text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 ul li { font-size: var(--font-sm) } 
