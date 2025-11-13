@@ -5,7 +5,7 @@ import styles from "@/styles/ui/menu.module.css";
 import ThemeButton from "@/components/ui/themeButton";
 import ClockClient from "../about/clockClient";
 import Image from "next/image";
-import { ChevronRight, File, FolderCog, Mail } from "lucide-react";
+import { ChevronRight, File, Settings, Mail } from "lucide-react";
 import { useWindowManager } from "@/components/desktop/windowManager";
 import { useWindowStore } from "@/store/windowStore";
 import type { WindowPayloads } from "@/lib/definitions";
@@ -128,8 +128,8 @@ export default function MenuBar({ user, preload }: MenuBarProps) {
                   <li className={styles.item} role="menuitem">
                     <button className={styles.row} type="button" onClick={() => handleOpenArchive("category=Work")}>
                       <span className={styles.label}>
-                        <FolderCog size={16} className={styles.rowIcon} />
-                        Selected Work
+                        <Settings size={16} className={styles.rowIcon} />
+                        Projects
                       </span>
                     </button>
                   </li>

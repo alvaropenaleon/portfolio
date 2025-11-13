@@ -97,7 +97,7 @@ export default function DesktopShell({ preload }: Props) {
     return (
         <div className="desktop-root">
             <div className="icon-grid">
-                <Icon label="Work" iconSrc="/smart-folder.png" onClick={() => open('archive', { payload: preload.archive, pathOverride: '/archive?page=1&category=Work' })} />
+                <Icon label="Projects" iconSrc="/smart-folder.png" onClick={() => open('archive', { payload: preload.archive, pathOverride: '/archive?page=1&category=Work' })} />
                 <Icon label="Archive" iconSrc="/folder.png" onClick={() => open('archive', { payload: preload.archive, pathOverride: '/archive' })} />
                 <Icon label="About" iconSrc="/paper.png" onClick={() => open('about', { payload: preload.about })} />
                 <Icon label="Mail" iconSrc="/mail.png" onClick={() => { window.location.href = "mailto:alvleon@hotmail.com"; }} />
