@@ -206,7 +206,7 @@ export default function ArchiveClient({
             const visibleRows = isFiltered
                 ? projects.length
                 : categories
-                    .filter((c) => c !== "Work")
+                    /* .filter((c) => c !== "Work") */
                     .reduce((sum, c) => {
                         sum++; // folder row
                         if (expanded.has(c)) sum += byCategory[c].length;
@@ -354,7 +354,7 @@ export default function ArchiveClient({
                         ))
                     ) : (
                         categories
-                            .filter((c) => c !== "Work")
+                            /* .filter((c) => c !== "Work") */
                             .map((cat) => (
                                 <Fragment key={cat}>
                                     <div
@@ -378,8 +378,10 @@ export default function ArchiveClient({
                                             </span>
                                         </div>
                                         <div className={rowStyles.col2}>
-                                            <Image src="/folder.png" alt="Folder" width={34} height={34} className={styles.catFolder} />
-                                            <span className={styles.catLabel}>{cat}</span>
+                                            <Image src={cat === "Work" ? "/smart-folder.png" : "/folder.png"} alt="Folder" width={34} height={34} className={styles.catFolder} />
+                                            <span className={styles.catLabel}>
+                                                {cat === "Work" ? "Selected Projects" : cat}
+                                            </span>
                                         </div>
                                     </div>
                                     {expanded.has(cat) &&

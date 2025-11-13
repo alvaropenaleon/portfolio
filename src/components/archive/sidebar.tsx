@@ -88,7 +88,7 @@ export default function CategorySidebar({
             onClick={() => go(category)}
           >
             <Settings size={15} strokeWidth={1.6} className={styles.folderIcon} />
-            {category}
+            {category === "Work" ? "Selected Projects" : category}
           </li>
         ))}
         
