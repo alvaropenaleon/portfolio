@@ -32,11 +32,11 @@ hr {
 
 a {
     color: var(--link-blue);
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 a:hover {
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 .invisible { 
