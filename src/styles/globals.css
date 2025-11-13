@@ -39,7 +39,7 @@ hr {
 }
 
 a {
-    color: var(--brand-blue);
+    color: var(--link-blue);
     text-decoration: none;
 }
 
