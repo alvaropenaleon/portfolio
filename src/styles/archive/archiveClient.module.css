@@ -7,10 +7,10 @@
 
     /* live width var used by both list and overlay */
     --pane-width: var(--space-preview-pane);
-    --pane-dur: .4s;
+    --pane-dur: .5s;
 }
 
-/* When pane is condensed, reduce the var globally for this container */
+/* When pane is condensed, reduce the reserved width to 0 */
 .container[data-pane="condensed"] {
     --pane-width: var(--space-preview-pane-condensed);
 }
@@ -37,14 +37,13 @@
 }
 
 /* Full view overlay that sits on top of the rows area only */
+/* Expanded: leave space on the right for the preview pane */
 .overlay {
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
-    /* cover the archive list wrapper area */
-    right: calc(var(--pane-width));
-    /* always leave the preview visible with current width */
+    right: var(--space-preview-pane); /* fixed preview width */
     pointer-events: auto;
     z-index: 2;
 
@@ -53,9 +52,15 @@
 
     opacity: 0;
     transform: translateX(8px);
-    animation: ovIn .0s ease forwards; /* duration set to 0s to avoid delay on full view project load, prev set to .18s */
+    animation: ovIn .0s ease forwards;
     transition: right var(--pane-dur) ease;
 }
+
+/* Condensed: article takes full width, preview slides over it */
+.container[data-pane="condensed"] .overlay {
+    right: 0;
+}
+
 
 @keyframes ovIn {
     to {

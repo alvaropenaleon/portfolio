@@ -48,7 +48,6 @@ export default function ArchiveClient({
     const [expanded, setExpanded] = useState<Set<string>>(new Set());
     const scrollerRef = useRef<HTMLDivElement>(null);
     const [placeCnt, setPlaceCnt] = useState(0);
-    const [noWidthTransition, setNoWidthTransition] = useState(false);
 
 
     const currentQuery = params.get("query") || "";
@@ -227,26 +226,12 @@ export default function ArchiveClient({
     }, [quickView, setParam]);
 
     const closeFullView = useCallback(() => {
-        if (paneCollapsed) {
-            // Disable the width transition just for this close, to avoid the slide.
-            setNoWidthTransition(true);
+    setParam("view", undefined);
 
-            // Wait a frame so the class is applied before we change layout.
-            requestAnimationFrame(() => {
-                // Remove both overlay and preview: rows should snap to full width
-                setParam("view", undefined);
-                setParam("project", undefined);
-                setQuickView(null);
-                setPaneCollapsed(false);
-
-                // Re-enable transitions after the snap (another frame is safest)
-                requestAnimationFrame(() => setNoWidthTransition(false));
-            });
-        } else {
-            // Pane expanded → no width jump, close overlay normally.
-            setParam("view", undefined);
-        }
-    }, [paneCollapsed, setParam]);
+    // IMPORTANT: restore pane to expanded state on exit
+    setPaneCollapsed(false);
+    setPaneOpen(true);
+}, [setParam]);
 
 
     //  smart close handler for the Preview Pane
@@ -318,12 +303,11 @@ export default function ArchiveClient({
         <div
             className={styles.container}
             data-pane={paneCollapsed ? "condensed" : "normal"}  // drives CSS var
-            data-notrans={noWidthTransition ? "1" : "0"}
         >
             <div
                 className={clsx(
                     styles.archiveListWrapper,
-                    paneOpen ? styles.withPreview : styles.withoutPreview
+                    paneOpen && paneProject ? styles.withPreview : styles.withoutPreview
                 )}
             >
                 {/* header row */}
