@@ -124,7 +124,7 @@
 
 .dark {
     color-scheme: dark;
-    --color-background: #1E1F1F;
+    --color-background: rgb(28, 28, 30);
     --color-background-rgb: 10, 10, 10;
     --color-foreground: #ededed;
     --color-foreground-rgb: 237, 237, 237;
