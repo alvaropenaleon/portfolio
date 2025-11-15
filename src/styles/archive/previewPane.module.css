@@ -51,6 +51,14 @@
   transform: translateX(calc(var(--space-preview-pane) - var(--space-preview-pane-condensed)));
 }
 
+[data-pane="condensed"] .sidebar {
+  pointer-events: none;
+}
+
+[data-pane="condensed"] .sidebar .chrome {
+  pointer-events: auto;
+}
+
 /* The main content just grows, no internal scroll */
 .content {
     flex: 1 1 auto;
