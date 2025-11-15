@@ -51,7 +51,7 @@
 
 /* Zebra-stripe odd rows */
 .row4col:nth-child(even) {
-    background-color: rgba(var(--brand-grey-rgb), 0.07);
+    background-color: rgba(var(--brand-grey-rgb), 0.08);
   }
   
   .row4col:nth-child(odd) {
