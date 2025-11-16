@@ -120,10 +120,11 @@ export default function PreviewPane({
         ) : null}
 
         {/* title */}
-        {!isFullView && title ? (
+        {/* {!isFullView && title ? (
           <h2 className={styles.title}>{title}</h2>
         ) : null}
-        
+        */}
+        <h2 className={styles.title}>{title}</h2>
 
         {/* description (hidden when full view is open) */}
         {!isFullView && description ? (

@@ -150,7 +150,10 @@ export default function ArchiveClient({
         let title = "Archive";
 
         if (isFullView && quickView?.title) {
-            title = quickView.title;
+            // Uncomment to show project title in full view,
+            // currently last folder name 
+            // title = quickView.title;
+            title = prettify(currentCategory);
         } else if (currentQuery) {
             title = `Searching "${currentQuery}"`;
         } else if (currentCategory) {
