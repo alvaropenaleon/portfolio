@@ -37,13 +37,13 @@
 }
 
 /* Full view overlay that sits on top of the rows area only */
-/* Expanded: leave space on the right for the preview pane */
+/* Expanded: leave space on the right for the preview pane 
 .overlay {
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
-    right: var(--space-preview-pane); /* fixed preview width */
+    right: var(--space-preview-pane);
     pointer-events: auto;
     z-index: 2;
 
@@ -54,6 +54,31 @@
     transform: translateX(8px);
     animation: ovIn .0s ease forwards;
     transition: right var(--pane-dur) ease;
+}
+*/
+
+.overlay {
+   position: absolute;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   right: var(--space-preview-pane); /* fixed preview width */
+   pointer-events: auto;
+   z-index: 2;
+
+   /* Finder-ish: grey-ish field with a centered card */
+   display: flex;
+   justify-content: flex-start;
+   align-items: stretch;
+   padding: 15px 15px;
+
+   overflow: hidden; /* content scrolls *inside* the card */
+   background: var(--color-background);
+
+   opacity: 0;
+   transform: translateX(8px);
+   animation: ovIn .0s ease forwards;
+   transition: right var(--pane-dur) ease;
 }
 
 /* Condensed: article takes full width, preview slides over it */

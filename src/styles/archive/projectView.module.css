@@ -1,9 +1,32 @@
+/* full width of overlay 
 .articleRoot {
     max-width: 72ch;
     margin: 0 auto;
     line-height: 1.65;
     padding: 20px 30px 30px;
     transition: margin-inline-end var(--pv-dur) ease;
+}
+*/
+
+.articleRoot {
+  position: relative;
+  width: 100%;
+  max-width: none; 
+
+  margin: 1rem 1rem 1rem;
+  max-height: calc(100% - 2rem);
+  padding: 20px 30px;
+
+
+  background: var(--color-background);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(var(--color-foreground-rgb), 0.1);
+
+  overflow: auto;
+
+  scroll-timeline-name: --pv;
+  scroll-timeline-axis: block;
+  transition: margin-inline-end var(--pane-dur) ease;
 }
 
 /* When full view overlay is present, tie the end margin to the live pane width */
@@ -153,8 +176,8 @@
 .gallery {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 12px;
-    margin-top: 16px;
+    gap: 0px;
+    margin: -30px -30px -30px -30px;
 }
 
 .galleryItem {
