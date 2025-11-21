@@ -27,6 +27,15 @@
   scroll-timeline-name: --pv;
   scroll-timeline-axis: block;
   transition: margin-inline-end var(--pane-dur) ease;
+
+  /* hide scrollbar */
+  overflow: auto;
+  scrollbar-width: none;
+}
+
+/* Chrome / Safari / Edge */
+.articleRoot::-webkit-scrollbar {
+  display: none;
 }
 
 /* When full view overlay is present, tie the end margin to the live pane width */
