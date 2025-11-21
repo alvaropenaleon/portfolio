@@ -22,6 +22,12 @@ export default function ProjectView({
 }: Props) {
   const { title, text, images } = project; // pass heroImage if used
 
+  const galleryImages = Array.isArray(images)
+  ? images.filter(
+      (src): src is string => typeof src === "string" && src.trim() !== ""
+    )
+  : [];
+
   return (
     <>
     {/*}
@@ -70,22 +76,22 @@ export default function ProjectView({
         <Markdown content={text ?? ""} />
       </div>
 
-      {Array.isArray(images) && images.length > 0 ? (
+      {galleryImages.length > 0 && (
         <div className={styles.gallery}>
-          {images.map((src, i) => (
+            {galleryImages.map((src, i) => (
             <div className={styles.galleryItem} key={src + i}>
-              <Image
+                <Image
                 src={src}
                 alt={`${title} – image ${i + 1}`}
                 width={1600}
                 height={1200}
                 className={styles.galleryImage}
                 quality={90}
-              />
+                />
             </div>
-          ))}
+            ))}
         </div>
-      ) : null}
+        )}
 
     </div>
     </>
