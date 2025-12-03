@@ -147,6 +147,8 @@ export default function WindowFrame({
       left: 0,
       width: "100vw",
       height: "calc(100dvh - var(--menu-safe-top, 0px))",
+      "border-radius": 0,
+      "box-shadow": "0 0 1px 0 rgba(var(--color-foreground-rgb), 0.40)",
     });
   }
 
